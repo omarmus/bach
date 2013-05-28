@@ -1,0 +1,981 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"php",
+				"php	<?php … ?>"
+			],
+			[
+				"tr",
+				"tr"
+			],
+			[
+				"input",
+				"input	input - password"
+			],
+			[
+				"al",
+				"almacenes"
+			],
+			[
+				"ELS",
+				"else"
+			],
+			[
+				"factu",
+				"facturas"
+			],
+			[
+				"YAS",
+				"YASTA_WEB_ROOT"
+			],
+			[
+				"style",
+				"style	@style"
+			],
+			[
+				"idU",
+				"idUsuario"
+			],
+			[
+				"if",
+				"ifelse	if … else …"
+			],
+			[
+				"rolE",
+				"rolUser"
+			],
+			[
+				"getU",
+				"getUsername  (function)"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"getIdMo",
+				"getIdMoneda"
+			],
+			[
+				"coin",
+				"coins"
+			],
+			[
+				"h2",
+				"h2"
+			],
+			[
+				"a",
+				"<a href=\"${1001}\">${1002:$SELECTION}</a>"
+			],
+			[
+				"In",
+				"Inventic_Config"
+			],
+			[
+				"Inv",
+				"Inventic"
+			],
+			[
+				"OcpF",
+				"OcpFacturasQuery"
+			],
+			[
+				"Ocp",
+				"OcpFacturasQuery"
+			],
+			[
+				"FILE",
+				"FILE_DIRECTORY"
+			],
+			[
+				"arr",
+				"array"
+			],
+			[
+				"getPar",
+				"getParameter"
+			],
+			[
+				"FECHA",
+				"FECHA_ACTUALIZACION"
+			],
+			[
+				"Inventic",
+				"Inventic_Config"
+			],
+			[
+				"fad",
+				"fadeOut"
+			],
+			[
+				"bor",
+				"borrarLoading"
+			],
+			[
+				"p",
+				"p	<p>"
+			],
+			[
+				"Inventic_",
+				"Inventic_ConfigScript"
+			],
+			[
+				"result",
+				"results"
+			],
+			[
+				"explod",
+				"explode  (function)"
+			],
+			[
+				"str_re",
+				"str_replace  (function)"
+			],
+			[
+				"3",
+				"<a href=\"${1001}\">${1002}</a>\n<a href=\"${1003}\">${1004}</a>\n<a href=\"${1005}\">${1006:$SELECTION}</a>"
+			],
+			[
+				"els",
+				"else"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"getClien",
+				"getCliente"
+			],
+			[
+				"crea",
+				"create"
+			],
+			[
+				"clas",
+				"class=  (attribute)"
+			],
+			[
+				"4",
+				"<td>${1001}</td>\n<td>${1002}</td>\n<td>${1003}</td>\n<td>${1004:$SELECTION}</td>"
+			],
+			[
+				"re",
+				"docente  (variable)"
+			],
+			[
+				"doc",
+				"docentes"
+			],
+			[
+				"SysS",
+				"SysSorteoQuery"
+			],
+			[
+				"10",
+				"100"
+			],
+			[
+				"SysDocente",
+				"SysDocenteQuery  (class)"
+			],
+			[
+				"HORA",
+				"Hora"
+			],
+			[
+				"get",
+				"get	Get Elements"
+			],
+			[
+				"SysPa",
+				"SysParametrosQuery  (class)"
+			],
+			[
+				"alum",
+				"alumno"
+			],
+			[
+				"td",
+				"td	<td>"
+			],
+			[
+				"table",
+				"table	<table>"
+			],
+			[
+				"foreach",
+				"foreach	foreach …"
+			],
+			[
+				"th",
+				"<th>${1001:$SELECTION}</th>"
+			],
+			[
+				"Class",
+				"Class_Sorteo_Admin"
+			],
+			[
+				"doce",
+				"docente"
+			],
+			[
+				"class",
+				"classClass_Sorteo_Admin"
+			],
+			[
+				"SysMate",
+				"SysMateriaQuery  (class)"
+			],
+			[
+				"find",
+				"findPk"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"ar",
+				"array	$… = array (…)"
+			],
+			[
+				"getA",
+				"getAlumno"
+			],
+			[
+				"switch",
+				"fs.writeFileSync(path, data, encoding);"
+			],
+			[
+				"button",
+				"<button>${1001:$SELECTION}</button>"
+			],
+			[
+				"label",
+				"label	<label>"
+			],
+			[
+				"Sys",
+				"SysAlumnoQuery::create"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"field",
+				"<div class=\"field\">${1001:$SELECTION}</div>"
+			],
+			[
+				"script",
+				"<script type=\"text/javascript\">${1001:$SELECTION}</script>"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"te",
+				"text-align:   (property)"
+			],
+			[
+				"form",
+				"form	<form>"
+			],
+			[
+				"N",
+				"\"Arial Narrow\""
+			],
+			[
+				"SysAlumnos",
+				"SysAlumnoQuery  (class)"
+			],
+			[
+				"footer",
+				"<div class=\"footer\">${1001:$SELECTION}</div>"
+			],
+			[
+				"1",
+				"10"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"html",
+				"htmlcinco	dochtml5"
+			],
+			[
+				"I",
+				"IFRAME"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"remo",
+				"removeAllClass"
+			],
+			[
+				"fade",
+				"fadeIn"
+			],
+			[
+				"remove",
+				"removeClass"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"li",
+				"list-style"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"o",
+				"oldDiv"
+			],
+			[
+				"se",
+				"second"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"co",
+				"container"
+			],
+			[
+				"no",
+				"no-repeat"
+			],
+			[
+				"bi",
+				"Birthplace"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"heig",
+				"height-logo"
+			],
+			[
+				"pro",
+				"project"
+			],
+			[
+				"js",
+				"json_encode"
+			],
+			[
+				"hid",
+				"hideLoading"
+			],
+			[
+				"is",
+				"isObligatory"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"fiel",
+				"fieldsObligatory"
+			],
+			[
+				"verti",
+				"vertical-align"
+			],
+			[
+				"new",
+				"news-press"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 380.0,
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"oacke",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"packe",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: html",
+				"Snippet: IE Conditional Comment: HTML5 Shim"
+			],
+			[
+				"Snippet: ",
+				"Snippet: img"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"pac",
+				"Package Control: Add Channel"
+			],
+			[
+				"if",
+				"Snippet: <?php if (…) ?> … <?php else ?> … <?php endif ?>"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/pcmoc/modules/ordenCompra/upload.php",
+		"/C/wamp/www/pcmoc/Inventic/Inventic_Config.php",
+		"/C/Users/Oziel/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/Lenovo/Downloads/Documents/pcm_oc_2013-01-28.sql",
+		"/C/Users/Gutiérrez/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/wamp/www/pcmoc/lib/mailer/class.phpmailer.php",
+		"/C/wamp/www/pcmoc/modules/admin/SysUsers.php",
+		"/C/wamp/www/pcmoc/modules/documents/FacturaAjax.php",
+		"/C/wamp/www/pcmoc/modules/documents/PcmFacturas.php",
+		"/C/wamp/www/pcmoc/Inventic/OC/Inventic_OC_Funciones.php",
+		"/C/wamp/www/pcmoc/modules/main/header.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmOc_JXP.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmDetallesOc.php",
+		"/C/wamp/www/pcmoc/inc/SuperInclude.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmOc.php",
+		"/C/wamp/www/tdvalle/inc/SuperInclude.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmSearchOc.php",
+		"/C/wamp/www/pcmoc/test.php",
+		"/C/Users/Gutierrez/AppData/Local/Temp/fz3temp-1/.htaccess",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/generarPdf.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmDetailsOc.php",
+		"/C/wamp/www/pcmoc/Inventic/Pdf/Inventic_Pdf_Pdf.php",
+		"/C/wamp/www/pcmoc/Inventic/Pdf/Inventic_Pdf_Reporte.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmSendOc.php",
+		"/C/wamp/www/pcmoc/lib/mailer/Mail.class.php",
+		"/C/wamp/www/pcmoc/modules/admin/AdmAjax.php",
+		"/C/Inventic/Sistemas/Excel/GenerarExcel.php",
+		"/C/Inventic/Sistemas/Excel/index.php",
+		"/C/Inventic/Sistemas/Excel/Excel.php",
+		"/C/wamp/www/pcmoc/model/build/conf/classmap-ocp-conf.php",
+		"/C/wamp/www/pcmoc/model/build/conf/classmap-yasta-conf.php",
+		"/C/wamp/www/pcmoc/modules/documents/download.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/FacturaAjax.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/download.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/PcmFacturas.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/producto/PcmProduct_JXP.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/admin/AdmAjax.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/CO5987P_13082012_CFV0049468.XML",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/updateDocs.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/download.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/upload.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/OC/Inventic_OC_Funciones.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmDetailsOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmSearchOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Admin/Inventic_Admin_User.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/admin/SysUsers.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/clientes/PcmClientes_JXP.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/lib/ajax/inventicAjaxV1.js",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmOc_JXP.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/producto/PcmListOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/admin/SysConfig.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Mailer/mail_template.txt",
+		"/usr/local/zend/apache2/htdocs/pcmoc/test.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Util/Inventic_Util_Login.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Mailer/Inventic_Mailer_Template.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmSendOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/model/build/classes/ocp/SysParametros.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/createZip.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/css/main.css",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmDetallesOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/bd/updateDataBDScript.php",
+		"/Users/omar/Documents/geo.html",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/main/main.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Inventic_ConfigScript.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/0000000_ddmmaaaa_0_CFV00000_otros.xml",
+		"/usr/local/zend/apache2/htdocs/pcmoc/docs/updateDocs.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/docs/PcmFacturas.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/ajax/ajax.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/Class/Sorteo/Class_Sorteo_Admin.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/layout/header.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/js/scripts.js",
+		"/usr/local/zend/apache2/htdocs/sorteo/css/main.css",
+		"/usr/local/zend/apache2/htdocs/sorteo/config/Config_Site.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/classmap-sorteo-conf.php",
+		"/usr/local/zend/apache2/htdocs/html5-boilerplate/index.html",
+		"/usr/local/zend/apache2/htdocs/html5-boilerplate/css/main.css",
+		"/usr/local/zend/apache2/htdocs/html5-boilerplate/js/plugins.js",
+		"/usr/local/zend/apache2/htdocs/html5-boilerplate/js/main.js",
+		"/usr/local/zend/apache2/htdocs/html5-boilerplate/css/normalize.css",
+		"/usr/local/zend/apache2/htdocs/sorteo/lib/jquery-ui/css/dark-hive/jquery-ui-1.8.24.custom.css",
+		"/usr/local/zend/apache2/htdocs/sorteo/Class/Util/Class_Util_PropelLogger.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/layout/footer.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/sorteo-conf.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Model.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Notificacion.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Notificaciones.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Util.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Vista.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/noticenter.php",
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/noticenter_JXP.php",
+		"/usr/local/zend/apache2/htdocs/Template/Version 1.0.2 beta /css/main.css",
+		"/usr/local/zend/apache2/htdocs/Template/Version 1.0.2 beta /layout/header.php",
+		"/Users/omar/Downloads/normalize.css",
+		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/Prefixr/Default (OSX).sublime-keymap",
+		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/SFTP.sublime-settings",
+		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/store.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/contact.php",
+		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/dochtml5.sublime-snippet",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/test.html",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/news.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/press.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/videos.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/staff.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/layout/header.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/ajax/ajax.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/css/jquery.mCustomScrollbar.css",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/about.php",
+		"/usr/local/zend/apache2/htdocs/remorca_new2/adm/modules/main/header.php",
+		"/usr/local/zend/apache2/htdocs/mp/css/main.css",
+		"/usr/local/zend/apache2/htdocs/mp/pages/compositions.php",
+		"/usr/local/zend/apache2/htdocs/mp/pages/about.php",
+		"/usr/local/zend/apache2/htdocs/mp/pages/recording.php",
+		"/usr/local/zend/apache2/htdocs/mp/ajax/ajax.php",
+		"/usr/local/zend/apache2/htdocs/mp/js/scripts.js",
+		"/Users/omar/Desktop/rose.html",
+		"/usr/local/zend/apache2/htdocs/mp/layout/header.php",
+		"/Users/omar/Desktop/Notificaciones/demo/index.html",
+		"/Users/omar/Downloads/audiojs/includes/index.css",
+		"/usr/local/zend/apache2/htdocs/mp/layout/footer.php",
+		"/usr/local/zend/apache2/htdocs/mp/index.php",
+		"/usr/local/zend/apache2/htdocs/mp/config/Config_Site.php",
+		"/usr/local/zend/apache2/htdocs/mp/pages/news.php",
+		"/usr/local/zend/apache2/htdocs/mp/pages/schedule.php",
+		"/usr/local/zend/apache2/htdocs/mp/pages/contact.php",
+		"/usr/local/zend/apache2/htdocs/mp/css/jquery.jscrollpane.css",
+		"/usr/local/zend/apache2/htdocs/mp/pages/template.php"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"<project>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"importFrame",
+			"frames",
+			"abrirImport",
+			"$vendedor->getEstado()",
+			"vendedor",
+			"ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER",
+			"[]",
+			"\"][] ",
+			"$data[\"cc\"] .",
+			"email",
+			"5",
+			"$orden->id_oc",
+			"IdCliente",
+			"idCliente",
+			"userBrowser",
+			"htmlentities",
+			"userBrowser",
+			"$value = htmlentities($value)",
+			"userBrowser",
+			"htmlen",
+			"producto",
+			"$producto",
+			"producto",
+			"<?php",
+			">\n",
+			"?>",
+			"r r",
+			"rr",
+			"td",
+			"<br>",
+			"Orden",
+			"orden",
+			"moneda",
+			"$oc",
+			"data",
+			"td",
+			"locati",
+			"<input type=\"button\" class=\"botonAceptar\" onclick=\"return validarDatos(true)\" value=\"Guardar Cambios\" />",
+			"vendedores",
+			"correosRol",
+			"servicioCliente",
+			"$vendedores",
+			"servicioCliente",
+			"$vendedores",
+			"vendedores",
+			"getIdRol",
+			"$cliente",
+			"cliente",
+			"array($idUsuario, $idCliente)",
+			"findPk",
+			"idRol",
+			"idUser",
+			"> <",
+			"><",
+			"json",
+			"TTIJ",
+			"sitios",
+			"\" \"",
+			" ",
+			" \n",
+			" ",
+			"MDE",
+			" ",
+			"clientes",
+			"ELIMINAR",
+			"'//",
+			"filename",
+			"docs",
+			"$idCliente",
+			"isIdCliente",
+			"Combo",
+			"cdigo",
+			"rol",
+			"list",
+			"$user",
+			"user",
+			"$oParam->strXML",
+			"esDestinoCliente",
+			"searchClienteParameter",
+			"Inventic_Mailer_Template()",
+			"buildReminderMailContent",
+			"function getUsername",
+			"Código del cliente...",
+			"código",
+			"c?digo",
+			"?",
+			"codOcCLiente",
+			"addOC",
+			"_SESSION",
+			"url",
+			"MTY",
+			"filename",
+			"buscarD",
+			"results",
+			".alert",
+			"getFecha",
+			"id=\"idCliente",
+			"idCliente",
+			"string",
+			"$codCliente",
+			" \n",
+			"msg-error",
+			"idCliente",
+			"span",
+			"/>\n",
+			"inputSmallObligatorio",
+			"iniciarCalendario",
+			"format",
+			"<thead>",
+			"Cdigo",
+			"$$",
+			"style=\"margin: 0 auto; width: 400px\"",
+			"docentes",
+			"s[$random[$i]]",
+			"materia",
+			"</tbody>",
+			"<thead>",
+			"thead",
+			"><?",
+			"fecha",
+			"dialog",
+			"nombre",
+			"lt-ie9",
+			"form-sorteo",
+			"step-2",
+			"submit",
+			"tabs",
+			">\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"<div class=\"inline-block\"><a href=\"#\">Listen to excerpt</a></div>\n					<div class=\"audio inline-block\"><audio src=\"mp3/Moment-Musical.mp3\" /></div>	",
+			"",
+			"-mp",
+			"",
+			"-mp",
+			"View",
+			"<p class=\"link\"><a href=\"#\">Listen",
+			"class=\"score\" id=\"score-\"",
+			"class=\"score\" id=\"\"",
+			"class=\"score\"",
+			"Class=\"score\"",
+			"<a href=\"#\" class=\"score\">View score page</a>",
+			"news",
+			"section",
+			"",
+			"January 12, 2012",
+			"secondDiv",
+			"firstDiv",
+			"first",
+			"#",
+			"",
+			"#nav-main",
+			"",
+			">texto",
+			"texto",
+			"text",
+			"label",
+			"</span></li>",
+			"<a href=\"\" style=\"color: #268D0A\">",
+			"logo-width",
+			"logo-height",
+			"titulo2-color",
+			"titulo1-color",
+			"label",
+			"Question goes here?",
+			"main",
+			"Read more",
+			"showMore",
+			"default.gif"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"replace":
+	{
+		"height": 75.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"mail",
+				"lib/mailer/Mail.class.php"
+			],
+			[
+				"ocf",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"ocfun",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"pcmoc",
+				"modules/ordenCompra/PcmOc.php"
+			],
+			[
+				"sys",
+				"modules/admin/SysConfig.php"
+			],
+			[
+				"sysp",
+				"model/build/classes/ocp/SysParametros.php"
+			],
+			[
+				"util_login",
+				"Inventic/Util/Inventic_Util_Login.php"
+			],
+			[
+				"pcmli",
+				"modules/producto/PcmListOc.php"
+			],
+			[
+				"sysu",
+				"modules/admin/SysUsers.php"
+			],
+			[
+				"oc_",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"pcmo",
+				"modules/ordenCompra/PcmOc.php"
+			],
+			[
+				"main",
+				"css/main.css"
+			],
+			[
+				"oc_f",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"scri",
+				"js/scripts.js"
+			],
+			[
+				"sc",
+				"js/scripts.js"
+			],
+			[
+				"header",
+				"adm/modules/main/header.php"
+			],
+			[
+				"ab",
+				"pages/about.php"
+			],
+			[
+				"he",
+				"layout/header.php"
+			],
+			[
+				"aja",
+				"ajax/ajax.php"
+			],
+			[
+				"",
+				"/usr/local/zend/apache2/htdocs/brian/layout/header.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 239.0,
+	"status_bar_visible": true
+}
