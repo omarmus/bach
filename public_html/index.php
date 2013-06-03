@@ -19,7 +19,16 @@ date_default_timezone_set('America/La_Paz');
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	define('ENVIRONMENT', 'development');
+switch (dirname(__FILE__)) {
+	case 'C:\wamp\www\bach\public_html': //Ruta donde se aloja el sitio
+		define('ENVIRONMENT', 'development');
+		break;
+	
+	default:
+		define('ENVIRONMENT', 'production');
+		break;
+}
+
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
@@ -57,7 +66,7 @@ if (defined('ENVIRONMENT'))
  * as this file.
  *
  */
-	$system_path = 'system';
+	$system_path = '../system';
 
 /*
  *---------------------------------------------------------------
@@ -73,7 +82,7 @@ if (defined('ENVIRONMENT'))
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = 'application';
+	$application_folder = '../application';
 
 /*
  * --------------------------------------------------------------------
