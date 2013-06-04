@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700">
-        <link rel="stylesheet" href="<?php echo site_url('/css/bootstrap.css') ?>">
+        <link rel="stylesheet" href="<?php echo site_url('css/bootstrap.css') ?>">
         <link rel="stylesheet" href="<?php echo site_url('css/bootstrap-responsive.min.css') ?>">
         <link rel="stylesheet" href="<?php echo site_url('css/main.css') ?>">
         <!--[if lt IE 9]>
@@ -99,9 +99,7 @@
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div>
             </div>
-
-
-
+            <div id="push"></div>
         </div> <!-- /container -->
         <footer>
             <p>&copy; Bach PHP <?php echo date('Y') ?></p>
@@ -115,8 +113,7 @@
                 $('.spinner').animate({'opacity':0},1000,'easeOutCubic',function (){$(this).css('display','none')});  
             });                         
         </script>
-        <script src="<?php echo site_url('js/vendor/bootstrap.min.js') ?>"></script>
-        <script src="<?php echo site_url('js/plugins.js') ?>"></script>
+        <script src="<?php echo site_url('js/bootstrap.min.js') ?>"></script>
         <script src="<?php echo site_url('js/main.js') ?>"></script>
     </body>
 </html>
