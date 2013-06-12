@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"link",
+				"link	link - stylesheet"
+			],
+			[
+				"fun",
+				"fun	function …"
+			],
+			[
+				"fil",
+				"filename"
+			],
+			[
+				"class",
+				"classname"
+			],
+			[
+				"if",
+				"if	if …"
+			],
+			[
+				"clas",
+				"classname"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
 				"pro",
 				"production"
 			],
@@ -20,10 +48,6 @@
 				"margin-right"
 			],
 			[
-				"fun",
-				"function"
-			],
-			[
 				"show",
 				"showNavs"
 			],
@@ -38,10 +62,6 @@
 			[
 				"meta",
 				"meta	<meta name=\"\" content=\"\">"
-			],
-			[
-				"link",
-				"link	link - stylesheet"
 			],
 			[
 				"mar",
@@ -86,10 +106,6 @@
 			[
 				"idU",
 				"idUsuario"
-			],
-			[
-				"if",
-				"ifelse	if … else …"
 			],
 			[
 				"rolE",
@@ -200,10 +216,6 @@
 				"create"
 			],
 			[
-				"clas",
-				"class=  (attribute)"
-			],
-			[
 				"4",
 				"<td>${1001}</td>\n<td>${1002}</td>\n<td>${1003}</td>\n<td>${1004:$SELECTION}</td>"
 			],
@@ -266,10 +278,6 @@
 			[
 				"doce",
 				"docente"
-			],
-			[
-				"class",
-				"classClass_Sorteo_Admin"
 			],
 			[
 				"SysMate",
@@ -468,42 +476,29 @@
 	"buffers":
 	[
 		{
-			"file": "application/config/bach_config.php",
+			"contents": "<!DOCTYPE html>\n<!--[if lt IE 7]>      <html class=\"no-js lt-ie9 lt-ie8 lt-ie7\"> <![endif]-->\n<!--[if IE 7]>         <html class=\"no-js lt-ie9 lt-ie8\"> <![endif]-->\n<!--[if IE 8]>         <html class=\"no-js lt-ie9\"> <![endif]-->\n<!--[if gt IE 8]><!--> <html class=\"no-js\"> <!--<![endif]-->\n    <head>\n        <meta charset=\"utf-8\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n        <title><?php echo $meta_title ?></title>\n        <meta name=\"description\" content=\"\">\n        <meta name=\"viewport\" content=\"width=device-width\">\n        <link rel=\"stylesheet\" href=\"http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700\">\n        <link rel=\"stylesheet\" href=\"<?php echo site_url('css/bootstrap.css') ?>\">\n        <link rel=\"stylesheet\" href=\"<?php echo site_url('css/bootstrap-responsive.min.css') ?>\">\n        <link rel=\"stylesheet\" href=\"<?php echo site_url('css/main.css') ?>\">\n        <!--[if lt IE 9]>\n            <script src=\"js/vendor/html5-3.6-respond-1.1.0.min.js\"></script>\n        <![endif]-->\n    </head>\n    <body>\n        <div class=\"spinner\"></div>\n        <!--[if lt IE 7]>\n            <p class=\"chromeframe\">You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/\">upgrade your browser</a> or <a href=\"http://www.google.com/chromeframe/?redirect=true\">activate Google Chrome Frame</a> to improve your experience.</p>\n        <![endif]-->\n\n        <div id=\"container-main\">\n            <header id=\"header\" class=\"navbar navbar-inverse navbar-fixed-top\">\n                <span class=\"trigger\" id=\"slide-toggle-bar\"><strong style=\"opacity: 1;\"></strong><em></em></span>\n                <div class=\"navbar-inner\">\n                    <div class=\"container-fluid\">\n                        <a class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                            <span class=\"icon-bar\"></span>\n                        </a>\n                        <h1><a class=\"brand\" href=\"index.html\"><span>Bach PHP</span></a></h1>\n                        <nav class=\"nav-collapse collapse\">\n                            <ul class=\"nav\">\n                                <li><a href=\"#about\">About</a></li>\n                                <li><a href=\"#contact\">Contact</a></li>\n                                <li class=\"dropdown\">\n                                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">Dropdown <b class=\"caret\"></b></a>\n                                    <ul class=\"dropdown-menu\">\n                                        <li><a href=\"#\">Action</a></li>\n                                        <li><a href=\"#\">Another action</a></li>\n                                        <li><a href=\"#\">Something else here</a></li>\n                                        <li class=\"divider\"></li>\n                                        <li class=\"nav-header\">Nav header</li>\n                                        <li><a href=\"#\">Separated link</a></li>\n                                        <li><a href=\"#\">One more separated link</a></li>\n                                    </ul>\n                                </li>\n                            </ul>\n                            <form class=\"navbar-form pull-right\">\n                                <input class=\"input-large\" style=\"margin-right: 14px;\" type=\"text\" placeholder=\"Search\">\n                                <button type=\"submit\" class=\"btn btn-danger\" style=\"margin-right: -3px;\" ><i class=\"icon-off icon-white\"></i></button>\n                                \n                            </form>\n                        </nav><!--/.nav-collapse -->\n                    </div>\n                </div>\n            </header><!-- /header -->\n            <nav id=\"nav-left\">\n\n            </nav>\n            <div class=\"container\">\n                \n            </div>\n            <div id=\"push\"></div>\n        </div> <!-- /container -->\n        <footer>\n            \n            <p>&copy; Bach PHP <?php echo date('Y') ?></p>\n        </footer>\n        <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>\n        <script>window.jQuery || document.write('<script src=\"<?php echo site_url('js/jquery-1.9.1.min.js') ?>\"><\\/script>')</script>\n        <script src=\"<?php echo site_url('js/jquery.easing.1.3.js') ?>\"></script>\n        <script type=\"text/javascript\">      \n            $(window).load(function() { \n                $('.spinner').animate({'opacity':0},1000,'easeOutCubic',function (){$(this).css('display','none')});  \n            });                         \n        </script>\n        <script src=\"<?php echo site_url('js/bootstrap.min.js') ?>\"></script>\n        <script src=\"<?php echo site_url('js/main.js') ?>\"></script>\n    </body>\n</html>",
+			"file": "application/views/_layout_main.php",
+			"file_size": 4980,
+			"file_write_time": 130152143567902850,
 			"settings":
 			{
-				"buffer_size": 42,
+				"buffer_size": 4909,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "application/config/autoload.php",
+			"file": "public_html/css/main.css",
 			"settings":
 			{
-				"buffer_size": 3111,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "application/config/development/database.php",
-			"settings":
-			{
-				"buffer_size": 3219,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "application/controllers/admin/dashboard.php",
-			"settings":
-			{
-				"buffer_size": 173,
-				"line_ending": "Windows"
+				"buffer_size": 7324,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 380.0,
 		"selected_items":
 		[
 			[
@@ -511,15 +506,23 @@
 				"Package Control: Install Package"
 			],
 			[
+				"packi",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"packre",
+				"Package Control: Remove Package"
+			],
+			[
+				"packe",
+				"Package Control: Remove Package"
+			],
+			[
 				"oacke",
 				"Package Control: Install Package"
 			],
 			[
 				"pa",
-				"Package Control: Install Package"
-			],
-			[
-				"packe",
 				"Package Control: Install Package"
 			],
 			[
@@ -543,7 +546,7 @@
 				"Snippet: <?php if (…) ?> … <?php else ?> … <?php endif ?>"
 			]
 		],
-		"width": 400.0
+		"width": 512.0
 	},
 	"console":
 	{
@@ -560,6 +563,23 @@
 	},
 	"file_history":
 	[
+		"/C/wamp/www/bach/application/config/bach_config.php",
+		"/C/wamp/www/bach/application/controllers/admin/dashboard.php",
+		"/C/wamp/www/bach/application/core/BC_Controller.php",
+		"/C/wamp/www/bach/application/controllers/welcome.php",
+		"/C/wamp/www/bach/application/libraries/Frontend_Controller.php",
+		"/C/wamp/www/bach/application/libraries/Admin_Controller.php",
+		"/C/wamp/www/bach/application/config/config.php",
+		"/C/wamp/www/bach/application/config/migration.php",
+		"/C/wamp/www/bach/application/migrations/001_create_users.php",
+		"/C/wamp/www/bach/application/migrations/002_create_pages.php",
+		"/C/wamp/www/bach/application/controllers/admin/migration.php",
+		"/D/Programations/CMS/Bu_CMS_C_Ig/Project Files/05-setting-up-the-base-model/application/migrations/001_create_users.php",
+		"/D/Programations/CMS/Bu_CMS_C_Ig/Project Files/05-setting-up-the-base-model/application/migrations/002_create_pages.php",
+		"/C/wamp/www/bach/application/migrations/001_create_pages.php",
+		"/D/Programations/CMS/Bu_CMS_C_Ig/Project Files/03-setting-up-the-base-controllers/application/core/MY_Controller.php",
+		"/C/wamp/www/bach/application/config/autoload.php",
+		"/C/wamp/www/bach/application/config/development/database.php",
 		"/C/wamp/www/bach/template/css/main.css",
 		"/C/wamp/www/bach/template/index.html",
 		"/C/wamp/www/bach/public_html/index.php",
@@ -670,24 +690,7 @@
 		"/usr/local/zend/apache2/htdocs/sorteo/lib/jquery-ui/css/dark-hive/jquery-ui-1.8.24.custom.css",
 		"/usr/local/zend/apache2/htdocs/sorteo/Class/Util/Class_Util_PropelLogger.php",
 		"/usr/local/zend/apache2/htdocs/sorteo/layout/footer.php",
-		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/sorteo-conf.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Model.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Notificacion.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Notificaciones.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Util.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Vista.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/noticenter.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/noticenter_JXP.php",
-		"/usr/local/zend/apache2/htdocs/Template/Version 1.0.2 beta /css/main.css",
-		"/usr/local/zend/apache2/htdocs/Template/Version 1.0.2 beta /layout/header.php",
-		"/Users/omar/Downloads/normalize.css",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/Prefixr/Default (OSX).sublime-keymap",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/SFTP.sublime-settings",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
-		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/store.php",
-		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/contact.php",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/dochtml5.sublime-snippet",
-		"/usr/local/zend/apache2/htdocs/remorca_new2/test.html"
+		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/sorteo-conf.php"
 	],
 	"find":
 	{
@@ -707,6 +710,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"40",
+			"100",
+			"users",
 			"jQuery",
 			"header",
 			"content",
@@ -831,10 +837,7 @@
 			"addOC",
 			"_SESSION",
 			"url",
-			"MTY",
-			"filename",
-			"buscarD",
-			"results"
+			"MTY"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -891,107 +894,60 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "application/config/bach_config.php",
+					"file": "application/views/_layout_main.php",
 					"settings":
 					{
-						"buffer_size": 42,
+						"buffer_size": 4909,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								42,
-								42
+								4028,
+								4028
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 357.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "application/config/autoload.php",
+					"file": "public_html/css/main.css",
 					"settings":
 					{
-						"buffer_size": 3111,
+						"buffer_size": 7324,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1671,
-								1671
+								406,
+								406
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage"
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 648.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "application/config/development/database.php",
-					"settings":
-					{
-						"buffer_size": 3219,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2737,
-								2737
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 594.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "application/controllers/admin/dashboard.php",
-					"settings":
-					{
-						"buffer_size": 173,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								164,
-								164
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
+						"translation.x": 556.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1050,6 +1006,14 @@
 		"selected_items":
 		[
 			[
+				"main",
+				"public_html/css/main.css"
+			],
+			[
+				"lay",
+				"application/views/_layout_main.php"
+			],
+			[
 				"majs",
 				"template/js/main.js"
 			],
@@ -1096,10 +1060,6 @@
 			[
 				"pcmo",
 				"modules/ordenCompra/PcmOc.php"
-			],
-			[
-				"main",
-				"css/main.css"
 			],
 			[
 				"oc_f",
