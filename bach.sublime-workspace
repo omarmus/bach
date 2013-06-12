@@ -4,12 +4,72 @@
 		"selected_items":
 		[
 			[
-				"pro",
-				"production"
+				"li",
+				"li"
+			],
+			[
+				"link",
+				"link"
+			],
+			[
+				"fun",
+				"fun	Function"
+			],
+			[
+				"get",
+				"geometric"
+			],
+			[
+				"rea",
+				"ready	$(document).ready"
+			],
+			[
+				"script",
+				"script"
+			],
+			[
+				"p",
+				"p"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"5",
+				"51041513_signup"
+			],
+			[
+				"in",
+				"innerHTML"
+			],
+			[
+				"bor",
+				"border"
+			],
+			[
+				"div",
+				"divs"
+			],
+			[
+				"scrip",
+				"script"
 			],
 			[
 				"bac",
-				"background-position"
+				"background"
+			],
+			[
+				"cont",
+				"content"
+			],
+			[
+				"ba",
+				"bac	CSS background: #fff url('') 0 0 repeat;"
+			],
+			[
+				"pro",
+				"production"
 			],
 			[
 				"back",
@@ -18,10 +78,6 @@
 			[
 				"margi",
 				"margin-right"
-			],
-			[
-				"fun",
-				"function"
 			],
 			[
 				"show",
@@ -38,14 +94,6 @@
 			[
 				"meta",
 				"meta	<meta name=\"\" content=\"\">"
-			],
-			[
-				"link",
-				"link	link - stylesheet"
-			],
-			[
-				"mar",
-				"margin"
 			],
 			[
 				"prin",
@@ -156,14 +204,6 @@
 				"fadeOut"
 			],
 			[
-				"bor",
-				"borrarLoading"
-			],
-			[
-				"p",
-				"p	<p>"
-			],
-			[
 				"Inventic_",
 				"Inventic_ConfigScript"
 			],
@@ -230,10 +270,6 @@
 			[
 				"HORA",
 				"Hora"
-			],
-			[
-				"get",
-				"get	Get Elements"
 			],
 			[
 				"SysPa",
@@ -312,10 +348,6 @@
 				"<div class=\"field\">${1001:$SELECTION}</div>"
 			],
 			[
-				"script",
-				"<script type=\"text/javascript\">${1001:$SELECTION}</script>"
-			],
-			[
 				"w",
 				"width"
 			],
@@ -390,10 +422,6 @@
 			[
 				"font",
 				"font-size"
-			],
-			[
-				"li",
-				"list-style"
 			],
 			[
 				"fon",
@@ -476,18 +504,24 @@
 			}
 		},
 		{
-			"file": "application/config/autoload.php",
+			"contents": "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');\n/*\n| -------------------------------------------------------------------\n| DATABASE CONNECTIVITY SETTINGS\n| -------------------------------------------------------------------\n| This file will contain the settings needed to access your database.\n|\n| For complete instructions please consult the 'Database Connection'\n| page of the User Guide.\n|\n| -------------------------------------------------------------------\n| EXPLANATION OF VARIABLES\n| -------------------------------------------------------------------\n|\n|	['hostname'] The hostname of your database server.\n|	['username'] The username used to connect to the database\n|	['password'] The password used to connect to the database\n|	['database'] The name of the database you want to connect to\n|	['dbdriver'] The database type. ie: mysql.  Currently supported:\n				 mysql, mysqli, postgre, odbc, mssql, sqlite, oci8\n|	['dbprefix'] You can add an optional prefix, which will be added\n|				 to the table name when using the  Active Record class\n|	['pconnect'] TRUE/FALSE - Whether to use a persistent connection\n|	['db_debug'] TRUE/FALSE - Whether database errors should be displayed.\n|	['cache_on'] TRUE/FALSE - Enables/disables query caching\n|	['cachedir'] The path to the folder where cache files should be stored\n|	['char_set'] The character set used in communicating with the database\n|	['dbcollat'] The character collation used in communicating with the database\n|				 NOTE: For MySQL and MySQLi databases, this setting is only used\n| 				 as a backup if your server is running PHP < 5.2.3 or MySQL < 5.0.7\n|				 (and in table creation queries made with DB Forge).\n| 				 There is an incompatibility in PHP with mysql_real_escape_string() which\n| 				 can make your site vulnerable to SQL injection if you are using a\n| 				 multi-byte character set and are running versions lower than these.\n| 				 Sites using Latin-1 or UTF-8 database character set and collation are unaffected.\n|	['swap_pre'] A default table prefix that should be swapped with the dbprefix\n|	['autoinit'] Whether or not to automatically initialize the database.\n|	['stricton'] TRUE/FALSE - forces 'Strict Mode' connections\n|							- good for ensuring strict SQL while developing\n|\n| The $active_group variable lets you choose which connection group to\n| make active.  By default there is only one group (the 'default' group).\n|\n| The $active_record variables lets you determine whether or not to load\n| the active record class\n*/\n\n$active_group = 'default';\n$active_record = TRUE;\n\n$db['default']['hostname'] = 'localhost';\n$db['default']['username'] = 'root';\n$db['default']['password'] = '';\n$db['default']['database'] = 'bach';\n$db['default']['dbdriver'] = 'mysql';\n$db['default']['dbprefix'] = '';\n$db['default']['pconnect'] = FALSE;\n$db['default']['db_debug'] = TRUE;\n$db['default']['cache_on'] = FALSE;\n$db['default']['cachedir'] = '';\n$db['default']['char_set'] = 'utf8';\n$db['default']['dbcollat'] = 'utf8_general_ci';\n$db['default']['swap_pre'] = '';\n$db['default']['autoinit'] = TRUE;\n$db['default']['stricton'] = TRUE;\n\n\n/* End of file database.php */\n/* Location: ./application/config/database.php */ ?>",
+			"file": "application/config/development/database.php",
+			"file_size": 3287,
+			"file_write_time": 130150858619138386,
 			"settings":
 			{
-				"buffer_size": 3111,
+				"buffer_size": 3222,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "application/config/development/database.php",
+			"contents": "<a href=\"\n\"></a>nav>ul>li*2\nnav>ul*5",
+			"file": "test.html",
+			"file_size": 0,
+			"file_write_time": 130150928363297524,
 			"settings":
 			{
-				"buffer_size": 3219,
+				"buffer_size": 36,
 				"line_ending": "Windows"
 			}
 		},
@@ -495,7 +529,15 @@
 			"file": "application/controllers/admin/dashboard.php",
 			"settings":
 			{
-				"buffer_size": 173,
+				"buffer_size": 314,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test.php",
+			"settings":
+			{
+				"buffer_size": 121229,
 				"line_ending": "Windows"
 			}
 		}
@@ -503,23 +545,55 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 357.0,
 		"selected_items":
 		[
 			[
+				"packere",
+				"Package Control: Remove Package"
+			],
+			[
 				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"packe",
+				"Package Control: Enable Package"
+			],
+			[
+				"packre",
+				"Package Control: Remove Package"
+			],
+			[
+				"pckre",
+				"Package Control: Remove Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"sinta",
+				"Snippet: CI - Session - Retrieving Session Data"
+			],
+			[
+				"packdi",
+				"Package Control: Disable Package"
+			],
+			[
+				"packd",
+				"Package Control: Disable Package"
+			],
+			[
+				"pa",
+				"Package Control: Disable Package"
+			],
+			[
+				"oack",
 				"Package Control: Install Package"
 			],
 			[
 				"oacke",
-				"Package Control: Install Package"
-			],
-			[
-				"pa",
-				"Package Control: Install Package"
-			],
-			[
-				"packe",
 				"Package Control: Install Package"
 			],
 			[
@@ -535,15 +609,11 @@
 				"Package Control: Install Package"
 			],
 			[
-				"pac",
-				"Package Control: Add Channel"
-			],
-			[
 				"if",
 				"Snippet: <?php if (…) ?> … <?php else ?> … <?php endif ?>"
 			]
 		],
-		"width": 400.0
+		"width": 512.0
 	},
 	"console":
 	{
@@ -560,6 +630,22 @@
 	},
 	"file_history":
 	[
+		"/C/wamp/www/bach/bach.sublime-workspace",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Emmet/Default (Windows).sublime-keymap",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Emmet/Emmet.sublime-settings",
+		"/C/wamp/www/bach/application/config/autoload.php",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/DSK02/Pictures/Maya/IP_Signup.html",
+		"/C/Users/DSK02/Pictures/instapage/button_facebook.css",
+		"/C/Users/DSK02/Downloads/base/base.backup",
+		"/C/wamp/www/bach/public_html/lib/perfect-scrollbar/perfect-scrollbar.with-mousewheel.min.js",
+		"/C/Users/DSK02/Downloads/perfect-scrollbar-0.3.4/examples/options-default.html",
+		"/C/Users/DSK02/Downloads/perfect-scrollbar-0.3.4/examples/options-wheelPropagation.html",
+		"/C/Users/DSK02/Downloads/perfect-scrollbar-0.3.4/examples/options-wheelSpeed.html",
+		"/C/wamp/www/bach/public_html/lib/perfect-scrollbar/perfect-scrollbar.min.css",
 		"/C/wamp/www/bach/template/css/main.css",
 		"/C/wamp/www/bach/template/index.html",
 		"/C/wamp/www/bach/public_html/index.php",
@@ -671,23 +757,7 @@
 		"/usr/local/zend/apache2/htdocs/sorteo/Class/Util/Class_Util_PropelLogger.php",
 		"/usr/local/zend/apache2/htdocs/sorteo/layout/footer.php",
 		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/sorteo-conf.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Model.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Notificacion.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Notificaciones.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Util.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Vista.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/noticenter.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/noticenter_JXP.php",
-		"/usr/local/zend/apache2/htdocs/Template/Version 1.0.2 beta /css/main.css",
-		"/usr/local/zend/apache2/htdocs/Template/Version 1.0.2 beta /layout/header.php",
-		"/Users/omar/Downloads/normalize.css",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/Prefixr/Default (OSX).sublime-keymap",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/SFTP.sublime-settings",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
-		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/store.php",
-		"/usr/local/zend/apache2/htdocs/remorca_new2/pages/contact.php",
-		"/Users/omar/Library/Application Support/Sublime Text 2/Packages/User/dochtml5.sublime-snippet",
-		"/usr/local/zend/apache2/htdocs/remorca_new2/test.html"
+		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Model.php"
 	],
 	"find":
 	{
@@ -698,15 +768,28 @@
 		"height": 0.0,
 		"where_history":
 		[
-			"<project>",
-			""
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"bar",
+			"width",
+			"div1",
+			"Default",
+			"width",
+			"ps-scrollbar-x",
+			";}",
+			"0",
+			"content-holder",
+			"scrollablemenu",
+			"contentHolder",
+			"Default",
+			"contentHolder",
+			"content",
+			"float: left;",
 			"jQuery",
 			"header",
 			"content",
@@ -819,22 +902,7 @@
 			"user",
 			"$oParam->strXML",
 			"esDestinoCliente",
-			"searchClienteParameter",
-			"Inventic_Mailer_Template()",
-			"buildReminderMailContent",
-			"function getUsername",
-			"Código del cliente...",
-			"código",
-			"c?digo",
-			"?",
-			"codOcCLiente",
-			"addOC",
-			"_SESSION",
-			"url",
-			"MTY",
-			"filename",
-			"buscarD",
-			"results"
+			"searchClienteParameter"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -891,6 +959,7 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -905,13 +974,13 @@
 						"selection":
 						[
 							[
-								42,
-								42
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -921,52 +990,52 @@
 				},
 				{
 					"buffer": 1,
-					"file": "application/config/autoload.php",
+					"file": "application/config/development/database.php",
 					"settings":
 					{
-						"buffer_size": 3111,
+						"buffer_size": 3222,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1671,
-								1671
+								3222,
+								3222
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 648.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "application/config/development/database.php",
+					"file": "test.html",
 					"settings":
 					{
-						"buffer_size": 3219,
+						"buffer_size": 36,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2737,
-								2737
+								36,
+								36
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML5/Syntaxes/HTML 5.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 594.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -976,15 +1045,15 @@
 					"file": "application/controllers/admin/dashboard.php",
 					"settings":
 					{
-						"buffer_size": 173,
+						"buffer_size": 314,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								164,
-								164
+								0,
+								0
 							]
 						],
 						"settings":
@@ -993,6 +1062,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "test.php",
+					"settings":
+					{
+						"buffer_size": 121229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								121044,
+								121044
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1710.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1031,14 +1128,6 @@
 		]
 	},
 	"menu_visible": true,
-	"output.exec":
-	{
-		"height": 112.0
-	},
-	"output.sftp":
-	{
-		"height": 0.0
-	},
 	"replace":
 	{
 		"height": 75.0
