@@ -6,7 +6,7 @@ class Dashboard extends Admin_Controller {
     }
 
     public function index() {
-    	$this->load->view('_layout_main', $this->data);
+    	$this->load->view('admin/_layout_main', $this->data);
     }
     
     public function modal() {

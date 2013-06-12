@@ -4,36 +4,68 @@
 		"selected_items":
 		[
 			[
-				"li",
-				"li"
+				"ba",
+				"black"
 			],
 			[
-				"link",
-				"link"
+				"tra",
+				"transparent"
 			],
 			[
-				"fun",
-				"fun	Function"
+				"bori",
+				"border-right"
 			],
 			[
-				"get",
-				"geometric"
+				"bor",
+				"border-left"
 			],
 			[
-				"rea",
-				"ready	$(document).ready"
+				"abs",
+				"absolute"
 			],
 			[
-				"script",
-				"script"
+				"blo",
+				"block"
 			],
 			[
-				"p",
-				"p"
+				"pad",
+				"padding"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"backgr",
+				"background"
+			],
+			[
+				"back",
+				"background-position"
+			],
+			[
+				"pa",
+				"padding"
 			],
 			[
 				"mar",
-				"margin-bottom"
+				"margin"
+			],
+			[
+				"ce",
+				"center"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"tec",
+				"text-decoration"
+			],
+			[
+				"li",
+				"library	CI - New Library"
 			],
 			[
 				"5",
@@ -44,10 +76,6 @@
 				"innerHTML"
 			],
 			[
-				"bor",
-				"border"
-			],
-			[
 				"div",
 				"divs"
 			],
@@ -56,28 +84,28 @@
 				"script"
 			],
 			[
-				"bac",
-				"background"
+				"link",
+				"link	link - stylesheet"
+			],
+			[
+				"script",
+				"script	<script>"
 			],
 			[
 				"cont",
 				"content"
 			],
 			[
-				"ba",
-				"bac	CSS background: #fff url('') 0 0 repeat;"
-			],
-			[
 				"pro",
 				"production"
 			],
 			[
-				"back",
-				"background"
-			],
-			[
 				"margi",
 				"margin-right"
+			],
+			[
+				"fun",
+				"function"
 			],
 			[
 				"show",
@@ -204,6 +232,10 @@
 				"fadeOut"
 			],
 			[
+				"p",
+				"p	<p>"
+			],
+			[
 				"Inventic_",
 				"Inventic_ConfigScript"
 			],
@@ -270,6 +302,10 @@
 			[
 				"HORA",
 				"Hora"
+			],
+			[
+				"get",
+				"get	Get Elements"
 			],
 			[
 				"SysPa",
@@ -478,90 +514,40 @@
 			[
 				"le",
 				"length"
-			],
-			[
-				"fiel",
-				"fieldsObligatory"
-			],
-			[
-				"verti",
-				"vertical-align"
-			],
-			[
-				"new",
-				"news-press"
 			]
 		]
 	},
 	"buffers":
 	[
-		{
-			"file": "application/config/bach_config.php",
-			"settings":
-			{
-				"buffer_size": 42,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');\n/*\n| -------------------------------------------------------------------\n| DATABASE CONNECTIVITY SETTINGS\n| -------------------------------------------------------------------\n| This file will contain the settings needed to access your database.\n|\n| For complete instructions please consult the 'Database Connection'\n| page of the User Guide.\n|\n| -------------------------------------------------------------------\n| EXPLANATION OF VARIABLES\n| -------------------------------------------------------------------\n|\n|	['hostname'] The hostname of your database server.\n|	['username'] The username used to connect to the database\n|	['password'] The password used to connect to the database\n|	['database'] The name of the database you want to connect to\n|	['dbdriver'] The database type. ie: mysql.  Currently supported:\n				 mysql, mysqli, postgre, odbc, mssql, sqlite, oci8\n|	['dbprefix'] You can add an optional prefix, which will be added\n|				 to the table name when using the  Active Record class\n|	['pconnect'] TRUE/FALSE - Whether to use a persistent connection\n|	['db_debug'] TRUE/FALSE - Whether database errors should be displayed.\n|	['cache_on'] TRUE/FALSE - Enables/disables query caching\n|	['cachedir'] The path to the folder where cache files should be stored\n|	['char_set'] The character set used in communicating with the database\n|	['dbcollat'] The character collation used in communicating with the database\n|				 NOTE: For MySQL and MySQLi databases, this setting is only used\n| 				 as a backup if your server is running PHP < 5.2.3 or MySQL < 5.0.7\n|				 (and in table creation queries made with DB Forge).\n| 				 There is an incompatibility in PHP with mysql_real_escape_string() which\n| 				 can make your site vulnerable to SQL injection if you are using a\n| 				 multi-byte character set and are running versions lower than these.\n| 				 Sites using Latin-1 or UTF-8 database character set and collation are unaffected.\n|	['swap_pre'] A default table prefix that should be swapped with the dbprefix\n|	['autoinit'] Whether or not to automatically initialize the database.\n|	['stricton'] TRUE/FALSE - forces 'Strict Mode' connections\n|							- good for ensuring strict SQL while developing\n|\n| The $active_group variable lets you choose which connection group to\n| make active.  By default there is only one group (the 'default' group).\n|\n| The $active_record variables lets you determine whether or not to load\n| the active record class\n*/\n\n$active_group = 'default';\n$active_record = TRUE;\n\n$db['default']['hostname'] = 'localhost';\n$db['default']['username'] = 'root';\n$db['default']['password'] = '';\n$db['default']['database'] = 'bach';\n$db['default']['dbdriver'] = 'mysql';\n$db['default']['dbprefix'] = '';\n$db['default']['pconnect'] = FALSE;\n$db['default']['db_debug'] = TRUE;\n$db['default']['cache_on'] = FALSE;\n$db['default']['cachedir'] = '';\n$db['default']['char_set'] = 'utf8';\n$db['default']['dbcollat'] = 'utf8_general_ci';\n$db['default']['swap_pre'] = '';\n$db['default']['autoinit'] = TRUE;\n$db['default']['stricton'] = TRUE;\n\n\n/* End of file database.php */\n/* Location: ./application/config/database.php */ ?>",
-			"file": "application/config/development/database.php",
-			"file_size": 3287,
-			"file_write_time": 130150858619138386,
-			"settings":
-			{
-				"buffer_size": 3222,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<a href=\"\n\"></a>nav>ul>li*2\nnav>ul*5",
-			"file": "test.html",
-			"file_size": 0,
-			"file_write_time": 130150928363297524,
-			"settings":
-			{
-				"buffer_size": 36,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "application/controllers/admin/dashboard.php",
-			"settings":
-			{
-				"buffer_size": 314,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "test.php",
-			"settings":
-			{
-				"buffer_size": 121229,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 357.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
-				"packere",
-				"Package Control: Remove Package"
-			],
-			[
 				"pack",
-				"Package Control: List Packages"
+				"Package Control: Install Package"
 			],
 			[
-				"packe",
-				"Package Control: Enable Package"
+				"con",
+				"Convert Case: Lower Case"
+			],
+			[
+				"conver",
+				"Convert Case: Lower Case"
+			],
+			[
+				"converca",
+				"Convert Case: Lower Case"
 			],
 			[
 				"packre",
+				"Package Control: Remove Package"
+			],
+			[
+				"packere",
 				"Package Control: Remove Package"
 			],
 			[
@@ -597,6 +583,10 @@
 				"Package Control: Install Package"
 			],
 			[
+				"packe",
+				"Package Control: Install Package"
+			],
+			[
 				"Snippet: html",
 				"Snippet: IE Conditional Comment: HTML5 Shim"
 			],
@@ -613,7 +603,7 @@
 				"Snippet: <?php if (…) ?> … <?php else ?> … <?php endif ?>"
 			]
 		],
-		"width": 512.0
+		"width": 432.0
 	},
 	"console":
 	{
@@ -630,6 +620,16 @@
 	},
 	"file_history":
 	[
+		"/C/wamp/www/css/index.css",
+		"/C/wamp/www/demochimp/app/views/watch/complete.php",
+		"/C/wamp/www/instapage/system/application/controllers/account.php",
+		"/C/wamp/www/instapage/system/libraries/twitter/secret.php",
+		"/C/wamp/www/instapage/system/application/libraries/Twitter.php",
+		"/C/wamp/www/instapage/static/css/auth.css",
+		"/C/wamp/www/instapage/system/application/views/account/profile.php",
+		"/C/Users/DSK02/Downloads/mdw-twitter-oauth/twitterOAuth.php",
+		"/C/wamp/www/instapage/system/application/libraries/twitteroauth/twitteroauth/twitteroauth.php",
+		"/C/Users/DSK02/Downloads/mdw-twitter-oauth/OAuth.php",
 		"/C/wamp/www/bach/bach.sublime-workspace",
 		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Emmet/Default (Windows).sublime-keymap",
 		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
@@ -747,17 +747,7 @@
 		"/usr/local/zend/apache2/htdocs/sorteo/js/scripts.js",
 		"/usr/local/zend/apache2/htdocs/sorteo/css/main.css",
 		"/usr/local/zend/apache2/htdocs/sorteo/config/Config_Site.php",
-		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/classmap-sorteo-conf.php",
-		"/usr/local/zend/apache2/htdocs/html5-boilerplate/index.html",
-		"/usr/local/zend/apache2/htdocs/html5-boilerplate/css/main.css",
-		"/usr/local/zend/apache2/htdocs/html5-boilerplate/js/plugins.js",
-		"/usr/local/zend/apache2/htdocs/html5-boilerplate/js/main.js",
-		"/usr/local/zend/apache2/htdocs/html5-boilerplate/css/normalize.css",
-		"/usr/local/zend/apache2/htdocs/sorteo/lib/jquery-ui/css/dark-hive/jquery-ui-1.8.24.custom.css",
-		"/usr/local/zend/apache2/htdocs/sorteo/Class/Util/Class_Util_PropelLogger.php",
-		"/usr/local/zend/apache2/htdocs/sorteo/layout/footer.php",
-		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/sorteo-conf.php",
-		"/usr/local/zend/apache2/htdocs/emstrunk/Calvi/Noticenter/Calvi_Noticenter_Model.php"
+		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/classmap-sorteo-conf.php"
 	],
 	"find":
 	{
@@ -768,6 +758,12 @@
 		"height": 0.0,
 		"where_history":
 		[
+			"C:\\wamp\\www",
+			"C:\\wamp\\www\\instapage",
+			"<project>",
+			"C:\\wamp\\www\\instapage\\system\\application",
+			"C:\\wamp\\www\\instapage\\system\\application\\libraries",
+			"C:\\wamp\\www\\instapage\\system\\application"
 		]
 	},
 	"find_state":
@@ -775,6 +771,59 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"''",
+			"mediaelement-and-player.min.js",
+			"/static/plugins/mediaelement/",
+			"url(",
+			"/static",
+			"mediaelement",
+			"\\",
+			"build/",
+			"<video",
+			"acornmediaplayer",
+			"10px",
+			"acornmediaplayer",
+			"/static/img/ip2/icons/ip_logo.png",
+			"https://s3.amazonaws.com/instapage/ip_logo.png",
+			"img",
+			"img/ip2/site/logo_big.png",
+			"\\",
+			"consumer_key",
+			"site_path",
+			"site_url",
+			"consumer_secret",
+			"consumer_key",
+			"current_user",
+			"global",
+			"$db",
+			"config",
+			"header",
+			"$this->site_url",
+			"verify",
+			"auth_clear_cookie",
+			"auth_verify_cookie",
+			"auth_create_cookie",
+			"authenticate_user",
+			"oauth_authenticate",
+			"oauth_authlink",
+			"oauth_clearcookies",
+			"oauth_clearcookies()",
+			"oauth_authenticate()",
+			"oauth_clearcookies()",
+			"oauth_authenticate()",
+			"oauth_clearcookies()",
+			"oauth_clearcookies",
+			"redirect",
+			"include_once( 'twitterOAuth.php' );",
+			", ",
+			"define(",
+			"COOKIE_KEY",
+			"COOKIE_PREFIX",
+			"SITE_PATH",
+			"SITE_URL",
+			"CONSUMER_SECRET",
+			"CONSUMER_KEY",
+			"function",
 			"bar",
 			"width",
 			"div1",
@@ -849,60 +898,7 @@
 			"producto",
 			"<?php",
 			">\n",
-			"?>",
-			"r r",
-			"rr",
-			"td",
-			"<br>",
-			"Orden",
-			"orden",
-			"moneda",
-			"$oc",
-			"data",
-			"td",
-			"locati",
-			"<input type=\"button\" class=\"botonAceptar\" onclick=\"return validarDatos(true)\" value=\"Guardar Cambios\" />",
-			"vendedores",
-			"correosRol",
-			"servicioCliente",
-			"$vendedores",
-			"servicioCliente",
-			"$vendedores",
-			"vendedores",
-			"getIdRol",
-			"$cliente",
-			"cliente",
-			"array($idUsuario, $idCliente)",
-			"findPk",
-			"idRol",
-			"idUser",
-			"> <",
-			"><",
-			"json",
-			"TTIJ",
-			"sitios",
-			"\" \"",
-			" ",
-			" \n",
-			" ",
-			"MDE",
-			" ",
-			"clientes",
-			"ELIMINAR",
-			"'//",
-			"filename",
-			"docs",
-			"$idCliente",
-			"isIdCliente",
-			"Combo",
-			"cdigo",
-			"rol",
-			"list",
-			"$user",
-			"user",
-			"$oParam->strXML",
-			"esDestinoCliente",
-			"searchClienteParameter"
+			"?>"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -959,141 +955,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "application/config/bach_config.php",
-					"settings":
-					{
-						"buffer_size": 42,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "application/config/development/database.php",
-					"settings":
-					{
-						"buffer_size": 3222,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3222,
-								3222
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 720.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "test.html",
-					"settings":
-					{
-						"buffer_size": 36,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								36,
-								36
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "application/controllers/admin/dashboard.php",
-					"settings":
-					{
-						"buffer_size": 314,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "test.php",
-					"settings":
-					{
-						"buffer_size": 121229,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								121044,
-								121044
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1710.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1138,6 +1001,30 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"comple",
+				"app/views/watch/complete.php"
+			],
+			[
+				"page2.css",
+				"static/css/templates/default/page2.css"
+			],
+			[
+				"style",
+				"static/css/ip_v2/style.css"
+			],
+			[
+				"auth",
+				"static/css/ip_v2/auth.css"
+			],
+			[
+				"libraries/twitter/secret.php",
+				"system/libraries/twitter/secret.php"
+			],
+			[
+				"/controllers/account.php",
+				"system/application/controllers/account.php"
+			],
 			[
 				"majs",
 				"template/js/main.js"

@@ -2,7 +2,7 @@
                                 T E M P L A T E
    ========================================================================== */
 html, body{ height: 100%; } 
-body {background-color: #ffffff; font-family: "Open Sans", Calibri, Candara, Arial, sans-serif; font-size: 14px; color: #555555; line-height: 20px; padding: 20px 0px 40px 0px;}
+body {background-color: #ffffff; font-family: "Open Sans", Calibri, Candara, Arial, sans-serif; font-size: 14px; color: #555555; line-height: 20px; padding: 0;}
 h1, h2, h3, h4, h5, h6 {font-weight: 300;}
 h1 {float: left; margin: 0;}
 h1 a {background: transparent; display: block; padding: 0; }
@@ -95,5 +95,8 @@ header .dropdown:hover .dropdown-menu {display: block;}
    ========================================================================== */
 #nav-left {background: #1B1B1B url(../img/bg-content.jpg); border-left: 1px solid #2D2D2D; height: 100%; margin-right: -79px; position: fixed; right: 0; top: 0; width: 80px;}
 
-.container { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -100px;} 
-footer, #push { height: 100px; }
+#wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -30px;} 
+#container-main {padding: 70px 80px 0 0;}
+footer, #push { height: 30px; }
+footer p { font-size: 0.8em; border-top: 1px solid #AAAAAA;}
+footer {padding-right: 80px;}
