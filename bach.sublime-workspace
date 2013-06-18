@@ -519,6 +519,30 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "test.php",
+			"settings":
+			{
+				"buffer_size": 1569,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 110,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/wamp/www/accelraise/static/css/main.css",
+			"settings":
+			{
+				"buffer_size": 6450,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -771,6 +795,22 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"10px",
+			"right",
+			"-5px",
+			" -",
+			"5",
+			" 5px",
+			"top: 0px;",
+			"0px",
+			"margin: 0 0 -15px -20px; ",
+			" 5px",
+			"5px",
+			"text-aign: center; ",
+			"10",
+			"padding",
+			"span",
+			"]",
 			"''",
 			"mediaelement-and-player.min.js",
 			"/static/plugins/mediaelement/",
@@ -882,23 +922,7 @@
 			"[]",
 			"\"][] ",
 			"$data[\"cc\"] .",
-			"email",
-			"5",
-			"$orden->id_oc",
-			"IdCliente",
-			"idCliente",
-			"userBrowser",
-			"htmlentities",
-			"userBrowser",
-			"$value = htmlentities($value)",
-			"userBrowser",
-			"htmlen",
-			"producto",
-			"$producto",
-			"producto",
-			"<?php",
-			">\n",
-			"?>"
+			"email"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -955,8 +979,91 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "test.php",
+					"settings":
+					{
+						"buffer_size": 1569,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								714,
+								714
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								110,
+								110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/wamp/www/accelraise/static/css/main.css",
+					"settings":
+					{
+						"buffer_size": 6450,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2720,
+								2720
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
