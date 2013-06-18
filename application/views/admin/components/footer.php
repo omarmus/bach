@@ -1,4 +1,6 @@
-        <footer class="container">
+            <div id="push"></div>
+        </div> <!-- /wrap -->
+        <footer>
             <p>&copy; Bach PHP <?php echo date('Y') ?> - Disponible en <?php echo anchor('https://github.com/ozielmus/bach', 'Github') ?></p>
         </footer>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
