@@ -9,10 +9,10 @@ var showNavs = function() {
 		layer1 = show ? $("#nav-left") : header,
 		layer2 = show ? header : $("#nav-left"),
 		container = $("#container-main");
-	layer1.animate(show ? {marginRight: "-79px"} : {marginTop: 0}, function () {
-		layer2.animate(show ? {marginTop: "-50px"} : {marginRight: 0});
+	layer1.animate(show ? {marginRight: -79} : {marginTop: 0}, function () {
+		layer2.animate(show ? {marginTop: -50} : {marginRight: 0});
 		$("#slide-toggle-bar strong").animate({opacity: show ? 1 : 0});
-		container.animate(show ? {paddingTop: "20px"} : {paddingRight: "80px"});
+		container.animate(show ? {paddingTop: 3} : {paddingRight: 80});
 	});
-	container.animate(show ? {paddingRight: 0} : {paddingTop: "70px"});
+	container.animate(show ? {paddingRight: 0} : {paddingTop: 53});
 }

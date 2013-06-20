@@ -9,5 +9,7 @@ class Admin_Controller extends BC_Controller
  	{
  		parent::__construct();
  		$this->data['meta_title'] = 'Bach PHP';
+ 		$this->load->helper('form');
+ 		$this->load->library('form_validation');
  	}
 }
