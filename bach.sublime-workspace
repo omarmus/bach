@@ -1,0 +1,1305 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ba",
+				"black"
+			],
+			[
+				"tra",
+				"transparent"
+			],
+			[
+				"bori",
+				"border-right"
+			],
+			[
+				"bor",
+				"border-left"
+			],
+			[
+				"abs",
+				"absolute"
+			],
+			[
+				"blo",
+				"block"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"backgr",
+				"background"
+			],
+			[
+				"back",
+				"background-position"
+			],
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"ce",
+				"center"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"tec",
+				"text-decoration"
+			],
+			[
+				"li",
+				"library	CI - New Library"
+			],
+			[
+				"5",
+				"51041513_signup"
+			],
+			[
+				"in",
+				"innerHTML"
+			],
+			[
+				"div",
+				"divs"
+			],
+			[
+				"scrip",
+				"script"
+			],
+			[
+				"link",
+				"link	link - stylesheet"
+			],
+			[
+				"script",
+				"script	<script>"
+			],
+			[
+				"cont",
+				"content"
+			],
+			[
+				"pro",
+				"production"
+			],
+			[
+				"margi",
+				"margin-right"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"show",
+				"showNavs"
+			],
+			[
+				"sho",
+				"showNavs"
+			],
+			[
+				"drop",
+				"dropdown-menu"
+			],
+			[
+				"meta",
+				"meta	<meta name=\"\" content=\"\">"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"php",
+				"php	<?php … ?>"
+			],
+			[
+				"tr",
+				"tr"
+			],
+			[
+				"input",
+				"input	input - password"
+			],
+			[
+				"al",
+				"almacenes"
+			],
+			[
+				"ELS",
+				"else"
+			],
+			[
+				"factu",
+				"facturas"
+			],
+			[
+				"YAS",
+				"YASTA_WEB_ROOT"
+			],
+			[
+				"style",
+				"style	@style"
+			],
+			[
+				"idU",
+				"idUsuario"
+			],
+			[
+				"if",
+				"ifelse	if … else …"
+			],
+			[
+				"rolE",
+				"rolUser"
+			],
+			[
+				"getU",
+				"getUsername  (function)"
+			],
+			[
+				"getIdMo",
+				"getIdMoneda"
+			],
+			[
+				"coin",
+				"coins"
+			],
+			[
+				"h2",
+				"h2"
+			],
+			[
+				"a",
+				"<a href=\"${1001}\">${1002:$SELECTION}</a>"
+			],
+			[
+				"In",
+				"Inventic_Config"
+			],
+			[
+				"Inv",
+				"Inventic"
+			],
+			[
+				"OcpF",
+				"OcpFacturasQuery"
+			],
+			[
+				"Ocp",
+				"OcpFacturasQuery"
+			],
+			[
+				"FILE",
+				"FILE_DIRECTORY"
+			],
+			[
+				"arr",
+				"array"
+			],
+			[
+				"getPar",
+				"getParameter"
+			],
+			[
+				"FECHA",
+				"FECHA_ACTUALIZACION"
+			],
+			[
+				"Inventic",
+				"Inventic_Config"
+			],
+			[
+				"fad",
+				"fadeOut"
+			],
+			[
+				"p",
+				"p	<p>"
+			],
+			[
+				"Inventic_",
+				"Inventic_ConfigScript"
+			],
+			[
+				"result",
+				"results"
+			],
+			[
+				"explod",
+				"explode  (function)"
+			],
+			[
+				"str_re",
+				"str_replace  (function)"
+			],
+			[
+				"3",
+				"<a href=\"${1001}\">${1002}</a>\n<a href=\"${1003}\">${1004}</a>\n<a href=\"${1005}\">${1006:$SELECTION}</a>"
+			],
+			[
+				"els",
+				"else"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"getClien",
+				"getCliente"
+			],
+			[
+				"crea",
+				"create"
+			],
+			[
+				"clas",
+				"class=  (attribute)"
+			],
+			[
+				"4",
+				"<td>${1001}</td>\n<td>${1002}</td>\n<td>${1003}</td>\n<td>${1004:$SELECTION}</td>"
+			],
+			[
+				"re",
+				"docente  (variable)"
+			],
+			[
+				"doc",
+				"docentes"
+			],
+			[
+				"SysS",
+				"SysSorteoQuery"
+			],
+			[
+				"10",
+				"100"
+			],
+			[
+				"SysDocente",
+				"SysDocenteQuery  (class)"
+			],
+			[
+				"HORA",
+				"Hora"
+			],
+			[
+				"get",
+				"get	Get Elements"
+			],
+			[
+				"SysPa",
+				"SysParametrosQuery  (class)"
+			],
+			[
+				"alum",
+				"alumno"
+			],
+			[
+				"td",
+				"td	<td>"
+			],
+			[
+				"table",
+				"table	<table>"
+			],
+			[
+				"foreach",
+				"foreach	foreach …"
+			],
+			[
+				"th",
+				"<th>${1001:$SELECTION}</th>"
+			],
+			[
+				"Class",
+				"Class_Sorteo_Admin"
+			],
+			[
+				"doce",
+				"docente"
+			],
+			[
+				"class",
+				"classClass_Sorteo_Admin"
+			],
+			[
+				"SysMate",
+				"SysMateriaQuery  (class)"
+			],
+			[
+				"find",
+				"findPk"
+			],
+			[
+				"ar",
+				"array	$… = array (…)"
+			],
+			[
+				"getA",
+				"getAlumno"
+			],
+			[
+				"switch",
+				"fs.writeFileSync(path, data, encoding);"
+			],
+			[
+				"button",
+				"<button>${1001:$SELECTION}</button>"
+			],
+			[
+				"label",
+				"label	<label>"
+			],
+			[
+				"Sys",
+				"SysAlumnoQuery::create"
+			],
+			[
+				"json_",
+				"json_encode"
+			],
+			[
+				"field",
+				"<div class=\"field\">${1001:$SELECTION}</div>"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"te",
+				"text-align:   (property)"
+			],
+			[
+				"form",
+				"form	<form>"
+			],
+			[
+				"N",
+				"\"Arial Narrow\""
+			],
+			[
+				"SysAlumnos",
+				"SysAlumnoQuery  (class)"
+			],
+			[
+				"footer",
+				"<div class=\"footer\">${1001:$SELECTION}</div>"
+			],
+			[
+				"1",
+				"10"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"html",
+				"htmlcinco	dochtml5"
+			],
+			[
+				"I",
+				"IFRAME"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"remo",
+				"removeAllClass"
+			],
+			[
+				"fade",
+				"fadeIn"
+			],
+			[
+				"remove",
+				"removeClass"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"o",
+				"oldDiv"
+			],
+			[
+				"se",
+				"second"
+			],
+			[
+				"ma",
+				"margin"
+			],
+			[
+				"co",
+				"container"
+			],
+			[
+				"no",
+				"no-repeat"
+			],
+			[
+				"bi",
+				"Birthplace"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"inl",
+				"inline-block"
+			],
+			[
+				"heig",
+				"height-logo"
+			],
+			[
+				"js",
+				"json_encode"
+			],
+			[
+				"hid",
+				"hideLoading"
+			],
+			[
+				"is",
+				"isObligatory"
+			],
+			[
+				"le",
+				"length"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "test.php",
+			"settings":
+			{
+				"buffer_size": 1569,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 110,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/wamp/www/accelraise/static/css/main.css",
+			"settings":
+			{
+				"buffer_size": 6450,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "bach.sublime-workspace",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 508,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"con",
+				"Convert Case: Lower Case"
+			],
+			[
+				"conver",
+				"Convert Case: Lower Case"
+			],
+			[
+				"converca",
+				"Convert Case: Lower Case"
+			],
+			[
+				"packre",
+				"Package Control: Remove Package"
+			],
+			[
+				"packere",
+				"Package Control: Remove Package"
+			],
+			[
+				"pckre",
+				"Package Control: Remove Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"sinta",
+				"Snippet: CI - Session - Retrieving Session Data"
+			],
+			[
+				"packdi",
+				"Package Control: Disable Package"
+			],
+			[
+				"packd",
+				"Package Control: Disable Package"
+			],
+			[
+				"pa",
+				"Package Control: Disable Package"
+			],
+			[
+				"oack",
+				"Package Control: Install Package"
+			],
+			[
+				"oacke",
+				"Package Control: Install Package"
+			],
+			[
+				"packe",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: html",
+				"Snippet: IE Conditional Comment: HTML5 Shim"
+			],
+			[
+				"Snippet: ",
+				"Snippet: img"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"if",
+				"Snippet: <?php if (…) ?> … <?php else ?> … <?php endif ?>"
+			]
+		],
+		"width": 432.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/css/index.css",
+		"/C/wamp/www/demochimp/app/views/watch/complete.php",
+		"/C/wamp/www/instapage/system/application/controllers/account.php",
+		"/C/wamp/www/instapage/system/libraries/twitter/secret.php",
+		"/C/wamp/www/instapage/system/application/libraries/Twitter.php",
+		"/C/wamp/www/instapage/static/css/auth.css",
+		"/C/wamp/www/instapage/system/application/views/account/profile.php",
+		"/C/Users/DSK02/Downloads/mdw-twitter-oauth/twitterOAuth.php",
+		"/C/wamp/www/instapage/system/application/libraries/twitteroauth/twitteroauth/twitteroauth.php",
+		"/C/Users/DSK02/Downloads/mdw-twitter-oauth/OAuth.php",
+		"/C/wamp/www/bach/bach.sublime-workspace",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Emmet/Default (Windows).sublime-keymap",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Emmet/Emmet.sublime-settings",
+		"/C/wamp/www/bach/application/config/autoload.php",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/DSK02/AppData/Roaming/Sublime Text 2/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/DSK02/Pictures/Maya/IP_Signup.html",
+		"/C/Users/DSK02/Pictures/instapage/button_facebook.css",
+		"/C/Users/DSK02/Downloads/base/base.backup",
+		"/C/wamp/www/bach/public_html/lib/perfect-scrollbar/perfect-scrollbar.with-mousewheel.min.js",
+		"/C/Users/DSK02/Downloads/perfect-scrollbar-0.3.4/examples/options-default.html",
+		"/C/Users/DSK02/Downloads/perfect-scrollbar-0.3.4/examples/options-wheelPropagation.html",
+		"/C/Users/DSK02/Downloads/perfect-scrollbar-0.3.4/examples/options-wheelSpeed.html",
+		"/C/wamp/www/bach/public_html/lib/perfect-scrollbar/perfect-scrollbar.min.css",
+		"/C/wamp/www/bach/template/css/main.css",
+		"/C/wamp/www/bach/template/index.html",
+		"/C/wamp/www/bach/public_html/index.php",
+		"/C/wamp/www/bach/public_html/.htaccess",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/css/docs.css",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/css/style.css",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/index-4.html",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/jquery.easing.1.3.js",
+		"/C/wamp/www/bach/test.php",
+		"/C/wamp/www/bach/template/css/bootstrap.css",
+		"/C/wamp/www/bach/template/css/cosmo/bootstrap.css",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/css/bootstrap.css",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/index.html",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/bootstrap.js",
+		"/C/wamp/www/bach/template/index-cosmo.html",
+		"/C/wamp/www/bach/index.php",
+		"/C/wamp/www/bach/template/js/main.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/jquery.preloader.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/superfish.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/jquery.kwicks-1.5.1.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/touchTouch.jquery.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/forms.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/jquery.cookie.js",
+		"/D/Git/Plantillas/free_bootstrap_responsive_template_001/free_bootstrap_responsive_template_001/js/jquery.flexslider-min.js",
+		"/C/wamp/www/bach/template/index-cyborg.html",
+		"/C/wamp/www/bach/template/index-flatness.html",
+		"/C/wamp/www/bach/template/index-slate.html",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/upload.php",
+		"/C/wamp/www/pcmoc/Inventic/Inventic_Config.php",
+		"/C/Users/Oziel/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/Lenovo/Downloads/Documents/pcm_oc_2013-01-28.sql",
+		"/C/Users/Gutiérrez/AppData/Roaming/Sublime Text 2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
+		"/C/wamp/www/pcmoc/lib/mailer/class.phpmailer.php",
+		"/C/wamp/www/pcmoc/modules/admin/SysUsers.php",
+		"/C/wamp/www/pcmoc/modules/documents/FacturaAjax.php",
+		"/C/wamp/www/pcmoc/modules/documents/PcmFacturas.php",
+		"/C/wamp/www/pcmoc/Inventic/OC/Inventic_OC_Funciones.php",
+		"/C/wamp/www/pcmoc/modules/main/header.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmOc_JXP.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmDetallesOc.php",
+		"/C/wamp/www/pcmoc/inc/SuperInclude.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmOc.php",
+		"/C/wamp/www/tdvalle/inc/SuperInclude.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmSearchOc.php",
+		"/C/wamp/www/pcmoc/test.php",
+		"/C/Users/Gutierrez/AppData/Local/Temp/fz3temp-1/.htaccess",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/generarPdf.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmDetailsOc.php",
+		"/C/wamp/www/pcmoc/Inventic/Pdf/Inventic_Pdf_Pdf.php",
+		"/C/wamp/www/pcmoc/Inventic/Pdf/Inventic_Pdf_Reporte.php",
+		"/C/wamp/www/pcmoc/modules/ordenCompra/PcmSendOc.php",
+		"/C/wamp/www/pcmoc/lib/mailer/Mail.class.php",
+		"/C/wamp/www/pcmoc/modules/admin/AdmAjax.php",
+		"/C/Inventic/Sistemas/Excel/GenerarExcel.php",
+		"/C/Inventic/Sistemas/Excel/index.php",
+		"/C/Inventic/Sistemas/Excel/Excel.php",
+		"/C/wamp/www/pcmoc/model/build/conf/classmap-ocp-conf.php",
+		"/C/wamp/www/pcmoc/model/build/conf/classmap-yasta-conf.php",
+		"/C/wamp/www/pcmoc/modules/documents/download.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/FacturaAjax.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/download.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/PcmFacturas.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/producto/PcmProduct_JXP.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/admin/AdmAjax.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/CO5987P_13082012_CFV0049468.XML",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/updateDocs.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/download.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/upload.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/OC/Inventic_OC_Funciones.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmDetailsOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmSearchOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Admin/Inventic_Admin_User.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/admin/SysUsers.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/clientes/PcmClientes_JXP.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/lib/ajax/inventicAjaxV1.js",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmOc_JXP.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/producto/PcmListOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/admin/SysConfig.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Mailer/mail_template.txt",
+		"/usr/local/zend/apache2/htdocs/pcmoc/test.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Util/Inventic_Util_Login.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Mailer/Inventic_Mailer_Template.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmSendOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/model/build/classes/ocp/SysParametros.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/documents/createZip.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/css/main.css",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/ordenCompra/PcmDetallesOc.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/bd/updateDataBDScript.php",
+		"/Users/omar/Documents/geo.html",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/main/main.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/Inventic/Inventic_ConfigScript.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/documents/0000000_ddmmaaaa_0_CFV00000_otros.xml",
+		"/usr/local/zend/apache2/htdocs/pcmoc/docs/updateDocs.php",
+		"/usr/local/zend/apache2/htdocs/pcmoc/modules/docs/PcmFacturas.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/ajax/ajax.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/Class/Sorteo/Class_Sorteo_Admin.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/layout/header.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/js/scripts.js",
+		"/usr/local/zend/apache2/htdocs/sorteo/css/main.css",
+		"/usr/local/zend/apache2/htdocs/sorteo/config/Config_Site.php",
+		"/usr/local/zend/apache2/htdocs/sorteo/model/build/conf/classmap-sorteo-conf.php"
+	],
+	"find":
+	{
+		"height": 43.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"C:\\wamp\\www",
+			"C:\\wamp\\www\\instapage",
+			"<project>",
+			"C:\\wamp\\www\\instapage\\system\\application",
+			"C:\\wamp\\www\\instapage\\system\\application\\libraries",
+			"C:\\wamp\\www\\instapage\\system\\application"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"10px",
+			"right",
+			"-5px",
+			" -",
+			"5",
+			" 5px",
+			"top: 0px;",
+			"0px",
+			"margin: 0 0 -15px -20px; ",
+			" 5px",
+			"5px",
+			"text-aign: center; ",
+			"10",
+			"padding",
+			"span",
+			"]",
+			"''",
+			"mediaelement-and-player.min.js",
+			"/static/plugins/mediaelement/",
+			"url(",
+			"/static",
+			"mediaelement",
+			"\\",
+			"build/",
+			"<video",
+			"acornmediaplayer",
+			"10px",
+			"acornmediaplayer",
+			"/static/img/ip2/icons/ip_logo.png",
+			"https://s3.amazonaws.com/instapage/ip_logo.png",
+			"img",
+			"img/ip2/site/logo_big.png",
+			"\\",
+			"consumer_key",
+			"site_path",
+			"site_url",
+			"consumer_secret",
+			"consumer_key",
+			"current_user",
+			"global",
+			"$db",
+			"config",
+			"header",
+			"$this->site_url",
+			"verify",
+			"auth_clear_cookie",
+			"auth_verify_cookie",
+			"auth_create_cookie",
+			"authenticate_user",
+			"oauth_authenticate",
+			"oauth_authlink",
+			"oauth_clearcookies",
+			"oauth_clearcookies()",
+			"oauth_authenticate()",
+			"oauth_clearcookies()",
+			"oauth_authenticate()",
+			"oauth_clearcookies()",
+			"oauth_clearcookies",
+			"redirect",
+			"include_once( 'twitterOAuth.php' );",
+			", ",
+			"define(",
+			"COOKIE_KEY",
+			"COOKIE_PREFIX",
+			"SITE_PATH",
+			"SITE_URL",
+			"CONSUMER_SECRET",
+			"CONSUMER_KEY",
+			"function",
+			"bar",
+			"width",
+			"div1",
+			"Default",
+			"width",
+			"ps-scrollbar-x",
+			";}",
+			"0",
+			"content-holder",
+			"scrollablemenu",
+			"contentHolder",
+			"Default",
+			"contentHolder",
+			"content",
+			"float: left;",
+			"jQuery",
+			"header",
+			"content",
+			"background-position",
+			".dropdown-menu",
+			"layer",
+			", 100",
+			"$(\"body\")",
+			"nav",
+			"aside",
+			"right",
+			"3",
+			"0.4",
+			"main-nav",
+			"\"});\n",
+			"nav",
+			"select, textarea, input[type=\"text\"], input[type=\"password\"], input[type=\"datetime\"], input[type=\"datetime-local\"], input[type=\"date\"], input[type=\"month\"], input[type=\"time\"], input[type=\"week\"], input[type=\"number\"], input[type=\"email\"], input[type=\"url\"], input[type=\"search\"], input[type=\"tel\"], input[type=\"color\"], .uneditable-input",
+			"0.3",
+			"linear",
+			"background-position",
+			"color: #ffffff;",
+			".active",
+			"btn-success",
+			"advanced",
+			"0.1",
+			".btn {",
+			".btn-primary:hover",
+			".btn:hover",
+			".btn:hover {",
+			".btn-primary {",
+			".btn {",
+			".btn",
+			"advanced",
+			".navbar-inverse .navbar-inner",
+			"importFrame",
+			"frames",
+			"abrirImport",
+			"$vendedor->getEstado()",
+			"vendedor",
+			"ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER",
+			"[]",
+			"\"][] ",
+			"$data[\"cc\"] .",
+			"email"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"<div class=\"inline-block\"><a href=\"#\">Listen to excerpt</a></div>\n					<div class=\"audio inline-block\"><audio src=\"mp3/Moment-Musical.mp3\" /></div>	",
+			"",
+			"-mp",
+			"",
+			"-mp",
+			"View",
+			"<p class=\"link\"><a href=\"#\">Listen",
+			"class=\"score\" id=\"score-\"",
+			"class=\"score\" id=\"\"",
+			"class=\"score\"",
+			"Class=\"score\"",
+			"<a href=\"#\" class=\"score\">View score page</a>",
+			"news",
+			"section",
+			"",
+			"January 12, 2012",
+			"secondDiv",
+			"firstDiv",
+			"first",
+			"#",
+			"",
+			"#nav-main",
+			"",
+			">texto",
+			"texto",
+			"text",
+			"label",
+			"</span></li>",
+			"<a href=\"\" style=\"color: #268D0A\">",
+			"logo-width",
+			"logo-height",
+			"titulo2-color",
+			"titulo1-color",
+			"label",
+			"Question goes here?",
+			"main",
+			"Read more",
+			"showMore",
+			"default.gif"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "test.php",
+					"settings":
+					{
+						"buffer_size": 1569,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								714,
+								714
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								110,
+								110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/wamp/www/accelraise/static/css/main.css",
+					"settings":
+					{
+						"buffer_size": 6450,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2720,
+								2720
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "bach.sublime-workspace",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": ".gitignore",
+					"settings":
+					{
+						"buffer_size": 508,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								170,
+								170
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 75.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"comple",
+				"app/views/watch/complete.php"
+			],
+			[
+				"page2.css",
+				"static/css/templates/default/page2.css"
+			],
+			[
+				"style",
+				"static/css/ip_v2/style.css"
+			],
+			[
+				"auth",
+				"static/css/ip_v2/auth.css"
+			],
+			[
+				"libraries/twitter/secret.php",
+				"system/libraries/twitter/secret.php"
+			],
+			[
+				"/controllers/account.php",
+				"system/application/controllers/account.php"
+			],
+			[
+				"majs",
+				"template/js/main.js"
+			],
+			[
+				"mail",
+				"lib/mailer/Mail.class.php"
+			],
+			[
+				"ocf",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"ocfun",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"pcmoc",
+				"modules/ordenCompra/PcmOc.php"
+			],
+			[
+				"sys",
+				"modules/admin/SysConfig.php"
+			],
+			[
+				"sysp",
+				"model/build/classes/ocp/SysParametros.php"
+			],
+			[
+				"util_login",
+				"Inventic/Util/Inventic_Util_Login.php"
+			],
+			[
+				"pcmli",
+				"modules/producto/PcmListOc.php"
+			],
+			[
+				"sysu",
+				"modules/admin/SysUsers.php"
+			],
+			[
+				"oc_",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"pcmo",
+				"modules/ordenCompra/PcmOc.php"
+			],
+			[
+				"main",
+				"css/main.css"
+			],
+			[
+				"oc_f",
+				"Inventic/OC/Inventic_OC_Funciones.php"
+			],
+			[
+				"scri",
+				"js/scripts.js"
+			],
+			[
+				"sc",
+				"js/scripts.js"
+			],
+			[
+				"header",
+				"adm/modules/main/header.php"
+			],
+			[
+				"ab",
+				"pages/about.php"
+			],
+			[
+				"he",
+				"layout/header.php"
+			],
+			[
+				"aja",
+				"ajax/ajax.php"
+			],
+			[
+				"",
+				"/usr/local/zend/apache2/htdocs/brian/layout/header.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 239.0,
+	"status_bar_visible": true
+}
