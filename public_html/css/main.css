@@ -7,26 +7,29 @@ h1, h2, h3, h4, h5, h6 {font-weight: 300;}
 h1 {float: left; margin: 0;}
 h1 a {background: transparent; display: block; padding: 0; }
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {height: 24px; line-height: 24px; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
+#wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -22px;} 
+#container-main {padding: 70px 80px 0 0;}
 .spinner { background: url(../img/spinner.gif) 50% 50% no-repeat #000000; height: 100%; left: 0px; position: fixed; top: 0px; width: 100%; z-index: 9999;}
 .preloader { background: url(../img/loader.gif) center center no-repeat;}
 .hero-unit { background: #eeeeee;}
-#wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -22px;} 
-#container-main {padding: 70px 80px 0 0;}
+.hero-unit, .dropdown-menu {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
+.navbar-inverse .brand {color: #f0f0f0;}
+.border {border-top: 3px solid #000;}
 
 /* ==========================================================================
                         H E A D E R   A N D   N A V
    ========================================================================== */
 header {margin-top: -50px;}
-header span.trigger{display:block;position:absolute; background:url(../img/tm/pro_button.png) 0 0 no-repeat; width:42px; height:42px; left:0; top:51px; cursor:pointer;}
+header span.trigger{display:block;position:absolute; background:url(../img/tm/pro_button.png) 0 0 no-repeat; width:42px; height:42px; left:0; top:53px; cursor:pointer;}
 header span.trigger strong{display:block; background: url(../img/tm/plus-minus.png) 0 0 no-repeat; width:11px; height:11px; position:absolute; left:7px; bottom:24px; opacity:0;}
 header span.trigger em{display:block; background: url(../img/tm/plus-minus.png) -11px 0 no-repeat; width:11px; height:11px; position:absolute; left:7px; bottom:24px;}
 header .dropdown:hover .dropdown-menu {display: block;}
 .navbar h1 .brand {padding: 5px 15px; font-size: 26px;}
-.navbar .nav > li > a {padding: 15px;}
+.navbar .nav > li > a {padding: 15px 25px;}
 .navbar .nav > li > .dropdown-menu:after {border-bottom: 6px solid #404040}
 .navbar-form input, .navbar-form select, .navbar-form .radio, .navbar-form .checkbox {margin-top: 8px;}
 .navbar-inverse .nav > li > a:hover, .navbar-inverse .nav > li.active a { background: #D5D90D; color: #1B1B1B;}
-.navbar-inverse .navbar-inner {background: #1B1B1B url(../img/bg-content.jpg); border-bottom: 1px solid #2D2D2D;}
+.navbar-inverse .navbar-inner {background: #1B1B1B url(../img/bg-content.jpg); border-top: 2px solid #E85356;}
 .navbar .btn, .navbar .btn-group {margin-top: 8px;}
 .dropdown-menu {background: #1B1B1B url(../img/bg-content.jpg); border-top: 1px solid #2D2D2D; margin: 0; }
 .dropdown-menu .divider {background-color: transparent; border-bottom: 1px solid #2D2D2D;}
@@ -34,28 +37,17 @@ header .dropdown:hover .dropdown-menu {display: block;}
 .dropdown-menu > li > a {padding: 5px 20px;}
 .dropdown-menu > li > a, .navbar-inverse .nav > li > a, h1 a:hover, h1 a {
   color: #eeeeee;
-  -webkit-transition: all 0.5s ease;
-     -moz-transition: all 0.5s ease;
-       -o-transition: all 0.5s ease;
-          transition: all 0.5s ease;
-}
-.hero-unit, .dropdown-menu {
-  -webkit-border-radius: 0;
-     -moz-border-radius: 0;
-          border-radius: 0;
+  -webkit-transition: all .4s ease;
+     -moz-transition: all .4s ease;
+       -o-transition: all .4s ease;
+          transition: all .4s ease;
 }
 
 /* ==========================================================================
                                 B U T T O N S
    ========================================================================== */
 .btn {background-color: #dfdfdf; *background-color: #c8c8c8; color: #999999;}
-.btn:hover, .btn:focus {
-  color: #777777;
-  -webkit-transition: background-position 0.2s linear;
-     -moz-transition: background-position 0.2s linear;
-       -o-transition: background-position 0.2s linear;
-          transition: background-position 0.2s linear;
-}
+.btn:hover, .btn:focus {color: #777777;}
 .btn:hover, .btn:focus, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {background-color: #c8c8c8; *background-color: #bbbbbb;}
 .btn-primary, .btn-warning, .btn-danger, .btn-success, .btn-info, .btn-inverse {color: #ffffff;}
 .btn-primary.active, .btn-warning.active, .btn-danger.active, .btn-success.active, .btn-info.active, .btn-inverse.active {color: rgba(255, 255, 255, 0.75);}
@@ -84,10 +76,10 @@ header .dropdown:hover .dropdown-menu {display: block;}
   -webkit-box-shadow: none;
      -moz-box-shadow: none;
           box-shadow: none;
-  -webkit-transition: all 0.4s linear;
-     -moz-transition: all 0.4s linear;
-       -o-transition: all 0.4s linear;
-          transition: all 0.4s linear;
+  -webkit-transition: all 0.4s ease;
+     -moz-transition: all 0.4s ease;
+       -o-transition: all 0.4s ease;
+          transition: all 0.4s ease;
 }
 .btn-large {padding: 22px 30px;}
 
@@ -95,13 +87,74 @@ header .dropdown:hover .dropdown-menu {display: block;}
                                 N A V  L E F T
    ========================================================================== */
 #nav-left {background: #1B1B1B url(../img/bg-content.jpg); border-left: 1px solid #2D2D2D; height: 100%; margin-right: -79px; position: fixed; right: 0; top: 0; width: 80px;}
-#nav-left > div:first-child {margin-top: 51px; border-top: 1px solid #555;}
-#nav-left > div {border-bottom: 1px solid #555; min-height: 80px; padding: 0; width: 80px;}
-#nav-left .profile img {background: gray; display: block; height: 60px; margin: 0 auto 10px auto; width: 60px; }
-#nav-left .profile label {color: #eee; font-weight: bold; text-align: center; }
+#nav-left > div:first-child {margin-top: 51px; border-top: 1px solid #2D2D2D;}
+#nav-left > div {border-bottom: 1px solid #2D2D2D; min-height: 70px; padding: 0; width: 80px; text-align: center;}
+#nav-left div > a {color: #eee; display: block; line-height: 70px; overflow: hidden; text-decoration: none; 
+  -webkit-transition: all 0.4s ease;
+     -moz-transition: all 0.4s ease;
+       -o-transition: all 0.4s ease;
+          transition: all 0.4s ease;
+}
+#nav-left div > a:hover, #nav-left div > a.current {color: #1B1B1B; background-color: #D5D90D;}
+#nav-left .profile img {background: gray; display: block; height: 72px; margin: 0 auto 10px auto; width: 72px; opacity: .85;
+  -webkit-transition: all 0.4s ease;
+     -moz-transition: all 0.4s ease;
+       -o-transition: all 0.4s ease;
+          transition: all 0.4s ease;
+}
+#nav-left .profile a:hover img {opacity: 1;}
+#nav-left .profile label {font-weight: bold;  margin: 11px 0; text-align: center;}
+
+.breadcrumb { background: #eeeeee; border-radius: 0; padding: 11px 42px;}
+#nav-left a > span {background: url(../img/btns-dashboard.png) no-repeat; display: block; height: 40px; margin: 15px auto; width: 47px;}
+#nav-left a#dashboard > span{background-position: -47px -41px;}
+#nav-left div > a#dashboard.current span, #nav-left div > a#dashboard:hover span{background-position: -47px 0px;}
+#nav-left a#settings > span{background-position: 0 -41px;}
+#nav-left div > a#settings.current span, #nav-left div > a#settings:hover span{background-position: 0 0;}
+
 
 /* ==========================================================================
                                 F O O T E R
    ========================================================================== */
 footer, #push {height: 22px;}
 footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-indent: 10px;}
+
+/* ==========================================================================
+                             R E S P O N S I V E
+   ========================================================================== */
+/* Large desktop */
+@media (min-width: 1200px) { 
+
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+}
+
+/* ==========================================================================
+                                  L O G  I N
+   ========================================================================== */
+.form-signin {background-color: #fff; border: 1px solid #e5e5e5; margin: 100px auto 0; max-width: 320px; padding: 40px 40px 30px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.form-signin form {margin: 0; overflow: hidden;}
+.form-signin .checkbox {float: left;}
+.form-signin input[type="text"],
+.form-signin input[type="password"] {font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px; min-width: 264px;}
+.form-signin input[type="submit"] {float: right;}
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {border-radius: 0;}
+.input-append .add-on, .input-prepend .add-on {padding: 7px 9px 6px;}
+

@@ -28,7 +28,9 @@
                 </ul>
                 <form class="navbar-form pull-right">
                     <input class="input-large" style="display: none; margin-right: 14px;" type="text" placeholder="Search">
-                    <button type="submit" class="btn btn-danger" style="margin-right: -3px;" ><i class="icon-off icon-white"></i></button>
+                    <button type="submit" class="btn btn-inverse" ><i class="icon-search icon-white"></i></button>
+                    <button type="submit" class="btn btn-inverse" ><i class="icon-question-sign icon-white"></i></button>
+                    <button type="submit" class="btn btn-danger" style="margin-right: -15px;" ><i class="icon-off icon-white"></i></button>
                 </form>
             </nav><!--/.nav-collapse -->
         </div>
@@ -36,18 +38,26 @@
 </header><!-- /header -->
 <nav id="nav-left">
     <div class="profile">
-        <label>Omar</label>
-        <img src="" alt="Foto">
-        
+        <a href="#">
+            <label>Omar</label>
+            <img src="<?php echo site_url('img/profile.png') ?>" alt="Foto">
+        </a>
     </div>
     <div>
-       
+       <a href="#" id="dashboard" class="current"><span></span></a>
     </div>
     <div>
-        
+        <a href="#" id="settings"><span></span></a>
     </div>
 </nav>
-<div class="container" id="container-main">
-    <?php //$this->load->view($subview); ?>
+<div id="container-main">
+    <ul class="breadcrumb">
+        <li><a href="#">Dashboard</a> <span class="divider">/</span></li>
+        <li><a href="#">Library</a> <span class="divider">/</span></li>
+        <li class="active">Data</li>
+    </ul>
+    <div class="container">
+        <?php //$this->load->view($subview); ?>
+    </div>
 </div>
 <?php $this->load->view('admin/components/footer'); ?>
