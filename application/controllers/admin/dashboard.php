@@ -6,6 +6,8 @@ class Dashboard extends Admin_Controller {
     }
 
     public function index() {
+    	$this->data["subview"] = "";
+    	var_dump(SysUsersQuery::create()->find());
     	$this->load->view('admin/_layout_main', $this->data);
     }
     

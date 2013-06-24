@@ -374,8 +374,8 @@ $config['proxy_ips'] = '';
 |
 */
 $config['propel_main_script'] = APPPATH.'libraries/Propel/runtime/lib/Propel.php';
-$config['propel_conf_file']   = APPPATH.'bin/build/conf/test-conf.php';
-$config['propel_models_dir']  = APPPATH.'bin/build/classes/test';
+$config['propel_conf_file']   = APPPATH.'libraries/Propel/build/conf/bach-conf.php';
+$config['propel_models_dir']  = APPPATH.'libraries/Propel/build/classes/bach';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
