@@ -365,5 +365,17 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
+/*
+|--------------------------------------------------------------------------
+| Propel ORM
+|--------------------------------------------------------------------------
+|
+| If your PHP installation Propel ORM
+|
+*/
+$config['propel_main_script'] = APPPATH.'libraries/Propel/runtime/lib/Propel.php';
+$config['propel_conf_file']   = APPPATH.'bin/build/conf/test-conf.php';
+$config['propel_models_dir']  = APPPATH.'bin/build/classes/test';
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */
