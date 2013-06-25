@@ -29,7 +29,6 @@ class PropelORM
         Propel::setLogger($logger);
         Propel::init( $this->_propel_conf_file );
 	}
-
 }
 
 /* End of file PropelORM.php */

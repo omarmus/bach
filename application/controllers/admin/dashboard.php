@@ -3,11 +3,12 @@ class Dashboard extends Admin_Controller {
 
     public function __construct(){
         parent::__construct();
+        $this->load->model('user_m', 'user');
     }
 
     public function index() {
     	$this->data["subview"] = "";
-    	var_dump(SysUsersQuery::create()->find());
+    	$this->data["users"] = $this->user->getUsers();
     	$this->load->view('admin/_layout_main', $this->data);
     }
     

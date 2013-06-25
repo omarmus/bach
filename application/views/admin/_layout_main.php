@@ -62,6 +62,10 @@
                 <li class="active">Data</li>
             </ul>
             <div class="container">
+                Usuarios
+                <?php foreach ($users as $user): ?>
+                    <?php echo $user['username'] ?>
+                <?php endforeach ?>
                 <?php //$this->load->view($subview); ?>
             </div>
         </div>
