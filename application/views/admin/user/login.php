@@ -17,4 +17,4 @@
 		</div>
 		<?php echo form_submit('submit', 'Log in', 'class="btn btn-large btn-primary"'); ?>
 	<?php echo form_close(); ?>
-</div>1232
+</div>
