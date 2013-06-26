@@ -1,7 +1,7 @@
 <?php 
 
 /**
-* 
+* Class Model implements Propel ORM
 */
 
 class BC_Model extends CI_Model {
@@ -17,69 +17,82 @@ class BC_Model extends CI_Model {
 		parent::__construct();
 	}
 	
-	public function get($id = NULL, $single = FALSE){
-		
-		if ($id != NULL) {
+	public function get($pk = NULL) 
+	{
+		if ($pk != NULL) {
 			$filter = $this->_primary_filter;
-			$id = $filter($id);
-			$this->db->where($this->_primary_key, $id);
-			$method = 'row';
+			$pk = $filter($pk);
+			$method = 'findPk';
+		} else {
+			$method = 'find';
 		}
-		elseif($single == TRUE) {
-			$method = 'row';
-		}
-		else {
-			$method = 'result';
-		}
-		
-		if (!count($this->db->ar_orderby)) {
-			$this->db->order_by($this->_order_by);
-		}
-		return $this->db->get($this->_table_name)->$method();
+
+		// if (!count($this->db->ar_orderby)) {
+		// 	$this->db->order_by($this->_order_by);
+		// }
+
+		$table = $this->_table_name.'Query';
+		return $table::create()->$method($pk);
 	}
 	
-	public function get_by($where, $single = FALSE){
-		$this->db->where($where);
-		return $this->get(NULL, $single);
+	public function get_by($where, $single = FALSE) 
+	{
+		$table = $this->_table_name.'Query';
+		$query = $this->where($table::create(), $where);
+		$method = $single === TRUE?'findOne':'find';
+		return $query->$method();
 	}
 	
-	public function save($data, $id = NULL){
-		
+	public function save($data, $pk = NULL) 
+	{
 		// Set timestamps
 		if ($this->_timestamps == TRUE) {
 			$now = date('Y-m-d H:i:s');
-			$id || $data['created'] = $now;
+			$pk || $data['created'] = $now;
 			$data['modified'] = $now;
 		}
-		
-		// Insert
-		if ($id === NULL) {
+
+		if ($pk === NULL) { // Insert
 			!isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;
-			$this->db->set($data);
-			$this->db->insert($this->_table_name);
-			$id = $this->db->insert_id();
-		}
-		// Update
-		else {
+			$table = $this->_table_name;
+			$obj = new $table();
+		} else { // Update
 			$filter = $this->_primary_filter;
-			$id = $filter($id);
-			$this->db->set($data);
-			$this->db->where($this->_primary_key, $id);
-			$this->db->update($this->_table_name);
+			$pk = $filter($pk);
+			$table = $this->_table_name.'Query';
+			$obj = $table::create()->findPk($pk);
 		}
-		
-		return $id;
+
+		$obj->fromArray($data);
+		if ($obj->save()) {
+            return $obj->getPrimaryKey();
+        }
+		return null;
 	}
 	
-	public function delete($id){
+	public function delete($pk) 
+	{
 		$filter = $this->_primary_filter;
-		$id = $filter($id);
+		$pk = $filter($pk);
 		
-		if (!$id) {
+		if (!$pk) {
 			return FALSE;
 		}
-		$this->db->where($this->_primary_key, $id);
-		$this->db->limit(1);
-		$this->db->delete($this->_table_name);
+		$table = $this->_table_name.'Query';
+		$table::create()->findPk($pk)->delete();
 	}
+
+	protected function where($obj, $key, $value = NULL)
+	{
+		if ( ! is_array($key)) {
+			$key = array($key => $value);
+		}
+		foreach ($key as $k => $v) {
+			$filter = "filterBy{$k}";
+			$obj->$filter($v);
+		}
+
+		return $obj;
+	}
+
 }

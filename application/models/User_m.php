@@ -1,29 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User_m extends CI_Model {
+class User_M extends BC_Model {
 
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	public function getUsers()
-	{
-		$users = array();
-		$result = SysUsersQuery::create()->find();
-		var_dump(count($result));
-		die("");
-		foreach ($result as $item) {
-			$users[]  = array(
-				'username' => $item->getIdUser(), 
-				'email' => $item->getEmail(), 
-				'first_name' => $item->getFirstName(), 
-				'last_name' => $item->getLastName(), 
-			);
-		}
-		return $users;
-	}
-
+	protected $_table_name = 'SysUsers';
+	protected $_primary_key = 'idUser';
+	protected $_primary_filter = 'intval';
+	protected $_order_by = '';
+	protected $_rules = array();
+	protected $_timestamps = FALSE;
+	
 }
 
 /* End of file User.php */

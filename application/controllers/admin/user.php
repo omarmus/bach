@@ -16,6 +16,12 @@ class User extends Admin_Controller
 		$this->data['subview'] = 'admin/user/login';
 		$this->load->view('admin/_layout_modal', $this->data);
 	}
+
+	public function logout()
+	{
+		$this->data['subview'] = 'admin/user/login';
+		$this->load->view('admin/_layout_modal', $this->data);
+	}
 }
 
 /* End of file user.php */
