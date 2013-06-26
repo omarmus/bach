@@ -14,7 +14,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <h1><a class="brand" href="index.html"><span>Bach PHP</span></a></h1>
+                    <h1><a class="brand" href="<?php echo site_url('admin/user/login') ?>"><span>Bach PHP</span></a></h1>
                     <nav class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="#about">About</a></li>
@@ -36,7 +36,7 @@
                             <input class="input-large" style="display: none; margin-right: 14px;" type="text" placeholder="Search">
                             <button type="submit" class="btn btn-inverse" ><i class="icon-search icon-white"></i></button>
                             <button type="submit" class="btn btn-inverse" ><i class="icon-question-sign icon-white"></i></button>
-                            <button type="submit" class="btn btn-danger" style="margin-right: -19px;" ><i class="icon-off icon-white"></i></button>
+                            <a href="<?php echo site_url('admin/user/logout') ?>" class="btn btn-danger" style="margin-right: -19px;" ><i class="icon-off icon-white"></i></a>
                         </form>
                     </nav><!--/.nav-collapse -->
                 </div>
@@ -62,11 +62,7 @@
                 <li class="active">Data</li>
             </ul>
             <div class="container">
-                Usuarios
-                <?php foreach ($users as $user): ?>
-                    <?php echo $user['username'] ?>
-                <?php endforeach ?>
-                <?php //$this->load->view($subview); ?>
+                <?php $this->load->view($subview); ?>
             </div>
         </div>
 <?php $this->load->view('admin/components/footer'); ?>

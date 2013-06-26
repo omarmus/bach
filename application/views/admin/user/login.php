@@ -1,6 +1,6 @@
 <h1><a href="" class="brand">Bach PHP</a></h1>
 <div class="form-signin">
-	<?php echo form_open(); ?>
+	<?php echo form_open('admin/dashboard'); ?>
 		<div class="input-append">
 			<input type="text" placeholder="Email">
 			<span class="add-on"><i class="icon-user"></i></span>
