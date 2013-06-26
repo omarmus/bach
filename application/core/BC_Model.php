@@ -6,6 +6,7 @@
 
 class BC_Model extends CI_Model {
 	
+	protected $_query = null;
 	protected $_table_name = '';
 	protected $_primary_key = 'id';
 	protected $_primary_filter = 'intval';
@@ -27,19 +28,21 @@ class BC_Model extends CI_Model {
 			$method = 'find';
 		}
 
-		// if (!count($this->db->ar_orderby)) {
-		// 	$this->db->order_by($this->_order_by);
-		// }
-
 		$table = $this->_table_name.'Query';
-		return $table::create()->$method($pk);
+		$this->_query = $table::create();
+		$this->order_by();
+
+		return $this->_query->$method($pk);
 	}
-	
+
 	public function get_by($where, $single = FALSE) 
 	{
 		$table = $this->_table_name.'Query';
-		$query = $this->where($table::create(), $where);
+		$this->_query = $table::create();
+		$this->where($where);
+		$this->order_by();
 		$method = $single === TRUE?'findOne':'find';
+
 		return $query->$method();
 	}
 	
@@ -82,17 +85,29 @@ class BC_Model extends CI_Model {
 		$table::create()->findPk($pk)->delete();
 	}
 
-	protected function where($obj, $key, $value = NULL)
+	public function order_by()
+	{
+		if ($this->_order_by != '' OR (is_array($this->_order_by) && count($this->_order_by))) {
+			if (is_array($this->_order_by)) {
+				foreach ($this->_order_by as $k => $v) {
+					$order = "orderBy{$k}";
+					$this->_query->order($v);
+				}
+			} else {
+				$order = 'orderBy'.$this->_order_by;
+				$this->_query->order('ASC');
+			}
+		}
+	}
+
+	protected function where($key, $value = NULL)
 	{
 		if ( ! is_array($key)) {
 			$key = array($key => $value);
 		}
 		foreach ($key as $k => $v) {
 			$filter = "filterBy{$k}";
-			$obj->$filter($v);
+			$this->_query->$filter($v);
 		}
-
-		return $obj;
 	}
-
 }
