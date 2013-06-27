@@ -24,7 +24,7 @@ class User extends Admin_Controller
 				redirect($dashboard);
 			} else {
 				$this->session->flashdata('error', 'That email/password combination does not exist');
-				redirect('admin/user/login', 'refresh');
+				redirect('login', 'refresh');
 			}
 		}
 		$this->data['subview'] = 'admin/user/login';
@@ -34,7 +34,7 @@ class User extends Admin_Controller
 	public function logout()
 	{
 		$this->user->logout();
-		redirect('admin/user/login');
+		redirect('login');
 	}
 }
 

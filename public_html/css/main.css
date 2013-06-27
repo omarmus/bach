@@ -154,16 +154,16 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
 /* ==========================================================================
                                   L O G  I N
    ========================================================================== */
-.form-signin {background-color: #fff; border: 1px solid #e5e5e5; margin: 0 auto 50px; max-width: 320px; padding: 40px 40px 30px;
+.form-login {background-color: #fff; border: 1px solid #e5e5e5; margin: 0 auto 50px; max-width: 320px; padding: 40px 40px 30px;
   -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
           box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-.form-signin form {margin: 0; overflow: hidden;}
-.form-signin div.options {float: left; text-align: left !important;}
-.form-signin input[type="text"],
-.form-signin input[type="password"] {font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px; min-width: 264px;}
-.form-signin input[type="submit"] {float: right; margin-top: 5px; padding: 15px 40px;}
+.form-login form {margin: 0; overflow: hidden;}
+.form-login div.options {float: left; text-align: left !important;}
+.form-login input[type="text"],
+.form-login input[type="password"] {font-size: 16px; height: auto; margin-bottom: 15px; padding: 7px 9px; min-width: 264px;}
+.form-login input[type="submit"] {float: right; margin-top: 5px; padding: 15px 40px;}
 .input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {border-radius: 0;}
 .input-append .add-on, .input-prepend .add-on {padding: 7px 9px 6px;}
 
@@ -230,8 +230,8 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
  
 /* Landscape phones and down */
 @media (max-width: 480px) { 
-  .form-signin {padding: 40px 20px 20px; text-align: center;}
-  .form-signin input[type="text"], .form-signin input[type="password"] {min-width: auto;}
+  .form-login {padding: 40px 20px 20px; text-align: center;}
+  .form-login input[type="text"], .form-login input[type="password"] {min-width: auto;}
 }
 @media (max-width: 320px) { 
   .body-gray h1 {margin: 20px 0 30px;}

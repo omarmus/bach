@@ -1,5 +1,5 @@
 <h1><a href="" class="brand">Bach PHP</a></h1>
-<div class="form-signin">
+<div class="form-login">
 	<?php echo form_open(); ?>
 		<div class="input-append">
 			<input type="text" name="email" placeholder="Email">
