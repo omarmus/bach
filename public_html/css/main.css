@@ -20,6 +20,28 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .brand {font-size: 26px; padding: 5px 15px !important; display: inline;}
 .brand:hover {color: #ffffff; text-decoration: none;}
 
+.error:before {
+    border-bottom: 4px solid #F50F43;
+    border-right: 7px solid transparent;
+    content: "";
+    height: 0;
+    margin: -5px 0 0 10px;
+    position: absolute;
+    width: 0;
+    -webkit-transform: skew(25deg); 
+    -moz-transform: skew(25deg); 
+    -o-transform: skew(25deg);
+    transform: skew(25deg);
+}
+.error {
+    background-color: #F50F43;
+    color: white;
+    float: right;
+    font-size: 12px;
+    margin: -21px 0 10px;
+    padding: 1px 10px;
+}
+
 /* ==========================================================================
                         H E A D E R   A N D   N A V
    ========================================================================== */
@@ -209,7 +231,7 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
 /* Landscape phones and down */
 @media (max-width: 480px) { 
   .form-signin {padding: 40px 20px 20px; text-align: center;}
-  .form-signin input[type="text"] {min-width: auto;}
+  .form-signin input[type="text"], .form-signin input[type="password"] {min-width: auto;}
 }
 @media (max-width: 320px) { 
   .body-gray h1 {margin: 20px 0 30px;}

@@ -11,10 +11,10 @@ class BC_Model extends CI_Model {
 	protected $_primary_key = 'id';
 	protected $_primary_filter = 'intval';
 	protected $_order_by = '';
-	protected $_rules = array();
 	protected $_timestamps = FALSE;
+	public $rules = array();
 	
-	function __construct() {
+	public function __construct() {
 		parent::__construct();
 	}
 	
@@ -43,7 +43,7 @@ class BC_Model extends CI_Model {
 		$this->order_by();
 		$method = $single === TRUE?'findOne':'find';
 
-		return $query->$method();
+		return $this->_query->$method();
 	}
 	
 	public function save($data, $pk = NULL) 
@@ -91,11 +91,11 @@ class BC_Model extends CI_Model {
 			if (is_array($this->_order_by)) {
 				foreach ($this->_order_by as $k => $v) {
 					$order = "orderBy{$k}";
-					$this->_query->order($v);
+					$this->_query->$order($v);
 				}
 			} else {
 				$order = 'orderBy'.$this->_order_by;
-				$this->_query->order('ASC');
+				$this->_query->$order('ASC');
 			}
 		}
 	}

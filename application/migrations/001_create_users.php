@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 class Migration_Create_users extends CI_Migration {
 
 	public function up()
@@ -24,7 +23,7 @@ class Migration_Create_users extends CI_Migration {
 				'constraint' => '100',
 			),
 		));
-		$this->dbforge->add_key('id', TRUE);
+		$this->dbforge->add_key('id');
 		$this->dbforge->create_table('users');
 	}
 
@@ -33,4 +32,3 @@ class Migration_Create_users extends CI_Migration {
 		$this->dbforge->drop_table('users');
 	}
 }
- ?>
