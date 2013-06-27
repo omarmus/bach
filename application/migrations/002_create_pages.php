@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 class Migration_Create_pages extends CI_Migration {
 
 	public function up()
@@ -36,4 +35,3 @@ class Migration_Create_pages extends CI_Migration {
 		$this->dbforge->drop_table('pages');
 	}
 }
- ?>

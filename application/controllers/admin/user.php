@@ -13,14 +13,28 @@ class User extends Admin_Controller
 
 	public function login()
 	{
+		$dashboard = 'admin/dashboard';
+		$this->user->loggedin() == FALSE || redirect($dashboard);
+
+		$rules = $this->user->rules;
+		$this->form_validation->set_rules($rules);
+		if ($this->form_validation->run() == TRUE) {
+			//We can login and redirect
+			if ($this->user->login() == TRUE) {
+				redirect($dashboard);
+			} else {
+				$this->session->flashdata('error', 'That email/password combination does not exist');
+				redirect('admin/user/login', 'refresh');
+			}
+		}
 		$this->data['subview'] = 'admin/user/login';
 		$this->load->view('admin/_layout_modal', $this->data);
 	}
 
 	public function logout()
 	{
-		$this->data['subview'] = 'admin/user/login';
-		$this->load->view('admin/_layout_modal', $this->data);
+		$this->user->logout();
+		redirect('admin/user/login');
 	}
 }
 
