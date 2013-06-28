@@ -24,19 +24,21 @@ class User_M extends BC_Model {
 
 	public function login()
 	{
-		$user = $this->get_by(array(
-			'Email' => $this->input->post('email'),
-			'Password' => $this->hash($this->input->post('password'))
-		), TRUE);
+		$user = $this->get_by(array('Email' => $this->input->post('email')), TRUE);
 		if (count($user)) {
 			//Log in user
-			$data = array(
-				'username' => $user->getUsername(), 
-				'email' => $user->getEmail(), 
-				'id_user' => $user->getPrimaryKey(), 
-				'loggedin' => TRUE, 
-			);
-			$this->session->set_userdata($data);
+			if($this->bcrypt->check_password($this->input->post('password'), $user->getPassword())) {
+				$idUser = $user->getPrimaryKey();
+				$rol = SysRolesXUserQuery::create()->filterByIdUser($idUser)->findOne();
+                $data = array(
+					'username' => $user->getUsername(), 
+					'email' => $user->getEmail(), 
+					'id_user' => $idUser, 
+					'loggedin' => TRUE, 
+					'id_rol' => $rol->getIdRol()
+				);
+				$this->session->set_userdata($data);
+            }
 		}
 	}
 
@@ -50,10 +52,6 @@ class User_M extends BC_Model {
 		return (bool) $this->session->userdata('loggedin');
 	}
 
-	public function hash($string)
-	{
-		return hash('sha512', $string . config_item('encryption_key'));
-	}
 }
 
 /* End of file user_m.php */

@@ -21,9 +21,13 @@ class BC_Model extends CI_Model {
 	public function get($pk = NULL) 
 	{
 		if ($pk != NULL) {
-			$filter = $this->_primary_filter;
-			$pk = $filter($pk);
-			$method = 'findPk';
+			if (is_array($pk)) {
+				$method = 'findPks';
+			} else {
+				$filter = $this->_primary_filter;
+				$pk = $filter($pk);
+				$method = 'findPk';
+			}
 		} else {
 			$method = 'find';
 		}
@@ -85,7 +89,7 @@ class BC_Model extends CI_Model {
 		$table::create()->findPk($pk)->delete();
 	}
 
-	public function order_by()
+	protected function order_by()
 	{
 		if ($this->_order_by != '' OR (is_array($this->_order_by) && count($this->_order_by))) {
 			if (is_array($this->_order_by)) {

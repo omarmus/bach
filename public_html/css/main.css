@@ -9,7 +9,7 @@ h1 a {background: transparent; display: block; padding: 0; }
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {height: 24px; line-height: 24px; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
 #wrap { min-height: 100%; height: auto !important; height: 100%; margin: 0 auto -22px;} 
 #container-main {padding: 0;}
-.spinner { background: url(../img/spinner.gif) 50% 50% no-repeat #000000; height: 100%; left: 0px; position: fixed; top: 0px; width: 100%; z-index: 9999;}
+.spinner {display: none; background: url(../img/spinner.gif) 50% 50% no-repeat #000000; height: 100%; left: 0px; position: fixed; top: 0px; width: 100%; z-index: 9999;}
 .preloader { background: url(../img/loader.gif) center center no-repeat;}
 .hero-unit { background: #eeeeee;}
 .hero-unit, .dropdown-menu {-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;}
@@ -41,6 +41,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     margin: -21px 0 10px;
     padding: 1px 10px;
 }
+.msg {font-size: 12px; line-height: 30px; margin-bottom: 20px; text-align: center;}
+.msg-alert {background-color: #F50F43; color: #ffffff;}
+.msg-success {background-color: #41bb19; color: #ffffff;}
 
 /* ==========================================================================
                         H E A D E R   A N D   N A V

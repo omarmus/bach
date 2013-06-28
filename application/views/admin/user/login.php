@@ -1,5 +1,13 @@
 <h1><a href="" class="brand">Bach PHP</a></h1>
 <div class="form-login">
+	<?php $error = $this->session->flashdata('error'); ?>
+	<?php if ($error): ?>
+	<div class="msg msg-alert"><?php echo $error ?></div>	
+	<?php endif ?>
+	<?php $success = $this->session->flashdata('success'); ?>
+	<?php if ($success): ?>
+	<div class="msg msg-success"><?php echo $success ?></div>	
+	<?php endif ?>
 	<?php echo form_open(); ?>
 		<div class="input-append">
 			<input type="text" name="email" placeholder="Email">

@@ -6,13 +6,34 @@
 class User extends Admin_Controller
 {
 	
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 	}
 
+	public function index()
+	{
+		$this->data['users'] = $this->user->get();
+		$this->data['subview'] = 'admin/user/index';
+		$this->load->view('admin/_layout_main', $this->data);
+	}
+
+	public function edit($id = NULL)
+	{
+		$id == NULL || $this->data['user'] = $this->user->get($id)->toArray();
+		$this->data['subview'] = 'admin/user/edit';
+		$this->load->view('admin/_layout_main', $this->data);
+	}
+
+	public function delete($id)
+	{
+		
+	}
+
 	public function login()
 	{
+		$this->load->library('bcrypt');
+
 		$dashboard = 'admin/dashboard';
 		$this->user->loggedin() == FALSE || redirect($dashboard);
 
@@ -23,7 +44,7 @@ class User extends Admin_Controller
 			if ($this->user->login() == TRUE) {
 				redirect($dashboard);
 			} else {
-				$this->session->flashdata('error', 'That email/password combination does not exist');
+				$this->session->set_flashdata('error', 'That email/password combination does not exist');
 				redirect('login', 'refresh');
 			}
 		}
@@ -33,6 +54,7 @@ class User extends Admin_Controller
 
 	public function logout()
 	{
+		$this->session->set_flashdata('success', 'Logout exit!');
 		$this->user->logout();
 		redirect('login');
 	}

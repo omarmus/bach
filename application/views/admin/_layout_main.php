@@ -36,7 +36,7 @@
                             <input class="input-large" style="display: none; margin-right: 14px;" type="text" placeholder="Search">
                             <button type="submit" class="btn btn-inverse" ><i class="icon-search icon-white"></i></button>
                             <button type="submit" class="btn btn-inverse" ><i class="icon-question-sign icon-white"></i></button>
-                            <a href="<?php echo site_url('admin/user/logout') ?>" class="btn btn-danger" style="margin-right: -19px;" ><i class="icon-off icon-white"></i></a>
+                            <a href="<?php echo site_url('logout') ?>" class="btn btn-danger" style="margin-right: -19px;" ><i class="icon-off icon-white"></i></a>
                         </form>
                     </nav><!--/.nav-collapse -->
                 </div>
@@ -62,6 +62,14 @@
                 <li class="active">Data</li>
             </ul>
             <div class="container">
+                <?php $error = $this->session->flashdata('error'); ?>
+                <?php if ($error): ?>
+                <div class="msg msg-alert"><?php echo $error ?></div>   
+                <?php endif ?>
+                <?php $success = $this->session->flashdata('success'); ?>
+                <?php if ($success): ?>
+                <div class="msg msg-success"><?php echo $success ?></div>   
+                <?php endif ?>
                 <?php $this->load->view($subview); ?>
             </div>
         </div>
