@@ -45,6 +45,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .msg-alert {background-color: #F50F43; color: #ffffff;}
 .msg-success {background-color: #41bb19; color: #ffffff;}
 
+
+
+
 /* ==========================================================================
                         H E A D E R   A N D   N A V
    ========================================================================== */
@@ -229,6 +232,35 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
     background-position: -60px -40px;
   } 
   .navbar-inverse .navbar-inner {border: none;}
+  .data-table {
+    display: block;
+    font-size: 0;
+  }
+  .data-table thead {
+      display: inline-block;
+      font-size: 14px;
+      padding-left: 0;
+      vertical-align: top;
+      width: 30%;
+  }
+  .data-table tbody {
+      display: inline-block;
+      font-size: 0;
+      margin-top: -1px;
+      overflow: auto;
+      white-space: nowrap;
+      width: 70%;
+  }
+  .data-table thead tr, .data-table thead th {
+      display: block;
+  }
+  .data-table tbody tr {
+      display: inline-block;
+      font-size: 14px;
+  }
+  .data-table tbody td {
+      display: block;
+  }
 }
  
 /* Landscape phones and down */
