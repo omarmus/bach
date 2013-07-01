@@ -1,12 +1,12 @@
-<section>
+<section class="row-fluid">
 	<h2>Users</h2>
 	<?php echo anchor('admin/user/edit', '<i class="icon-plus"></i> Add a user'); ?>
-	<table class="table table-striped">
+	<table class="table table-striped table-bordered table-hover data-table">
 		<thead>
 			<tr>
-				<td>Email</td>
-				<td>Edit</td>
-				<td>Delete</td>
+				<th>Email</th>
+				<th>Edit</th>
+				<th>Delete</th>
 			</tr>
 		</thead>
 		<tbody>

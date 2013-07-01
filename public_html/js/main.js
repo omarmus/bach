@@ -1,11 +1,27 @@
 $(document).ready(function() {
-	console.log($("body").width())
 	if ($("body").width() > 979) {
 		showNavs();
 	}
+	$('.data-table').dataTable();
 	
     $("#slide-toggle-bar").on("click", showNavs)
 });
+
+$.extend( true, $.fn.dataTable.defaults, {
+	"sDom": "<'row-fluid'<'span9'><'span3'l>r>t<'row-fluid'<'span4'i><'span8'p>>",
+	"bFilter": false,
+	"sPaginationType": "full_numbers",
+	"oLanguage": {
+        "sLengthMenu": "Rows _MENU_",
+        "sZeroRecords": "Nothing found - sorry",
+        "sInfo": "Showing _START_ to _END_ of _TOTAL_ records",
+        "sInfoEmpty": "Showing 0 to 0 of 0 records",
+        "oPaginate": {
+	        "sNext": "&raquo;",
+	        "sPrevious": "&laquo;"
+	    }
+    }
+} );
 
 var showNavs = function() {
 	var header = $("#header"), 

@@ -10,6 +10,7 @@
 		<!-- <link rel="stylesheet" type="text/css" href="public_html/lib/bootstrap/plugins/datatables/DT_bootstrap.css"> -->
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf-8" language="javascript" src="public_html/lib/jquery/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" charset="utf-8" language="javascript" src="public_html/lib/datatables/js/jquery.dataTables.js"></script>
 		<link rel="stylesheet" href="public_html/lib/bootstrap/css/bootstrap-responsive.min.css">
 		<link rel="stylesheet" href="public_html/css/main.css">
@@ -17,7 +18,21 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
-				// $('#example').dataTable();
+				$('#example').dataTable({
+					"sDom": "<'row-fluid'<'span9'><'span3'l>r>t<'row-fluid'<'span4'i><'span8'p>>",
+					"bFilter": false,
+        			"sPaginationType": "full_numbers",
+        			"oLanguage": {
+			            "sLengthMenu": "Rows _MENU_",
+			            "sZeroRecords": "Nothing found - sorry",
+			            "sInfo": "Showing _START_ to _END_ of _TOTAL_ records",
+			            "sInfoEmpty": "Showing 0 to 0 of 0 records",
+			            "oPaginate": {
+					        "sNext": "&raquo;",
+					        "sPrevious": "&laquo;"
+					    }
+			        }
+				});
 			});
 		</script>
 	</head>
