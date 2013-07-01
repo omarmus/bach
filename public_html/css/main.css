@@ -111,7 +111,21 @@ table.table thead .sorting_asc_disabled { background: url('../lib/datatables/ima
 table.table thead .sorting_desc_disabled { background: url('../lib/datatables/images/sort_desc_disabled.png') no-repeat center right; }
 
 .table-bordered, .table-bordered thead:first-child tr:first-child > th:first-child, .table-bordered tbody:first-child tr:first-child > td:first-child, .table-bordered tbody:first-child tr:first-child > th:first-child {border-radius: 0;}
-
+.check-item, .check-all {cursor: pointer;}
+.check-item i, .check-all i {
+    background: url("../img/checkbox.png") no-repeat 0 0 transparent;
+    display: block;
+    height: 14px;
+    margin-top: 4px;
+    text-align: center;
+    width: 14px;
+    vertical-align: middle;
+}
+table thead th.check-all {vertical-align: top;}
+.row-selected .check-item i, .all-selected .check-all i {background-position: 0 -14px;}
+.table-hover tbody tr:hover > td, .table-hover tbody tr:hover > th, .table-hover tbody tr.row-selected > td {
+    background-color: #eee;
+}
 /* ==========================================================================
                         H E A D E R   A N D   N A V
    ========================================================================== */
@@ -284,13 +298,13 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
     padding: 1px;
   }
   #nav-left #dashboard {
-    background: url("../img/navbar_mini.png") no-repeat 0 0 transparent;
+    background: url(../img/navbar_mini.png) no-repeat 0 0 transparent;
   }
   #nav-left #dashboard.active, #nav-left #dashboard:hover {
     background-position: 0 -40px;
   }
   #nav-left #settings {
-      background: url("../img/navbar_mini.png") no-repeat -60px 0 transparent;
+      background: url(../img/navbar_mini.png) no-repeat -60px 0 transparent;
   }
   #nav-left #settings.active, #nav-left #settings:hover {
     background-position: -60px -40px;
@@ -341,6 +355,7 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
   }
   .dataTable + div > .span4 {float: left;}
   .dataTable + div > .span8 {float: right;}
+  
 }
  
 /* Landscape phones and down */
