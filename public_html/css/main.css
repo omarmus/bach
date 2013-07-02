@@ -45,6 +45,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .msg-alert {background-color: #F50F43; color: #ffffff;}
 .msg-success {background-color: #41bb19; color: #ffffff;}
 
+.section-buttons {margin: 0 0 20px;}
+.fields-form > div {display: inline-block; position: relative;}
+
 /* ==========================================================================
                       T A B L E  A N D  D A T A T A B L E S
    ========================================================================== */
@@ -116,7 +119,7 @@ table.table thead .sorting_desc_disabled { background: url('../lib/datatables/im
     background: url("../img/checkbox.png") no-repeat 0 0 transparent;
     display: block;
     height: 14px;
-    margin-top: 4px;
+    margin: 4px 4px 0;
     text-align: center;
     width: 14px;
     vertical-align: middle;
@@ -125,6 +128,13 @@ table thead th.check-all {vertical-align: top;}
 .row-selected .check-item i, .all-selected .check-all i {background-position: 0 -14px;}
 .table-hover tbody tr:hover > td, .table-hover tbody tr:hover > th, .table-hover tbody tr.row-selected > td {
     background-color: #eee;
+}
+.dataTables_wrapper .row-fluid > .span9 label{
+  background-color: #D5D90D;
+  display: inline-block;
+  line-height: 30px;
+  margin: 0 0 0 5px;
+  padding: 0 10px;
 }
 /* ==========================================================================
                         H E A D E R   A N D   N A V
@@ -353,9 +363,15 @@ footer p { border-top: 1px solid #AAAAAA; font-size: 0.8em; margin: 0; text-inde
     vertical-align: top;
     width: auto;
   }
-  .dataTable + div > .span4 {float: left;}
-  .dataTable + div > .span8 {float: right;}
-  
+  .dataTable + div > .span4, .dataTables_wrapper .row-fluid > .span9 {float: left; width: auto;}
+  .dataTable + div > .span8, .dataTables_wrapper .row-fluid > .span3 {float: right; width: auto;}
+  .check-all i {margin: 12px 10px 0;}
+  .check-all i:after {
+    content: "Select all";
+    float: left;
+    margin: -12px 0 0 10px;
+    width: 70px;
+  }
 }
  
 /* Landscape phones and down */

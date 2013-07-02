@@ -9,6 +9,7 @@ class User extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->data['title'] = 'Users';
 	}
 
 	public function index()
@@ -21,6 +22,13 @@ class User extends Admin_Controller
 	public function edit($id = NULL)
 	{
 		$id == NULL || $this->data['user'] = $this->user->get($id)->toArray();
+
+		$rules = $this->user->rules_edit;
+		$id || $rules['Password'] .= '|required';
+		$this->form_validation->set_rules($rules);
+		if ($this->form_validation->run() == TRUE) {
+			
+		}
 		$this->data['subview'] = 'admin/user/edit';
 		$this->load->view('admin/_layout_main', $this->data);
 	}
@@ -54,9 +62,22 @@ class User extends Admin_Controller
 
 	public function logout()
 	{
-		$this->session->set_flashdata('success', 'Logout exit!');
 		$this->user->logout();
+		$this->session->sess_create();
+	 	$this->session->set_flashdata('success', 'Logout success!');
 		redirect('login');
+	}
+
+	public function _unique_email($str)
+	{
+		$id = $this->uri->segment(4);
+		$user = SysUsersQuery::create()->filterByEmail($this->input->post('Email'))
+									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
+		if (count($user)) {
+			$this->form_validation->set_message('_unique_email', '%s should be unique');
+			return FALSE;
+		}
+		return TRUE;
 	}
 }
 

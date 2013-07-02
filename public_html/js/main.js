@@ -24,14 +24,18 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    }
     },
     "fnInitComplete" : function() {
-    	var that = this;
-		var firstTH = $(that).find('th')[0];
-		var th = document.createElement('th');
+    	var that = this,
+			firstTH = $(that).find('th')[0],
+			total = that.$('tr').length,
+			th = document.createElement('th');
     	th.innerHTML = "<i></i>";
     	th.className = "check-all";
     	th.onclick = function () {
-    		$(firstTH).parent().toggleClass('all-selected');
-    		that.$('tr').toggleClass('row-selected')
+    		var toggle = (total == that.$('tr.row-selected').length?'remove':'add') + 'Class';
+    		$(firstTH).parent()[toggle]('all-selected');
+    		that.$('tr')[toggle]('row-selected');
+    		var now = that.$('tr.row-selected').length;
+    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
     	}
 		$(firstTH).parent().prepend(th);
 		that.$('tr').each(function () {
@@ -41,8 +45,11 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    	td.innerHTML = '<i></i>';
 	    	td.onclick = function () {
 	    		$(firstTD).toggleClass('row-selected');
+	    		var now = that.$('tr.row-selected').length
+	    		$(firstTH).parent()[(total == now?'add':'remove') + 'Class']('all-selected');
+	    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
 	    	}
-	    	$(firstTD).prepend(td)
+	    	$(firstTD).prepend(td);
 		})
     }
 } );

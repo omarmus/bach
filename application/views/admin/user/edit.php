@@ -1,15 +1,31 @@
-<h2><?php echo empty($user['IdUser']) ? 'Add a new user' : 'Edit user ' .$user['FirstName'] ?></h2>
 <?php echo form_open(); ?>
-	<div class="input-append">
-		<input type="text" name="email" placeholder="Email">
-		<span class="add-on"><i class="icon-user"></i></span>
-	</div>
-	<?php echo form_error('email'); ?>
-	<div class="input-append">
-		<input type="password" name="password" placeholder="Password">
-		<span class="add-on"><i class="icon-lock"></i></span>
-	</div>
-	<?php echo form_error('password'); ?>
-
-	<?php echo form_submit('submit', 'Log in', 'class="btn btn-large btn-primary"'); ?>
+    <fieldset class="fields-form">
+	    <legend><?php echo empty($user['IdUser']) ? 'Add a new user' : 'Edit user ' .$user['FirstName'] ?></legend>
+	    <div>
+	    	<label for="">First name:</label> 
+			<input type="text" name="FirstName">
+			<?php echo form_error('FirstName'); ?>
+		</div>
+		<div>
+			<label for="">Last name:</label>
+			<input type="text" name="LastName">
+			<?php echo form_error('LastName'); ?>
+		</div>
+		<div>
+			<label for="">Email:</label>
+			<input type="text" name="Email">
+			<?php echo form_error('Email'); ?>
+		</div>
+		<div>
+			<label for="">Password:</label>
+			<input type="password" name="Password">
+			<?php echo form_error('Password'); ?>
+		</div>
+		<div>
+			<label for="">Confirm password:</label>
+			<input type="text" name="PasswordConfirm">
+		</div>
+		<?php echo form_error('PasswordConfirm'); ?>
+	    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>Save</button>
+    </fieldset>
 <?php echo form_close(); ?>
