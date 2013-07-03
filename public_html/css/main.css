@@ -125,10 +125,7 @@ table.table thead .sorting_desc_disabled { background: url('../lib/datatables/im
     vertical-align: middle;
 }
 table thead th.check-all {vertical-align: top;}
-.row-selected .check-item i, .all-selected .check-all i {background-position: 0 -14px;}
-.table-hover tbody tr:hover > td, .table-hover tbody tr:hover > th, .table-hover tbody tr.row-selected > td {
-    background-color: #eee;
-}
+.info .check-item i, .all-selected .check-all i {background-position: 0 -14px;}
 .dataTables_wrapper .row-fluid > .span9 label{
   background-color: #D5D90D;
   display: inline-block;
@@ -136,6 +133,19 @@ table thead th.check-all {vertical-align: top;}
   margin: 0 0 0 5px;
   padding: 0 10px;
 }
+/* ==========================================================================
+                                    M O D A L
+   ========================================================================== */
+.modal {border-radius: 0;}
+.modal form {margin: 0;}
+.modal-header {position: relative;}
+.modal-header h3, .modal-body label > strong {color: #f50f43;}
+.modal-header .close {opacity: 1;position: absolute;right: -10px;top: -10px;}
+.modal-footer {background-image: url(../img/bg-content.jpg); border-radius: 0;}
+.modal-body > div {display: inline-block;margin: 0 10px 10px;overflow: hidden;vertical-align: top;width: 45%;}
+.modal-body input {margin: 0;}
+.modal-body .error {margin: 5px 0 0;}
+
 /* ==========================================================================
                         H E A D E R   A N D   N A V
    ========================================================================== */

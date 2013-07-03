@@ -11,7 +11,10 @@ $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row-fluid'<'span9'><'span3'l>r>t<'row-fluid'<'span4'i><'span8'p>>",
 	"bFilter": false,
 	"sPaginationType": "full_numbers",
-	"aoColumnDefs" : [{"bVisible": false, "aTargets": [ 0 ]}],
+	"aoColumnDefs" : [
+		{"bVisible": false, "aTargets": [ 0 ]}, 
+		{"bSortable": false, "aTargets": [ 1 ] }
+	],
 	// "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 	"oLanguage": {
         "sLengthMenu": "Rows _MENU_",
@@ -31,10 +34,10 @@ $.extend( true, $.fn.dataTable.defaults, {
     	th.innerHTML = "<i></i>";
     	th.className = "check-all";
     	th.onclick = function () {
-    		var toggle = (total == that.$('tr.row-selected').length?'remove':'add') + 'Class';
+    		var toggle = (total == that.$('tr.info').length?'remove':'add') + 'Class';
     		$(firstTH).parent()[toggle]('all-selected');
-    		that.$('tr')[toggle]('row-selected');
-    		var now = that.$('tr.row-selected').length;
+    		that.$('tr')[toggle]('info');
+    		var now = that.$('tr.info').length;
     		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
     	}
 		$(firstTH).parent().prepend(th);
@@ -44,8 +47,8 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    	td.className = "check-item";
 	    	td.innerHTML = '<i></i>';
 	    	td.onclick = function () {
-	    		$(firstTD).toggleClass('row-selected');
-	    		var now = that.$('tr.row-selected').length
+	    		$(firstTD).toggleClass('info');
+	    		var now = that.$('tr.info').length
 	    		$(firstTH).parent()[(total == now?'add':'remove') + 'Class']('all-selected');
 	    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
 	    	}
@@ -54,7 +57,18 @@ $.extend( true, $.fn.dataTable.defaults, {
     }
 } );
 
+function showModal (url) {
+	$('#main-modal').load(url, function () {
+		$(this).modal();
+	})
+}
 
+function validate (form, url) {
+	$.post(url, $(form).serialize(), function (response) {
+		$('#main-modal').html(response);
+	})
+	return false;
+}
 
 var showNavs = function() {
 	var header = $("#header"), 

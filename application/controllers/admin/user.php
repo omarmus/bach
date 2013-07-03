@@ -29,8 +29,7 @@ class User extends Admin_Controller
 		if ($this->form_validation->run() == TRUE) {
 			
 		}
-		$this->data['subview'] = 'admin/user/edit';
-		$this->load->view('admin/_layout_main', $this->data);
+		$this->load->view('admin/user/edit', $this->data);
 	}
 
 	public function delete($id)

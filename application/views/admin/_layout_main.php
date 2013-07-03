@@ -62,15 +62,17 @@
                 <li class="active">Data</li>
             </ul>
             <div class="container">
-                <?php $error = $this->session->flashdata('error'); ?>
-                <?php if ($error): ?>
-                <div class="msg msg-alert"><?php echo $error ?></div>   
-                <?php endif ?>
-                <?php $success = $this->session->flashdata('success'); ?>
-                <?php if ($success): ?>
-                <div class="msg msg-success"><?php echo $success ?></div>   
-                <?php endif ?>
-                <?php $this->load->view($subview); ?>
+                <section class="row-fluid">
+                    <?php $error = $this->session->flashdata('error'); ?>
+                    <?php if ($error): ?>
+                    <div class="msg msg-alert"><?php echo $error ?></div>   
+                    <?php endif ?>
+                    <?php $success = $this->session->flashdata('success'); ?>
+                    <?php if ($success): ?>
+                    <div class="msg msg-success"><?php echo $success ?></div>   
+                    <?php endif ?>
+                    <?php $this->load->view($subview); ?>
+                </section>
             </div>
         </div>
 <?php $this->load->view('admin/components/footer'); ?>
