@@ -22,7 +22,7 @@
 		<tr>
 			<td><?php echo $user->getPrimaryKey() ?></td>
 			<td><?php echo btn_edit('admin/user/edit/' . $user->getIdUser()) ?></td>
-			<td><?php echo anchor('admin/user/edit/' . $user->getIdUser(), $user->getEmail()); ?></td>
+			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName() ?></td>
 			<td><?php echo $user->getLastName() ?></td>
 		</tr>

@@ -1,7 +1,10 @@
 <?php 
 function btn_edit($uri)
 {
-	return anchor($uri, '<i class="icon-edit"></i>', 'attributs');
+	$uri = site_url($uri);
+	return anchor('#', '<i class="icon-edit"></i>', array(
+		'onclick' => "edit('{$uri}', event)"
+	));
 }
 
 function btn_delete($uri)

@@ -66,8 +66,15 @@ function showModal (url) {
 function validate (form, url) {
 	$.post(url, $(form).serialize(), function (response) {
 		$('#main-modal').html(response);
-	})
+	});
 	return false;
+}
+
+function edit (url, e) {
+	e.preventDefault();
+	$('#main-modal').load(url, function () {
+		$(this).modal();
+	})
 }
 
 var showNavs = function() {

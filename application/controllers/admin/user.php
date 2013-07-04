@@ -21,13 +21,22 @@ class User extends Admin_Controller
 
 	public function edit($id = NULL)
 	{
-		$id == NULL || $this->data['user'] = $this->user->get($id)->toArray();
-
+		if ($id) {
+			$this->data['user'] = $this->user->get($id)->toArray();
+			count($this->data['user']) || $this->data['errors'][] = 'User could no be found';
+		} else {
+			$this->data['user'] = $this->user->get_new();
+		}
+		
 		$rules = $this->user->rules_edit;
 		$id || $rules['Password'] .= '|required';
 		$this->form_validation->set_rules($rules);
 		if ($this->form_validation->run() == TRUE) {
-			
+			$this->load->library('bcrypt');
+			$data = $this->user->array_from_post(array('FirstName', 'LastName', 'Email', 'Password'));
+			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
+			$this->user->save($data, $id);
+			die('OK');
 		}
 		$this->load->view('admin/user/edit', $this->data);
 	}
