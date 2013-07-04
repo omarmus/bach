@@ -144,6 +144,7 @@ table thead th.check-all {vertical-align: top;}
 .modal-footer {background-image: url(../img/bg-content.jpg); border-radius: 0;}
 .modal-body > div {display: inline-block;margin: 0 10px 10px;overflow: hidden;vertical-align: top;width: 45%;}
 .modal-body input {margin: 0;}
+.modal-body input[type=text], .modal-body input[type=password] {width: 94%;}
 .modal-body .error {margin: 5px 0 0;}
 
 /* ==========================================================================

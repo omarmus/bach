@@ -8,27 +8,27 @@
 	<div class="modal-body">
 	    <div>
 	    	<label for="">First name <strong>*</strong></label> 
-			<input type="text" name="FirstName" value="<?php echo set_value('FirstName') ?>">
+			<?php echo form_input('FirstName', set_value('FirstName', $user['FirstName'])); ?>
 			<?php echo form_error('FirstName'); ?>
 		</div>
 		<div>
 			<label for="">Last name <strong>*</strong></label>
-			<input type="text" name="LastName" value="<?php echo set_value('LastName') ?>">
+			<?php echo form_input('LastName', set_value('LastName', $user['LastName'])); ?>
 			<?php echo form_error('LastName'); ?>
 		</div>
 		<div>
 			<label for="">Email <strong>*</strong></label>
-			<input type="text" name="Email" value="<?php echo set_value('Email') ?>">
+			<?php echo form_input('Email', set_value('Email', $user['Email'])); ?>
 			<?php echo form_error('Email'); ?>
 		</div>
 		<div>
 			<label for="">Password </label>
-			<input type="password" name="Password" value="<?php echo set_value('Password') ?>">
+			<?php echo form_password('Password'); ?>
 			<?php echo form_error('Password'); ?>
 		</div>
 		<div>
 			<label for="">Confirm password </label>
-			<input type="text" name="PasswordConfirm" value="<?php echo set_value('PasswordConfirm') ?>">
+			<?php echo form_password('PasswordConfirm'); ?>
 		</div>
 	</div>
 	<div class="modal-footer">

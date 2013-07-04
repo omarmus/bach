@@ -50,6 +50,15 @@ class User_M extends BC_Model {
 		parent::__construct();
 	}
 
+	public function get_new()
+	{
+		return array(
+			'FirstName' => '',
+			'LastName' => '',
+			'Email' => '',
+		);
+	}
+
 	public function login()
 	{
 		$user = $this->get_by(array('Email' => $this->input->post('email')), TRUE);
