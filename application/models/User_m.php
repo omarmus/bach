@@ -59,6 +59,12 @@ class User_M extends BC_Model {
 		);
 	}
 
+	public function delete($pk)
+	{
+		SysRolesXUserQuery::create()->filterByIdUser($pk)->find()->delete();
+		parent::delete($pk);
+	}
+
 	public function login()
 	{
 		$user = $this->get_by(array('Email' => $this->input->post('email')), TRUE);

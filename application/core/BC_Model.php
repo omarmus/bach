@@ -98,6 +98,16 @@ class BC_Model extends CI_Model {
 		$table::create()->findPk($pk)->delete();
 	}
 
+	public function deleteItems($pks)
+	{
+		foreach ($pks as $pk) {
+			if ($this->delete($pk) === FALSE) {
+				return FALSE;
+			}
+		}
+		return TRUE;
+	}
+
 	protected function order_by()
 	{
 		if ($this->_order_by != '' OR (is_array($this->_order_by) && count($this->_order_by))) {

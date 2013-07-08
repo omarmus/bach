@@ -41,9 +41,14 @@ class User extends Admin_Controller
 		$this->load->view('admin/user/edit', $this->data);
 	}
 
+	public function deleteSelected()
+	{
+		echo $this->user->deleteItems($this->input->post('pks'))?"OK":"ERROR";
+	}
+
 	public function delete($id)
 	{
-		
+		echo $this->user->delete($id)?"OK":"ERROR";
 	}
 
 	public function login()

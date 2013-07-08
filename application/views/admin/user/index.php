@@ -4,13 +4,16 @@
 			onclick="showModal('<?php echo site_url('admin/user/edit') ?>')">
 		<i class="icon-plus icon-white"></i>Add a user
 	</button>
-	<button type="button" class="btn btn-danger input-mini disabled"><i class="icon-trash icon-white"></i></button>
+	<button type="button" class="btn btn-danger input-mini disabled" 
+			onclick="deleteSelected(oTable, '<?php echo site_url('admin/user/deleteSelected') ?>')">
+		<i class="icon-trash icon-white"></i>
+	</button>
 </div>
-<table class="table table-striped table-bordered table-hover data-table">
+<table id="main-table" class="table table-striped table-bordered table-hover data-table">
 	<thead>
 		<tr>
 			<th></th>
-			<th>Edit</th>
+			<th class="edit">Edit</th>
 			<th>Email</th>
 			<th>First name</th>
 			<th>Last name</th>
@@ -21,7 +24,7 @@
 		<?php foreach ($users as $user): ?>
 		<tr>
 			<td><?php echo $user->getPrimaryKey() ?></td>
-			<td><?php echo btn_edit('admin/user/edit/' . $user->getIdUser()) ?></td>
+			<td class="edit"><?php echo btn_edit('admin/user/edit/' . $user->getIdUser()) ?></td>
 			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName() ?></td>
 			<td><?php echo $user->getLastName() ?></td>

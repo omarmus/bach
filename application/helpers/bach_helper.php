@@ -2,8 +2,8 @@
 function btn_edit($uri)
 {
 	$uri = site_url($uri);
-	return anchor('#', '<i class="icon-edit"></i>', array(
-		'onclick' => "edit('{$uri}', event)"
+	return anchor('#', '<img src="'.site_url('img/glyphicons/glyphicons_150_edit.png').'">', array(
+		'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-mini'
 	));
 }
 
