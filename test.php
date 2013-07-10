@@ -10,10 +10,13 @@
 		<!-- <link rel="stylesheet" type="text/css" href="public_html/lib/bootstrap/plugins/datatables/DT_bootstrap.css"> -->
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script type="text/javascript" charset="utf-8" language="javascript" src="public_html/lib/jquery/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" charset="utf-8" language="javascript" src="public_html/lib/datatables/js/jquery.dataTables.js"></script>
-		<script type="text/javascript" charset="utf-8" language="javascript" src="public_html/js/main.js"></script>
+		<script type="text/javascript" src="public_html/lib/jquery/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="public_html/lib/jquery.datatables/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" src="public_html/lib/jquery.gritter/js/jquery.gritter.js"></script>
+		<script type="text/javascript" src="public_html/js/main.js"></script>
+
 		<link rel="stylesheet" href="public_html/lib/bootstrap/css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" href="public_html/lib/jquery.gritter/css/jquery.gritter.css">
 		<link rel="stylesheet" href="public_html/css/main.css">
 		<!-- <script type="text/javascript" charset="utf-8" language="javascript" src="public_html/lib/bootstrap/plugins/datatables/DT_bootstrap.js"></script> -->
 
@@ -21,12 +24,41 @@
 			$(document).ready(function() {
 				// $('#example').dataTable();
 			});
+
+			function messageOk (text) {
+				text = text || 'Operation has been successful.';
+				message('Success!', text, 'public_html/img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
+			}
+
+			function messageError (text) {
+				text = text || 'There was an error.';
+				message('Error!', text, 'public_html/img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
+			}
+
+			function message (title, text, img, class_name, sticky) {
+				var options = {
+					title: title || 'Message', // (string | mandatory) the heading of the notification
+					text: text || '', // (string | mandatory) the text inside the notification
+					sticky: sticky || false, // (bool | optional) if you want it to fade out on its own or just sit there
+					time: 3000,// (int | optional) the time you want it to be alive for before fading out
+					class_name: class_name || '', // for light notifications (can be added directly to $.gritter.add too)
+					position: 'top-right', // possibilities: bottom-left, bottom-right, top-left, top-right
+					fade_in_speed: 80, 
+					fade_out_speed: 80
+				}
+				if (img) {
+					options = $.extend(options, {image: img}); // (string | optional) the image to display on the left
+				}
+				$.gritter.add(options);
+			}
 		</script>
 	</head>
-	<body>
-		<div class="container" style="margin-top: 20px">
+	<body style="background: #eee;">
+		<div class="container" style="margin-top: 20px;">
 			<div class="row-fluid">
-				<table class="table table-striped table-bordered table-hover data-table">
+				<button onclick="messageOk()">Ok!</button>
+				<button onclick="messageError()">Cancel!</button>
+				<table style=" display: none;"class="table table-striped table-bordered table-hover data-table">
 					<thead>
 						<tr>
 							<th></th>
