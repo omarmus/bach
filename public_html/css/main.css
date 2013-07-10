@@ -142,6 +142,12 @@ table thead th.check-all {vertical-align: top;}
 .edit .btn {padding: 2px 10px 8px 14px;}
 .edit .btn img {height: 16px;}
 
+.modal-body select {
+    height: 34px;
+    padding: 7px;
+    width: 99%;
+}
+
 /* ==========================================================================
                                     M O D A L
    ========================================================================== */

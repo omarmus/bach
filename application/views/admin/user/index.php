@@ -4,7 +4,7 @@
 			onclick="showModal('<?php echo site_url('admin/user/edit') ?>')">
 		<i class="icon-plus icon-white"></i>Add a user
 	</button>
-	<button type="button" class="btn btn-danger input-mini disabled" 
+	<button type="button" id="delete-rows" class="btn btn-danger input-mini disabled" 
 			onclick="deleteSelected(oTable, '<?php echo site_url('admin/user/deleteSelected') ?>')">
 		<i class="icon-trash icon-white"></i>
 	</button>

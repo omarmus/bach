@@ -19,26 +19,32 @@ class User extends Admin_Controller
 		$this->load->view('admin/_layout_main', $this->data);
 	}
 
-	public function edit($id = NULL)
+	public function edit($pk = NULL)
 	{
-		if ($id) {
-			$this->data['user'] = $this->user->get($id)->toArray();
+		if ($pk) {
+			$this->data['user'] = $this->user->get($pk)->toArray();
+			$this->data['user']['idRol'] = $this->user->get_rol($pk);
 			count($this->data['user']) || $this->data['errors'][] = 'User could no be found';
 		} else {
 			$this->data['user'] = $this->user->get_new();
 		}
-		
+		$this->data['roles'] = $this->user->get_roles();
 		$rules = $this->user->rules_edit;
-		$id || $rules['Password'] .= '|required';
+		$pk || $rules['Password']['rules'] .= '|required';
 		$this->form_validation->set_rules($rules);
 		if ($this->form_validation->run() == TRUE) {
 			$this->load->library('bcrypt');
 			$data = $this->user->array_from_post(array('FirstName', 'LastName', 'Email', 'Password'));
 			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
-			$this->user->save($data, $id);
-			die('OK');
-		}
-		$this->load->view('admin/user/edit', $this->data);
+			$data['Username'] = $data['Email'];
+			$idUser = $this->user->save($data, $pk);
+			if ($pk === NULL) {
+				$this->user->save_rol($idUser, $this->input->post('idRol'));
+			}
+			echo $pk?'UPDATE':'CREATE';
+		} else {
+			$this->load->view('admin/user/edit', $this->data);
+		}	
 	}
 
 	public function deleteSelected()
@@ -58,7 +64,7 @@ class User extends Admin_Controller
 		$dashboard = 'admin/dashboard';
 		$this->user->loggedin() == FALSE || redirect($dashboard);
 
-		$rules = $this->user->rules;
+		$rules = $this->user->rules_login;
 		$this->form_validation->set_rules($rules);
 		if ($this->form_validation->run() == TRUE) {
 			//We can login and redirect

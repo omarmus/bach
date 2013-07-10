@@ -41,6 +41,7 @@ $.extend( true, $.fn.dataTable.defaults, {
     		$(firstTH).parent()[toggle]('all-selected');
     		that.$('tr')[toggle]('info');
     		var now = that.$('tr.info').length;
+    		$('#delete-rows')[(now?'remove':'add') + 'Class']('disabled');
     		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
     	}
 		$(firstTH).parent().prepend(th);
@@ -51,8 +52,9 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    	td.innerHTML = '<i></i>';
 	    	td.onclick = function () {
 	    		$(firstTD).toggleClass('info');
-	    		var now = that.$('tr.info').length
+	    		var now = that.$('tr.info').length;
 	    		$(firstTH).parent()[(total == now?'add':'remove') + 'Class']('all-selected');
+	    		$('#delete-rows')[(now?'remove':'add') + 'Class']('disabled');
 	    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
 	    	}
 	    	$(firstTD).prepend(td);
@@ -62,13 +64,23 @@ $.extend( true, $.fn.dataTable.defaults, {
 
 function showModal (url) {
 	$('#main-modal').load(url, function () {
-		$(this).modal();
+		var input = $(this).modal().find('input');
+		setTimeout(function () {$(input[0]).focus()}, 500);
 	})
 }
 
 function validate (form, url) {
 	$.post(url, $(form).serialize(), function (response) {
-		$('#main-modal').html(response);
+		if (response == "CREATE" || response == 'UPDATE') {
+			$('#main-modal').modal('hide');
+			alert(response == "CREATE"?"Create!":"Update!");
+		} else {
+			var error = $('#main-modal').html(response).find('.error');
+			setTimeout(function () {$(error[0]).prev().focus()}, 500);
+			$('#main-modal').find('input').on('keypress', function () {
+				$(this).next().fadeOut();
+			})
+		}
 	});
 	return false;
 }
@@ -81,13 +93,14 @@ function edit (url, e) {
 }
 
 function deleteSelected (oTable, url) {
-	deleteRows(oTable);
 	var pks = getPks(oTable);
 	if (pks.length) {
-		$.post(url, {pks: pks}, function (response) {
-			deleteRows(oTable);
-			alert('Delete!');
-		});
+		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
+			$.post(url, {pks: pks}, function (response) {
+				deleteRows(oTable);
+				alert('Delete!');
+			});
+		}
 	}
 }
 

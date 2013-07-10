@@ -5,7 +5,7 @@ class User_M extends BC_Model {
 	protected $_table_name = 'SysUsers';
 	protected $_primary_key = 'idUser';
 	protected $_order_by = 'username';
-	public $rules = array(
+	public $rules_login = array(
 		'email' => array(
 			'field' => 'email',
 			'label' => 'Email',
@@ -37,12 +37,12 @@ class User_M extends BC_Model {
 		'Password' => array(
 			'field' => 'Password',
 			'label' => 'Password',
-			'rules' => 'trim|matches[password_confirm]'
+			'rules' => 'trim|matches[PasswordConfirm]'
 		),
 		'PasswordConfirm' => array(
 			'field' => 'PasswordConfirm',
 			'label' => 'Confirm password',
-			'rules' => 'trim|matches[password]'
+			'rules' => 'trim|matches[Password]'
 		)
 	);
 	
@@ -56,6 +56,7 @@ class User_M extends BC_Model {
 			'FirstName' => '',
 			'LastName' => '',
 			'Email' => '',
+			'idRol' => '2'
 		);
 	}
 
@@ -63,6 +64,29 @@ class User_M extends BC_Model {
 	{
 		SysRolesXUserQuery::create()->filterByIdUser($pk)->find()->delete();
 		parent::delete($pk);
+	}
+
+	public function get_rol($pk)
+	{
+		return SysRolesXUserQuery::create()->filterByIdUser($pk)->findOne()->getIdRol();
+	}
+
+	public function save_rol($idUser, $idRol)
+	{
+		$obj = new SysRolesXUser();
+		$obj->setIdUser($idUser);
+		$obj->setIdRol($idRol);
+		$obj->save();
+	}
+
+	public function get_roles()
+	{
+		$roles = array();
+		$result = SysRolesQuery::create()->find();
+		foreach ($result as $item) {
+			$roles[$item->getIdRol()] = $item->getName();
+		}
+		return $roles;
 	}
 
 	public function login()

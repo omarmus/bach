@@ -22,6 +22,12 @@
 			<?php echo form_error('Email'); ?>
 		</div>
 		<div>
+			<label for="">Rol</label>
+			<?php echo form_dropdown('idRol', $roles, set_value('idRol', $user['idRol'])); ?>
+			<?php echo form_error('idRol'); ?>
+		</div>
+		<?php if (!isset($user['IdUser'])): ?>
+		<div>
 			<label for="">Password </label>
 			<?php echo form_password('Password'); ?>
 			<?php echo form_error('Password'); ?>
@@ -29,10 +35,12 @@
 		<div>
 			<label for="">Confirm password </label>
 			<?php echo form_password('PasswordConfirm'); ?>
-		</div>
+			<?php echo form_error('PasswordConfirm'); ?>
+		</div>	
+		<?php endif ?>
 	</div>
 	<div class="modal-footer">
-	    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
 	    <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i>Save</button>
 	</div>
 </form>

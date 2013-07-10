@@ -17,15 +17,6 @@ class BC_Model extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 	}
-
-	public function array_from_post($fields)
-	{
-		$data = array();
-		foreach ($fields as $field) {
-			$data[$field] = $this->input->post($field);
-		}
-		return $data;
-	}
 	
 	public function get($pk = NULL) 
 	{
@@ -106,6 +97,24 @@ class BC_Model extends CI_Model {
 			}
 		}
 		return TRUE;
+	}
+
+	public function array_from_post($fields)
+	{
+		$data = array();
+		foreach ($fields as $field) {
+			$data[$field] = $this->input->post($field);
+		}
+		return $data;
+	}
+
+	public function array_request($request)
+	{
+		$data = array();
+		foreach ($request as $key => $value) {
+			$data[$key] = $this->input->post($key);
+		}
+		return $data;
 	}
 
 	protected function order_by()
