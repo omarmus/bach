@@ -89,6 +89,11 @@ class User_M extends BC_Model {
 		return $roles;
 	}
 
+	public function delete_rol($idUser)
+	{
+		SysRolesXUserQuery::create()->filterByIdUser($idUser)->delete();
+	}
+
 	public function login()
 	{
 		$user = $this->get_by(array('Email' => $this->input->post('email')), TRUE);

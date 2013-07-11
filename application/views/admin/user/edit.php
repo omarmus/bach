@@ -1,10 +1,10 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-        <img src="<?php echo site_url('img/close.png') ?>">
+        <img src="<?php echo site_url('img/close2.png') ?>">
     </button>
     <h3><?php echo empty($user['IdUser']) ? 'Add a new user' : 'Edit user ' .$user['FirstName'] ?></h3>
 </div>
-<form onsubmit="return validate(this, '<?php echo site_url('admin/user/edit') ?>')">
+<form onsubmit="return validate(this, '<?php echo site_url('admin/user/edit'. (isset($user['IdUser'])?'/'.$user['IdUser']:'')) ?>')">
 	<div class="modal-body">
 	    <div>
 	    	<label for="">First name <strong>*</strong></label> 
@@ -26,7 +26,7 @@
 			<?php echo form_dropdown('idRol', $roles, set_value('idRol', $user['idRol'])); ?>
 			<?php echo form_error('idRol'); ?>
 		</div>
-		<?php if (!isset($user['IdUser'])): ?>
+		<?php if (!isset($user['IdUser'])) : ?>
 		<div>
 			<label for="">Password </label>
 			<?php echo form_password('Password'); ?>

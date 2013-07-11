@@ -15,7 +15,8 @@
             });                         
         </script>
         <script src="<?php echo site_url('lib/bootstrap/js/bootstrap.min.js') ?>"></script>
-        <script src="<?php echo site_url('lib/datatables/js/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?php echo site_url('lib/jquery.datatables/js/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?php echo site_url('lib/jquery.gritter/js/jquery.gritter.min.js') ?>"></script>
         <script src="<?php echo site_url('js/main.js') ?>"></script>
     </body>
 </html>

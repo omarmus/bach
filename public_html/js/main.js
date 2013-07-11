@@ -73,7 +73,7 @@ function validate (form, url) {
 	$.post(url, $(form).serialize(), function (response) {
 		if (response == "CREATE" || response == 'UPDATE') {
 			$('#main-modal').modal('hide');
-			alert(response == "CREATE"?"Create!":"Update!");
+			messageOk(response == "CREATE"?"Create!":"Update!");
 		} else {
 			var error = $('#main-modal').html(response).find('.error');
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);
@@ -98,7 +98,7 @@ function deleteSelected (oTable, url) {
 		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
 			$.post(url, {pks: pks}, function (response) {
 				deleteRows(oTable);
-				alert('Delete!');
+				messageOk('Delete!');
 			});
 		}
 	}
@@ -139,3 +139,33 @@ var showNavs = function() {
 	container.animate(show ? {paddingRight: 0} : {paddingTop: 53}).toggleClass("nav-hidden");
 }
 
+function messageOk (text) {
+	text = text || 'Operation has been successful.';
+	setTimeout(function () {
+		message('Success!', text, _site_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
+	}, 500);
+}
+
+function messageError (text) {
+	text = text || 'There was an error.';
+	setTimeout(function () {
+		message('Error!', text, _site_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
+	}, 500);
+}
+
+function message (title, text, img, class_name, sticky) {
+	var options = {
+		title: title || 'Message', // (string | mandatory) the heading of the notification
+		text: text || '', // (string | mandatory) the text inside the notification
+		sticky: sticky || false, // (bool | optional) if you want it to fade out on its own or just sit there
+		time: 4000,// (int | optional) the time you want it to be alive for before fading out
+		class_name: class_name || '', // for light notifications (can be added directly to $.gritter.add too)
+		position: 'top-right', // possibilities: bottom-left, bottom-right, top-left, top-right
+		fade_in_speed: 80, 
+		fade_out_speed: 80
+	}
+	if (img) {
+		options = $.extend(options, {image: img}); // (string | optional) the image to display on the left
+	}
+	$.gritter.add(options);
+}

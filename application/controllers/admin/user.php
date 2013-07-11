@@ -38,9 +38,8 @@ class User extends Admin_Controller
 			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
 			$data['Username'] = $data['Email'];
 			$idUser = $this->user->save($data, $pk);
-			if ($pk === NULL) {
-				$this->user->save_rol($idUser, $this->input->post('idRol'));
-			}
+			$this->user->delete_rol($idUser);
+			$this->user->save_rol($idUser, $this->input->post('idRol'));
 			echo $pk?'UPDATE':'CREATE';
 		} else {
 			$this->load->view('admin/user/edit', $this->data);

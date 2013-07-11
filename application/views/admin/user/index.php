@@ -17,6 +17,7 @@
 			<th>Email</th>
 			<th>First name</th>
 			<th>Last name</th>
+			<th>Rol</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,6 +29,7 @@
 			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName() ?></td>
 			<td><?php echo $user->getLastName() ?></td>
+			<td><?php echo $user->getSysRolesXUser() ?></td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>
