@@ -29,7 +29,7 @@
 			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName() ?></td>
 			<td><?php echo $user->getLastName() ?></td>
-			<td><?php echo $user->getSysRolesXUser() ?></td>
+			<td><?php ?></td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>

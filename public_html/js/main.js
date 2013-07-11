@@ -73,7 +73,7 @@ function validate (form, url) {
 	$.post(url, $(form).serialize(), function (response) {
 		if (response == "CREATE" || response == 'UPDATE') {
 			$('#main-modal').modal('hide');
-			messageOk(response == "CREATE"?"Create!":"Update!");
+			messageOk(response == "CREATE"?"Create!":"Update!", 800);
 		} else {
 			var error = $('#main-modal').html(response).find('.error');
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);
@@ -139,18 +139,19 @@ var showNavs = function() {
 	container.animate(show ? {paddingRight: 0} : {paddingTop: 53}).toggleClass("nav-hidden");
 }
 
-function messageOk (text) {
+function messageOk (text, delay) {
 	text = text || 'Operation has been successful.';
 	setTimeout(function () {
 		message('Success!', text, _site_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
-	}, 500);
+	}, delay || 0)
+	
 }
 
-function messageError (text) {
+function messageError (text, delay) {
 	text = text || 'There was an error.';
 	setTimeout(function () {
 		message('Error!', text, _site_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
-	}, 500);
+	}, delay || 0);
 }
 
 function message (title, text, img, class_name, sticky) {
