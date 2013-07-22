@@ -163,3 +163,17 @@ ALTER TABLE `sys_roles_x_user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE `sys_files` (
+  `id_file` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  `fullpath` varchar(255) DEFAULT NULL,
+  `size` decimal(20,0) DEFAULT '0',
+  `image_width` int(11) DEFAULT '0',
+  `image_height` int(11) DEFAULT '0',
+  `image_type` varchar(20) DEFAULT NULL,
+  `is_image` varchar(20) DEFAULT 'NO',
+  PRIMARY KEY (`id_file`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
