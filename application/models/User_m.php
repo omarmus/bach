@@ -3,8 +3,10 @@
 class User_M extends BC_Model {
 
 	protected $_table_name = 'SysUsers';
-	protected $_primary_key = 'idUser';
-	protected $_order_by = 'username';
+	protected $_primary_key = 'IdUser';
+	protected $_order_by = 'Username';
+	protected $_timestamps = TRUE;
+
 	public $rules_login = array(
 		'email' => array(
 			'field' => 'email',
@@ -56,42 +58,13 @@ class User_M extends BC_Model {
 			'FirstName' => '',
 			'LastName' => '',
 			'Email' => '',
-			'idRol' => '2'
+			'IdRol' => '2'
 		);
 	}
 
-	public function delete($pk)
+	public function get_roles_array()
 	{
-		SysRolesXUserQuery::create()->filterByIdUser($pk)->find()->delete();
-		parent::delete($pk);
-	}
-
-	public function get_rol($pk)
-	{
-		return SysRolesXUserQuery::create()->filterByIdUser($pk)->findOne()->getIdRol();
-	}
-
-	public function save_rol($idUser, $idRol)
-	{
-		$obj = new SysRolesXUser();
-		$obj->setIdUser($idUser);
-		$obj->setIdRol($idRol);
-		$obj->save();
-	}
-
-	public function get_roles()
-	{
-		$roles = array();
-		$result = SysRolesQuery::create()->find();
-		foreach ($result as $item) {
-			$roles[$item->getIdRol()] = $item->getName();
-		}
-		return $roles;
-	}
-
-	public function delete_rol($idUser)
-	{
-		SysRolesXUserQuery::create()->filterByIdUser($idUser)->delete();
+		return parent::get_array('SysRoles', 'Name');
 	}
 
 	public function login()
@@ -100,14 +73,12 @@ class User_M extends BC_Model {
 		if (count($user)) {
 			//Log in user
 			if($this->bcrypt->check_password($this->input->post('password'), $user->getPassword())) {
-				$idUser = $user->getPrimaryKey();
-				$rol = SysRolesXUserQuery::create()->filterByIdUser($idUser)->findOne();
                 $data = array(
 					'username' => $user->getUsername(), 
 					'email' => $user->getEmail(), 
-					'id_user' => $idUser, 
+					'id_user' => $user->getIdUser(),
+					'id_rol' => $user->getIdRol(),
 					'loggedin' => TRUE, 
-					'id_rol' => $rol->getIdRol()
 				);
 				$this->session->set_userdata($data);
             }

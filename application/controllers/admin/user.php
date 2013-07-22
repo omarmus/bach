@@ -14,40 +14,52 @@ class User extends Admin_Controller
 
 	public function index()
 	{
+		// Fetch all users
 		$this->data['users'] = $this->user->get();
+
+		// Load view
 		$this->data['subview'] = 'admin/user/index';
 		$this->load->view('admin/_layout_main', $this->data);
 	}
 
 	public function edit($pk = NULL)
 	{
+		is_ajax();
+
+		// Fetch a user or set a new one
 		if ($pk) {
 			$this->data['user'] = $this->user->get($pk)->toArray();
-			$this->data['user']['idRol'] = $this->user->get_rol($pk);
 			count($this->data['user']) || $this->data['errors'][] = 'User could no be found';
 		} else {
 			$this->data['user'] = $this->user->get_new();
 		}
-		$this->data['roles'] = $this->user->get_roles();
+
+		// Roles for dropdown
+		$this->data['roles'] = $this->user->get_roles_array();
+
+		// Set up the form
 		$rules = $this->user->rules_edit;
 		$pk || $rules['Password']['rules'] .= '|required';
 		$this->form_validation->set_rules($rules);
+
+		// Process the form
 		if ($this->form_validation->run() == TRUE) {
 			$this->load->library('bcrypt');
-			$data = $this->user->array_from_post(array('FirstName', 'LastName', 'Email', 'Password'));
-			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
+			$data = $this->user->array_request($_POST);
+			$pk || $data['Password'] = $this->bcrypt->hash_password($data['Password']);
 			$data['Username'] = $data['Email'];
-			$idUser = $this->user->save($data, $pk);
-			$this->user->delete_rol($idUser);
-			$this->user->save_rol($idUser, $this->input->post('idRol'));
+			$this->user->save($data, $pk);
 			echo $pk?'UPDATE':'CREATE';
 		} else {
+			// Load the view
 			$this->load->view('admin/user/edit', $this->data);
 		}	
 	}
 
 	public function deleteSelected()
 	{
+		is_ajax();
+
 		echo $this->user->deleteItems($this->input->post('pks'))?"OK":"ERROR";
 	}
 
@@ -60,11 +72,15 @@ class User extends Admin_Controller
 	{
 		$this->load->library('bcrypt');
 
+		// Redirect a user if he's already logged in
 		$dashboard = 'admin/dashboard';
 		$this->user->loggedin() == FALSE || redirect($dashboard);
 
+		// Set form
 		$rules = $this->user->rules_login;
 		$this->form_validation->set_rules($rules);
+
+		// Process form
 		if ($this->form_validation->run() == TRUE) {
 			//We can login and redirect
 			if ($this->user->login() == TRUE) {
@@ -74,8 +90,10 @@ class User extends Admin_Controller
 				redirect('login', 'refresh');
 			}
 		}
+
+		// Load view
 		$this->data['subview'] = 'admin/user/login';
-		$this->load->view('admin/_layout_modal', $this->data);
+		$this->load->view('admin/_layout_login', $this->data);
 	}
 
 	public function logout()
@@ -86,8 +104,10 @@ class User extends Admin_Controller
 		redirect('login');
 	}
 
-	public function _unique_email($str)
+	public function _unique_email()
 	{
+		// Do NOT valide if emai already exists
+		//UNLESS it's the email for the current user
 		$id = $this->uri->segment(4);
 		$user = SysUsersQuery::create()->filterByEmail($this->input->post('Email'))
 									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();

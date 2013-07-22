@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'sys_roles_x_user' table.
+ * This class defines the structure of the 'sys_sessions' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.bach.map
  */
-class SysRolesXUserTableMap extends TableMap
+class SysSessionsTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'bach.map.SysRolesXUserTableMap';
+    const CLASS_NAME = 'bach.map.SysSessionsTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,14 +32,17 @@ class SysRolesXUserTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('sys_roles_x_user');
-        $this->setPhpName('SysRolesXUser');
-        $this->setClassname('SysRolesXUser');
+        $this->setName('sys_sessions');
+        $this->setPhpName('SysSessions');
+        $this->setClassname('SysSessions');
         $this->setPackage('bach');
         $this->setUseIdGenerator(false);
         // columns
-        $this->addForeignPrimaryKey('id_rol', 'IdRol', 'INTEGER' , 'sys_roles', 'id_rol', true, null, null);
-        $this->addForeignPrimaryKey('id_user', 'IdUser', 'INTEGER' , 'sys_users', 'id_user', true, null, null);
+        $this->addPrimaryKey('session_id', 'SessionId', 'VARCHAR', true, 40, '0');
+        $this->addColumn('ip_address', 'IpAddress', 'VARCHAR', true, 45, '0');
+        $this->addColumn('user_agent', 'UserAgent', 'VARCHAR', true, 120, null);
+        $this->addColumn('last_activity', 'LastActivity', 'INTEGER', true, 10, 0);
+        $this->addColumn('user_data', 'UserData', 'LONGVARCHAR', true, null, null);
         // validators
     } // initialize()
 
@@ -48,8 +51,6 @@ class SysRolesXUserTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('SysUsers', 'SysUsers', RelationMap::MANY_TO_ONE, array('id_user' => 'id_user', ), null, null);
-        $this->addRelation('SysRoles', 'SysRoles', RelationMap::MANY_TO_ONE, array('id_rol' => 'id_rol', ), null, null);
     } // buildRelations()
 
-} // SysRolesXUserTableMap
+} // SysSessionsTableMap

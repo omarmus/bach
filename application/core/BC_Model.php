@@ -55,8 +55,8 @@ class BC_Model extends CI_Model {
 		// Set timestamps
 		if ($this->_timestamps == TRUE) {
 			$now = date('Y-m-d H:i:s');
-			$pk || $data['created'] = $now;
-			$data['modified'] = $now;
+			$pk || $data['Created'] = $now;
+			$data['Modified'] = $now;
 		}
 
 		if ($pk === NULL) { // Insert
@@ -115,6 +115,18 @@ class BC_Model extends CI_Model {
 			$data[$key] = $this->input->post($key);
 		}
 		return $data;
+	}
+
+	public function get_array($table = 'SysUsers', $field = 'Email')
+	{
+		$items = array();
+		$table = "{$table}Query";
+		$field = "get{$field}";
+		$result = $table::create()->find();
+		foreach ($result as $item) {
+			$items[$item->getPrimaryKey()] = $item->$field();
+		}
+		return $items;
 	}
 
 	protected function order_by()

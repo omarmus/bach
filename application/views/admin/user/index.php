@@ -14,6 +14,7 @@
 		<tr>
 			<th></th>
 			<th class="edit">Edit</th>
+			<th>State</th>
 			<th>Email</th>
 			<th>First name</th>
 			<th>Last name</th>
@@ -26,10 +27,11 @@
 		<tr>
 			<td><?php echo $user->getPrimaryKey() ?></td>
 			<td class="edit"><?php echo btn_edit('admin/user/edit/' . $user->getIdUser()) ?></td>
+			<td><?php echo $user->getState(); ?></td>
 			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName() ?></td>
 			<td><?php echo $user->getLastName() ?></td>
-			<td><?php echo $user->getSysRolesXUser() ?></td>
+			<td><?php echo $user->getSysRoles()->getName() ?></td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>

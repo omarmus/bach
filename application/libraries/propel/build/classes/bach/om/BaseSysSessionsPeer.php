@@ -2,26 +2,26 @@
 
 
 /**
- * Base static class for performing query and update operations on the 'sys_pages' table.
+ * Base static class for performing query and update operations on the 'sys_sessions' table.
  *
  * 
  *
  * @package propel.generator.bach.om
  */
-abstract class BaseSysPagesPeer
+abstract class BaseSysSessionsPeer
 {
 
     /** the default database name for this class */
     const DATABASE_NAME = 'bach';
 
     /** the table name for this class */
-    const TABLE_NAME = 'sys_pages';
+    const TABLE_NAME = 'sys_sessions';
 
     /** the related Propel class for this table */
-    const OM_CLASS = 'SysPages';
+    const OM_CLASS = 'SysSessions';
 
     /** the related TableMap class for this table */
-    const TM_CLASS = 'SysPagesTableMap';
+    const TM_CLASS = 'SysSessionsTableMap';
 
     /** The total number of columns. */
     const NUM_COLUMNS = 5;
@@ -32,29 +32,29 @@ abstract class BaseSysPagesPeer
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
     const NUM_HYDRATE_COLUMNS = 5;
 
-    /** the column name for the id_page field */
-    const ID_PAGE = 'sys_pages.id_page';
+    /** the column name for the session_id field */
+    const SESSION_ID = 'sys_sessions.session_id';
 
-    /** the column name for the title field */
-    const TITLE = 'sys_pages.title';
+    /** the column name for the ip_address field */
+    const IP_ADDRESS = 'sys_sessions.ip_address';
 
-    /** the column name for the slug field */
-    const SLUG = 'sys_pages.slug';
+    /** the column name for the user_agent field */
+    const USER_AGENT = 'sys_sessions.user_agent';
 
-    /** the column name for the order field */
-    const ORDER = 'sys_pages.order';
+    /** the column name for the last_activity field */
+    const LAST_ACTIVITY = 'sys_sessions.last_activity';
 
-    /** the column name for the id_parent field */
-    const ID_PARENT = 'sys_pages.id_parent';
+    /** the column name for the user_data field */
+    const USER_DATA = 'sys_sessions.user_data';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
 
     /**
-     * An identity map to hold any loaded instances of SysPages objects.
+     * An identity map to hold any loaded instances of SysSessions objects.
      * This must be public so that other peer classes can access this when hydrating from JOIN
      * queries.
-     * @var        array SysPages[]
+     * @var        array SysSessions[]
      */
     public static $instances = array();
 
@@ -63,14 +63,14 @@ abstract class BaseSysPagesPeer
      * holds an array of fieldnames
      *
      * first dimension keys are the type constants
-     * e.g. SysPagesPeer::$fieldNames[SysPagesPeer::TYPE_PHPNAME][0] = 'Id'
+     * e.g. SysSessionsPeer::$fieldNames[SysSessionsPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdPage', 'Title', 'Slug', 'Order', 'IdParent', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idPage', 'title', 'slug', 'order', 'idParent', ),
-        BasePeer::TYPE_COLNAME => array (SysPagesPeer::ID_PAGE, SysPagesPeer::TITLE, SysPagesPeer::SLUG, SysPagesPeer::ORDER, SysPagesPeer::ID_PARENT, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_PAGE', 'TITLE', 'SLUG', 'ORDER', 'ID_PARENT', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_page', 'title', 'slug', 'order', 'id_parent', ),
+        BasePeer::TYPE_PHPNAME => array ('SessionId', 'IpAddress', 'UserAgent', 'LastActivity', 'UserData', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('sessionId', 'ipAddress', 'userAgent', 'lastActivity', 'userData', ),
+        BasePeer::TYPE_COLNAME => array (SysSessionsPeer::SESSION_ID, SysSessionsPeer::IP_ADDRESS, SysSessionsPeer::USER_AGENT, SysSessionsPeer::LAST_ACTIVITY, SysSessionsPeer::USER_DATA, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('SESSION_ID', 'IP_ADDRESS', 'USER_AGENT', 'LAST_ACTIVITY', 'USER_DATA', ),
+        BasePeer::TYPE_FIELDNAME => array ('session_id', 'ip_address', 'user_agent', 'last_activity', 'user_data', ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
@@ -78,14 +78,14 @@ abstract class BaseSysPagesPeer
      * holds an array of keys for quick access to the fieldnames array
      *
      * first dimension keys are the type constants
-     * e.g. SysPagesPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
+     * e.g. SysSessionsPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdPage' => 0, 'Title' => 1, 'Slug' => 2, 'Order' => 3, 'IdParent' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idPage' => 0, 'title' => 1, 'slug' => 2, 'order' => 3, 'idParent' => 4, ),
-        BasePeer::TYPE_COLNAME => array (SysPagesPeer::ID_PAGE => 0, SysPagesPeer::TITLE => 1, SysPagesPeer::SLUG => 2, SysPagesPeer::ORDER => 3, SysPagesPeer::ID_PARENT => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_PAGE' => 0, 'TITLE' => 1, 'SLUG' => 2, 'ORDER' => 3, 'ID_PARENT' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_page' => 0, 'title' => 1, 'slug' => 2, 'order' => 3, 'id_parent' => 4, ),
+        BasePeer::TYPE_PHPNAME => array ('SessionId' => 0, 'IpAddress' => 1, 'UserAgent' => 2, 'LastActivity' => 3, 'UserData' => 4, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('sessionId' => 0, 'ipAddress' => 1, 'userAgent' => 2, 'lastActivity' => 3, 'userData' => 4, ),
+        BasePeer::TYPE_COLNAME => array (SysSessionsPeer::SESSION_ID => 0, SysSessionsPeer::IP_ADDRESS => 1, SysSessionsPeer::USER_AGENT => 2, SysSessionsPeer::LAST_ACTIVITY => 3, SysSessionsPeer::USER_DATA => 4, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('SESSION_ID' => 0, 'IP_ADDRESS' => 1, 'USER_AGENT' => 2, 'LAST_ACTIVITY' => 3, 'USER_DATA' => 4, ),
+        BasePeer::TYPE_FIELDNAME => array ('session_id' => 0, 'ip_address' => 1, 'user_agent' => 2, 'last_activity' => 3, 'user_data' => 4, ),
         BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
     );
 
@@ -101,10 +101,10 @@ abstract class BaseSysPagesPeer
      */
     public static function translateFieldName($name, $fromType, $toType)
     {
-        $toNames = SysPagesPeer::getFieldNames($toType);
-        $key = isset(SysPagesPeer::$fieldKeys[$fromType][$name]) ? SysPagesPeer::$fieldKeys[$fromType][$name] : null;
+        $toNames = SysSessionsPeer::getFieldNames($toType);
+        $key = isset(SysSessionsPeer::$fieldKeys[$fromType][$name]) ? SysSessionsPeer::$fieldKeys[$fromType][$name] : null;
         if ($key === null) {
-            throw new PropelException("'$name' could not be found in the field names of type '$fromType'. These are: " . print_r(SysPagesPeer::$fieldKeys[$fromType], true));
+            throw new PropelException("'$name' could not be found in the field names of type '$fromType'. These are: " . print_r(SysSessionsPeer::$fieldKeys[$fromType], true));
         }
 
         return $toNames[$key];
@@ -121,11 +121,11 @@ abstract class BaseSysPagesPeer
      */
     public static function getFieldNames($type = BasePeer::TYPE_PHPNAME)
     {
-        if (!array_key_exists($type, SysPagesPeer::$fieldNames)) {
+        if (!array_key_exists($type, SysSessionsPeer::$fieldNames)) {
             throw new PropelException('Method getFieldNames() expects the parameter $type to be one of the class constants BasePeer::TYPE_PHPNAME, BasePeer::TYPE_STUDLYPHPNAME, BasePeer::TYPE_COLNAME, BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_NUM. ' . $type . ' was given.');
         }
 
-        return SysPagesPeer::$fieldNames[$type];
+        return SysSessionsPeer::$fieldNames[$type];
     }
 
     /**
@@ -137,12 +137,12 @@ abstract class BaseSysPagesPeer
      *		$c->addJoin(TablePeer::alias("alias1", TablePeer::PRIMARY_KEY_COLUMN), TablePeer::PRIMARY_KEY_COLUMN);
      * </code>
      * @param      string $alias The alias for the current table.
-     * @param      string $column The column name for current table. (i.e. SysPagesPeer::COLUMN_NAME).
+     * @param      string $column The column name for current table. (i.e. SysSessionsPeer::COLUMN_NAME).
      * @return string
      */
     public static function alias($alias, $column)
     {
-        return str_replace(SysPagesPeer::TABLE_NAME.'.', $alias.'.', $column);
+        return str_replace(SysSessionsPeer::TABLE_NAME.'.', $alias.'.', $column);
     }
 
     /**
@@ -160,17 +160,17 @@ abstract class BaseSysPagesPeer
     public static function addSelectColumns(Criteria $criteria, $alias = null)
     {
         if (null === $alias) {
-            $criteria->addSelectColumn(SysPagesPeer::ID_PAGE);
-            $criteria->addSelectColumn(SysPagesPeer::TITLE);
-            $criteria->addSelectColumn(SysPagesPeer::SLUG);
-            $criteria->addSelectColumn(SysPagesPeer::ORDER);
-            $criteria->addSelectColumn(SysPagesPeer::ID_PARENT);
+            $criteria->addSelectColumn(SysSessionsPeer::SESSION_ID);
+            $criteria->addSelectColumn(SysSessionsPeer::IP_ADDRESS);
+            $criteria->addSelectColumn(SysSessionsPeer::USER_AGENT);
+            $criteria->addSelectColumn(SysSessionsPeer::LAST_ACTIVITY);
+            $criteria->addSelectColumn(SysSessionsPeer::USER_DATA);
         } else {
-            $criteria->addSelectColumn($alias . '.id_page');
-            $criteria->addSelectColumn($alias . '.title');
-            $criteria->addSelectColumn($alias . '.slug');
-            $criteria->addSelectColumn($alias . '.order');
-            $criteria->addSelectColumn($alias . '.id_parent');
+            $criteria->addSelectColumn($alias . '.session_id');
+            $criteria->addSelectColumn($alias . '.ip_address');
+            $criteria->addSelectColumn($alias . '.user_agent');
+            $criteria->addSelectColumn($alias . '.last_activity');
+            $criteria->addSelectColumn($alias . '.user_data');
         }
     }
 
@@ -190,21 +190,21 @@ abstract class BaseSysPagesPeer
         // We need to set the primary table name, since in the case that there are no WHERE columns
         // it will be impossible for the BasePeer::createSelectSql() method to determine which
         // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SysPagesPeer::TABLE_NAME);
+        $criteria->setPrimaryTableName(SysSessionsPeer::TABLE_NAME);
 
         if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
             $criteria->setDistinct();
         }
 
         if (!$criteria->hasSelectClause()) {
-            SysPagesPeer::addSelectColumns($criteria);
+            SysSessionsPeer::addSelectColumns($criteria);
         }
 
         $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-        $criteria->setDbName(SysPagesPeer::DATABASE_NAME); // Set the correct dbName
+        $criteria->setDbName(SysSessionsPeer::DATABASE_NAME); // Set the correct dbName
 
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
         // BasePeer returns a PDOStatement
         $stmt = BasePeer::doCount($criteria, $con);
@@ -223,7 +223,7 @@ abstract class BaseSysPagesPeer
      *
      * @param      Criteria $criteria object used to create the SELECT statement.
      * @param      PropelPDO $con
-     * @return SysPages
+     * @return SysSessions
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
@@ -231,7 +231,7 @@ abstract class BaseSysPagesPeer
     {
         $critcopy = clone $criteria;
         $critcopy->setLimit(1);
-        $objects = SysPagesPeer::doSelect($critcopy, $con);
+        $objects = SysSessionsPeer::doSelect($critcopy, $con);
         if ($objects) {
             return $objects[0];
         }
@@ -249,7 +249,7 @@ abstract class BaseSysPagesPeer
      */
     public static function doSelect(Criteria $criteria, PropelPDO $con = null)
     {
-        return SysPagesPeer::populateObjects(SysPagesPeer::doSelectStmt($criteria, $con));
+        return SysSessionsPeer::populateObjects(SysSessionsPeer::doSelectStmt($criteria, $con));
     }
     /**
      * Prepares the Criteria object and uses the parent doSelect() method to execute a PDOStatement.
@@ -267,16 +267,16 @@ abstract class BaseSysPagesPeer
     public static function doSelectStmt(Criteria $criteria, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         if (!$criteria->hasSelectClause()) {
             $criteria = clone $criteria;
-            SysPagesPeer::addSelectColumns($criteria);
+            SysSessionsPeer::addSelectColumns($criteria);
         }
 
         // Set the correct dbName
-        $criteria->setDbName(SysPagesPeer::DATABASE_NAME);
+        $criteria->setDbName(SysSessionsPeer::DATABASE_NAME);
 
         // BasePeer returns a PDOStatement
         return BasePeer::doSelect($criteria, $con);
@@ -290,16 +290,16 @@ abstract class BaseSysPagesPeer
      * to the cache in order to ensure that the same objects are always returned by doSelect*()
      * and retrieveByPK*() calls.
      *
-     * @param SysPages $obj A SysPages object.
+     * @param SysSessions $obj A SysSessions object.
      * @param      string $key (optional) key to use for instance map (for performance boost if key was already calculated externally).
      */
     public static function addInstanceToPool($obj, $key = null)
     {
         if (Propel::isInstancePoolingEnabled()) {
             if ($key === null) {
-                $key = (string) $obj->getIdPage();
+                $key = (string) $obj->getSessionId();
             } // if key === null
-            SysPagesPeer::$instances[$key] = $obj;
+            SysSessionsPeer::$instances[$key] = $obj;
         }
     }
 
@@ -311,7 +311,7 @@ abstract class BaseSysPagesPeer
      * methods in your stub classes -- you may need to explicitly remove objects
      * from the cache in order to prevent returning objects that no longer exist.
      *
-     * @param      mixed $value A SysPages object or a primary key value.
+     * @param      mixed $value A SysSessions object or a primary key value.
      *
      * @return void
      * @throws PropelException - if the value is invalid.
@@ -319,17 +319,17 @@ abstract class BaseSysPagesPeer
     public static function removeInstanceFromPool($value)
     {
         if (Propel::isInstancePoolingEnabled() && $value !== null) {
-            if (is_object($value) && $value instanceof SysPages) {
-                $key = (string) $value->getIdPage();
+            if (is_object($value) && $value instanceof SysSessions) {
+                $key = (string) $value->getSessionId();
             } elseif (is_scalar($value)) {
                 // assume we've been passed a primary key
                 $key = (string) $value;
             } else {
-                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or SysPages object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
+                $e = new PropelException("Invalid value passed to removeInstanceFromPool().  Expected primary key or SysSessions object; got " . (is_object($value) ? get_class($value) . ' object.' : var_export($value,true)));
                 throw $e;
             }
 
-            unset(SysPagesPeer::$instances[$key]);
+            unset(SysSessionsPeer::$instances[$key]);
         }
     } // removeInstanceFromPool()
 
@@ -340,14 +340,14 @@ abstract class BaseSysPagesPeer
      * a multi-column primary key, a serialize()d version of the primary key will be returned.
      *
      * @param      string $key The key (@see getPrimaryKeyHash()) for this instance.
-     * @return SysPages Found object or null if 1) no instance exists for specified key or 2) instance pooling has been disabled.
+     * @return SysSessions Found object or null if 1) no instance exists for specified key or 2) instance pooling has been disabled.
      * @see        getPrimaryKeyHash()
      */
     public static function getInstanceFromPool($key)
     {
         if (Propel::isInstancePoolingEnabled()) {
-            if (isset(SysPagesPeer::$instances[$key])) {
-                return SysPagesPeer::$instances[$key];
+            if (isset(SysSessionsPeer::$instances[$key])) {
+                return SysSessionsPeer::$instances[$key];
             }
         }
 
@@ -362,15 +362,15 @@ abstract class BaseSysPagesPeer
     public static function clearInstancePool($and_clear_all_references = false)
     {
       if ($and_clear_all_references) {
-        foreach (SysPagesPeer::$instances as $instance) {
+        foreach (SysSessionsPeer::$instances as $instance) {
           $instance->clearAllReferences(true);
         }
       }
-        SysPagesPeer::$instances = array();
+        SysSessionsPeer::$instances = array();
     }
     
     /**
-     * Method to invalidate the instance pool of all tables related to sys_pages
+     * Method to invalidate the instance pool of all tables related to sys_sessions
      * by a foreign key with ON DELETE CASCADE
      */
     public static function clearRelatedInstancePool()
@@ -409,7 +409,7 @@ abstract class BaseSysPagesPeer
     public static function getPrimaryKeyFromRow($row, $startcol = 0)
     {
 
-        return (int) $row[$startcol];
+        return (string) $row[$startcol];
     }
     
     /**
@@ -424,11 +424,11 @@ abstract class BaseSysPagesPeer
         $results = array();
     
         // set the class once to avoid overhead in the loop
-        $cls = SysPagesPeer::getOMClass();
+        $cls = SysSessionsPeer::getOMClass();
         // populate the object(s)
         while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key = SysPagesPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj = SysPagesPeer::getInstanceFromPool($key))) {
+            $key = SysSessionsPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj = SysSessionsPeer::getInstanceFromPool($key))) {
                 // We no longer rehydrate the object, since this can cause data loss.
                 // See http://www.propelorm.org/ticket/509
                 // $obj->hydrate($row, 0, true); // rehydrate
@@ -437,7 +437,7 @@ abstract class BaseSysPagesPeer
                 $obj = new $cls();
                 $obj->hydrate($row);
                 $results[] = $obj;
-                SysPagesPeer::addInstanceToPool($obj, $key);
+                SysSessionsPeer::addInstanceToPool($obj, $key);
             } // if key exists
         }
         $stmt->closeCursor();
@@ -451,21 +451,21 @@ abstract class BaseSysPagesPeer
      * @param      int $startcol The 0-based offset for reading from the resultset row.
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
-     * @return array (SysPages object, last column rank)
+     * @return array (SysSessions object, last column rank)
      */
     public static function populateObject($row, $startcol = 0)
     {
-        $key = SysPagesPeer::getPrimaryKeyHashFromRow($row, $startcol);
-        if (null !== ($obj = SysPagesPeer::getInstanceFromPool($key))) {
+        $key = SysSessionsPeer::getPrimaryKeyHashFromRow($row, $startcol);
+        if (null !== ($obj = SysSessionsPeer::getInstanceFromPool($key))) {
             // We no longer rehydrate the object, since this can cause data loss.
             // See http://www.propelorm.org/ticket/509
             // $obj->hydrate($row, $startcol, true); // rehydrate
-            $col = $startcol + SysPagesPeer::NUM_HYDRATE_COLUMNS;
+            $col = $startcol + SysSessionsPeer::NUM_HYDRATE_COLUMNS;
         } else {
-            $cls = SysPagesPeer::OM_CLASS;
+            $cls = SysSessionsPeer::OM_CLASS;
             $obj = new $cls();
             $col = $obj->hydrate($row, $startcol);
-            SysPagesPeer::addInstanceToPool($obj, $key);
+            SysSessionsPeer::addInstanceToPool($obj, $key);
         }
 
         return array($obj, $col);
@@ -480,7 +480,7 @@ abstract class BaseSysPagesPeer
      */
     public static function getTableMap()
     {
-        return Propel::getDatabaseMap(SysPagesPeer::DATABASE_NAME)->getTable(SysPagesPeer::TABLE_NAME);
+        return Propel::getDatabaseMap(SysSessionsPeer::DATABASE_NAME)->getTable(SysSessionsPeer::TABLE_NAME);
     }
 
     /**
@@ -488,9 +488,9 @@ abstract class BaseSysPagesPeer
      */
     public static function buildTableMap()
     {
-      $dbMap = Propel::getDatabaseMap(BaseSysPagesPeer::DATABASE_NAME);
-      if (!$dbMap->hasTable(BaseSysPagesPeer::TABLE_NAME)) {
-        $dbMap->addTableObject(new SysPagesTableMap());
+      $dbMap = Propel::getDatabaseMap(BaseSysSessionsPeer::DATABASE_NAME);
+      if (!$dbMap->hasTable(BaseSysSessionsPeer::TABLE_NAME)) {
+        $dbMap->addTableObject(new SysSessionsTableMap());
       }
     }
 
@@ -502,13 +502,13 @@ abstract class BaseSysPagesPeer
      */
     public static function getOMClass($row = 0, $colnum = 0)
     {
-        return SysPagesPeer::OM_CLASS;
+        return SysSessionsPeer::OM_CLASS;
     }
 
     /**
-     * Performs an INSERT on the database, given a SysPages or Criteria object.
+     * Performs an INSERT on the database, given a SysSessions or Criteria object.
      *
-     * @param      mixed $values Criteria or SysPages object containing data that is used to create the INSERT statement.
+     * @param      mixed $values Criteria or SysSessions object containing data that is used to create the INSERT statement.
      * @param      PropelPDO $con the PropelPDO connection to use
      * @return mixed           The new primary key.
      * @throws PropelException Any exceptions caught during processing will be
@@ -517,22 +517,18 @@ abstract class BaseSysPagesPeer
     public static function doInsert($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
         } else {
-            $criteria = $values->buildCriteria(); // build Criteria from SysPages object
-        }
-
-        if ($criteria->containsKey(SysPagesPeer::ID_PAGE) && $criteria->keyContainsValue(SysPagesPeer::ID_PAGE) ) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key ('.SysPagesPeer::ID_PAGE.')');
+            $criteria = $values->buildCriteria(); // build Criteria from SysSessions object
         }
 
 
         // Set the correct dbName
-        $criteria->setDbName(SysPagesPeer::DATABASE_NAME);
+        $criteria->setDbName(SysSessionsPeer::DATABASE_NAME);
 
         try {
             // use transaction because $criteria could contain info
@@ -549,9 +545,9 @@ abstract class BaseSysPagesPeer
     }
 
     /**
-     * Performs an UPDATE on the database, given a SysPages or Criteria object.
+     * Performs an UPDATE on the database, given a SysSessions or Criteria object.
      *
-     * @param      mixed $values Criteria or SysPages object containing data that is used to create the UPDATE statement.
+     * @param      mixed $values Criteria or SysSessions object containing data that is used to create the UPDATE statement.
      * @param      PropelPDO $con The connection to use (specify PropelPDO connection object to exert more control over transactions).
      * @return int             The number of affected rows (if supported by underlying database driver).
      * @throws PropelException Any exceptions caught during processing will be
@@ -560,35 +556,35 @@ abstract class BaseSysPagesPeer
     public static function doUpdate($values, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
-        $selectCriteria = new Criteria(SysPagesPeer::DATABASE_NAME);
+        $selectCriteria = new Criteria(SysSessionsPeer::DATABASE_NAME);
 
         if ($values instanceof Criteria) {
             $criteria = clone $values; // rename for clarity
 
-            $comparison = $criteria->getComparison(SysPagesPeer::ID_PAGE);
-            $value = $criteria->remove(SysPagesPeer::ID_PAGE);
+            $comparison = $criteria->getComparison(SysSessionsPeer::SESSION_ID);
+            $value = $criteria->remove(SysSessionsPeer::SESSION_ID);
             if ($value) {
-                $selectCriteria->add(SysPagesPeer::ID_PAGE, $value, $comparison);
+                $selectCriteria->add(SysSessionsPeer::SESSION_ID, $value, $comparison);
             } else {
-                $selectCriteria->setPrimaryTableName(SysPagesPeer::TABLE_NAME);
+                $selectCriteria->setPrimaryTableName(SysSessionsPeer::TABLE_NAME);
             }
 
-        } else { // $values is SysPages object
+        } else { // $values is SysSessions object
             $criteria = $values->buildCriteria(); // gets full criteria
             $selectCriteria = $values->buildPkeyCriteria(); // gets criteria w/ primary key(s)
         }
 
         // set the correct dbName
-        $criteria->setDbName(SysPagesPeer::DATABASE_NAME);
+        $criteria->setDbName(SysSessionsPeer::DATABASE_NAME);
 
         return BasePeer::doUpdate($selectCriteria, $criteria, $con);
     }
 
     /**
-     * Deletes all rows from the sys_pages table.
+     * Deletes all rows from the sys_sessions table.
      *
      * @param      PropelPDO $con the connection to use
      * @return int             The number of affected rows (if supported by underlying database driver).
@@ -597,19 +593,19 @@ abstract class BaseSysPagesPeer
     public static function doDeleteAll(PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
         $affectedRows = 0; // initialize var to track total num of affected rows
         try {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += BasePeer::doDeleteAll(SysPagesPeer::TABLE_NAME, $con, SysPagesPeer::DATABASE_NAME);
+            $affectedRows += BasePeer::doDeleteAll(SysSessionsPeer::TABLE_NAME, $con, SysSessionsPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
             // instances get re-added by the select statement contained therein).
-            SysPagesPeer::clearInstancePool();
-            SysPagesPeer::clearRelatedInstancePool();
+            SysSessionsPeer::clearInstancePool();
+            SysSessionsPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -620,9 +616,9 @@ abstract class BaseSysPagesPeer
     }
 
     /**
-     * Performs a DELETE on the database, given a SysPages or Criteria object OR a primary key value.
+     * Performs a DELETE on the database, given a SysSessions or Criteria object OR a primary key value.
      *
-     * @param      mixed $values Criteria or SysPages object or primary key or array of primary keys
+     * @param      mixed $values Criteria or SysSessions object or primary key or array of primary keys
      *              which is used to create the DELETE statement
      * @param      PropelPDO $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
@@ -633,32 +629,32 @@ abstract class BaseSysPagesPeer
      public static function doDelete($values, PropelPDO $con = null)
      {
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         if ($values instanceof Criteria) {
             // invalidate the cache for all objects of this type, since we have no
             // way of knowing (without running a query) what objects should be invalidated
             // from the cache based on this Criteria.
-            SysPagesPeer::clearInstancePool();
+            SysSessionsPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
-        } elseif ($values instanceof SysPages) { // it's a model object
+        } elseif ($values instanceof SysSessions) { // it's a model object
             // invalidate the cache for this single object
-            SysPagesPeer::removeInstanceFromPool($values);
+            SysSessionsPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
-            $criteria = new Criteria(SysPagesPeer::DATABASE_NAME);
-            $criteria->add(SysPagesPeer::ID_PAGE, (array) $values, Criteria::IN);
+            $criteria = new Criteria(SysSessionsPeer::DATABASE_NAME);
+            $criteria->add(SysSessionsPeer::SESSION_ID, (array) $values, Criteria::IN);
             // invalidate the cache for this object(s)
             foreach ((array) $values as $singleval) {
-                SysPagesPeer::removeInstanceFromPool($singleval);
+                SysSessionsPeer::removeInstanceFromPool($singleval);
             }
         }
 
         // Set the correct dbName
-        $criteria->setDbName(SysPagesPeer::DATABASE_NAME);
+        $criteria->setDbName(SysSessionsPeer::DATABASE_NAME);
 
         $affectedRows = 0; // initialize var to track total num of affected rows
 
@@ -668,7 +664,7 @@ abstract class BaseSysPagesPeer
             $con->beginTransaction();
             
             $affectedRows += BasePeer::doDelete($criteria, $con);
-            SysPagesPeer::clearRelatedInstancePool();
+            SysSessionsPeer::clearRelatedInstancePool();
             $con->commit();
 
             return $affectedRows;
@@ -679,13 +675,13 @@ abstract class BaseSysPagesPeer
     }
 
     /**
-     * Validates all modified columns of given SysPages object.
+     * Validates all modified columns of given SysSessions object.
      * If parameter $columns is either a single column name or an array of column names
      * than only those columns are validated.
      *
      * NOTICE: This does not apply to primary or foreign keys for now.
      *
-     * @param SysPages $obj The object to validate.
+     * @param SysSessions $obj The object to validate.
      * @param      mixed $cols Column name or array of column names.
      *
      * @return mixed TRUE if all columns are valid or the error message of the first invalid column.
@@ -695,8 +691,8 @@ abstract class BaseSysPagesPeer
         $columns = array();
 
         if ($cols) {
-            $dbMap = Propel::getDatabaseMap(SysPagesPeer::DATABASE_NAME);
-            $tableMap = $dbMap->getTable(SysPagesPeer::TABLE_NAME);
+            $dbMap = Propel::getDatabaseMap(SysSessionsPeer::DATABASE_NAME);
+            $tableMap = $dbMap->getTable(SysSessionsPeer::TABLE_NAME);
 
             if (! is_array($cols)) {
                 $cols = array($cols);
@@ -712,31 +708,31 @@ abstract class BaseSysPagesPeer
 
         }
 
-        return BasePeer::doValidate(SysPagesPeer::DATABASE_NAME, SysPagesPeer::TABLE_NAME, $columns);
+        return BasePeer::doValidate(SysSessionsPeer::DATABASE_NAME, SysSessionsPeer::TABLE_NAME, $columns);
     }
 
     /**
      * Retrieve a single object by pkey.
      *
-     * @param int $pk the primary key.
+     * @param string $pk the primary key.
      * @param      PropelPDO $con the connection to use
-     * @return SysPages
+     * @return SysSessions
      */
     public static function retrieveByPK($pk, PropelPDO $con = null)
     {
 
-        if (null !== ($obj = SysPagesPeer::getInstanceFromPool((string) $pk))) {
+        if (null !== ($obj = SysSessionsPeer::getInstanceFromPool((string) $pk))) {
             return $obj;
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria = new Criteria(SysPagesPeer::DATABASE_NAME);
-        $criteria->add(SysPagesPeer::ID_PAGE, $pk);
+        $criteria = new Criteria(SysSessionsPeer::DATABASE_NAME);
+        $criteria->add(SysSessionsPeer::SESSION_ID, $pk);
 
-        $v = SysPagesPeer::doSelect($criteria, $con);
+        $v = SysSessionsPeer::doSelect($criteria, $con);
 
         return !empty($v) > 0 ? $v[0] : null;
     }
@@ -746,31 +742,31 @@ abstract class BaseSysPagesPeer
      *
      * @param      array $pks List of primary keys
      * @param      PropelPDO $con the connection to use
-     * @return SysPages[]
+     * @return SysSessions[]
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
     public static function retrieveByPKs($pks, PropelPDO $con = null)
     {
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         $objs = null;
         if (empty($pks)) {
             $objs = array();
         } else {
-            $criteria = new Criteria(SysPagesPeer::DATABASE_NAME);
-            $criteria->add(SysPagesPeer::ID_PAGE, $pks, Criteria::IN);
-            $objs = SysPagesPeer::doSelect($criteria, $con);
+            $criteria = new Criteria(SysSessionsPeer::DATABASE_NAME);
+            $criteria->add(SysSessionsPeer::SESSION_ID, $pks, Criteria::IN);
+            $objs = SysSessionsPeer::doSelect($criteria, $con);
         }
 
         return $objs;
     }
 
-} // BaseSysPagesPeer
+} // BaseSysSessionsPeer
 
 // This is the static code needed to register the TableMap for this table with the main Propel class.
 //
-BaseSysPagesPeer::buildTableMap();
+BaseSysSessionsPeer::buildTableMap();
 

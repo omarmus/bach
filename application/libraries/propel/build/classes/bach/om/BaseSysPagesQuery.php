@@ -10,13 +10,13 @@
  * @method SysPagesQuery orderByTitle($order = Criteria::ASC) Order by the title column
  * @method SysPagesQuery orderBySlug($order = Criteria::ASC) Order by the slug column
  * @method SysPagesQuery orderByOrder($order = Criteria::ASC) Order by the order column
- * @method SysPagesQuery orderByBody($order = Criteria::ASC) Order by the body column
+ * @method SysPagesQuery orderByIdParent($order = Criteria::ASC) Order by the id_parent column
  *
  * @method SysPagesQuery groupByIdPage() Group by the id_page column
  * @method SysPagesQuery groupByTitle() Group by the title column
  * @method SysPagesQuery groupBySlug() Group by the slug column
  * @method SysPagesQuery groupByOrder() Group by the order column
- * @method SysPagesQuery groupByBody() Group by the body column
+ * @method SysPagesQuery groupByIdParent() Group by the id_parent column
  *
  * @method SysPagesQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method SysPagesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -28,13 +28,13 @@
  * @method SysPages findOneByTitle(string $title) Return the first SysPages filtered by the title column
  * @method SysPages findOneBySlug(string $slug) Return the first SysPages filtered by the slug column
  * @method SysPages findOneByOrder(int $order) Return the first SysPages filtered by the order column
- * @method SysPages findOneByBody(string $body) Return the first SysPages filtered by the body column
+ * @method SysPages findOneByIdParent(int $id_parent) Return the first SysPages filtered by the id_parent column
  *
  * @method array findByIdPage(int $id_page) Return SysPages objects filtered by the id_page column
  * @method array findByTitle(string $title) Return SysPages objects filtered by the title column
  * @method array findBySlug(string $slug) Return SysPages objects filtered by the slug column
  * @method array findByOrder(int $order) Return SysPages objects filtered by the order column
- * @method array findByBody(string $body) Return SysPages objects filtered by the body column
+ * @method array findByIdParent(int $id_parent) Return SysPages objects filtered by the id_parent column
  *
  * @package    propel.generator.bach.om
  */
@@ -142,7 +142,7 @@ abstract class BaseSysPagesQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id_page`, `title`, `slug`, `order`, `body` FROM `sys_pages` WHERE `id_page` = :p0';
+        $sql = 'SELECT `id_page`, `title`, `slug`, `order`, `id_parent` FROM `sys_pages` WHERE `id_page` = :p0';
         try {
             $stmt = $con->prepare($sql);			
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -374,32 +374,45 @@ abstract class BaseSysPagesQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the body column
+     * Filter the query on the id_parent column
      *
      * Example usage:
      * <code>
-     * $query->filterByBody('fooValue');   // WHERE body = 'fooValue'
-     * $query->filterByBody('%fooValue%'); // WHERE body LIKE '%fooValue%'
+     * $query->filterByIdParent(1234); // WHERE id_parent = 1234
+     * $query->filterByIdParent(array(12, 34)); // WHERE id_parent IN (12, 34)
+     * $query->filterByIdParent(array('min' => 12)); // WHERE id_parent >= 12
+     * $query->filterByIdParent(array('max' => 12)); // WHERE id_parent <= 12
      * </code>
      *
-     * @param     string $body The value to use as filter.
-     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     mixed $idParent The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return SysPagesQuery The current query, for fluid interface
      */
-    public function filterByBody($body = null, $comparison = null)
+    public function filterByIdParent($idParent = null, $comparison = null)
     {
-        if (null === $comparison) {
-            if (is_array($body)) {
+        if (is_array($idParent)) {
+            $useMinMax = false;
+            if (isset($idParent['min'])) {
+                $this->addUsingAlias(SysPagesPeer::ID_PARENT, $idParent['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idParent['max'])) {
+                $this->addUsingAlias(SysPagesPeer::ID_PARENT, $idParent['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
                 $comparison = Criteria::IN;
-            } elseif (preg_match('/[\%\*]/', $body)) {
-                $body = str_replace('*', '%', $body);
-                $comparison = Criteria::LIKE;
             }
         }
 
-        return $this->addUsingAlias(SysPagesPeer::BODY, $body, $comparison);
+        return $this->addUsingAlias(SysPagesPeer::ID_PARENT, $idParent, $comparison);
     }
 
     /**

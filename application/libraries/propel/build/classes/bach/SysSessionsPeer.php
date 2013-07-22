@@ -3,7 +3,7 @@
 
 
 /**
- * Skeleton subclass for performing query and update operations on the 'sys_roles_x_user' table.
+ * Skeleton subclass for performing query and update operations on the 'sys_sessions' table.
  *
  * 
  *
@@ -13,6 +13,6 @@
  *
  * @package    propel.generator.bach
  */
-class SysRolesXUserQuery extends BaseSysRolesXUserQuery
+class SysSessionsPeer extends BaseSysSessionsPeer
 {
 }

@@ -49,7 +49,7 @@ class SysRolesTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('SysRolesXUser', 'SysRolesXUser', RelationMap::ONE_TO_MANY, array('id_rol' => 'id_rol', ), null, null, 'SysRolesXUsers');
+        $this->addRelation('SysUsers', 'SysUsers', RelationMap::ONE_TO_MANY, array('id_rol' => 'id_rol', ), null, null, 'SysUserss');
     } // buildRelations()
 
 } // SysRolesTableMap

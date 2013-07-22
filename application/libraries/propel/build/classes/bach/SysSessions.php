@@ -3,7 +3,7 @@
 
 
 /**
- * Skeleton subclass for representing a row from the 'sys_roles_x_user' table.
+ * Skeleton subclass for representing a row from the 'sys_sessions' table.
  *
  * 
  *
@@ -13,6 +13,6 @@
  *
  * @package    propel.generator.bach
  */
-class SysRolesXUser extends BaseSysRolesXUser
+class SysSessions extends BaseSysSessions
 {
 }

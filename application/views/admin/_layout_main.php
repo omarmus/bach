@@ -14,24 +14,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <h1><a class="brand" href="<?php echo site_url('admin/user/login') ?>"><span>Bach PHP</span></a></h1>
+                    <h1><a class="brand" href="<?php echo site_url('admin/dashboard') ?>"><span>Bach PHP</span></a></h1>
                     <nav class="nav-collapse collapse">
-                        <ul class="nav">
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <?php echo get_menu($menu); ?>
                         <form class="navbar-form pull-right">
                             <input class="input-large" style="display: none; margin-right: 14px;" type="text" placeholder="Search">
                             <button type="submit" class="btn btn-inverse" ><i class="icon-search icon-white"></i></button>
@@ -57,20 +42,15 @@
         </nav>
         <div id="container-main">
             <ul class="breadcrumb">
-                <li><a href="#">Dashboard</a> <span class="divider">/</span></li>
-                <li><a href="#">Library</a> <span class="divider">/</span></li>
-                <li class="active">Data</li>
+            <?php if (count($page)) : ?>
+                <li><a href="<?php echo site_url('admin/dashboard') ?>">Dashboard</a> <span class="divider">/</span></li>
+                <li class="active"><?php echo $page->getTitle() ?></li>
+            <?php else : ?>
+                <li class="active">Dashboard</li>
+            <?php endif ?>
             </ul>
             <div class="container">
                 <section class="row-fluid">
-                    <?php $error = $this->session->flashdata('error'); ?>
-                    <?php if ($error): ?>
-                    <div class="msg msg-alert"><?php echo $error ?></div>   
-                    <?php endif ?>
-                    <?php $success = $this->session->flashdata('success'); ?>
-                    <?php if ($success): ?>
-                    <div class="msg msg-success"><?php echo $success ?></div>   
-                    <?php endif ?>
                     <?php $this->load->view($subview); ?>
                 </section>
             </div>

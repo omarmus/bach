@@ -18,9 +18,9 @@
  * @method SysRolesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method SysRolesQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method SysRolesQuery leftJoinSysRolesXUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysRolesXUser relation
- * @method SysRolesQuery rightJoinSysRolesXUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysRolesXUser relation
- * @method SysRolesQuery innerJoinSysRolesXUser($relationAlias = null) Adds a INNER JOIN clause to the query using the SysRolesXUser relation
+ * @method SysRolesQuery leftJoinSysUsers($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysUsers relation
+ * @method SysRolesQuery rightJoinSysUsers($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysUsers relation
+ * @method SysRolesQuery innerJoinSysUsers($relationAlias = null) Adds a INNER JOIN clause to the query using the SysUsers relation
  *
  * @method SysRoles findOne(PropelPDO $con = null) Return the first SysRoles matching the query
  * @method SysRoles findOneOrCreate(PropelPDO $con = null) Return the first SysRoles matching the query, or a new SysRoles object populated from the query conditions when no match is found
@@ -328,41 +328,41 @@ abstract class BaseSysRolesQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related SysRolesXUser object
+     * Filter the query by a related SysUsers object
      *
-     * @param   SysRolesXUser|PropelObjectCollection $sysRolesXUser  the related object to use as filter
+     * @param   SysUsers|PropelObjectCollection $sysUsers  the related object to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return                 SysRolesQuery The current query, for fluid interface
      * @throws PropelException - if the provided filter is invalid.
      */
-    public function filterBySysRolesXUser($sysRolesXUser, $comparison = null)
+    public function filterBySysUsers($sysUsers, $comparison = null)
     {
-        if ($sysRolesXUser instanceof SysRolesXUser) {
+        if ($sysUsers instanceof SysUsers) {
             return $this
-                ->addUsingAlias(SysRolesPeer::ID_ROL, $sysRolesXUser->getIdRol(), $comparison);
-        } elseif ($sysRolesXUser instanceof PropelObjectCollection) {
+                ->addUsingAlias(SysRolesPeer::ID_ROL, $sysUsers->getIdRol(), $comparison);
+        } elseif ($sysUsers instanceof PropelObjectCollection) {
             return $this
-                ->useSysRolesXUserQuery()
-                ->filterByPrimaryKeys($sysRolesXUser->getPrimaryKeys())
+                ->useSysUsersQuery()
+                ->filterByPrimaryKeys($sysUsers->getPrimaryKeys())
                 ->endUse();
         } else {
-            throw new PropelException('filterBySysRolesXUser() only accepts arguments of type SysRolesXUser or PropelCollection');
+            throw new PropelException('filterBySysUsers() only accepts arguments of type SysUsers or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the SysRolesXUser relation
+     * Adds a JOIN clause to the query using the SysUsers relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return SysRolesQuery The current query, for fluid interface
      */
-    public function joinSysRolesXUser($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinSysUsers($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('SysRolesXUser');
+        $relationMap = $tableMap->getRelation('SysUsers');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -377,14 +377,14 @@ abstract class BaseSysRolesQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'SysRolesXUser');
+            $this->addJoinObject($join, 'SysUsers');
         }
 
         return $this;
     }
 
     /**
-     * Use the SysRolesXUser relation SysRolesXUser object
+     * Use the SysUsers relation SysUsers object
      *
      * @see       useQuery()
      *
@@ -392,13 +392,13 @@ abstract class BaseSysRolesQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   SysRolesXUserQuery A secondary query class using the current class as primary query
+     * @return   SysUsersQuery A secondary query class using the current class as primary query
      */
-    public function useSysRolesXUserQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useSysUsersQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinSysRolesXUser($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'SysRolesXUser', 'SysRolesXUserQuery');
+            ->joinSysUsers($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'SysUsers', 'SysUsersQuery');
     }
 
     /**

@@ -44,6 +44,11 @@ class SysUsersTableMap extends TableMap
         $this->addColumn('email', 'Email', 'VARCHAR', false, 100, null);
         $this->addColumn('first_name', 'FirstName', 'VARCHAR', false, 50, null);
         $this->addColumn('last_name', 'LastName', 'VARCHAR', false, 100, null);
+        $this->addColumn('state', 'State', 'VARCHAR', false, 20, 'CREATE');
+        $this->addForeignKey('id_rol', 'IdRol', 'INTEGER', 'sys_roles', 'id_rol', false, null, null);
+        $this->addColumn('id_image', 'IdImage', 'INTEGER', false, null, null);
+        $this->addColumn('created', 'Created', 'TIMESTAMP', false, null, null);
+        $this->addColumn('phone', 'Phone', 'CHAR', false, 20, null);
         // validators
     } // initialize()
 
@@ -52,7 +57,7 @@ class SysUsersTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('SysRolesXUser', 'SysRolesXUser', RelationMap::ONE_TO_MANY, array('id_user' => 'id_user', ), null, null, 'SysRolesXUsers');
+        $this->addRelation('SysRoles', 'SysRoles', RelationMap::MANY_TO_ONE, array('id_rol' => 'id_rol', ), null, null);
     } // buildRelations()
 
 } // SysUsersTableMap

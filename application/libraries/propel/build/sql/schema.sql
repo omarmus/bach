@@ -26,8 +26,8 @@ CREATE TABLE `sys_pages`
     `id_page` int(11) unsigned NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(100) NOT NULL,
     `slug` VARCHAR(100) NOT NULL,
-    `order` INTEGER NOT NULL,
-    `body` TEXT NOT NULL,
+    `order` int(11) unsigned NOT NULL,
+    `id_parent` int(11) unsigned,
     PRIMARY KEY (`id_page`)
 ) ENGINE=InnoDB;
 
@@ -46,24 +46,20 @@ CREATE TABLE `sys_roles`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
--- sys_roles_x_user
+-- sys_sessions
 -- ---------------------------------------------------------------------
 
-DROP TABLE IF EXISTS `sys_roles_x_user`;
+DROP TABLE IF EXISTS `sys_sessions`;
 
-CREATE TABLE `sys_roles_x_user`
+CREATE TABLE `sys_sessions`
 (
-    `id_rol` INTEGER NOT NULL,
-    `id_user` INTEGER NOT NULL,
-    PRIMARY KEY (`id_rol`,`id_user`),
-    INDEX `id_rol` (`id_rol`),
-    INDEX `id_user` (`id_user`),
-    CONSTRAINT `sys_roles_x_user_fk1`
-        FOREIGN KEY (`id_user`)
-        REFERENCES `sys_users` (`id_user`),
-    CONSTRAINT `sys_roles_x_user_fk`
-        FOREIGN KEY (`id_rol`)
-        REFERENCES `sys_roles` (`id_rol`)
+    `session_id` VARCHAR(40) DEFAULT '0' NOT NULL,
+    `ip_address` VARCHAR(45) DEFAULT '0' NOT NULL,
+    `user_agent` VARCHAR(120) NOT NULL,
+    `last_activity` int(10) unsigned DEFAULT 0 NOT NULL,
+    `user_data` TEXT NOT NULL,
+    PRIMARY KEY (`session_id`),
+    INDEX `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -80,7 +76,17 @@ CREATE TABLE `sys_users`
     `email` VARCHAR(100),
     `first_name` VARCHAR(50),
     `last_name` VARCHAR(100),
-    PRIMARY KEY (`id_user`)
+    `state` VARCHAR(20) DEFAULT 'CREATE',
+    `id_rol` INTEGER,
+    `id_image` INTEGER,
+    `created` DATETIME,
+    `phone` CHAR(20),
+    PRIMARY KEY (`id_user`),
+    UNIQUE INDEX `email` (`email`),
+    INDEX `id_rol` (`id_rol`),
+    CONSTRAINT `sys_users_fk`
+        FOREIGN KEY (`id_rol`)
+        REFERENCES `sys_roles` (`id_rol`)
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

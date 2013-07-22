@@ -54,10 +54,10 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $order;
 
     /**
-     * The value for the body field.
-     * @var        string
+     * The value for the id_parent field.
+     * @var        int
      */
-    protected $body;
+    protected $id_parent;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -124,14 +124,14 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [body] column value.
+     * Get the [id_parent] column value.
      * 
-     * @return string
+     * @return int
      */
-    public function getBody()
+    public function getIdParent()
     {
 
-        return $this->body;
+        return $this->id_parent;
     }
 
     /**
@@ -219,25 +219,25 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     } // setOrder()
 
     /**
-     * Set the value of [body] column.
+     * Set the value of [id_parent] column.
      * 
-     * @param  string $v new value
+     * @param  int $v new value
      * @return SysPages The current object (for fluent API support)
      */
-    public function setBody($v)
+    public function setIdParent($v)
     {
         if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
+            $v = (int) $v;
         }
 
-        if ($this->body !== $v) {
-            $this->body = $v;
-            $this->modifiedColumns[] = SysPagesPeer::BODY;
+        if ($this->id_parent !== $v) {
+            $this->id_parent = $v;
+            $this->modifiedColumns[] = SysPagesPeer::ID_PARENT;
         }
 
 
         return $this;
-    } // setBody()
+    } // setIdParent()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -275,7 +275,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->slug = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->order = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
-            $this->body = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->id_parent = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -509,8 +509,8 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if ($this->isColumnModified(SysPagesPeer::ORDER)) {
             $modifiedColumns[':p' . $index++]  = '`order`';
         }
-        if ($this->isColumnModified(SysPagesPeer::BODY)) {
-            $modifiedColumns[':p' . $index++]  = '`body`';
+        if ($this->isColumnModified(SysPagesPeer::ID_PARENT)) {
+            $modifiedColumns[':p' . $index++]  = '`id_parent`';
         }
 
         $sql = sprintf(
@@ -535,8 +535,8 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                     case '`order`':						
                         $stmt->bindValue($identifier, $this->order, PDO::PARAM_INT);
                         break;
-                    case '`body`':						
-                        $stmt->bindValue($identifier, $this->body, PDO::PARAM_STR);
+                    case '`id_parent`':						
+                        $stmt->bindValue($identifier, $this->id_parent, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -685,7 +685,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                 return $this->getOrder();
                 break;
             case 4:
-                return $this->getBody();
+                return $this->getIdParent();
                 break;
             default:
                 return null;
@@ -719,7 +719,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $keys[1] => $this->getTitle(),
             $keys[2] => $this->getSlug(),
             $keys[3] => $this->getOrder(),
-            $keys[4] => $this->getBody(),
+            $keys[4] => $this->getIdParent(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -773,7 +773,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                 $this->setOrder($value);
                 break;
             case 4:
-                $this->setBody($value);
+                $this->setIdParent($value);
                 break;
         } // switch()
     }
@@ -803,7 +803,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setSlug($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setOrder($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setBody($arr[$keys[4]]);
+        if (array_key_exists($keys[4], $arr)) $this->setIdParent($arr[$keys[4]]);
     }
 
     /**
@@ -819,7 +819,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if ($this->isColumnModified(SysPagesPeer::TITLE)) $criteria->add(SysPagesPeer::TITLE, $this->title);
         if ($this->isColumnModified(SysPagesPeer::SLUG)) $criteria->add(SysPagesPeer::SLUG, $this->slug);
         if ($this->isColumnModified(SysPagesPeer::ORDER)) $criteria->add(SysPagesPeer::ORDER, $this->order);
-        if ($this->isColumnModified(SysPagesPeer::BODY)) $criteria->add(SysPagesPeer::BODY, $this->body);
+        if ($this->isColumnModified(SysPagesPeer::ID_PARENT)) $criteria->add(SysPagesPeer::ID_PARENT, $this->id_parent);
 
         return $criteria;
     }
@@ -886,7 +886,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $copyObj->setTitle($this->getTitle());
         $copyObj->setSlug($this->getSlug());
         $copyObj->setOrder($this->getOrder());
-        $copyObj->setBody($this->getBody());
+        $copyObj->setIdParent($this->getIdParent());
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setIdPage(NULL); // this is a auto-increment column, so set to default value
@@ -942,7 +942,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $this->title = null;
         $this->slug = null;
         $this->order = null;
-        $this->body = null;
+        $this->id_parent = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

@@ -2,24 +2,24 @@
 
 
 /**
- * Base class that represents a row from the 'sys_roles_x_user' table.
+ * Base class that represents a row from the 'sys_sessions' table.
  *
  * 
  *
  * @package    propel.generator.bach.om
  */
-abstract class BaseSysRolesXUser extends BaseObject implements Persistent
+abstract class BaseSysSessions extends BaseObject implements Persistent
 {
     /**
      * Peer class name
      */
-    const PEER = 'SysRolesXUserPeer';
+    const PEER = 'SysSessionsPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        SysRolesXUserPeer
+     * @var        SysSessionsPeer
      */
     protected static $peer;
 
@@ -30,26 +30,37 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     protected $startCopy = false;
 
     /**
-     * The value for the id_rol field.
+     * The value for the session_id field.
+     * Note: this column has a database default value of: '0'
+     * @var        string
+     */
+    protected $session_id;
+
+    /**
+     * The value for the ip_address field.
+     * Note: this column has a database default value of: '0'
+     * @var        string
+     */
+    protected $ip_address;
+
+    /**
+     * The value for the user_agent field.
+     * @var        string
+     */
+    protected $user_agent;
+
+    /**
+     * The value for the last_activity field.
+     * Note: this column has a database default value of: 0
      * @var        int
      */
-    protected $id_rol;
+    protected $last_activity;
 
     /**
-     * The value for the id_user field.
-     * @var        int
+     * The value for the user_data field.
+     * @var        string
      */
-    protected $id_user;
-
-    /**
-     * @var        SysUsers
-     */
-    protected $aSysUsers;
-
-    /**
-     * @var        SysRoles
-     */
-    protected $aSysRoles;
+    protected $user_data;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -72,76 +83,187 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     protected $alreadyInClearAllReferencesDeep = false;
 
     /**
-     * Get the [id_rol] column value.
-     * 
-     * @return int
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see        __construct()
      */
-    public function getIdRol()
+    public function applyDefaultValues()
     {
-
-        return $this->id_rol;
+        $this->session_id = '0';
+        $this->ip_address = '0';
+        $this->last_activity = 0;
     }
 
     /**
-     * Get the [id_user] column value.
-     * 
-     * @return int
+     * Initializes internal state of BaseSysSessions object.
+     * @see        applyDefaults()
      */
-    public function getIdUser()
+    public function __construct()
     {
-
-        return $this->id_user;
+        parent::__construct();
+        $this->applyDefaultValues();
     }
 
     /**
-     * Set the value of [id_rol] column.
+     * Get the [session_id] column value.
+     * 
+     * @return string
+     */
+    public function getSessionId()
+    {
+
+        return $this->session_id;
+    }
+
+    /**
+     * Get the [ip_address] column value.
+     * 
+     * @return string
+     */
+    public function getIpAddress()
+    {
+
+        return $this->ip_address;
+    }
+
+    /**
+     * Get the [user_agent] column value.
+     * 
+     * @return string
+     */
+    public function getUserAgent()
+    {
+
+        return $this->user_agent;
+    }
+
+    /**
+     * Get the [last_activity] column value.
+     * 
+     * @return int
+     */
+    public function getLastActivity()
+    {
+
+        return $this->last_activity;
+    }
+
+    /**
+     * Get the [user_data] column value.
+     * 
+     * @return string
+     */
+    public function getUserData()
+    {
+
+        return $this->user_data;
+    }
+
+    /**
+     * Set the value of [session_id] column.
+     * 
+     * @param  string $v new value
+     * @return SysSessions The current object (for fluent API support)
+     */
+    public function setSessionId($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->session_id !== $v) {
+            $this->session_id = $v;
+            $this->modifiedColumns[] = SysSessionsPeer::SESSION_ID;
+        }
+
+
+        return $this;
+    } // setSessionId()
+
+    /**
+     * Set the value of [ip_address] column.
+     * 
+     * @param  string $v new value
+     * @return SysSessions The current object (for fluent API support)
+     */
+    public function setIpAddress($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->ip_address !== $v) {
+            $this->ip_address = $v;
+            $this->modifiedColumns[] = SysSessionsPeer::IP_ADDRESS;
+        }
+
+
+        return $this;
+    } // setIpAddress()
+
+    /**
+     * Set the value of [user_agent] column.
+     * 
+     * @param  string $v new value
+     * @return SysSessions The current object (for fluent API support)
+     */
+    public function setUserAgent($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->user_agent !== $v) {
+            $this->user_agent = $v;
+            $this->modifiedColumns[] = SysSessionsPeer::USER_AGENT;
+        }
+
+
+        return $this;
+    } // setUserAgent()
+
+    /**
+     * Set the value of [last_activity] column.
      * 
      * @param  int $v new value
-     * @return SysRolesXUser The current object (for fluent API support)
+     * @return SysSessions The current object (for fluent API support)
      */
-    public function setIdRol($v)
+    public function setLastActivity($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->id_rol !== $v) {
-            $this->id_rol = $v;
-            $this->modifiedColumns[] = SysRolesXUserPeer::ID_ROL;
-        }
-
-        if ($this->aSysRoles !== null && $this->aSysRoles->getIdRol() !== $v) {
-            $this->aSysRoles = null;
+        if ($this->last_activity !== $v) {
+            $this->last_activity = $v;
+            $this->modifiedColumns[] = SysSessionsPeer::LAST_ACTIVITY;
         }
 
 
         return $this;
-    } // setIdRol()
+    } // setLastActivity()
 
     /**
-     * Set the value of [id_user] column.
+     * Set the value of [user_data] column.
      * 
-     * @param  int $v new value
-     * @return SysRolesXUser The current object (for fluent API support)
+     * @param  string $v new value
+     * @return SysSessions The current object (for fluent API support)
      */
-    public function setIdUser($v)
+    public function setUserData($v)
     {
         if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
+            $v = (string) $v;
         }
 
-        if ($this->id_user !== $v) {
-            $this->id_user = $v;
-            $this->modifiedColumns[] = SysRolesXUserPeer::ID_USER;
-        }
-
-        if ($this->aSysUsers !== null && $this->aSysUsers->getIdUser() !== $v) {
-            $this->aSysUsers = null;
+        if ($this->user_data !== $v) {
+            $this->user_data = $v;
+            $this->modifiedColumns[] = SysSessionsPeer::USER_DATA;
         }
 
 
         return $this;
-    } // setIdUser()
+    } // setUserData()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -153,6 +275,18 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->session_id !== '0') {
+                return false;
+            }
+
+            if ($this->ip_address !== '0') {
+                return false;
+            }
+
+            if ($this->last_activity !== 0) {
+                return false;
+            }
+
         // otherwise, everything was equal, so return true
         return true;
     } // hasOnlyDefaultValues()
@@ -175,8 +309,11 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     {
         try {
 
-            $this->id_rol = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->id_user = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->session_id = ($row[$startcol + 0] !== null) ? (string) $row[$startcol + 0] : null;
+            $this->ip_address = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->user_agent = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->last_activity = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
+            $this->user_data = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -186,10 +323,10 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 2; // 2 = SysRolesXUserPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 5; // 5 = SysSessionsPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating SysRolesXUser object", $e);
+            throw new PropelException("Error populating SysSessions object", $e);
         }
     }
 
@@ -209,12 +346,6 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
-        if ($this->aSysRoles !== null && $this->id_rol !== $this->aSysRoles->getIdRol()) {
-            $this->aSysRoles = null;
-        }
-        if ($this->aSysUsers !== null && $this->id_user !== $this->aSysUsers->getIdUser()) {
-            $this->aSysUsers = null;
-        }
     } // ensureConsistency
 
     /**
@@ -238,13 +369,13 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysRolesXUserPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = SysRolesXUserPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = SysSessionsPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -254,8 +385,6 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aSysUsers = null;
-            $this->aSysRoles = null;
         } // if (deep)
     }
 
@@ -276,12 +405,12 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysRolesXUserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = SysRolesXUserQuery::create()
+            $deleteQuery = SysSessionsQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -319,7 +448,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysRolesXUserPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysSessionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -339,7 +468,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                SysRolesXUserPeer::addInstanceToPool($this);
+                SysSessionsPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -368,25 +497,6 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
         $affectedRows = 0; // initialize var to track total num of affected rows
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
-
-            // We call the save method on the following object(s) if they
-            // were passed to this object by their corresponding set
-            // method.  This object relates to these object(s) by a
-            // foreign key reference.
-
-            if ($this->aSysUsers !== null) {
-                if ($this->aSysUsers->isModified() || $this->aSysUsers->isNew()) {
-                    $affectedRows += $this->aSysUsers->save($con);
-                }
-                $this->setSysUsers($this->aSysUsers);
-            }
-
-            if ($this->aSysRoles !== null) {
-                if ($this->aSysRoles->isModified() || $this->aSysRoles->isNew()) {
-                    $affectedRows += $this->aSysRoles->save($con);
-                }
-                $this->setSysRoles($this->aSysRoles);
-            }
 
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
@@ -421,15 +531,24 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
 
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(SysRolesXUserPeer::ID_ROL)) {
-            $modifiedColumns[':p' . $index++]  = '`id_rol`';
+        if ($this->isColumnModified(SysSessionsPeer::SESSION_ID)) {
+            $modifiedColumns[':p' . $index++]  = '`session_id`';
         }
-        if ($this->isColumnModified(SysRolesXUserPeer::ID_USER)) {
-            $modifiedColumns[':p' . $index++]  = '`id_user`';
+        if ($this->isColumnModified(SysSessionsPeer::IP_ADDRESS)) {
+            $modifiedColumns[':p' . $index++]  = '`ip_address`';
+        }
+        if ($this->isColumnModified(SysSessionsPeer::USER_AGENT)) {
+            $modifiedColumns[':p' . $index++]  = '`user_agent`';
+        }
+        if ($this->isColumnModified(SysSessionsPeer::LAST_ACTIVITY)) {
+            $modifiedColumns[':p' . $index++]  = '`last_activity`';
+        }
+        if ($this->isColumnModified(SysSessionsPeer::USER_DATA)) {
+            $modifiedColumns[':p' . $index++]  = '`user_data`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sys_roles_x_user` (%s) VALUES (%s)',
+            'INSERT INTO `sys_sessions` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -438,11 +557,20 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`id_rol`':						
-                        $stmt->bindValue($identifier, $this->id_rol, PDO::PARAM_INT);
+                    case '`session_id`':						
+                        $stmt->bindValue($identifier, $this->session_id, PDO::PARAM_STR);
                         break;
-                    case '`id_user`':						
-                        $stmt->bindValue($identifier, $this->id_user, PDO::PARAM_INT);
+                    case '`ip_address`':						
+                        $stmt->bindValue($identifier, $this->ip_address, PDO::PARAM_STR);
+                        break;
+                    case '`user_agent`':						
+                        $stmt->bindValue($identifier, $this->user_agent, PDO::PARAM_STR);
+                        break;
+                    case '`last_activity`':						
+                        $stmt->bindValue($identifier, $this->last_activity, PDO::PARAM_INT);
+                        break;
+                    case '`user_data`':						
+                        $stmt->bindValue($identifier, $this->user_data, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -531,25 +659,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
             $failureMap = array();
 
 
-            // We call the validate method on the following object(s) if they
-            // were passed to this object by their corresponding set
-            // method.  This object relates to these object(s) by a
-            // foreign key reference.
-
-            if ($this->aSysUsers !== null) {
-                if (!$this->aSysUsers->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aSysUsers->getValidationFailures());
-                }
-            }
-
-            if ($this->aSysRoles !== null) {
-                if (!$this->aSysRoles->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aSysRoles->getValidationFailures());
-                }
-            }
-
-
-            if (($retval = SysRolesXUserPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = SysSessionsPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
@@ -573,7 +683,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = SysRolesXUserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SysSessionsPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -590,10 +700,19 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                return $this->getIdRol();
+                return $this->getSessionId();
                 break;
             case 1:
-                return $this->getIdUser();
+                return $this->getIpAddress();
+                break;
+            case 2:
+                return $this->getUserAgent();
+                break;
+            case 3:
+                return $this->getLastActivity();
+                break;
+            case 4:
+                return $this->getUserData();
                 break;
             default:
                 return null;
@@ -612,20 +731,22 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to true.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
-     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
     {
-        if (isset($alreadyDumpedObjects['SysRolesXUser'][serialize($this->getPrimaryKey())])) {
+        if (isset($alreadyDumpedObjects['SysSessions'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['SysRolesXUser'][serialize($this->getPrimaryKey())] = true;
-        $keys = SysRolesXUserPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['SysSessions'][$this->getPrimaryKey()] = true;
+        $keys = SysSessionsPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdRol(),
-            $keys[1] => $this->getIdUser(),
+            $keys[0] => $this->getSessionId(),
+            $keys[1] => $this->getIpAddress(),
+            $keys[2] => $this->getUserAgent(),
+            $keys[3] => $this->getLastActivity(),
+            $keys[4] => $this->getUserData(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -633,14 +754,6 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
             $result[$key] = $virtualColumn;
         }
         
-        if ($includeForeignObjects) {
-            if (null !== $this->aSysUsers) {
-                $result['SysUsers'] = $this->aSysUsers->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
-            if (null !== $this->aSysRoles) {
-                $result['SysRoles'] = $this->aSysRoles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
-        }
 
         return $result;
     }
@@ -658,7 +771,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = SysRolesXUserPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SysSessionsPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -675,10 +788,19 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                $this->setIdRol($value);
+                $this->setSessionId($value);
                 break;
             case 1:
-                $this->setIdUser($value);
+                $this->setIpAddress($value);
+                break;
+            case 2:
+                $this->setUserAgent($value);
+                break;
+            case 3:
+                $this->setLastActivity($value);
+                break;
+            case 4:
+                $this->setUserData($value);
                 break;
         } // switch()
     }
@@ -702,10 +824,13 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = SysRolesXUserPeer::getFieldNames($keyType);
+        $keys = SysSessionsPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdRol($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setIdUser($arr[$keys[1]]);
+        if (array_key_exists($keys[0], $arr)) $this->setSessionId($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setIpAddress($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setUserAgent($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setLastActivity($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setUserData($arr[$keys[4]]);
     }
 
     /**
@@ -715,10 +840,13 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(SysRolesXUserPeer::DATABASE_NAME);
+        $criteria = new Criteria(SysSessionsPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(SysRolesXUserPeer::ID_ROL)) $criteria->add(SysRolesXUserPeer::ID_ROL, $this->id_rol);
-        if ($this->isColumnModified(SysRolesXUserPeer::ID_USER)) $criteria->add(SysRolesXUserPeer::ID_USER, $this->id_user);
+        if ($this->isColumnModified(SysSessionsPeer::SESSION_ID)) $criteria->add(SysSessionsPeer::SESSION_ID, $this->session_id);
+        if ($this->isColumnModified(SysSessionsPeer::IP_ADDRESS)) $criteria->add(SysSessionsPeer::IP_ADDRESS, $this->ip_address);
+        if ($this->isColumnModified(SysSessionsPeer::USER_AGENT)) $criteria->add(SysSessionsPeer::USER_AGENT, $this->user_agent);
+        if ($this->isColumnModified(SysSessionsPeer::LAST_ACTIVITY)) $criteria->add(SysSessionsPeer::LAST_ACTIVITY, $this->last_activity);
+        if ($this->isColumnModified(SysSessionsPeer::USER_DATA)) $criteria->add(SysSessionsPeer::USER_DATA, $this->user_data);
 
         return $criteria;
     }
@@ -733,37 +861,30 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(SysRolesXUserPeer::DATABASE_NAME);
-        $criteria->add(SysRolesXUserPeer::ID_ROL, $this->id_rol);
-        $criteria->add(SysRolesXUserPeer::ID_USER, $this->id_user);
+        $criteria = new Criteria(SysSessionsPeer::DATABASE_NAME);
+        $criteria->add(SysSessionsPeer::SESSION_ID, $this->session_id);
 
         return $criteria;
     }
 
     /**
-     * Returns the composite primary key for this object.
-     * The array elements will be in same order as specified in XML.
-     * @return array
+     * Returns the primary key for this object (row).
+     * @return string
      */
     public function getPrimaryKey()
     {
-        $pks = array();
-        $pks[0] = $this->getIdRol();
-        $pks[1] = $this->getIdUser();
-
-        return $pks;
+        return $this->getSessionId();
     }
 
     /**
-     * Set the [composite] primary key.
+     * Generic method to set the primary key (session_id column).
      *
-     * @param array $keys The elements of the composite key (order must match the order in XML file).
+     * @param  string $key Primary key.
      * @return void
      */
-    public function setPrimaryKey($keys)
+    public function setPrimaryKey($key)
     {
-        $this->setIdRol($keys[0]);
-        $this->setIdUser($keys[1]);
+        $this->setSessionId($key);
     }
 
     /**
@@ -773,7 +894,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     public function isPrimaryKeyNull()
     {
 
-        return (null === $this->getIdRol()) && (null === $this->getIdUser());
+        return null === $this->getSessionId();
     }
 
     /**
@@ -782,29 +903,20 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param object $copyObj An object of SysRolesXUser (or compatible) type.
+     * @param object $copyObj An object of SysSessions (or compatible) type.
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setIdRol($this->getIdRol());
-        $copyObj->setIdUser($this->getIdUser());
-
-        if ($deepCopy && !$this->startCopy) {
-            // important: temporarily setNew(false) because this affects the behavior of
-            // the getter/setter methods for fkey referrer objects.
-            $copyObj->setNew(false);
-            // store object hash to prevent cycle
-            $this->startCopy = true;
-
-            //unflag object copy
-            $this->startCopy = false;
-        } // if ($deepCopy)
-
+        $copyObj->setIpAddress($this->getIpAddress());
+        $copyObj->setUserAgent($this->getUserAgent());
+        $copyObj->setLastActivity($this->getLastActivity());
+        $copyObj->setUserData($this->getUserData());
         if ($makeNew) {
             $copyObj->setNew(true);
+            $copyObj->setSessionId('0'); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -817,7 +929,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      * objects.
      *
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return SysRolesXUser Clone of current object.
+     * @return SysSessions Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -837,119 +949,15 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return SysRolesXUserPeer
+     * @return SysSessionsPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new SysRolesXUserPeer();
+            self::$peer = new SysSessionsPeer();
         }
 
         return self::$peer;
-    }
-
-    /**
-     * Declares an association between this object and a SysUsers object.
-     *
-     * @param                  SysUsers $v
-     * @return SysRolesXUser The current object (for fluent API support)
-     * @throws PropelException
-     */
-    public function setSysUsers(SysUsers $v = null)
-    {
-        if ($v === null) {
-            $this->setIdUser(NULL);
-        } else {
-            $this->setIdUser($v->getIdUser());
-        }
-
-        $this->aSysUsers = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the SysUsers object, it will not be re-added.
-        if ($v !== null) {
-            $v->addSysRolesXUser($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated SysUsers object
-     *
-     * @param PropelPDO $con Optional Connection object.
-     * @param $doQuery Executes a query to get the object if required
-     * @return SysUsers The associated SysUsers object.
-     * @throws PropelException
-     */
-    public function getSysUsers(PropelPDO $con = null, $doQuery = true)
-    {
-        if ($this->aSysUsers === null && ($this->id_user !== null) && $doQuery) {
-            $this->aSysUsers = SysUsersQuery::create()->findPk($this->id_user, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aSysUsers->addSysRolesXUsers($this);
-             */
-        }
-
-        return $this->aSysUsers;
-    }
-
-    /**
-     * Declares an association between this object and a SysRoles object.
-     *
-     * @param                  SysRoles $v
-     * @return SysRolesXUser The current object (for fluent API support)
-     * @throws PropelException
-     */
-    public function setSysRoles(SysRoles $v = null)
-    {
-        if ($v === null) {
-            $this->setIdRol(NULL);
-        } else {
-            $this->setIdRol($v->getIdRol());
-        }
-
-        $this->aSysRoles = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the SysRoles object, it will not be re-added.
-        if ($v !== null) {
-            $v->addSysRolesXUser($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated SysRoles object
-     *
-     * @param PropelPDO $con Optional Connection object.
-     * @param $doQuery Executes a query to get the object if required
-     * @return SysRoles The associated SysRoles object.
-     * @throws PropelException
-     */
-    public function getSysRoles(PropelPDO $con = null, $doQuery = true)
-    {
-        if ($this->aSysRoles === null && ($this->id_rol !== null) && $doQuery) {
-            $this->aSysRoles = SysRolesQuery::create()->findPk($this->id_rol, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aSysRoles->addSysRolesXUsers($this);
-             */
-        }
-
-        return $this->aSysRoles;
     }
 
     /**
@@ -957,12 +965,16 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function clear()
     {
-        $this->id_rol = null;
-        $this->id_user = null;
+        $this->session_id = null;
+        $this->ip_address = null;
+        $this->user_agent = null;
+        $this->last_activity = null;
+        $this->user_data = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);
@@ -981,18 +993,10 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->aSysUsers instanceof Persistent) {
-              $this->aSysUsers->clearAllReferences($deep);
-            }
-            if ($this->aSysRoles instanceof Persistent) {
-              $this->aSysRoles->clearAllReferences($deep);
-            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        $this->aSysUsers = null;
-        $this->aSysRoles = null;
     }
 
     /**
@@ -1002,7 +1006,7 @@ abstract class BaseSysRolesXUser extends BaseObject implements Persistent
      */
     public function __toString()
     {
-        return (string) $this->exportTo(SysRolesXUserPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(SysSessionsPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**

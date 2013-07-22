@@ -2,7 +2,7 @@ var oTable;
 
 $(document).ready(function() {
 	if ($("body").width() > 979) {
-		showNavs();
+		// showNavs();
 	}
 
 	oTable = $('#main-table').dataTable();
@@ -32,12 +32,11 @@ $.extend( true, $.fn.dataTable.defaults, {
     "fnInitComplete" : function() {
     	var that = this,
 			firstTH = $(that).find('th')[0],
-			total = that.$('tr').length,
 			th = document.createElement('th');
     	th.innerHTML = "<i></i>";
     	th.className = "check-all";
     	th.onclick = function () {
-    		var toggle = (total == that.$('tr.info').length?'remove':'add') + 'Class';
+    		var toggle = (that.$('tr').length == that.$('tr.info').length?'remove':'add') + 'Class';
     		$(firstTH).parent()[toggle]('all-selected');
     		that.$('tr')[toggle]('info');
     		var now = that.$('tr.info').length;
@@ -53,7 +52,7 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    	td.onclick = function () {
 	    		$(firstTD).toggleClass('info');
 	    		var now = that.$('tr.info').length;
-	    		$(firstTH).parent()[(total == now?'add':'remove') + 'Class']('all-selected');
+	    		$(firstTH).parent()[(that.$('tr').length == now?'add':'remove') + 'Class']('all-selected');
 	    		$('#delete-rows')[(now?'remove':'add') + 'Class']('disabled');
 	    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
 	    	}
@@ -66,14 +65,19 @@ function showModal (url) {
 	$('#main-modal').load(url, function () {
 		var input = $(this).modal().find('input');
 		setTimeout(function () {$(input[0]).focus()}, 500);
-	})
+	});
+}
+
+function hideModal() {
+	$('#main-modal').modal('hide');
 }
 
 function validate (form, url) {
 	$.post(url, $(form).serialize(), function (response) {
 		if (response == "CREATE" || response == 'UPDATE') {
-			$('#main-modal').modal('hide');
-			messageOk(response == "CREATE"?"Create!":"Update!");
+			hideModal();
+			messageOk(response == "CREATE"?"Create!":"Update!", 1000);
+			setTimeout(function () {window.location = '';}, 1200);
 		} else {
 			var error = $('#main-modal').html(response).find('.error');
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);
@@ -92,13 +96,20 @@ function edit (url, e) {
 	})
 }
 
-function deleteSelected (oTable, url) {
+function deleteSelected (oTable, url, refresh) {
 	var pks = getPks(oTable);
 	if (pks.length) {
 		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
 			$.post(url, {pks: pks}, function (response) {
 				deleteRows(oTable);
 				messageOk('Delete!');
+				$(oTable.find('th')[0]).parent().removeClass('all-selected');
+				$(oTable.parent().find('.row-fluid .span9')[0]).html('');
+				if (refresh) {
+					setTimeout(function () {
+						window.location = '';
+					}, 1000);
+				}
 			});
 		}
 	}
@@ -125,6 +136,10 @@ function getPks(oTable) {
 	return pks;
 }
 
+function addRow(oTable, data) {
+    oTable.fnAddData(data);
+}
+
 var showNavs = function() {
 	var header = $("#header"), 
 		show = header.css("marginTop") == "0px",
@@ -141,16 +156,12 @@ var showNavs = function() {
 
 function messageOk (text) {
 	text = text || 'Operation has been successful.';
-	setTimeout(function () {
-		message('Success!', text, _site_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
-	}, 500);
+	message('Success!', text, _site_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
 }
 
 function messageError (text) {
 	text = text || 'There was an error.';
-	setTimeout(function () {
-		message('Error!', text, _site_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
-	}, 500);
+	message('Error!', text, _site_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
 }
 
 function message (title, text, img, class_name, sticky) {

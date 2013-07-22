@@ -22,7 +22,7 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
-				// $('#example').dataTable();
+				console.log(typeof $.parseJSON('{}') == 'object')
 			});
 
 			function messageOk (text) {

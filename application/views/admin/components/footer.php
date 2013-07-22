@@ -6,8 +6,6 @@
         <!-- Modal main -->
         <div id="main-modal" class="modal hide fade" tabindex="-1" role="dialog"></div>
         <!-- /Modal main -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo site_url('lib/jquery/jquery-1.9.1.min.js') ?>"><\/script>')</script>
         <script src="<?php echo site_url('lib/jquery.easing/jquery.easing.1.3.js') ?>"></script>
         <script type="text/javascript">      
             $(window).load(function() { 

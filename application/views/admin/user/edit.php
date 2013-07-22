@@ -23,12 +23,12 @@
 		</div>
 		<div>
 			<label for="">Rol</label>
-			<?php echo form_dropdown('idRol', $roles, set_value('idRol', $user['idRol'])); ?>
-			<?php echo form_error('idRol'); ?>
+			<?php echo form_dropdown('IdRol', $roles, set_value('IdRol', $user['IdRol'])); ?>
+			<?php echo form_error('IdRol'); ?>
 		</div>
 		<?php if (!isset($user['IdUser'])) : ?>
 		<div>
-			<label for="">Password </label>
+			<label for="">Password <strong>*</strong></label>
 			<?php echo form_password('Password'); ?>
 			<?php echo form_error('Password'); ?>
 		</div>

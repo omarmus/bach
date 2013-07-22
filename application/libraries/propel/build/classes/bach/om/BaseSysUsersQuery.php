@@ -12,6 +12,11 @@
  * @method SysUsersQuery orderByEmail($order = Criteria::ASC) Order by the email column
  * @method SysUsersQuery orderByFirstName($order = Criteria::ASC) Order by the first_name column
  * @method SysUsersQuery orderByLastName($order = Criteria::ASC) Order by the last_name column
+ * @method SysUsersQuery orderByState($order = Criteria::ASC) Order by the state column
+ * @method SysUsersQuery orderByIdRol($order = Criteria::ASC) Order by the id_rol column
+ * @method SysUsersQuery orderByIdImage($order = Criteria::ASC) Order by the id_image column
+ * @method SysUsersQuery orderByCreated($order = Criteria::ASC) Order by the created column
+ * @method SysUsersQuery orderByPhone($order = Criteria::ASC) Order by the phone column
  *
  * @method SysUsersQuery groupByIdUser() Group by the id_user column
  * @method SysUsersQuery groupByUsername() Group by the username column
@@ -19,14 +24,19 @@
  * @method SysUsersQuery groupByEmail() Group by the email column
  * @method SysUsersQuery groupByFirstName() Group by the first_name column
  * @method SysUsersQuery groupByLastName() Group by the last_name column
+ * @method SysUsersQuery groupByState() Group by the state column
+ * @method SysUsersQuery groupByIdRol() Group by the id_rol column
+ * @method SysUsersQuery groupByIdImage() Group by the id_image column
+ * @method SysUsersQuery groupByCreated() Group by the created column
+ * @method SysUsersQuery groupByPhone() Group by the phone column
  *
  * @method SysUsersQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method SysUsersQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method SysUsersQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method SysUsersQuery leftJoinSysRolesXUser($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysRolesXUser relation
- * @method SysUsersQuery rightJoinSysRolesXUser($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysRolesXUser relation
- * @method SysUsersQuery innerJoinSysRolesXUser($relationAlias = null) Adds a INNER JOIN clause to the query using the SysRolesXUser relation
+ * @method SysUsersQuery leftJoinSysRoles($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysRoles relation
+ * @method SysUsersQuery rightJoinSysRoles($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysRoles relation
+ * @method SysUsersQuery innerJoinSysRoles($relationAlias = null) Adds a INNER JOIN clause to the query using the SysRoles relation
  *
  * @method SysUsers findOne(PropelPDO $con = null) Return the first SysUsers matching the query
  * @method SysUsers findOneOrCreate(PropelPDO $con = null) Return the first SysUsers matching the query, or a new SysUsers object populated from the query conditions when no match is found
@@ -36,6 +46,11 @@
  * @method SysUsers findOneByEmail(string $email) Return the first SysUsers filtered by the email column
  * @method SysUsers findOneByFirstName(string $first_name) Return the first SysUsers filtered by the first_name column
  * @method SysUsers findOneByLastName(string $last_name) Return the first SysUsers filtered by the last_name column
+ * @method SysUsers findOneByState(string $state) Return the first SysUsers filtered by the state column
+ * @method SysUsers findOneByIdRol(int $id_rol) Return the first SysUsers filtered by the id_rol column
+ * @method SysUsers findOneByIdImage(int $id_image) Return the first SysUsers filtered by the id_image column
+ * @method SysUsers findOneByCreated(string $created) Return the first SysUsers filtered by the created column
+ * @method SysUsers findOneByPhone(string $phone) Return the first SysUsers filtered by the phone column
  *
  * @method array findByIdUser(int $id_user) Return SysUsers objects filtered by the id_user column
  * @method array findByUsername(string $username) Return SysUsers objects filtered by the username column
@@ -43,6 +58,11 @@
  * @method array findByEmail(string $email) Return SysUsers objects filtered by the email column
  * @method array findByFirstName(string $first_name) Return SysUsers objects filtered by the first_name column
  * @method array findByLastName(string $last_name) Return SysUsers objects filtered by the last_name column
+ * @method array findByState(string $state) Return SysUsers objects filtered by the state column
+ * @method array findByIdRol(int $id_rol) Return SysUsers objects filtered by the id_rol column
+ * @method array findByIdImage(int $id_image) Return SysUsers objects filtered by the id_image column
+ * @method array findByCreated(string $created) Return SysUsers objects filtered by the created column
+ * @method array findByPhone(string $phone) Return SysUsers objects filtered by the phone column
  *
  * @package    propel.generator.bach.om
  */
@@ -150,7 +170,7 @@ abstract class BaseSysUsersQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id_user`, `username`, `password`, `email`, `first_name`, `last_name` FROM `sys_users` WHERE `id_user` = :p0';
+        $sql = 'SELECT `id_user`, `username`, `password`, `email`, `first_name`, `last_name`, `state`, `id_rol`, `id_image`, `created`, `phone` FROM `sys_users` WHERE `id_user` = :p0';
         try {
             $stmt = $con->prepare($sql);			
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -427,41 +447,230 @@ abstract class BaseSysUsersQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related SysRolesXUser object
+     * Filter the query on the state column
      *
-     * @param   SysRolesXUser|PropelObjectCollection $sysRolesXUser  the related object to use as filter
+     * Example usage:
+     * <code>
+     * $query->filterByState('fooValue');   // WHERE state = 'fooValue'
+     * $query->filterByState('%fooValue%'); // WHERE state LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $state The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysUsersQuery The current query, for fluid interface
+     */
+    public function filterByState($state = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($state)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $state)) {
+                $state = str_replace('*', '%', $state);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(SysUsersPeer::STATE, $state, $comparison);
+    }
+
+    /**
+     * Filter the query on the id_rol column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByIdRol(1234); // WHERE id_rol = 1234
+     * $query->filterByIdRol(array(12, 34)); // WHERE id_rol IN (12, 34)
+     * $query->filterByIdRol(array('min' => 12)); // WHERE id_rol >= 12
+     * $query->filterByIdRol(array('max' => 12)); // WHERE id_rol <= 12
+     * </code>
+     *
+     * @see       filterBySysRoles()
+     *
+     * @param     mixed $idRol The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysUsersQuery The current query, for fluid interface
+     */
+    public function filterByIdRol($idRol = null, $comparison = null)
+    {
+        if (is_array($idRol)) {
+            $useMinMax = false;
+            if (isset($idRol['min'])) {
+                $this->addUsingAlias(SysUsersPeer::ID_ROL, $idRol['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idRol['max'])) {
+                $this->addUsingAlias(SysUsersPeer::ID_ROL, $idRol['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(SysUsersPeer::ID_ROL, $idRol, $comparison);
+    }
+
+    /**
+     * Filter the query on the id_image column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByIdImage(1234); // WHERE id_image = 1234
+     * $query->filterByIdImage(array(12, 34)); // WHERE id_image IN (12, 34)
+     * $query->filterByIdImage(array('min' => 12)); // WHERE id_image >= 12
+     * $query->filterByIdImage(array('max' => 12)); // WHERE id_image <= 12
+     * </code>
+     *
+     * @param     mixed $idImage The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysUsersQuery The current query, for fluid interface
+     */
+    public function filterByIdImage($idImage = null, $comparison = null)
+    {
+        if (is_array($idImage)) {
+            $useMinMax = false;
+            if (isset($idImage['min'])) {
+                $this->addUsingAlias(SysUsersPeer::ID_IMAGE, $idImage['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idImage['max'])) {
+                $this->addUsingAlias(SysUsersPeer::ID_IMAGE, $idImage['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(SysUsersPeer::ID_IMAGE, $idImage, $comparison);
+    }
+
+    /**
+     * Filter the query on the created column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCreated('2011-03-14'); // WHERE created = '2011-03-14'
+     * $query->filterByCreated('now'); // WHERE created = '2011-03-14'
+     * $query->filterByCreated(array('max' => 'yesterday')); // WHERE created > '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $created The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysUsersQuery The current query, for fluid interface
+     */
+    public function filterByCreated($created = null, $comparison = null)
+    {
+        if (is_array($created)) {
+            $useMinMax = false;
+            if (isset($created['min'])) {
+                $this->addUsingAlias(SysUsersPeer::CREATED, $created['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($created['max'])) {
+                $this->addUsingAlias(SysUsersPeer::CREATED, $created['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(SysUsersPeer::CREATED, $created, $comparison);
+    }
+
+    /**
+     * Filter the query on the phone column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByPhone('fooValue');   // WHERE phone = 'fooValue'
+     * $query->filterByPhone('%fooValue%'); // WHERE phone LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $phone The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysUsersQuery The current query, for fluid interface
+     */
+    public function filterByPhone($phone = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($phone)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $phone)) {
+                $phone = str_replace('*', '%', $phone);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(SysUsersPeer::PHONE, $phone, $comparison);
+    }
+
+    /**
+     * Filter the query by a related SysRoles object
+     *
+     * @param   SysRoles|PropelObjectCollection $sysRoles The related object(s) to use as filter
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return                 SysUsersQuery The current query, for fluid interface
      * @throws PropelException - if the provided filter is invalid.
      */
-    public function filterBySysRolesXUser($sysRolesXUser, $comparison = null)
+    public function filterBySysRoles($sysRoles, $comparison = null)
     {
-        if ($sysRolesXUser instanceof SysRolesXUser) {
+        if ($sysRoles instanceof SysRoles) {
             return $this
-                ->addUsingAlias(SysUsersPeer::ID_USER, $sysRolesXUser->getIdUser(), $comparison);
-        } elseif ($sysRolesXUser instanceof PropelObjectCollection) {
+                ->addUsingAlias(SysUsersPeer::ID_ROL, $sysRoles->getIdRol(), $comparison);
+        } elseif ($sysRoles instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
             return $this
-                ->useSysRolesXUserQuery()
-                ->filterByPrimaryKeys($sysRolesXUser->getPrimaryKeys())
-                ->endUse();
+                ->addUsingAlias(SysUsersPeer::ID_ROL, $sysRoles->toKeyValue('PrimaryKey', 'IdRol'), $comparison);
         } else {
-            throw new PropelException('filterBySysRolesXUser() only accepts arguments of type SysRolesXUser or PropelCollection');
+            throw new PropelException('filterBySysRoles() only accepts arguments of type SysRoles or PropelCollection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the SysRolesXUser relation
+     * Adds a JOIN clause to the query using the SysRoles relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return SysUsersQuery The current query, for fluid interface
      */
-    public function joinSysRolesXUser($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinSysRoles($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('SysRolesXUser');
+        $relationMap = $tableMap->getRelation('SysRoles');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -476,14 +685,14 @@ abstract class BaseSysUsersQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'SysRolesXUser');
+            $this->addJoinObject($join, 'SysRoles');
         }
 
         return $this;
     }
 
     /**
-     * Use the SysRolesXUser relation SysRolesXUser object
+     * Use the SysRoles relation SysRoles object
      *
      * @see       useQuery()
      *
@@ -491,13 +700,13 @@ abstract class BaseSysUsersQuery extends ModelCriteria
      *                                   to be used as main alias in the secondary query
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
-     * @return   SysRolesXUserQuery A secondary query class using the current class as primary query
+     * @return   SysRolesQuery A secondary query class using the current class as primary query
      */
-    public function useSysRolesXUserQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useSysRolesQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinSysRolesXUser($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'SysRolesXUser', 'SysRolesXUserQuery');
+            ->joinSysRoles($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'SysRoles', 'SysRolesQuery');
     }
 
     /**
