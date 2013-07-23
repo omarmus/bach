@@ -5,7 +5,6 @@ class Admin_Controller extends BC_Controller
  	function __construct()
  	{
  		parent::__construct();
- 		$this->data['meta_title'] = ucfirst($this->uri->segment(2)) . ' - Bach PHP';
 
  		//Helpers
  		$this->load->helper('form');
@@ -33,7 +32,10 @@ class Admin_Controller extends BC_Controller
 	 		}
  		}
 
+ 		$this->data['userdata'] = $this->session->all_userdata();
  		$this->data['page'] = $this->page->get_by(array("Slug" => $this->uri->segment(2)), TRUE);
+ 		$this->data['title'] = count($this->data['page']) ? $this->data['page']->getTitle() : 'Dashboard';
+ 		$this->data['meta_title'] = $this->data['title'] . ' - Bach PHP';
  		$this->data['menu'] = $this->page->get_nested();
  	}
 }

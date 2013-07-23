@@ -1,77 +1,35 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Profile extends CI_Controller {
-
-	private $data;
-	public $rules = array(
-		'fname_usr' => array(
-			'field' => 'fname_usr',
-			'label' => 'First name',
-			'rules' => 'trim|required|xss_clean'
-		),
-		'lname_usr' => array(
-			'field' => 'lname_usr',
-			'label' => 'Last name',
-			'rules' => 'trim|required|xss_clean'
-		),
-		'email_usr' => array(
-			'field' => 'email_usr',
-			'label' => 'Email',
-			'rules' => 'trim|required|valid_email|xss_clean'
-		)
-	);
-
-	public $rules_password = array(
-		'old_password' => array(
-			'field' => 'old_password',
-			'label' => 'Contraseña anterior',
-			'rules' => 'trim|required|callback__verify_old_password'
-		),
-		'password_usr' => array(
-			'field' => 'password_usr',
-			'label' => 'Nueva contraseña',
-			'rules' => 'trim|required|matches[rpassword]'
-		),
-		'rpassword' => array(
-			'field' => 'rpassword',
-			'label' => 'Confirmar password',
-			'rules' => 'trim|matches[password_usr]'
-		)
-	);
+class Profile extends Admin_Controller {
 
 	private $id_user;
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->id_user = $this->session->userdata('id_usr');
-		$this->data["title"] = "Mi Perfil";
-		$this->data["page_segment"] = "Profile";
-		$this->data["father"]="Seguridad";
-		$this->load->model('panel/cms/users_model','user');
-		$this->load->model("panel/auth/mysecurity");
-		$this->load->model('files_model');
- 		$this->load->helper('form');
- 		$this->load->library('form_validation');
- 		$this->data["scripts"]=array('plugins/ajax-file-uploader/ajaxfileupload.js');
+
+		$this->id_user = $this->data['userdata']['id_user'];
+		$this->load->model('file_m', 'file');
+ 	// 	$this->data["scripts"]=array('lib/ajax-file-uploader/ajaxfileupload.js');
 	}
 
 	public function index()
 	{   
-		$this->form_validation->set_rules($this->rules);
-		$this->form_validation->set_error_delimiters('<div class="inline_validation_message">','</div>');
-		if ($this->form_validation->run() == TRUE) {
-			$data = $this->array_request($_POST);
-			$this->user->edit($data, 'id_usr', $this->id_user);
-			$this->mysecurity->autologin($this->id_user);
-		}
-		$this->data['user'] = $this->user->get_user($this->id_user);
-		if (!is_null($this->data['user']['id_file'])) {
-			$file = $this->files_model->get_file($this->data['user']['id_file']);
-			$this->data['user']['photo'] = $file['filename'];
-		}
-		$this->data["main_content"] = 'panel/sec/profile';
-		$this->load->view('panel/panel_template', $this->data);
+		// $this->form_validation->set_rules($this->rules);
+		// $this->form_validation->set_error_delimiters('<div class="inline_validation_message">','</div>');
+		// if ($this->form_validation->run() == TRUE) {
+		// 	$data = $this->array_request($_POST);
+		// 	$this->user->edit($data, 'id_usr', $this->id_user);
+		// 	$this->mysecurity->autologin($this->id_user);
+		// }
+		$this->data['user'] = $this->user->get($this->id_user)->toArray();
+		// if (!is_null($this->data['user']['id_file'])) {
+		// 	$file = $this->files_model->get_file($this->data['user']['id_file']);
+		// 	$this->data['user']['photo'] = $file['filename'];
+		// }
+
+		$this->data['subview'] = 'admin/user/profile';
+		$this->load->view('admin/_layout_main', $this->data);
 	}
 
 	public function change_password()

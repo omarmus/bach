@@ -1,67 +1,77 @@
-<div class="headline no-margintop">
-    <h3 class="short_headline">
-        <span>Mi Perfíl de Usuario</span>
-    </h3>
+<div class="modal-header">
+    <h3>My profile</h3>
 </div>
-<div class="row">
+<div class="row profile-form">
 	<div class="span3">
-		<?php echo isset($error)?$error:'';?>
-		<?php echo form_open_multipart('upload/do_upload', array('id' => 'form-photo'));?>
-			<?php $this->load->view('panel/sec/profile_photo'); ?>
+		<?php echo form_open_multipart('', array('id' => 'form-photo'));?>
+			<figure class="photo-user">
+			<?php if (isset($user['photo'])): ?>
+				<img src="<?php echo site_url('static/files/user_profile') . '/'.$user['photo'] ?>" style="display: none;" />
+			<?php else: ?>
+				<img src="<?php echo site_url('img/profile.png') ?>" style="display: none;" />
+			<?php endif ?>
+				<div class="loading-img" style="display: none"></div>
+				<figcaption>
+					<span style="display: none" class="btn btn-primary fileinput-button">
+						<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
+						<input type="file" name="photo" id="photo" size="20">
+					</span>
+				<?php if (isset($user['photo'])): ?>
+					<button type="button" class="btn btn-danger" onclick="delete_photo()"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
+				<?php endif ?>
+					<button type="submit" class="btn btn-success" style="display: none;"><i class="icon-upload icon-white"></i> Subir foto de perfil</button>
+				</figcaption>
+			</figure>
 		</form>
 	</div>
 	<div class="span9">
-		<div id="pills-basic" class="tab-pane">
-			<div class="tabbable">
-				<ul class="nav nav-pills">
-					<li class="active"><a data-toggle="tab" href="#datos">Mis datos</a></li>
-					<li class=""><a data-toggle="tab" href="#password">Mi contraseña</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="datos">
-						<form action="" class="form form-horizontal form-add" method="post">
-							<div class="control-group">
-								<label for="" class="control-label">Firstname</label>
-								<div class="controls">
-									<input type="text" name="fname_usr" value="<?php echo set_value('fname_usr', $user['fname_usr']) ?>">
-									<?php echo form_error('fname_usr'); ?>		
-								</div>
+		<div class="tabbable tabs-left profile">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#data" data-toggle="tab">My data</a></li>
+				<li class=""><a href="#password" data-toggle="tab">My password</a></li>
+			</ul>
+			<div class="tab-content well">
+				<div class="tab-pane active" id="data">
+					<form action="" class="form form-horizontal form-add" method="post">
+						<div class="control-group">
+							<label for="" class="control-label">Firstname <strong>*</strong></label>
+							<div class="controls">
+								<input type="text" name="FirstName" value="<?php echo set_value('FirstName', $user['FirstName']) ?>">
+								<?php echo form_error('FirstName'); ?>		
 							</div>
-							<div class="control-group">
-								<label for="" class="control-label">Lastname</label>
-								<div class="controls">
-									<input type="text" name="lname_usr" value="<?php echo set_value('lname_usr', $user['lname_usr']) ?>">
-									<?php echo form_error('lname_usr'); ?>		
-								</div>
+						</div>
+						<div class="control-group">
+							<label for="" class="control-label">Lastname <strong>*</strong></label>
+							<div class="controls">
+								<input type="text" name="LastName" value="<?php echo set_value('LastName', $user['LastName']) ?>">
+								<?php echo form_error('LastName'); ?>		
 							</div>
-							<div class="control-group">
-								<label for="" class="control-label">Email</label>
-								<div class="controls">
-									<input type="text" name="email_usr" value="<?php echo set_value('email_usr', $user['email_usr']) ?>">
-									<?php echo form_error('email_usr'); ?>		
-								</div>
+						</div>
+						<div class="control-group">
+							<label for="" class="control-label">Email <strong>*</strong></label>
+							<div class="controls">
+								<input type="text" name="Email" value="<?php echo set_value('Email', $user['Email']) ?>">
+								<?php echo form_error('Email'); ?>		
 							</div>
-							<div class="control-group">
-								<label for="" class="control-label">Phone</label>
-								<div class="controls">
-									<input type="text" name="phone_usr" value="<?php echo set_value('phone_usr', $user['phone_usr']) ?>">
-									<?php echo form_error('phone_usr'); ?>		
-								</div>
+						</div>
+						<div class="control-group">
+							<label for="" class="control-label">Phone</label>
+							<div class="controls">
+								<input type="text" name="Phone" value="<?php echo set_value('Phone', $user['Phone']) ?>">
+								<?php echo form_error('Phone'); ?>
 							</div>
-							<hr class="line-form">
-							<button class="btn btn-success" type="submit">Actualizar mis datos</button>
-						</form>
-					</div>
-					<div class="tab-pane" id="password">
-						<form id="form-password" class="form form-horizontal form-add" method="post">
-							<?php $this->load->view('panel/sec/profile_password'); ?>
-						</form>
-					</div>
+						</div>
+						<hr class="line-form">
+						<button class="btn btn-success" type="submit">Actualizar mis datos</button>
+					</form>
 				</div>
-				<!-- /.tab-content -->
+				<div class="tab-pane" id="password">
+					<form id="form-password" class="form form-horizontal form-add" method="post">
+						<?php $this->load->view('admin/user/profile_password'); ?>
+					</form>
+				</div>
 			</div>
-			<!-- /.tabbable -->
-		</div>
+        </div>
 	</div>
 </div>
 <script type="text/javascript">

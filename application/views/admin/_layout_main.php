@@ -29,7 +29,7 @@
         </header><!-- /header -->
         <nav id="nav-left">
             <div class="profile">
-                <a href="#">
+                <a href="<?php echo site_url('admin/profile') ?>">
                     <img src="<?php echo site_url('img/profile.png') ?>" alt="Foto">
                 </a>
             </div>
@@ -44,10 +44,8 @@
             <ul class="breadcrumb">
             <?php if (count($page)) : ?>
                 <li><a href="<?php echo site_url('admin/dashboard') ?>">Dashboard</a> <span class="divider">/</span></li>
-                <li class="active"><?php echo $page->getTitle() ?></li>
-            <?php else : ?>
-                <li class="active">Dashboard</li>
             <?php endif ?>
+                <li class="active"><?php echo $title ?></li>
             </ul>
             <div class="container">
                 <section class="row-fluid">

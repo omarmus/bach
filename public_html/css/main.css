@@ -157,7 +157,7 @@ table thead th.check-all {vertical-align: top;}
 .modal {border-radius: 0;}
 .modal form {margin: 0;}
 .modal-header {position: relative;}
-.modal-header h3, .modal-body label > strong {color: #f50f43;}
+.modal-header h3, .modal-body label > strong, form label > strong {color: #f50f43;}
 .modal-header .close {opacity: 1;position: absolute;right: -12px; top: -14px;}
 .modal-footer {background-image: url(../img/bg-content.jpg); border-radius: 0;}
 .modal-body > div {display: inline-block;margin: 0 10px 10px;overflow: hidden;vertical-align: top;width: 45%;}
@@ -200,6 +200,11 @@ header .dropdown:hover .dropdown-menu {display: block;}
 }
 .breadcrumb { background: #eeeeee; border-radius: 0; }
 
+.profile-form {margin-top: 10px;}
+.profile-form .nav.nav-tabs {margin-right: -1px;}
+.profile-form button.btn, .profile-form input.btn[type="submit"] {
+    float: right;
+}
 /* ==========================================================================
                                 B U T T O N S
    ========================================================================== */

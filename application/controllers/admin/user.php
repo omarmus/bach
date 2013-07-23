@@ -9,7 +9,6 @@ class User extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['title'] = 'Users';
 	}
 
 	public function index()

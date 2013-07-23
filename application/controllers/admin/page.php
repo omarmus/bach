@@ -9,8 +9,6 @@ class Page extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->data['title'] = 'Pages';
-		$this->load->model('page_m', 'page');
 	}
 
 	public function index()

@@ -2,11 +2,11 @@
 <?php if (isset($user['photo'])): ?>
 	<img src="<?php echo site_url('static/files/user_profile') . '/'.$user['photo'] ?>" style="display: none;" />
 <?php else: ?>
-	<img src="<?php echo site_url('static/panel/images/profile.jpg') ?>" style="display: none;" />
+	<img src="<?php echo site_url('img/profile.png') ?>" style="display: none;" />
 <?php endif ?>
-	<div class="loading-img"></div>
+	<div class="loading-img" style="display: none"></div>
 	<figcaption>
-		<span class="btn btn-primary fileinput-button">
+		<span style="display: none" class="btn btn-primary fileinput-button">
 			<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
 			<input type="file" name="photo" id="photo" size="20">
 		</span>

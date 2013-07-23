@@ -47,6 +47,24 @@ class User_M extends BC_Model {
 			'rules' => 'trim|matches[Password]'
 		)
 	);
+
+	public $rules_password = array(
+		'old_password' => array(
+			'field' => 'old_password',
+			'label' => 'Contraseña anterior',
+			'rules' => 'trim|required|callback__verify_old_password'
+		),
+		'password_usr' => array(
+			'field' => 'password_usr',
+			'label' => 'Nueva contraseña',
+			'rules' => 'trim|required|matches[rpassword]'
+		),
+		'rpassword' => array(
+			'field' => 'rpassword',
+			'label' => 'Confirmar password',
+			'rules' => 'trim|matches[password_usr]'
+		)
+	);
 	
 	public function __construct() {
 		parent::__construct();
