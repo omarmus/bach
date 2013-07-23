@@ -2,24 +2,24 @@
 
 
 /**
- * Base class that represents a row from the 'sys_pages' table.
+ * Base class that represents a row from the 'sys_files' table.
  *
  * 
  *
  * @package    propel.generator.bach.om
  */
-abstract class BaseSysPages extends BaseObject implements Persistent
+abstract class BaseSysFiles extends BaseObject implements Persistent
 {
     /**
      * Peer class name
      */
-    const PEER = 'SysPagesPeer';
+    const PEER = 'SysFilesPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        SysPagesPeer
+     * @var        SysFilesPeer
      */
     protected static $peer;
 
@@ -30,10 +30,16 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $startCopy = false;
 
     /**
-     * The value for the id_page field.
+     * The value for the id_file field.
      * @var        int
      */
-    protected $id_page;
+    protected $id_file;
+
+    /**
+     * The value for the filename field.
+     * @var        string
+     */
+    protected $filename;
 
     /**
      * The value for the title field.
@@ -42,23 +48,50 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $title;
 
     /**
-     * The value for the slug field.
+     * The value for the type field.
      * @var        string
      */
-    protected $slug;
+    protected $type;
 
     /**
-     * The value for the order field.
-     * @var        int
+     * The value for the fullpath field.
+     * @var        string
      */
-    protected $order;
+    protected $fullpath;
 
     /**
-     * The value for the id_parent field.
+     * The value for the size field.
+     * Note: this column has a database default value of: '0'
+     * @var        string
+     */
+    protected $size;
+
+    /**
+     * The value for the image_width field.
      * Note: this column has a database default value of: 0
      * @var        int
      */
-    protected $id_parent;
+    protected $image_width;
+
+    /**
+     * The value for the image_height field.
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $image_height;
+
+    /**
+     * The value for the image_type field.
+     * @var        string
+     */
+    protected $image_type;
+
+    /**
+     * The value for the is_image field.
+     * Note: this column has a database default value of: 'NO'
+     * @var        string
+     */
+    protected $is_image;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -88,11 +121,14 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function applyDefaultValues()
     {
-        $this->id_parent = 0;
+        $this->size = '0';
+        $this->image_width = 0;
+        $this->image_height = 0;
+        $this->is_image = 'NO';
     }
 
     /**
-     * Initializes internal state of BaseSysPages object.
+     * Initializes internal state of BaseSysFiles object.
      * @see        applyDefaults()
      */
     public function __construct()
@@ -102,14 +138,25 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [id_page] column value.
+     * Get the [id_file] column value.
      * 
      * @return int
      */
-    public function getIdPage()
+    public function getIdFile()
     {
 
-        return $this->id_page;
+        return $this->id_file;
+    }
+
+    /**
+     * Get the [filename] column value.
+     * 
+     * @return string
+     */
+    public function getFilename()
+    {
+
+        return $this->filename;
     }
 
     /**
@@ -124,64 +171,129 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [slug] column value.
+     * Get the [type] column value.
      * 
      * @return string
      */
-    public function getSlug()
+    public function getType()
     {
 
-        return $this->slug;
+        return $this->type;
     }
 
     /**
-     * Get the [order] column value.
+     * Get the [fullpath] column value.
+     * 
+     * @return string
+     */
+    public function getFullpath()
+    {
+
+        return $this->fullpath;
+    }
+
+    /**
+     * Get the [size] column value.
+     * 
+     * @return string
+     */
+    public function getSize()
+    {
+
+        return $this->size;
+    }
+
+    /**
+     * Get the [image_width] column value.
      * 
      * @return int
      */
-    public function getOrder()
+    public function getImageWidth()
     {
 
-        return $this->order;
+        return $this->image_width;
     }
 
     /**
-     * Get the [id_parent] column value.
+     * Get the [image_height] column value.
      * 
      * @return int
      */
-    public function getIdParent()
+    public function getImageHeight()
     {
 
-        return $this->id_parent;
+        return $this->image_height;
     }
 
     /**
-     * Set the value of [id_page] column.
+     * Get the [image_type] column value.
+     * 
+     * @return string
+     */
+    public function getImageType()
+    {
+
+        return $this->image_type;
+    }
+
+    /**
+     * Get the [is_image] column value.
+     * 
+     * @return string
+     */
+    public function getIsImage()
+    {
+
+        return $this->is_image;
+    }
+
+    /**
+     * Set the value of [id_file] column.
      * 
      * @param  int $v new value
-     * @return SysPages The current object (for fluent API support)
+     * @return SysFiles The current object (for fluent API support)
      */
-    public function setIdPage($v)
+    public function setIdFile($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->id_page !== $v) {
-            $this->id_page = $v;
-            $this->modifiedColumns[] = SysPagesPeer::ID_PAGE;
+        if ($this->id_file !== $v) {
+            $this->id_file = $v;
+            $this->modifiedColumns[] = SysFilesPeer::ID_FILE;
         }
 
 
         return $this;
-    } // setIdPage()
+    } // setIdFile()
+
+    /**
+     * Set the value of [filename] column.
+     * 
+     * @param  string $v new value
+     * @return SysFiles The current object (for fluent API support)
+     */
+    public function setFilename($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->filename !== $v) {
+            $this->filename = $v;
+            $this->modifiedColumns[] = SysFilesPeer::FILENAME;
+        }
+
+
+        return $this;
+    } // setFilename()
 
     /**
      * Set the value of [title] column.
      * 
      * @param  string $v new value
-     * @return SysPages The current object (for fluent API support)
+     * @return SysFiles The current object (for fluent API support)
      */
     public function setTitle($v)
     {
@@ -191,7 +303,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
 
         if ($this->title !== $v) {
             $this->title = $v;
-            $this->modifiedColumns[] = SysPagesPeer::TITLE;
+            $this->modifiedColumns[] = SysFilesPeer::TITLE;
         }
 
 
@@ -199,67 +311,151 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     } // setTitle()
 
     /**
-     * Set the value of [slug] column.
+     * Set the value of [type] column.
      * 
      * @param  string $v new value
-     * @return SysPages The current object (for fluent API support)
+     * @return SysFiles The current object (for fluent API support)
      */
-    public function setSlug($v)
+    public function setType($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->slug !== $v) {
-            $this->slug = $v;
-            $this->modifiedColumns[] = SysPagesPeer::SLUG;
+        if ($this->type !== $v) {
+            $this->type = $v;
+            $this->modifiedColumns[] = SysFilesPeer::TYPE;
         }
 
 
         return $this;
-    } // setSlug()
+    } // setType()
 
     /**
-     * Set the value of [order] column.
+     * Set the value of [fullpath] column.
+     * 
+     * @param  string $v new value
+     * @return SysFiles The current object (for fluent API support)
+     */
+    public function setFullpath($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->fullpath !== $v) {
+            $this->fullpath = $v;
+            $this->modifiedColumns[] = SysFilesPeer::FULLPATH;
+        }
+
+
+        return $this;
+    } // setFullpath()
+
+    /**
+     * Set the value of [size] column.
+     * 
+     * @param  string $v new value
+     * @return SysFiles The current object (for fluent API support)
+     */
+    public function setSize($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->size !== $v) {
+            $this->size = $v;
+            $this->modifiedColumns[] = SysFilesPeer::SIZE;
+        }
+
+
+        return $this;
+    } // setSize()
+
+    /**
+     * Set the value of [image_width] column.
      * 
      * @param  int $v new value
-     * @return SysPages The current object (for fluent API support)
+     * @return SysFiles The current object (for fluent API support)
      */
-    public function setOrder($v)
+    public function setImageWidth($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->order !== $v) {
-            $this->order = $v;
-            $this->modifiedColumns[] = SysPagesPeer::ORDER;
+        if ($this->image_width !== $v) {
+            $this->image_width = $v;
+            $this->modifiedColumns[] = SysFilesPeer::IMAGE_WIDTH;
         }
 
 
         return $this;
-    } // setOrder()
+    } // setImageWidth()
 
     /**
-     * Set the value of [id_parent] column.
+     * Set the value of [image_height] column.
      * 
      * @param  int $v new value
-     * @return SysPages The current object (for fluent API support)
+     * @return SysFiles The current object (for fluent API support)
      */
-    public function setIdParent($v)
+    public function setImageHeight($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->id_parent !== $v) {
-            $this->id_parent = $v;
-            $this->modifiedColumns[] = SysPagesPeer::ID_PARENT;
+        if ($this->image_height !== $v) {
+            $this->image_height = $v;
+            $this->modifiedColumns[] = SysFilesPeer::IMAGE_HEIGHT;
         }
 
 
         return $this;
-    } // setIdParent()
+    } // setImageHeight()
+
+    /**
+     * Set the value of [image_type] column.
+     * 
+     * @param  string $v new value
+     * @return SysFiles The current object (for fluent API support)
+     */
+    public function setImageType($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->image_type !== $v) {
+            $this->image_type = $v;
+            $this->modifiedColumns[] = SysFilesPeer::IMAGE_TYPE;
+        }
+
+
+        return $this;
+    } // setImageType()
+
+    /**
+     * Set the value of [is_image] column.
+     * 
+     * @param  string $v new value
+     * @return SysFiles The current object (for fluent API support)
+     */
+    public function setIsImage($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->is_image !== $v) {
+            $this->is_image = $v;
+            $this->modifiedColumns[] = SysFilesPeer::IS_IMAGE;
+        }
+
+
+        return $this;
+    } // setIsImage()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -271,7 +467,19 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function hasOnlyDefaultValues()
     {
-            if ($this->id_parent !== 0) {
+            if ($this->size !== '0') {
+                return false;
+            }
+
+            if ($this->image_width !== 0) {
+                return false;
+            }
+
+            if ($this->image_height !== 0) {
+                return false;
+            }
+
+            if ($this->is_image !== 'NO') {
                 return false;
             }
 
@@ -297,11 +505,16 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     {
         try {
 
-            $this->id_page = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->slug = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->order = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
-            $this->id_parent = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->id_file = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->filename = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
+            $this->title = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->type = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->fullpath = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->size = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
+            $this->image_width = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
+            $this->image_height = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+            $this->image_type = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
+            $this->is_image = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -311,10 +524,10 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 5; // 5 = SysPagesPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 10; // 10 = SysFilesPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating SysPages object", $e);
+            throw new PropelException("Error populating SysFiles object", $e);
         }
     }
 
@@ -357,13 +570,13 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysFilesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = SysPagesPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = SysFilesPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -393,12 +606,12 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysFilesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = SysPagesQuery::create()
+            $deleteQuery = SysFilesQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -436,7 +649,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysPagesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysFilesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -456,7 +669,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                SysPagesPeer::addInstanceToPool($this);
+                SysFilesPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -517,30 +730,45 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = SysPagesPeer::ID_PAGE;
-        if (null !== $this->id_page) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . SysPagesPeer::ID_PAGE . ')');
+        $this->modifiedColumns[] = SysFilesPeer::ID_FILE;
+        if (null !== $this->id_file) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key (' . SysFilesPeer::ID_FILE . ')');
         }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(SysPagesPeer::ID_PAGE)) {
-            $modifiedColumns[':p' . $index++]  = '`id_page`';
+        if ($this->isColumnModified(SysFilesPeer::ID_FILE)) {
+            $modifiedColumns[':p' . $index++]  = '`id_file`';
         }
-        if ($this->isColumnModified(SysPagesPeer::TITLE)) {
+        if ($this->isColumnModified(SysFilesPeer::FILENAME)) {
+            $modifiedColumns[':p' . $index++]  = '`filename`';
+        }
+        if ($this->isColumnModified(SysFilesPeer::TITLE)) {
             $modifiedColumns[':p' . $index++]  = '`title`';
         }
-        if ($this->isColumnModified(SysPagesPeer::SLUG)) {
-            $modifiedColumns[':p' . $index++]  = '`slug`';
+        if ($this->isColumnModified(SysFilesPeer::TYPE)) {
+            $modifiedColumns[':p' . $index++]  = '`type`';
         }
-        if ($this->isColumnModified(SysPagesPeer::ORDER)) {
-            $modifiedColumns[':p' . $index++]  = '`order`';
+        if ($this->isColumnModified(SysFilesPeer::FULLPATH)) {
+            $modifiedColumns[':p' . $index++]  = '`fullpath`';
         }
-        if ($this->isColumnModified(SysPagesPeer::ID_PARENT)) {
-            $modifiedColumns[':p' . $index++]  = '`id_parent`';
+        if ($this->isColumnModified(SysFilesPeer::SIZE)) {
+            $modifiedColumns[':p' . $index++]  = '`size`';
+        }
+        if ($this->isColumnModified(SysFilesPeer::IMAGE_WIDTH)) {
+            $modifiedColumns[':p' . $index++]  = '`image_width`';
+        }
+        if ($this->isColumnModified(SysFilesPeer::IMAGE_HEIGHT)) {
+            $modifiedColumns[':p' . $index++]  = '`image_height`';
+        }
+        if ($this->isColumnModified(SysFilesPeer::IMAGE_TYPE)) {
+            $modifiedColumns[':p' . $index++]  = '`image_type`';
+        }
+        if ($this->isColumnModified(SysFilesPeer::IS_IMAGE)) {
+            $modifiedColumns[':p' . $index++]  = '`is_image`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sys_pages` (%s) VALUES (%s)',
+            'INSERT INTO `sys_files` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -549,20 +777,35 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`id_page`':						
-                        $stmt->bindValue($identifier, $this->id_page, PDO::PARAM_INT);
+                    case '`id_file`':						
+                        $stmt->bindValue($identifier, $this->id_file, PDO::PARAM_INT);
+                        break;
+                    case '`filename`':						
+                        $stmt->bindValue($identifier, $this->filename, PDO::PARAM_STR);
                         break;
                     case '`title`':						
                         $stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
                         break;
-                    case '`slug`':						
-                        $stmt->bindValue($identifier, $this->slug, PDO::PARAM_STR);
+                    case '`type`':						
+                        $stmt->bindValue($identifier, $this->type, PDO::PARAM_STR);
                         break;
-                    case '`order`':						
-                        $stmt->bindValue($identifier, $this->order, PDO::PARAM_INT);
+                    case '`fullpath`':						
+                        $stmt->bindValue($identifier, $this->fullpath, PDO::PARAM_STR);
                         break;
-                    case '`id_parent`':						
-                        $stmt->bindValue($identifier, $this->id_parent, PDO::PARAM_INT);
+                    case '`size`':						
+                        $stmt->bindValue($identifier, $this->size, PDO::PARAM_STR);
+                        break;
+                    case '`image_width`':						
+                        $stmt->bindValue($identifier, $this->image_width, PDO::PARAM_INT);
+                        break;
+                    case '`image_height`':						
+                        $stmt->bindValue($identifier, $this->image_height, PDO::PARAM_INT);
+                        break;
+                    case '`image_type`':						
+                        $stmt->bindValue($identifier, $this->image_type, PDO::PARAM_STR);
+                        break;
+                    case '`is_image`':						
+                        $stmt->bindValue($identifier, $this->is_image, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -577,7 +820,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         } catch (Exception $e) {
             throw new PropelException('Unable to get autoincrement id.', $e);
         }
-        $this->setIdPage($pk);
+        $this->setIdFile($pk);
 
         $this->setNew(false);
     }
@@ -658,7 +901,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $failureMap = array();
 
 
-            if (($retval = SysPagesPeer::doValidate($this, $columns)) !== true) {
+            if (($retval = SysFilesPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
@@ -682,7 +925,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = SysPagesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SysFilesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -699,19 +942,34 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                return $this->getIdPage();
+                return $this->getIdFile();
                 break;
             case 1:
-                return $this->getTitle();
+                return $this->getFilename();
                 break;
             case 2:
-                return $this->getSlug();
+                return $this->getTitle();
                 break;
             case 3:
-                return $this->getOrder();
+                return $this->getType();
                 break;
             case 4:
-                return $this->getIdParent();
+                return $this->getFullpath();
+                break;
+            case 5:
+                return $this->getSize();
+                break;
+            case 6:
+                return $this->getImageWidth();
+                break;
+            case 7:
+                return $this->getImageHeight();
+                break;
+            case 8:
+                return $this->getImageType();
+                break;
+            case 9:
+                return $this->getIsImage();
                 break;
             default:
                 return null;
@@ -735,17 +993,22 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
     {
-        if (isset($alreadyDumpedObjects['SysPages'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['SysFiles'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['SysPages'][$this->getPrimaryKey()] = true;
-        $keys = SysPagesPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['SysFiles'][$this->getPrimaryKey()] = true;
+        $keys = SysFilesPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdPage(),
-            $keys[1] => $this->getTitle(),
-            $keys[2] => $this->getSlug(),
-            $keys[3] => $this->getOrder(),
-            $keys[4] => $this->getIdParent(),
+            $keys[0] => $this->getIdFile(),
+            $keys[1] => $this->getFilename(),
+            $keys[2] => $this->getTitle(),
+            $keys[3] => $this->getType(),
+            $keys[4] => $this->getFullpath(),
+            $keys[5] => $this->getSize(),
+            $keys[6] => $this->getImageWidth(),
+            $keys[7] => $this->getImageHeight(),
+            $keys[8] => $this->getImageType(),
+            $keys[9] => $this->getIsImage(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -770,7 +1033,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = SysPagesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SysFilesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -787,19 +1050,34 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                $this->setIdPage($value);
+                $this->setIdFile($value);
                 break;
             case 1:
-                $this->setTitle($value);
+                $this->setFilename($value);
                 break;
             case 2:
-                $this->setSlug($value);
+                $this->setTitle($value);
                 break;
             case 3:
-                $this->setOrder($value);
+                $this->setType($value);
                 break;
             case 4:
-                $this->setIdParent($value);
+                $this->setFullpath($value);
+                break;
+            case 5:
+                $this->setSize($value);
+                break;
+            case 6:
+                $this->setImageWidth($value);
+                break;
+            case 7:
+                $this->setImageHeight($value);
+                break;
+            case 8:
+                $this->setImageType($value);
+                break;
+            case 9:
+                $this->setIsImage($value);
                 break;
         } // switch()
     }
@@ -823,13 +1101,18 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = SysPagesPeer::getFieldNames($keyType);
+        $keys = SysFilesPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdPage($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setSlug($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setOrder($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setIdParent($arr[$keys[4]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdFile($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setFilename($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setTitle($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setType($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setFullpath($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setSize($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setImageWidth($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setImageHeight($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setImageType($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setIsImage($arr[$keys[9]]);
     }
 
     /**
@@ -839,13 +1122,18 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(SysPagesPeer::DATABASE_NAME);
+        $criteria = new Criteria(SysFilesPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(SysPagesPeer::ID_PAGE)) $criteria->add(SysPagesPeer::ID_PAGE, $this->id_page);
-        if ($this->isColumnModified(SysPagesPeer::TITLE)) $criteria->add(SysPagesPeer::TITLE, $this->title);
-        if ($this->isColumnModified(SysPagesPeer::SLUG)) $criteria->add(SysPagesPeer::SLUG, $this->slug);
-        if ($this->isColumnModified(SysPagesPeer::ORDER)) $criteria->add(SysPagesPeer::ORDER, $this->order);
-        if ($this->isColumnModified(SysPagesPeer::ID_PARENT)) $criteria->add(SysPagesPeer::ID_PARENT, $this->id_parent);
+        if ($this->isColumnModified(SysFilesPeer::ID_FILE)) $criteria->add(SysFilesPeer::ID_FILE, $this->id_file);
+        if ($this->isColumnModified(SysFilesPeer::FILENAME)) $criteria->add(SysFilesPeer::FILENAME, $this->filename);
+        if ($this->isColumnModified(SysFilesPeer::TITLE)) $criteria->add(SysFilesPeer::TITLE, $this->title);
+        if ($this->isColumnModified(SysFilesPeer::TYPE)) $criteria->add(SysFilesPeer::TYPE, $this->type);
+        if ($this->isColumnModified(SysFilesPeer::FULLPATH)) $criteria->add(SysFilesPeer::FULLPATH, $this->fullpath);
+        if ($this->isColumnModified(SysFilesPeer::SIZE)) $criteria->add(SysFilesPeer::SIZE, $this->size);
+        if ($this->isColumnModified(SysFilesPeer::IMAGE_WIDTH)) $criteria->add(SysFilesPeer::IMAGE_WIDTH, $this->image_width);
+        if ($this->isColumnModified(SysFilesPeer::IMAGE_HEIGHT)) $criteria->add(SysFilesPeer::IMAGE_HEIGHT, $this->image_height);
+        if ($this->isColumnModified(SysFilesPeer::IMAGE_TYPE)) $criteria->add(SysFilesPeer::IMAGE_TYPE, $this->image_type);
+        if ($this->isColumnModified(SysFilesPeer::IS_IMAGE)) $criteria->add(SysFilesPeer::IS_IMAGE, $this->is_image);
 
         return $criteria;
     }
@@ -860,8 +1148,8 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(SysPagesPeer::DATABASE_NAME);
-        $criteria->add(SysPagesPeer::ID_PAGE, $this->id_page);
+        $criteria = new Criteria(SysFilesPeer::DATABASE_NAME);
+        $criteria->add(SysFilesPeer::ID_FILE, $this->id_file);
 
         return $criteria;
     }
@@ -872,18 +1160,18 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function getPrimaryKey()
     {
-        return $this->getIdPage();
+        return $this->getIdFile();
     }
 
     /**
-     * Generic method to set the primary key (id_page column).
+     * Generic method to set the primary key (id_file column).
      *
      * @param  int $key Primary key.
      * @return void
      */
     public function setPrimaryKey($key)
     {
-        $this->setIdPage($key);
+        $this->setIdFile($key);
     }
 
     /**
@@ -893,7 +1181,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdPage();
+        return null === $this->getIdFile();
     }
 
     /**
@@ -902,20 +1190,25 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param object $copyObj An object of SysPages (or compatible) type.
+     * @param object $copyObj An object of SysFiles (or compatible) type.
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
+        $copyObj->setFilename($this->getFilename());
         $copyObj->setTitle($this->getTitle());
-        $copyObj->setSlug($this->getSlug());
-        $copyObj->setOrder($this->getOrder());
-        $copyObj->setIdParent($this->getIdParent());
+        $copyObj->setType($this->getType());
+        $copyObj->setFullpath($this->getFullpath());
+        $copyObj->setSize($this->getSize());
+        $copyObj->setImageWidth($this->getImageWidth());
+        $copyObj->setImageHeight($this->getImageHeight());
+        $copyObj->setImageType($this->getImageType());
+        $copyObj->setIsImage($this->getIsImage());
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdPage(NULL); // this is a auto-increment column, so set to default value
+            $copyObj->setIdFile(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -928,7 +1221,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      * objects.
      *
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return SysPages Clone of current object.
+     * @return SysFiles Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -948,12 +1241,12 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return SysPagesPeer
+     * @return SysFilesPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new SysPagesPeer();
+            self::$peer = new SysFilesPeer();
         }
 
         return self::$peer;
@@ -964,11 +1257,16 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function clear()
     {
-        $this->id_page = null;
+        $this->id_file = null;
+        $this->filename = null;
         $this->title = null;
-        $this->slug = null;
-        $this->order = null;
-        $this->id_parent = null;
+        $this->type = null;
+        $this->fullpath = null;
+        $this->size = null;
+        $this->image_width = null;
+        $this->image_height = null;
+        $this->image_type = null;
+        $this->is_image = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -1005,7 +1303,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function __toString()
     {
-        return (string) $this->exportTo(SysPagesPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(SysFilesPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**

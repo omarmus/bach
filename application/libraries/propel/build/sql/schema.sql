@@ -4,6 +4,27 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ---------------------------------------------------------------------
+-- sys_files
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_files`;
+
+CREATE TABLE `sys_files`
+(
+    `id_file` INTEGER NOT NULL AUTO_INCREMENT,
+    `filename` VARCHAR(255),
+    `title` VARCHAR(100),
+    `type` VARCHAR(20),
+    `fullpath` VARCHAR(255),
+    `size` DECIMAL(20,0) DEFAULT 0,
+    `image_width` INTEGER DEFAULT 0,
+    `image_height` INTEGER DEFAULT 0,
+    `image_type` VARCHAR(20),
+    `is_image` VARCHAR(20) DEFAULT 'NO',
+    PRIMARY KEY (`id_file`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- sys_migrations
 -- ---------------------------------------------------------------------
 
@@ -27,7 +48,7 @@ CREATE TABLE `sys_pages`
     `title` VARCHAR(100) NOT NULL,
     `slug` VARCHAR(100) NOT NULL,
     `order` int(11) unsigned NOT NULL,
-    `id_parent` int(11) unsigned,
+    `id_parent` int(11) unsigned DEFAULT 0,
     PRIMARY KEY (`id_page`)
 ) ENGINE=InnoDB;
 

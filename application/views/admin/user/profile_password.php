@@ -1,5 +1,5 @@
 <div class="control-group">
-	<label class="control-label">Contraseña anterior</label>
+	<label class="control-label">Contraseña anterior <strong>*</strong></label>
 	<div class="controls">
 		<div class="input-icon left">                                          
 			<input type="password" name="old_password" class="m-wrap medium">
@@ -8,7 +8,7 @@
 	</div>
 </div>
 <div class="control-group">
-	<label class="control-label">Nueva contraseña</label>
+	<label class="control-label">Nueva contraseña <strong>*</strong></label>
 	<div class="controls">
 		<div class="input-icon left">                                          
 			<input type="password" name="password_usr" class="m-wrap medium">
