@@ -24,13 +24,13 @@ abstract class BaseSysUsersPeer
     const TM_CLASS = 'SysUsersTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 11;
+    const NUM_COLUMNS = 14;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 11;
+    const NUM_HYDRATE_COLUMNS = 14;
 
     /** the column name for the id_user field */
     const ID_USER = 'sys_users.id_user';
@@ -56,14 +56,23 @@ abstract class BaseSysUsersPeer
     /** the column name for the id_rol field */
     const ID_ROL = 'sys_users.id_rol';
 
-    /** the column name for the id_image field */
-    const ID_IMAGE = 'sys_users.id_image';
+    /** the column name for the id_photo field */
+    const ID_PHOTO = 'sys_users.id_photo';
 
     /** the column name for the created field */
     const CREATED = 'sys_users.created';
 
     /** the column name for the phone field */
     const PHONE = 'sys_users.phone';
+
+    /** the column name for the modified field */
+    const MODIFIED = 'sys_users.modified';
+
+    /** the column name for the lang_code field */
+    const LANG_CODE = 'sys_users.lang_code';
+
+    /** the column name for the mobile field */
+    const MOBILE = 'sys_users.mobile';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -84,12 +93,12 @@ abstract class BaseSysUsersPeer
      * e.g. SysUsersPeer::$fieldNames[SysUsersPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdUser', 'Username', 'Password', 'Email', 'FirstName', 'LastName', 'State', 'IdRol', 'IdImage', 'Created', 'Phone', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idUser', 'username', 'password', 'email', 'firstName', 'lastName', 'state', 'idRol', 'idImage', 'created', 'phone', ),
-        BasePeer::TYPE_COLNAME => array (SysUsersPeer::ID_USER, SysUsersPeer::USERNAME, SysUsersPeer::PASSWORD, SysUsersPeer::EMAIL, SysUsersPeer::FIRST_NAME, SysUsersPeer::LAST_NAME, SysUsersPeer::STATE, SysUsersPeer::ID_ROL, SysUsersPeer::ID_IMAGE, SysUsersPeer::CREATED, SysUsersPeer::PHONE, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_USER', 'USERNAME', 'PASSWORD', 'EMAIL', 'FIRST_NAME', 'LAST_NAME', 'STATE', 'ID_ROL', 'ID_IMAGE', 'CREATED', 'PHONE', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_user', 'username', 'password', 'email', 'first_name', 'last_name', 'state', 'id_rol', 'id_image', 'created', 'phone', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+        BasePeer::TYPE_PHPNAME => array ('IdUser', 'Username', 'Password', 'Email', 'FirstName', 'LastName', 'State', 'IdRol', 'IdPhoto', 'Created', 'Phone', 'Modified', 'LangCode', 'Mobile', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idUser', 'username', 'password', 'email', 'firstName', 'lastName', 'state', 'idRol', 'idPhoto', 'created', 'phone', 'modified', 'langCode', 'mobile', ),
+        BasePeer::TYPE_COLNAME => array (SysUsersPeer::ID_USER, SysUsersPeer::USERNAME, SysUsersPeer::PASSWORD, SysUsersPeer::EMAIL, SysUsersPeer::FIRST_NAME, SysUsersPeer::LAST_NAME, SysUsersPeer::STATE, SysUsersPeer::ID_ROL, SysUsersPeer::ID_PHOTO, SysUsersPeer::CREATED, SysUsersPeer::PHONE, SysUsersPeer::MODIFIED, SysUsersPeer::LANG_CODE, SysUsersPeer::MOBILE, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_USER', 'USERNAME', 'PASSWORD', 'EMAIL', 'FIRST_NAME', 'LAST_NAME', 'STATE', 'ID_ROL', 'ID_PHOTO', 'CREATED', 'PHONE', 'MODIFIED', 'LANG_CODE', 'MOBILE', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_user', 'username', 'password', 'email', 'first_name', 'last_name', 'state', 'id_rol', 'id_photo', 'created', 'phone', 'modified', 'lang_code', 'mobile', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
     );
 
     /**
@@ -99,12 +108,12 @@ abstract class BaseSysUsersPeer
      * e.g. SysUsersPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdUser' => 0, 'Username' => 1, 'Password' => 2, 'Email' => 3, 'FirstName' => 4, 'LastName' => 5, 'State' => 6, 'IdRol' => 7, 'IdImage' => 8, 'Created' => 9, 'Phone' => 10, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idUser' => 0, 'username' => 1, 'password' => 2, 'email' => 3, 'firstName' => 4, 'lastName' => 5, 'state' => 6, 'idRol' => 7, 'idImage' => 8, 'created' => 9, 'phone' => 10, ),
-        BasePeer::TYPE_COLNAME => array (SysUsersPeer::ID_USER => 0, SysUsersPeer::USERNAME => 1, SysUsersPeer::PASSWORD => 2, SysUsersPeer::EMAIL => 3, SysUsersPeer::FIRST_NAME => 4, SysUsersPeer::LAST_NAME => 5, SysUsersPeer::STATE => 6, SysUsersPeer::ID_ROL => 7, SysUsersPeer::ID_IMAGE => 8, SysUsersPeer::CREATED => 9, SysUsersPeer::PHONE => 10, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_USER' => 0, 'USERNAME' => 1, 'PASSWORD' => 2, 'EMAIL' => 3, 'FIRST_NAME' => 4, 'LAST_NAME' => 5, 'STATE' => 6, 'ID_ROL' => 7, 'ID_IMAGE' => 8, 'CREATED' => 9, 'PHONE' => 10, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_user' => 0, 'username' => 1, 'password' => 2, 'email' => 3, 'first_name' => 4, 'last_name' => 5, 'state' => 6, 'id_rol' => 7, 'id_image' => 8, 'created' => 9, 'phone' => 10, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+        BasePeer::TYPE_PHPNAME => array ('IdUser' => 0, 'Username' => 1, 'Password' => 2, 'Email' => 3, 'FirstName' => 4, 'LastName' => 5, 'State' => 6, 'IdRol' => 7, 'IdPhoto' => 8, 'Created' => 9, 'Phone' => 10, 'Modified' => 11, 'LangCode' => 12, 'Mobile' => 13, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idUser' => 0, 'username' => 1, 'password' => 2, 'email' => 3, 'firstName' => 4, 'lastName' => 5, 'state' => 6, 'idRol' => 7, 'idPhoto' => 8, 'created' => 9, 'phone' => 10, 'modified' => 11, 'langCode' => 12, 'mobile' => 13, ),
+        BasePeer::TYPE_COLNAME => array (SysUsersPeer::ID_USER => 0, SysUsersPeer::USERNAME => 1, SysUsersPeer::PASSWORD => 2, SysUsersPeer::EMAIL => 3, SysUsersPeer::FIRST_NAME => 4, SysUsersPeer::LAST_NAME => 5, SysUsersPeer::STATE => 6, SysUsersPeer::ID_ROL => 7, SysUsersPeer::ID_PHOTO => 8, SysUsersPeer::CREATED => 9, SysUsersPeer::PHONE => 10, SysUsersPeer::MODIFIED => 11, SysUsersPeer::LANG_CODE => 12, SysUsersPeer::MOBILE => 13, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_USER' => 0, 'USERNAME' => 1, 'PASSWORD' => 2, 'EMAIL' => 3, 'FIRST_NAME' => 4, 'LAST_NAME' => 5, 'STATE' => 6, 'ID_ROL' => 7, 'ID_PHOTO' => 8, 'CREATED' => 9, 'PHONE' => 10, 'MODIFIED' => 11, 'LANG_CODE' => 12, 'MOBILE' => 13, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_user' => 0, 'username' => 1, 'password' => 2, 'email' => 3, 'first_name' => 4, 'last_name' => 5, 'state' => 6, 'id_rol' => 7, 'id_photo' => 8, 'created' => 9, 'phone' => 10, 'modified' => 11, 'lang_code' => 12, 'mobile' => 13, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
     );
 
     /**
@@ -186,9 +195,12 @@ abstract class BaseSysUsersPeer
             $criteria->addSelectColumn(SysUsersPeer::LAST_NAME);
             $criteria->addSelectColumn(SysUsersPeer::STATE);
             $criteria->addSelectColumn(SysUsersPeer::ID_ROL);
-            $criteria->addSelectColumn(SysUsersPeer::ID_IMAGE);
+            $criteria->addSelectColumn(SysUsersPeer::ID_PHOTO);
             $criteria->addSelectColumn(SysUsersPeer::CREATED);
             $criteria->addSelectColumn(SysUsersPeer::PHONE);
+            $criteria->addSelectColumn(SysUsersPeer::MODIFIED);
+            $criteria->addSelectColumn(SysUsersPeer::LANG_CODE);
+            $criteria->addSelectColumn(SysUsersPeer::MOBILE);
         } else {
             $criteria->addSelectColumn($alias . '.id_user');
             $criteria->addSelectColumn($alias . '.username');
@@ -198,9 +210,12 @@ abstract class BaseSysUsersPeer
             $criteria->addSelectColumn($alias . '.last_name');
             $criteria->addSelectColumn($alias . '.state');
             $criteria->addSelectColumn($alias . '.id_rol');
-            $criteria->addSelectColumn($alias . '.id_image');
+            $criteria->addSelectColumn($alias . '.id_photo');
             $criteria->addSelectColumn($alias . '.created');
             $criteria->addSelectColumn($alias . '.phone');
+            $criteria->addSelectColumn($alias . '.modified');
+            $criteria->addSelectColumn($alias . '.lang_code');
+            $criteria->addSelectColumn($alias . '.mobile');
         }
     }
 
@@ -554,6 +569,57 @@ abstract class BaseSysUsersPeer
 
 
     /**
+     * Returns the number of rows matching criteria, joining the related SysFiles table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinSysFiles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysUsersPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            SysUsersPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(SysUsersPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysUsersPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+
+        $criteria->addJoin(SysUsersPeer::ID_PHOTO, SysFilesPeer::ID_FILE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
      * Selects a collection of SysUsers objects pre-filled with their SysRoles objects.
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -621,6 +687,73 @@ abstract class BaseSysUsersPeer
 
 
     /**
+     * Selects a collection of SysUsers objects pre-filled with their SysFiles objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of SysUsers objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinSysFiles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(SysUsersPeer::DATABASE_NAME);
+        }
+
+        SysUsersPeer::addSelectColumns($criteria);
+        $startcol = SysUsersPeer::NUM_HYDRATE_COLUMNS;
+        SysFilesPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(SysUsersPeer::ID_PHOTO, SysFilesPeer::ID_FILE, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = SysUsersPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = SysUsersPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = SysUsersPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                SysUsersPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = SysFilesPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = SysFilesPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = SysFilesPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    SysFilesPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (SysUsers) to $obj2 (SysFiles)
+                $obj2->addSysUsers($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
      * Returns the number of rows matching criteria, joining all related tables
      *
      * @param      Criteria $criteria
@@ -657,6 +790,8 @@ abstract class BaseSysUsersPeer
         }
 
         $criteria->addJoin(SysUsersPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
+
+        $criteria->addJoin(SysUsersPeer::ID_PHOTO, SysFilesPeer::ID_FILE, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
 
@@ -695,7 +830,12 @@ abstract class BaseSysUsersPeer
         SysRolesPeer::addSelectColumns($criteria);
         $startcol3 = $startcol2 + SysRolesPeer::NUM_HYDRATE_COLUMNS;
 
+        SysFilesPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + SysFilesPeer::NUM_HYDRATE_COLUMNS;
+
         $criteria->addJoin(SysUsersPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
+
+        $criteria->addJoin(SysUsersPeer::ID_PHOTO, SysFilesPeer::ID_FILE, $join_behavior);
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
@@ -731,6 +871,274 @@ abstract class BaseSysUsersPeer
                 // Add the $obj1 (SysUsers) to the collection in $obj2 (SysRoles)
                 $obj2->addSysUsers($obj1);
             } // if joined row not null
+
+            // Add objects for joined SysFiles rows
+
+            $key3 = SysFilesPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            if ($key3 !== null) {
+                $obj3 = SysFilesPeer::getInstanceFromPool($key3);
+                if (!$obj3) {
+
+                    $cls = SysFilesPeer::getOMClass();
+
+                    $obj3 = new $cls();
+                    $obj3->hydrate($row, $startcol3);
+                    SysFilesPeer::addInstanceToPool($obj3, $key3);
+                } // if obj3 loaded
+
+                // Add the $obj1 (SysUsers) to the collection in $obj3 (SysFiles)
+                $obj3->addSysUsers($obj1);
+            } // if joined row not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related SysRoles table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptSysRoles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysUsersPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            SysUsersPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(SysUsersPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysUsersPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        $criteria->addJoin(SysUsersPeer::ID_PHOTO, SysFilesPeer::ID_FILE, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Returns the number of rows matching criteria, joining the related SysFiles table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptSysFiles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysUsersPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            SysUsersPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(SysUsersPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysUsersPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        $criteria->addJoin(SysUsersPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
+
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of SysUsers objects pre-filled with all related objects except SysRoles.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of SysUsers objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptSysRoles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(SysUsersPeer::DATABASE_NAME);
+        }
+
+        SysUsersPeer::addSelectColumns($criteria);
+        $startcol2 = SysUsersPeer::NUM_HYDRATE_COLUMNS;
+
+        SysFilesPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + SysFilesPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(SysUsersPeer::ID_PHOTO, SysFilesPeer::ID_FILE, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = SysUsersPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = SysUsersPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = SysUsersPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                SysUsersPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined SysFiles rows
+
+                $key2 = SysFilesPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = SysFilesPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+    
+                        $cls = SysFilesPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    SysFilesPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (SysUsers) to the collection in $obj2 (SysFiles)
+                $obj2->addSysUsers($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of SysUsers objects pre-filled with all related objects except SysFiles.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of SysUsers objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptSysFiles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(SysUsersPeer::DATABASE_NAME);
+        }
+
+        SysUsersPeer::addSelectColumns($criteria);
+        $startcol2 = SysUsersPeer::NUM_HYDRATE_COLUMNS;
+
+        SysRolesPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + SysRolesPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(SysUsersPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = SysUsersPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = SysUsersPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = SysUsersPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                SysUsersPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined SysRoles rows
+
+                $key2 = SysRolesPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = SysRolesPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+    
+                        $cls = SysRolesPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    SysRolesPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (SysUsers) to the collection in $obj2 (SysRoles)
+                $obj2->addSysUsers($obj1);
+
+            } // if joined row is not null
 
             $results[] = $obj1;
         }

@@ -46,9 +46,12 @@ class SysUsersTableMap extends TableMap
         $this->addColumn('last_name', 'LastName', 'VARCHAR', false, 100, null);
         $this->addColumn('state', 'State', 'VARCHAR', false, 20, 'CREATE');
         $this->addForeignKey('id_rol', 'IdRol', 'INTEGER', 'sys_roles', 'id_rol', false, null, null);
-        $this->addColumn('id_image', 'IdImage', 'INTEGER', false, null, null);
+        $this->addForeignKey('id_photo', 'IdPhoto', 'INTEGER', 'sys_files', 'id_file', false, null, null);
         $this->addColumn('created', 'Created', 'TIMESTAMP', false, null, null);
         $this->addColumn('phone', 'Phone', 'CHAR', false, 20, null);
+        $this->addColumn('modified', 'Modified', 'TIMESTAMP', false, null, null);
+        $this->addColumn('lang_code', 'LangCode', 'VARCHAR', false, 10, 'EN');
+        $this->addColumn('mobile', 'Mobile', 'VARCHAR', false, 20, null);
         // validators
     } // initialize()
 
@@ -58,6 +61,7 @@ class SysUsersTableMap extends TableMap
     public function buildRelations()
     {
         $this->addRelation('SysRoles', 'SysRoles', RelationMap::MANY_TO_ONE, array('id_rol' => 'id_rol', ), null, null);
+        $this->addRelation('SysFiles', 'SysFiles', RelationMap::MANY_TO_ONE, array('id_photo' => 'id_file', ), null, null);
     } // buildRelations()
 
 } // SysUsersTableMap

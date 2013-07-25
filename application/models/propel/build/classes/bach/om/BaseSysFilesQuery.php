@@ -32,6 +32,10 @@
  * @method SysFilesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method SysFilesQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
+ * @method SysFilesQuery leftJoinSysUsers($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysUsers relation
+ * @method SysFilesQuery rightJoinSysUsers($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysUsers relation
+ * @method SysFilesQuery innerJoinSysUsers($relationAlias = null) Adds a INNER JOIN clause to the query using the SysUsers relation
+ *
  * @method SysFiles findOne(PropelPDO $con = null) Return the first SysFiles matching the query
  * @method SysFiles findOneOrCreate(PropelPDO $con = null) Return the first SysFiles matching the query, or a new SysFiles object populated from the query conditions when no match is found
  *
@@ -591,6 +595,80 @@ abstract class BaseSysFilesQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(SysFilesPeer::IS_IMAGE, $isImage, $comparison);
+    }
+
+    /**
+     * Filter the query by a related SysUsers object
+     *
+     * @param   SysUsers|PropelObjectCollection $sysUsers  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 SysFilesQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterBySysUsers($sysUsers, $comparison = null)
+    {
+        if ($sysUsers instanceof SysUsers) {
+            return $this
+                ->addUsingAlias(SysFilesPeer::ID_FILE, $sysUsers->getIdPhoto(), $comparison);
+        } elseif ($sysUsers instanceof PropelObjectCollection) {
+            return $this
+                ->useSysUsersQuery()
+                ->filterByPrimaryKeys($sysUsers->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterBySysUsers() only accepts arguments of type SysUsers or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the SysUsers relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return SysFilesQuery The current query, for fluid interface
+     */
+    public function joinSysUsers($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('SysUsers');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'SysUsers');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the SysUsers relation SysUsers object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   SysUsersQuery A secondary query class using the current class as primary query
+     */
+    public function useSysUsersQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinSysUsers($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'SysUsers', 'SysUsersQuery');
     }
 
     /**

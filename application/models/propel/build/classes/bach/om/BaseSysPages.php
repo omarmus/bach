@@ -61,6 +61,12 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $id_parent;
 
     /**
+     * @var        PropelObjectCollection|SysPermissions[] Collection to store aggregation of SysPermissions objects.
+     */
+    protected $collSysPermissionss;
+    protected $collSysPermissionssPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -79,6 +85,12 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      * @var        boolean
      */
     protected $alreadyInClearAllReferencesDeep = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $sysPermissionssScheduledForDeletion = null;
 
     /**
      * Applies default values to this object.
@@ -373,6 +385,8 @@ abstract class BaseSysPages extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->collSysPermissionss = null;
+
         } // if (deep)
     }
 
@@ -495,6 +509,23 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                 }
                 $affectedRows += 1;
                 $this->resetModified();
+            }
+
+            if ($this->sysPermissionssScheduledForDeletion !== null) {
+                if (!$this->sysPermissionssScheduledForDeletion->isEmpty()) {
+                    SysPermissionsQuery::create()
+                        ->filterByPrimaryKeys($this->sysPermissionssScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->sysPermissionssScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collSysPermissionss !== null) {
+                foreach ($this->collSysPermissionss as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
             }
 
             $this->alreadyInSave = false;
@@ -663,6 +694,14 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             }
 
 
+                if ($this->collSysPermissionss !== null) {
+                    foreach ($this->collSysPermissionss as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -730,10 +769,11 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to true.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
         if (isset($alreadyDumpedObjects['SysPages'][$this->getPrimaryKey()])) {
             return '*RECURSION*';
@@ -753,6 +793,11 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $result[$key] = $virtualColumn;
         }
         
+        if ($includeForeignObjects) {
+            if (null !== $this->collSysPermissionss) {
+                $result['SysPermissionss'] = $this->collSysPermissionss->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+        }
 
         return $result;
     }
@@ -913,6 +958,24 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $copyObj->setSlug($this->getSlug());
         $copyObj->setOrder($this->getOrder());
         $copyObj->setIdParent($this->getIdParent());
+
+        if ($deepCopy && !$this->startCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+            // store object hash to prevent cycle
+            $this->startCopy = true;
+
+            foreach ($this->getSysPermissionss() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addSysPermissions($relObj->copy($deepCopy));
+                }
+            }
+
+            //unflag object copy
+            $this->startCopy = false;
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
             $copyObj->setIdPage(NULL); // this is a auto-increment column, so set to default value
@@ -959,6 +1022,270 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         return self::$peer;
     }
 
+
+    /**
+     * Initializes a collection based on the name of a relation.
+     * Avoids crafting an 'init[$relationName]s' method name
+     * that wouldn't work when StandardEnglishPluralizer is used.
+     *
+     * @param string $relationName The name of the relation to initialize
+     * @return void
+     */
+    public function initRelation($relationName)
+    {
+        if ('SysPermissions' == $relationName) {
+            $this->initSysPermissionss();
+        }
+    }
+
+    /**
+     * Clears out the collSysPermissionss collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return SysPages The current object (for fluent API support)
+     * @see        addSysPermissionss()
+     */
+    public function clearSysPermissionss()
+    {
+        $this->collSysPermissionss = null; // important to set this to null since that means it is uninitialized
+        $this->collSysPermissionssPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collSysPermissionss collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialSysPermissionss($v = true)
+    {
+        $this->collSysPermissionssPartial = $v;
+    }
+
+    /**
+     * Initializes the collSysPermissionss collection.
+     *
+     * By default this just sets the collSysPermissionss collection to an empty array (like clearcollSysPermissionss());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initSysPermissionss($overrideExisting = true)
+    {
+        if (null !== $this->collSysPermissionss && !$overrideExisting) {
+            return;
+        }
+        $this->collSysPermissionss = new PropelObjectCollection();
+        $this->collSysPermissionss->setModel('SysPermissions');
+    }
+
+    /**
+     * Gets an array of SysPermissions objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this SysPages is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|SysPermissions[] List of SysPermissions objects
+     * @throws PropelException
+     */
+    public function getSysPermissionss($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collSysPermissionssPartial && !$this->isNew();
+        if (null === $this->collSysPermissionss || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collSysPermissionss) {
+                // return empty collection
+                $this->initSysPermissionss();
+            } else {
+                $collSysPermissionss = SysPermissionsQuery::create(null, $criteria)
+                    ->filterBySysPages($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collSysPermissionssPartial && count($collSysPermissionss)) {
+                      $this->initSysPermissionss(false);
+
+                      foreach ($collSysPermissionss as $obj) {
+                        if (false == $this->collSysPermissionss->contains($obj)) {
+                          $this->collSysPermissionss->append($obj);
+                        }
+                      }
+
+                      $this->collSysPermissionssPartial = true;
+                    }
+
+                    $collSysPermissionss->getInternalIterator()->rewind();
+
+                    return $collSysPermissionss;
+                }
+
+                if ($partial && $this->collSysPermissionss) {
+                    foreach ($this->collSysPermissionss as $obj) {
+                        if ($obj->isNew()) {
+                            $collSysPermissionss[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collSysPermissionss = $collSysPermissionss;
+                $this->collSysPermissionssPartial = false;
+            }
+        }
+
+        return $this->collSysPermissionss;
+    }
+
+    /**
+     * Sets a collection of SysPermissions objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $sysPermissionss A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return SysPages The current object (for fluent API support)
+     */
+    public function setSysPermissionss(PropelCollection $sysPermissionss, PropelPDO $con = null)
+    {
+        $sysPermissionssToDelete = $this->getSysPermissionss(new Criteria(), $con)->diff($sysPermissionss);
+
+
+        //since at least one column in the foreign key is at the same time a PK
+        //we can not just set a PK to NULL in the lines below. We have to store
+        //a backup of all values, so we are able to manipulate these items based on the onDelete value later.
+        $this->sysPermissionssScheduledForDeletion = clone $sysPermissionssToDelete;
+
+        foreach ($sysPermissionssToDelete as $sysPermissionsRemoved) {
+            $sysPermissionsRemoved->setSysPages(null);
+        }
+
+        $this->collSysPermissionss = null;
+        foreach ($sysPermissionss as $sysPermissions) {
+            $this->addSysPermissions($sysPermissions);
+        }
+
+        $this->collSysPermissionss = $sysPermissionss;
+        $this->collSysPermissionssPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related SysPermissions objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related SysPermissions objects.
+     * @throws PropelException
+     */
+    public function countSysPermissionss(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collSysPermissionssPartial && !$this->isNew();
+        if (null === $this->collSysPermissionss || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collSysPermissionss) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getSysPermissionss());
+            }
+            $query = SysPermissionsQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterBySysPages($this)
+                ->count($con);
+        }
+
+        return count($this->collSysPermissionss);
+    }
+
+    /**
+     * Method called to associate a SysPermissions object to this object
+     * through the SysPermissions foreign key attribute.
+     *
+     * @param    SysPermissions $l SysPermissions
+     * @return SysPages The current object (for fluent API support)
+     */
+    public function addSysPermissions(SysPermissions $l)
+    {
+        if ($this->collSysPermissionss === null) {
+            $this->initSysPermissionss();
+            $this->collSysPermissionssPartial = true;
+        }
+        if (!in_array($l, $this->collSysPermissionss->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddSysPermissions($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	SysPermissions $sysPermissions The sysPermissions object to add.
+     */
+    protected function doAddSysPermissions($sysPermissions)
+    {
+        $this->collSysPermissionss[]= $sysPermissions;
+        $sysPermissions->setSysPages($this);
+    }
+
+    /**
+     * @param	SysPermissions $sysPermissions The sysPermissions object to remove.
+     * @return SysPages The current object (for fluent API support)
+     */
+    public function removeSysPermissions($sysPermissions)
+    {
+        if ($this->getSysPermissionss()->contains($sysPermissions)) {
+            $this->collSysPermissionss->remove($this->collSysPermissionss->search($sysPermissions));
+            if (null === $this->sysPermissionssScheduledForDeletion) {
+                $this->sysPermissionssScheduledForDeletion = clone $this->collSysPermissionss;
+                $this->sysPermissionssScheduledForDeletion->clear();
+            }
+            $this->sysPermissionssScheduledForDeletion[]= clone $sysPermissions;
+            $sysPermissions->setSysPages(null);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this SysPages is new, it will return
+     * an empty collection; or if this SysPages has previously
+     * been saved, it will retrieve related SysPermissionss from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in SysPages.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @param string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|SysPermissions[] List of SysPermissions objects
+     */
+    public function getSysPermissionssJoinSysRoles($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = SysPermissionsQuery::create(null, $criteria);
+        $query->joinWith('SysRoles', $join_behavior);
+
+        return $this->getSysPermissionss($query, $con);
+    }
+
     /**
      * Clears the current object and sets all attributes to their default values
      */
@@ -992,10 +1319,19 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->collSysPermissionss) {
+                foreach ($this->collSysPermissionss as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        if ($this->collSysPermissionss instanceof PropelCollection) {
+            $this->collSysPermissionss->clearIterator();
+        }
+        $this->collSysPermissionss = null;
     }
 
     /**

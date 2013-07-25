@@ -2,24 +2,24 @@
 
 
 /**
- * Base class that represents a row from the 'sys_files' table.
+ * Base class that represents a row from the 'sys_permissions' table.
  *
  * 
  *
  * @package    propel.generator.bach.om
  */
-abstract class BaseSysFiles extends BaseObject implements Persistent
+abstract class BaseSysPermissions extends BaseObject implements Persistent
 {
     /**
      * Peer class name
      */
-    const PEER = 'SysFilesPeer';
+    const PEER = 'SysPermissionsPeer';
 
     /**
      * The Peer class.
      * Instance provides a convenient way of calling static methods on a class
      * that calling code may not be able to identify.
-     * @var        SysFilesPeer
+     * @var        SysPermissionsPeer
      */
     protected static $peer;
 
@@ -30,68 +30,54 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     protected $startCopy = false;
 
     /**
-     * The value for the id_file field.
+     * The value for the id_page field.
      * @var        int
      */
-    protected $id_file;
+    protected $id_page;
 
     /**
-     * The value for the filename field.
-     * @var        string
-     */
-    protected $filename;
-
-    /**
-     * The value for the title field.
-     * @var        string
-     */
-    protected $title;
-
-    /**
-     * The value for the type field.
-     * @var        string
-     */
-    protected $type;
-
-    /**
-     * The value for the fullpath field.
-     * @var        string
-     */
-    protected $fullpath;
-
-    /**
-     * The value for the size field.
-     * Note: this column has a database default value of: '0'
-     * @var        string
-     */
-    protected $size;
-
-    /**
-     * The value for the image_width field.
-     * Note: this column has a database default value of: 0
+     * The value for the id_rol field.
      * @var        int
      */
-    protected $image_width;
+    protected $id_rol;
 
     /**
-     * The value for the image_height field.
-     * Note: this column has a database default value of: 0
-     * @var        int
-     */
-    protected $image_height;
-
-    /**
-     * The value for the image_type field.
-     * @var        string
-     */
-    protected $image_type;
-
-    /**
-     * The value for the is_image field.
+     * The value for the create field.
      * Note: this column has a database default value of: 'NO'
      * @var        string
      */
-    protected $is_image;
+    protected $create;
+
+    /**
+     * The value for the read field.
+     * Note: this column has a database default value of: 'NO'
+     * @var        string
+     */
+    protected $read;
+
+    /**
+     * The value for the update field.
+     * Note: this column has a database default value of: 'NO'
+     * @var        string
+     */
+    protected $update;
+
+    /**
+     * The value for the delete field.
+     * Note: this column has a database default value of: 'NO'
+     * @var        string
+     */
+    protected $delete;
+
+    /**
+     * @var        SysRoles
+     */
+    protected $aSysRoles;
+
+    /**
+     * @var        SysPages
+     */
+    protected $aSysPages;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -121,14 +107,14 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function applyDefaultValues()
     {
-        $this->size = '0';
-        $this->image_width = 0;
-        $this->image_height = 0;
-        $this->is_image = 'NO';
+        $this->create = 'NO';
+        $this->read = 'NO';
+        $this->update = 'NO';
+        $this->delete = 'NO';
     }
 
     /**
-     * Initializes internal state of BaseSysFiles object.
+     * Initializes internal state of BaseSysPermissions object.
      * @see        applyDefaults()
      */
     public function __construct()
@@ -138,324 +124,204 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [id_file] column value.
+     * Get the [id_page] column value.
      * 
      * @return int
      */
-    public function getIdFile()
+    public function getIdPage()
     {
 
-        return $this->id_file;
+        return $this->id_page;
     }
 
     /**
-     * Get the [filename] column value.
-     * 
-     * @return string
-     */
-    public function getFilename()
-    {
-
-        return $this->filename;
-    }
-
-    /**
-     * Get the [title] column value.
-     * 
-     * @return string
-     */
-    public function getTitle()
-    {
-
-        return $this->title;
-    }
-
-    /**
-     * Get the [type] column value.
-     * 
-     * @return string
-     */
-    public function getType()
-    {
-
-        return $this->type;
-    }
-
-    /**
-     * Get the [fullpath] column value.
-     * 
-     * @return string
-     */
-    public function getFullpath()
-    {
-
-        return $this->fullpath;
-    }
-
-    /**
-     * Get the [size] column value.
-     * 
-     * @return string
-     */
-    public function getSize()
-    {
-
-        return $this->size;
-    }
-
-    /**
-     * Get the [image_width] column value.
+     * Get the [id_rol] column value.
      * 
      * @return int
      */
-    public function getImageWidth()
+    public function getIdRol()
     {
 
-        return $this->image_width;
+        return $this->id_rol;
     }
 
     /**
-     * Get the [image_height] column value.
-     * 
-     * @return int
-     */
-    public function getImageHeight()
-    {
-
-        return $this->image_height;
-    }
-
-    /**
-     * Get the [image_type] column value.
+     * Get the [create] column value.
      * 
      * @return string
      */
-    public function getImageType()
+    public function getCreate()
     {
 
-        return $this->image_type;
+        return $this->create;
     }
 
     /**
-     * Get the [is_image] column value.
+     * Get the [read] column value.
      * 
      * @return string
      */
-    public function getIsImage()
+    public function getRead()
     {
 
-        return $this->is_image;
+        return $this->read;
     }
 
     /**
-     * Set the value of [id_file] column.
+     * Get the [update] column value.
+     * 
+     * @return string
+     */
+    public function getUpdate()
+    {
+
+        return $this->update;
+    }
+
+    /**
+     * Get the [delete] column value.
+     * 
+     * @return string
+     */
+    public function getDelete()
+    {
+
+        return $this->delete;
+    }
+
+    /**
+     * Set the value of [id_page] column.
      * 
      * @param  int $v new value
-     * @return SysFiles The current object (for fluent API support)
+     * @return SysPermissions The current object (for fluent API support)
      */
-    public function setIdFile($v)
+    public function setIdPage($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->id_file !== $v) {
-            $this->id_file = $v;
-            $this->modifiedColumns[] = SysFilesPeer::ID_FILE;
+        if ($this->id_page !== $v) {
+            $this->id_page = $v;
+            $this->modifiedColumns[] = SysPermissionsPeer::ID_PAGE;
+        }
+
+        if ($this->aSysPages !== null && $this->aSysPages->getIdPage() !== $v) {
+            $this->aSysPages = null;
         }
 
 
         return $this;
-    } // setIdFile()
+    } // setIdPage()
 
     /**
-     * Set the value of [filename] column.
-     * 
-     * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
-     */
-    public function setFilename($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
-        }
-
-        if ($this->filename !== $v) {
-            $this->filename = $v;
-            $this->modifiedColumns[] = SysFilesPeer::FILENAME;
-        }
-
-
-        return $this;
-    } // setFilename()
-
-    /**
-     * Set the value of [title] column.
-     * 
-     * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
-     */
-    public function setTitle($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
-        }
-
-        if ($this->title !== $v) {
-            $this->title = $v;
-            $this->modifiedColumns[] = SysFilesPeer::TITLE;
-        }
-
-
-        return $this;
-    } // setTitle()
-
-    /**
-     * Set the value of [type] column.
-     * 
-     * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
-     */
-    public function setType($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
-        }
-
-        if ($this->type !== $v) {
-            $this->type = $v;
-            $this->modifiedColumns[] = SysFilesPeer::TYPE;
-        }
-
-
-        return $this;
-    } // setType()
-
-    /**
-     * Set the value of [fullpath] column.
-     * 
-     * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
-     */
-    public function setFullpath($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
-        }
-
-        if ($this->fullpath !== $v) {
-            $this->fullpath = $v;
-            $this->modifiedColumns[] = SysFilesPeer::FULLPATH;
-        }
-
-
-        return $this;
-    } // setFullpath()
-
-    /**
-     * Set the value of [size] column.
-     * 
-     * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
-     */
-    public function setSize($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (string) $v;
-        }
-
-        if ($this->size !== $v) {
-            $this->size = $v;
-            $this->modifiedColumns[] = SysFilesPeer::SIZE;
-        }
-
-
-        return $this;
-    } // setSize()
-
-    /**
-     * Set the value of [image_width] column.
+     * Set the value of [id_rol] column.
      * 
      * @param  int $v new value
-     * @return SysFiles The current object (for fluent API support)
+     * @return SysPermissions The current object (for fluent API support)
      */
-    public function setImageWidth($v)
+    public function setIdRol($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->image_width !== $v) {
-            $this->image_width = $v;
-            $this->modifiedColumns[] = SysFilesPeer::IMAGE_WIDTH;
+        if ($this->id_rol !== $v) {
+            $this->id_rol = $v;
+            $this->modifiedColumns[] = SysPermissionsPeer::ID_ROL;
+        }
+
+        if ($this->aSysRoles !== null && $this->aSysRoles->getIdRol() !== $v) {
+            $this->aSysRoles = null;
         }
 
 
         return $this;
-    } // setImageWidth()
+    } // setIdRol()
 
     /**
-     * Set the value of [image_height] column.
-     * 
-     * @param  int $v new value
-     * @return SysFiles The current object (for fluent API support)
-     */
-    public function setImageHeight($v)
-    {
-        if ($v !== null && is_numeric($v)) {
-            $v = (int) $v;
-        }
-
-        if ($this->image_height !== $v) {
-            $this->image_height = $v;
-            $this->modifiedColumns[] = SysFilesPeer::IMAGE_HEIGHT;
-        }
-
-
-        return $this;
-    } // setImageHeight()
-
-    /**
-     * Set the value of [image_type] column.
+     * Set the value of [create] column.
      * 
      * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
+     * @return SysPermissions The current object (for fluent API support)
      */
-    public function setImageType($v)
+    public function setCreate($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->image_type !== $v) {
-            $this->image_type = $v;
-            $this->modifiedColumns[] = SysFilesPeer::IMAGE_TYPE;
+        if ($this->create !== $v) {
+            $this->create = $v;
+            $this->modifiedColumns[] = SysPermissionsPeer::CREATE;
         }
 
 
         return $this;
-    } // setImageType()
+    } // setCreate()
 
     /**
-     * Set the value of [is_image] column.
+     * Set the value of [read] column.
      * 
      * @param  string $v new value
-     * @return SysFiles The current object (for fluent API support)
+     * @return SysPermissions The current object (for fluent API support)
      */
-    public function setIsImage($v)
+    public function setRead($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (string) $v;
         }
 
-        if ($this->is_image !== $v) {
-            $this->is_image = $v;
-            $this->modifiedColumns[] = SysFilesPeer::IS_IMAGE;
+        if ($this->read !== $v) {
+            $this->read = $v;
+            $this->modifiedColumns[] = SysPermissionsPeer::READ;
         }
 
 
         return $this;
-    } // setIsImage()
+    } // setRead()
+
+    /**
+     * Set the value of [update] column.
+     * 
+     * @param  string $v new value
+     * @return SysPermissions The current object (for fluent API support)
+     */
+    public function setUpdate($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->update !== $v) {
+            $this->update = $v;
+            $this->modifiedColumns[] = SysPermissionsPeer::UPDATE;
+        }
+
+
+        return $this;
+    } // setUpdate()
+
+    /**
+     * Set the value of [delete] column.
+     * 
+     * @param  string $v new value
+     * @return SysPermissions The current object (for fluent API support)
+     */
+    public function setDelete($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->delete !== $v) {
+            $this->delete = $v;
+            $this->modifiedColumns[] = SysPermissionsPeer::DELETE;
+        }
+
+
+        return $this;
+    } // setDelete()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -467,19 +333,19 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function hasOnlyDefaultValues()
     {
-            if ($this->size !== '0') {
+            if ($this->create !== 'NO') {
                 return false;
             }
 
-            if ($this->image_width !== 0) {
+            if ($this->read !== 'NO') {
                 return false;
             }
 
-            if ($this->image_height !== 0) {
+            if ($this->update !== 'NO') {
                 return false;
             }
 
-            if ($this->is_image !== 'NO') {
+            if ($this->delete !== 'NO') {
                 return false;
             }
 
@@ -505,16 +371,12 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     {
         try {
 
-            $this->id_file = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
-            $this->filename = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->title = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
-            $this->type = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
-            $this->fullpath = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->size = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->image_width = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
-            $this->image_height = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
-            $this->image_type = ($row[$startcol + 8] !== null) ? (string) $row[$startcol + 8] : null;
-            $this->is_image = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
+            $this->id_page = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
+            $this->id_rol = ($row[$startcol + 1] !== null) ? (int) $row[$startcol + 1] : null;
+            $this->create = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
+            $this->read = ($row[$startcol + 3] !== null) ? (string) $row[$startcol + 3] : null;
+            $this->update = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
+            $this->delete = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -524,10 +386,10 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 10; // 10 = SysFilesPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 6; // 6 = SysPermissionsPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
-            throw new PropelException("Error populating SysFiles object", $e);
+            throw new PropelException("Error populating SysPermissions object", $e);
         }
     }
 
@@ -547,6 +409,12 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     public function ensureConsistency()
     {
 
+        if ($this->aSysPages !== null && $this->id_page !== $this->aSysPages->getIdPage()) {
+            $this->aSysPages = null;
+        }
+        if ($this->aSysRoles !== null && $this->id_rol !== $this->aSysRoles->getIdRol()) {
+            $this->aSysRoles = null;
+        }
     } // ensureConsistency
 
     /**
@@ -570,13 +438,13 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysFilesPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
         // We don't need to alter the object instance pool; we're just modifying this instance
         // already in the pool.
 
-        $stmt = SysFilesPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
+        $stmt = SysPermissionsPeer::doSelectStmt($this->buildPkeyCriteria(), $con);
         $row = $stmt->fetch(PDO::FETCH_NUM);
         $stmt->closeCursor();
         if (!$row) {
@@ -586,6 +454,8 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->aSysRoles = null;
+            $this->aSysPages = null;
         } // if (deep)
     }
 
@@ -606,12 +476,12 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysFilesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
         try {
-            $deleteQuery = SysFilesQuery::create()
+            $deleteQuery = SysPermissionsQuery::create()
                 ->filterByPrimaryKey($this->getPrimaryKey());
             $ret = $this->preDelete($con);
             if ($ret) {
@@ -649,7 +519,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
         }
 
         if ($con === null) {
-            $con = Propel::getConnection(SysFilesPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
         }
 
         $con->beginTransaction();
@@ -669,7 +539,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
                     $this->postUpdate($con);
                 }
                 $this->postSave($con);
-                SysFilesPeer::addInstanceToPool($this);
+                SysPermissionsPeer::addInstanceToPool($this);
             } else {
                 $affectedRows = 0;
             }
@@ -698,6 +568,25 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
         $affectedRows = 0; // initialize var to track total num of affected rows
         if (!$this->alreadyInSave) {
             $this->alreadyInSave = true;
+
+            // We call the save method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aSysRoles !== null) {
+                if ($this->aSysRoles->isModified() || $this->aSysRoles->isNew()) {
+                    $affectedRows += $this->aSysRoles->save($con);
+                }
+                $this->setSysRoles($this->aSysRoles);
+            }
+
+            if ($this->aSysPages !== null) {
+                if ($this->aSysPages->isModified() || $this->aSysPages->isNew()) {
+                    $affectedRows += $this->aSysPages->save($con);
+                }
+                $this->setSysPages($this->aSysPages);
+            }
 
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
@@ -730,45 +619,29 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
         $modifiedColumns = array();
         $index = 0;
 
-        $this->modifiedColumns[] = SysFilesPeer::ID_FILE;
-        if (null !== $this->id_file) {
-            throw new PropelException('Cannot insert a value for auto-increment primary key (' . SysFilesPeer::ID_FILE . ')');
-        }
 
          // check the columns in natural order for more readable SQL queries
-        if ($this->isColumnModified(SysFilesPeer::ID_FILE)) {
-            $modifiedColumns[':p' . $index++]  = '`id_file`';
+        if ($this->isColumnModified(SysPermissionsPeer::ID_PAGE)) {
+            $modifiedColumns[':p' . $index++]  = '`id_page`';
         }
-        if ($this->isColumnModified(SysFilesPeer::FILENAME)) {
-            $modifiedColumns[':p' . $index++]  = '`filename`';
+        if ($this->isColumnModified(SysPermissionsPeer::ID_ROL)) {
+            $modifiedColumns[':p' . $index++]  = '`id_rol`';
         }
-        if ($this->isColumnModified(SysFilesPeer::TITLE)) {
-            $modifiedColumns[':p' . $index++]  = '`title`';
+        if ($this->isColumnModified(SysPermissionsPeer::CREATE)) {
+            $modifiedColumns[':p' . $index++]  = '`create`';
         }
-        if ($this->isColumnModified(SysFilesPeer::TYPE)) {
-            $modifiedColumns[':p' . $index++]  = '`type`';
+        if ($this->isColumnModified(SysPermissionsPeer::READ)) {
+            $modifiedColumns[':p' . $index++]  = '`read`';
         }
-        if ($this->isColumnModified(SysFilesPeer::FULLPATH)) {
-            $modifiedColumns[':p' . $index++]  = '`fullpath`';
+        if ($this->isColumnModified(SysPermissionsPeer::UPDATE)) {
+            $modifiedColumns[':p' . $index++]  = '`update`';
         }
-        if ($this->isColumnModified(SysFilesPeer::SIZE)) {
-            $modifiedColumns[':p' . $index++]  = '`size`';
-        }
-        if ($this->isColumnModified(SysFilesPeer::IMAGE_WIDTH)) {
-            $modifiedColumns[':p' . $index++]  = '`image_width`';
-        }
-        if ($this->isColumnModified(SysFilesPeer::IMAGE_HEIGHT)) {
-            $modifiedColumns[':p' . $index++]  = '`image_height`';
-        }
-        if ($this->isColumnModified(SysFilesPeer::IMAGE_TYPE)) {
-            $modifiedColumns[':p' . $index++]  = '`image_type`';
-        }
-        if ($this->isColumnModified(SysFilesPeer::IS_IMAGE)) {
-            $modifiedColumns[':p' . $index++]  = '`is_image`';
+        if ($this->isColumnModified(SysPermissionsPeer::DELETE)) {
+            $modifiedColumns[':p' . $index++]  = '`delete`';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sys_files` (%s) VALUES (%s)',
+            'INSERT INTO `sys_permissions` (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -777,35 +650,23 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`id_file`':						
-                        $stmt->bindValue($identifier, $this->id_file, PDO::PARAM_INT);
+                    case '`id_page`':						
+                        $stmt->bindValue($identifier, $this->id_page, PDO::PARAM_INT);
                         break;
-                    case '`filename`':						
-                        $stmt->bindValue($identifier, $this->filename, PDO::PARAM_STR);
+                    case '`id_rol`':						
+                        $stmt->bindValue($identifier, $this->id_rol, PDO::PARAM_INT);
                         break;
-                    case '`title`':						
-                        $stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
+                    case '`create`':						
+                        $stmt->bindValue($identifier, $this->create, PDO::PARAM_STR);
                         break;
-                    case '`type`':						
-                        $stmt->bindValue($identifier, $this->type, PDO::PARAM_STR);
+                    case '`read`':						
+                        $stmt->bindValue($identifier, $this->read, PDO::PARAM_STR);
                         break;
-                    case '`fullpath`':						
-                        $stmt->bindValue($identifier, $this->fullpath, PDO::PARAM_STR);
+                    case '`update`':						
+                        $stmt->bindValue($identifier, $this->update, PDO::PARAM_STR);
                         break;
-                    case '`size`':						
-                        $stmt->bindValue($identifier, $this->size, PDO::PARAM_STR);
-                        break;
-                    case '`image_width`':						
-                        $stmt->bindValue($identifier, $this->image_width, PDO::PARAM_INT);
-                        break;
-                    case '`image_height`':						
-                        $stmt->bindValue($identifier, $this->image_height, PDO::PARAM_INT);
-                        break;
-                    case '`image_type`':						
-                        $stmt->bindValue($identifier, $this->image_type, PDO::PARAM_STR);
-                        break;
-                    case '`is_image`':						
-                        $stmt->bindValue($identifier, $this->is_image, PDO::PARAM_STR);
+                    case '`delete`':						
+                        $stmt->bindValue($identifier, $this->delete, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -814,13 +675,6 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-            $pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setIdFile($pk);
 
         $this->setNew(false);
     }
@@ -901,7 +755,25 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
             $failureMap = array();
 
 
-            if (($retval = SysFilesPeer::doValidate($this, $columns)) !== true) {
+            // We call the validate method on the following object(s) if they
+            // were passed to this object by their corresponding set
+            // method.  This object relates to these object(s) by a
+            // foreign key reference.
+
+            if ($this->aSysRoles !== null) {
+                if (!$this->aSysRoles->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aSysRoles->getValidationFailures());
+                }
+            }
+
+            if ($this->aSysPages !== null) {
+                if (!$this->aSysPages->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aSysPages->getValidationFailures());
+                }
+            }
+
+
+            if (($retval = SysPermissionsPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
             }
 
@@ -925,7 +797,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = SysFilesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SysPermissionsPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
         $field = $this->getByPosition($pos);
 
         return $field;
@@ -942,34 +814,22 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                return $this->getIdFile();
+                return $this->getIdPage();
                 break;
             case 1:
-                return $this->getFilename();
+                return $this->getIdRol();
                 break;
             case 2:
-                return $this->getTitle();
+                return $this->getCreate();
                 break;
             case 3:
-                return $this->getType();
+                return $this->getRead();
                 break;
             case 4:
-                return $this->getFullpath();
+                return $this->getUpdate();
                 break;
             case 5:
-                return $this->getSize();
-                break;
-            case 6:
-                return $this->getImageWidth();
-                break;
-            case 7:
-                return $this->getImageHeight();
-                break;
-            case 8:
-                return $this->getImageType();
-                break;
-            case 9:
-                return $this->getIsImage();
+                return $this->getDelete();
                 break;
             default:
                 return null;
@@ -988,27 +848,24 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      *                    Defaults to BasePeer::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to true.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = BasePeer::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
-        if (isset($alreadyDumpedObjects['SysFiles'][$this->getPrimaryKey()])) {
+        if (isset($alreadyDumpedObjects['SysPermissions'][serialize($this->getPrimaryKey())])) {
             return '*RECURSION*';
         }
-        $alreadyDumpedObjects['SysFiles'][$this->getPrimaryKey()] = true;
-        $keys = SysFilesPeer::getFieldNames($keyType);
+        $alreadyDumpedObjects['SysPermissions'][serialize($this->getPrimaryKey())] = true;
+        $keys = SysPermissionsPeer::getFieldNames($keyType);
         $result = array(
-            $keys[0] => $this->getIdFile(),
-            $keys[1] => $this->getFilename(),
-            $keys[2] => $this->getTitle(),
-            $keys[3] => $this->getType(),
-            $keys[4] => $this->getFullpath(),
-            $keys[5] => $this->getSize(),
-            $keys[6] => $this->getImageWidth(),
-            $keys[7] => $this->getImageHeight(),
-            $keys[8] => $this->getImageType(),
-            $keys[9] => $this->getIsImage(),
+            $keys[0] => $this->getIdPage(),
+            $keys[1] => $this->getIdRol(),
+            $keys[2] => $this->getCreate(),
+            $keys[3] => $this->getRead(),
+            $keys[4] => $this->getUpdate(),
+            $keys[5] => $this->getDelete(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -1016,6 +873,14 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
             $result[$key] = $virtualColumn;
         }
         
+        if ($includeForeignObjects) {
+            if (null !== $this->aSysRoles) {
+                $result['SysRoles'] = $this->aSysRoles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aSysPages) {
+                $result['SysPages'] = $this->aSysPages->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+        }
 
         return $result;
     }
@@ -1033,7 +898,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
     {
-        $pos = SysFilesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+        $pos = SysPermissionsPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 
         $this->setByPosition($pos, $value);
     }
@@ -1050,34 +915,22 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     {
         switch ($pos) {
             case 0:
-                $this->setIdFile($value);
+                $this->setIdPage($value);
                 break;
             case 1:
-                $this->setFilename($value);
+                $this->setIdRol($value);
                 break;
             case 2:
-                $this->setTitle($value);
+                $this->setCreate($value);
                 break;
             case 3:
-                $this->setType($value);
+                $this->setRead($value);
                 break;
             case 4:
-                $this->setFullpath($value);
+                $this->setUpdate($value);
                 break;
             case 5:
-                $this->setSize($value);
-                break;
-            case 6:
-                $this->setImageWidth($value);
-                break;
-            case 7:
-                $this->setImageHeight($value);
-                break;
-            case 8:
-                $this->setImageType($value);
-                break;
-            case 9:
-                $this->setIsImage($value);
+                $this->setDelete($value);
                 break;
         } // switch()
     }
@@ -1101,18 +954,14 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
     {
-        $keys = SysFilesPeer::getFieldNames($keyType);
+        $keys = SysPermissionsPeer::getFieldNames($keyType);
 
-        if (array_key_exists($keys[0], $arr)) $this->setIdFile($arr[$keys[0]]);
-        if (array_key_exists($keys[1], $arr)) $this->setFilename($arr[$keys[1]]);
-        if (array_key_exists($keys[2], $arr)) $this->setTitle($arr[$keys[2]]);
-        if (array_key_exists($keys[3], $arr)) $this->setType($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setFullpath($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setSize($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setImageWidth($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setImageHeight($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setImageType($arr[$keys[8]]);
-        if (array_key_exists($keys[9], $arr)) $this->setIsImage($arr[$keys[9]]);
+        if (array_key_exists($keys[0], $arr)) $this->setIdPage($arr[$keys[0]]);
+        if (array_key_exists($keys[1], $arr)) $this->setIdRol($arr[$keys[1]]);
+        if (array_key_exists($keys[2], $arr)) $this->setCreate($arr[$keys[2]]);
+        if (array_key_exists($keys[3], $arr)) $this->setRead($arr[$keys[3]]);
+        if (array_key_exists($keys[4], $arr)) $this->setUpdate($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setDelete($arr[$keys[5]]);
     }
 
     /**
@@ -1122,18 +971,14 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function buildCriteria()
     {
-        $criteria = new Criteria(SysFilesPeer::DATABASE_NAME);
+        $criteria = new Criteria(SysPermissionsPeer::DATABASE_NAME);
 
-        if ($this->isColumnModified(SysFilesPeer::ID_FILE)) $criteria->add(SysFilesPeer::ID_FILE, $this->id_file);
-        if ($this->isColumnModified(SysFilesPeer::FILENAME)) $criteria->add(SysFilesPeer::FILENAME, $this->filename);
-        if ($this->isColumnModified(SysFilesPeer::TITLE)) $criteria->add(SysFilesPeer::TITLE, $this->title);
-        if ($this->isColumnModified(SysFilesPeer::TYPE)) $criteria->add(SysFilesPeer::TYPE, $this->type);
-        if ($this->isColumnModified(SysFilesPeer::FULLPATH)) $criteria->add(SysFilesPeer::FULLPATH, $this->fullpath);
-        if ($this->isColumnModified(SysFilesPeer::SIZE)) $criteria->add(SysFilesPeer::SIZE, $this->size);
-        if ($this->isColumnModified(SysFilesPeer::IMAGE_WIDTH)) $criteria->add(SysFilesPeer::IMAGE_WIDTH, $this->image_width);
-        if ($this->isColumnModified(SysFilesPeer::IMAGE_HEIGHT)) $criteria->add(SysFilesPeer::IMAGE_HEIGHT, $this->image_height);
-        if ($this->isColumnModified(SysFilesPeer::IMAGE_TYPE)) $criteria->add(SysFilesPeer::IMAGE_TYPE, $this->image_type);
-        if ($this->isColumnModified(SysFilesPeer::IS_IMAGE)) $criteria->add(SysFilesPeer::IS_IMAGE, $this->is_image);
+        if ($this->isColumnModified(SysPermissionsPeer::ID_PAGE)) $criteria->add(SysPermissionsPeer::ID_PAGE, $this->id_page);
+        if ($this->isColumnModified(SysPermissionsPeer::ID_ROL)) $criteria->add(SysPermissionsPeer::ID_ROL, $this->id_rol);
+        if ($this->isColumnModified(SysPermissionsPeer::CREATE)) $criteria->add(SysPermissionsPeer::CREATE, $this->create);
+        if ($this->isColumnModified(SysPermissionsPeer::READ)) $criteria->add(SysPermissionsPeer::READ, $this->read);
+        if ($this->isColumnModified(SysPermissionsPeer::UPDATE)) $criteria->add(SysPermissionsPeer::UPDATE, $this->update);
+        if ($this->isColumnModified(SysPermissionsPeer::DELETE)) $criteria->add(SysPermissionsPeer::DELETE, $this->delete);
 
         return $criteria;
     }
@@ -1148,30 +993,37 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function buildPkeyCriteria()
     {
-        $criteria = new Criteria(SysFilesPeer::DATABASE_NAME);
-        $criteria->add(SysFilesPeer::ID_FILE, $this->id_file);
+        $criteria = new Criteria(SysPermissionsPeer::DATABASE_NAME);
+        $criteria->add(SysPermissionsPeer::ID_PAGE, $this->id_page);
+        $criteria->add(SysPermissionsPeer::ID_ROL, $this->id_rol);
 
         return $criteria;
     }
 
     /**
-     * Returns the primary key for this object (row).
-     * @return int
+     * Returns the composite primary key for this object.
+     * The array elements will be in same order as specified in XML.
+     * @return array
      */
     public function getPrimaryKey()
     {
-        return $this->getIdFile();
+        $pks = array();
+        $pks[0] = $this->getIdPage();
+        $pks[1] = $this->getIdRol();
+
+        return $pks;
     }
 
     /**
-     * Generic method to set the primary key (id_file column).
+     * Set the [composite] primary key.
      *
-     * @param  int $key Primary key.
+     * @param array $keys The elements of the composite key (order must match the order in XML file).
      * @return void
      */
-    public function setPrimaryKey($key)
+    public function setPrimaryKey($keys)
     {
-        $this->setIdFile($key);
+        $this->setIdPage($keys[0]);
+        $this->setIdRol($keys[1]);
     }
 
     /**
@@ -1181,7 +1033,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     public function isPrimaryKeyNull()
     {
 
-        return null === $this->getIdFile();
+        return (null === $this->getIdPage()) && (null === $this->getIdRol());
     }
 
     /**
@@ -1190,25 +1042,33 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      * If desired, this method can also make copies of all associated (fkey referrers)
      * objects.
      *
-     * @param object $copyObj An object of SysFiles (or compatible) type.
+     * @param object $copyObj An object of SysPermissions (or compatible) type.
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
      * @param boolean $makeNew Whether to reset autoincrement PKs and make the object new.
      * @throws PropelException
      */
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
-        $copyObj->setFilename($this->getFilename());
-        $copyObj->setTitle($this->getTitle());
-        $copyObj->setType($this->getType());
-        $copyObj->setFullpath($this->getFullpath());
-        $copyObj->setSize($this->getSize());
-        $copyObj->setImageWidth($this->getImageWidth());
-        $copyObj->setImageHeight($this->getImageHeight());
-        $copyObj->setImageType($this->getImageType());
-        $copyObj->setIsImage($this->getIsImage());
+        $copyObj->setIdPage($this->getIdPage());
+        $copyObj->setIdRol($this->getIdRol());
+        $copyObj->setCreate($this->getCreate());
+        $copyObj->setRead($this->getRead());
+        $copyObj->setUpdate($this->getUpdate());
+        $copyObj->setDelete($this->getDelete());
+
+        if ($deepCopy && !$this->startCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+            // store object hash to prevent cycle
+            $this->startCopy = true;
+
+            //unflag object copy
+            $this->startCopy = false;
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
-            $copyObj->setIdFile(NULL); // this is a auto-increment column, so set to default value
         }
     }
 
@@ -1221,7 +1081,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      * objects.
      *
      * @param boolean $deepCopy Whether to also copy all rows that refer (by fkey) to the current row.
-     * @return SysFiles Clone of current object.
+     * @return SysPermissions Clone of current object.
      * @throws PropelException
      */
     public function copy($deepCopy = false)
@@ -1241,15 +1101,119 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      * same instance for all member of this class. The method could therefore
      * be static, but this would prevent one from overriding the behavior.
      *
-     * @return SysFilesPeer
+     * @return SysPermissionsPeer
      */
     public function getPeer()
     {
         if (self::$peer === null) {
-            self::$peer = new SysFilesPeer();
+            self::$peer = new SysPermissionsPeer();
         }
 
         return self::$peer;
+    }
+
+    /**
+     * Declares an association between this object and a SysRoles object.
+     *
+     * @param                  SysRoles $v
+     * @return SysPermissions The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setSysRoles(SysRoles $v = null)
+    {
+        if ($v === null) {
+            $this->setIdRol(NULL);
+        } else {
+            $this->setIdRol($v->getIdRol());
+        }
+
+        $this->aSysRoles = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the SysRoles object, it will not be re-added.
+        if ($v !== null) {
+            $v->addSysPermissions($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated SysRoles object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return SysRoles The associated SysRoles object.
+     * @throws PropelException
+     */
+    public function getSysRoles(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aSysRoles === null && ($this->id_rol !== null) && $doQuery) {
+            $this->aSysRoles = SysRolesQuery::create()->findPk($this->id_rol, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aSysRoles->addSysPermissionss($this);
+             */
+        }
+
+        return $this->aSysRoles;
+    }
+
+    /**
+     * Declares an association between this object and a SysPages object.
+     *
+     * @param                  SysPages $v
+     * @return SysPermissions The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setSysPages(SysPages $v = null)
+    {
+        if ($v === null) {
+            $this->setIdPage(NULL);
+        } else {
+            $this->setIdPage($v->getIdPage());
+        }
+
+        $this->aSysPages = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the SysPages object, it will not be re-added.
+        if ($v !== null) {
+            $v->addSysPermissions($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated SysPages object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return SysPages The associated SysPages object.
+     * @throws PropelException
+     */
+    public function getSysPages(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aSysPages === null && ($this->id_page !== null) && $doQuery) {
+            $this->aSysPages = SysPagesQuery::create()->findPk($this->id_page, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aSysPages->addSysPermissionss($this);
+             */
+        }
+
+        return $this->aSysPages;
     }
 
     /**
@@ -1257,16 +1221,12 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function clear()
     {
-        $this->id_file = null;
-        $this->filename = null;
-        $this->title = null;
-        $this->type = null;
-        $this->fullpath = null;
-        $this->size = null;
-        $this->image_width = null;
-        $this->image_height = null;
-        $this->image_type = null;
-        $this->is_image = null;
+        $this->id_page = null;
+        $this->id_rol = null;
+        $this->create = null;
+        $this->read = null;
+        $this->update = null;
+        $this->delete = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -1290,10 +1250,18 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
+            if ($this->aSysRoles instanceof Persistent) {
+              $this->aSysRoles->clearAllReferences($deep);
+            }
+            if ($this->aSysPages instanceof Persistent) {
+              $this->aSysPages->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
+        $this->aSysRoles = null;
+        $this->aSysPages = null;
     }
 
     /**
@@ -1303,7 +1271,7 @@ abstract class BaseSysFiles extends BaseObject implements Persistent
      */
     public function __toString()
     {
-        return (string) $this->exportTo(SysFilesPeer::DEFAULT_STRING_FORMAT);
+        return (string) $this->exportTo(SysPermissionsPeer::DEFAULT_STRING_FORMAT);
     }
 
     /**

@@ -56,6 +56,7 @@ class SysFilesTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('SysUsers', 'SysUsers', RelationMap::ONE_TO_MANY, array('id_file' => 'id_photo', ), null, null, 'SysUserss');
     } // buildRelations()
 
 } // SysFilesTableMap
