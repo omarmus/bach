@@ -11,8 +11,12 @@ DROP TABLE IF EXISTS `sys_files`;
 
 CREATE TABLE `sys_files`
 (
+<<<<<<< HEAD:application/models/propel/build/sql/schema.sql
 <<<<<<< HEAD:application/libraries/propel/build/sql/schema.sql
     `id_file` INTEGER NOT NULL AUTO_INCREMENT,
+=======
+    `id_file` int(11) unsigned NOT NULL AUTO_INCREMENT,
+>>>>>>> 746f7c578cd95ce5ada7ab960dbfb3cb5b5c525e:application/models/propel/build/sql/schema.sql
 =======
     `id_file` int(11) unsigned NOT NULL AUTO_INCREMENT,
 >>>>>>> 746f7c578cd95ce5ada7ab960dbfb3cb5b5c525e:application/models/propel/build/sql/schema.sql

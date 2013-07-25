@@ -87,15 +87,12 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $alreadyInClearAllReferencesDeep = false;
 
     /**
-<<<<<<< HEAD:application/libraries/propel/build/classes/bach/om/BaseSysPages.php
-=======
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
     protected $sysPermissionssScheduledForDeletion = null;
 
     /**
->>>>>>> 746f7c578cd95ce5ada7ab960dbfb3cb5b5c525e:application/models/propel/build/classes/bach/om/BaseSysPages.php
      * Applies default values to this object.
      * This method should be called from the object's constructor (or
      * equivalent initialization method).
