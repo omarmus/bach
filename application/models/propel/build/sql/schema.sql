@@ -11,7 +11,11 @@ DROP TABLE IF EXISTS `sys_files`;
 
 CREATE TABLE `sys_files`
 (
+<<<<<<< HEAD:application/libraries/propel/build/sql/schema.sql
     `id_file` INTEGER NOT NULL AUTO_INCREMENT,
+=======
+    `id_file` int(11) unsigned NOT NULL AUTO_INCREMENT,
+>>>>>>> 746f7c578cd95ce5ada7ab960dbfb3cb5b5c525e:application/models/propel/build/sql/schema.sql
     `filename` VARCHAR(255),
     `title` VARCHAR(100),
     `type` VARCHAR(20),
@@ -53,6 +57,31 @@ CREATE TABLE `sys_pages`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- sys_permissions
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_permissions`;
+
+CREATE TABLE `sys_permissions`
+(
+    `id_page` int(11) unsigned NOT NULL,
+    `id_rol` int(11) unsigned NOT NULL,
+    `create` VARCHAR(3) DEFAULT 'NO',
+    `read` VARCHAR(3) DEFAULT 'NO',
+    `update` VARCHAR(3) DEFAULT 'NO',
+    `delete` VARCHAR(3) DEFAULT 'NO',
+    PRIMARY KEY (`id_page`,`id_rol`),
+    INDEX `id_page` (`id_page`),
+    INDEX `id_rol` (`id_rol`),
+    CONSTRAINT `sys_permissions_fk1`
+        FOREIGN KEY (`id_rol`)
+        REFERENCES `sys_roles` (`id_rol`),
+    CONSTRAINT `sys_permissions_fk`
+        FOREIGN KEY (`id_page`)
+        REFERENCES `sys_pages` (`id_page`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- sys_roles
 -- ---------------------------------------------------------------------
 
@@ -60,7 +89,7 @@ DROP TABLE IF EXISTS `sys_roles`;
 
 CREATE TABLE `sys_roles`
 (
-    `id_rol` INTEGER NOT NULL AUTO_INCREMENT,
+    `id_rol` int(11) unsigned NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(50),
     `description` VARCHAR(255),
     PRIMARY KEY (`id_rol`)
@@ -98,16 +127,23 @@ CREATE TABLE `sys_users`
     `first_name` VARCHAR(50),
     `last_name` VARCHAR(100),
     `state` VARCHAR(20) DEFAULT 'CREATE',
-    `id_rol` INTEGER,
-    `id_image` INTEGER,
+    `id_rol` int(11) unsigned,
+    `id_photo` int(11) unsigned,
     `created` DATETIME,
     `phone` CHAR(20),
+    `modified` DATETIME,
+    `lang_code` VARCHAR(10) DEFAULT 'EN',
+    `mobile` VARCHAR(20),
     PRIMARY KEY (`id_user`),
     UNIQUE INDEX `email` (`email`),
     INDEX `id_rol` (`id_rol`),
+    INDEX `id_photo` (`id_photo`),
     CONSTRAINT `sys_users_fk`
         FOREIGN KEY (`id_rol`)
-        REFERENCES `sys_roles` (`id_rol`)
+        REFERENCES `sys_roles` (`id_rol`),
+    CONSTRAINT `sys_users_fk1`
+        FOREIGN KEY (`id_photo`)
+        REFERENCES `sys_files` (`id_file`)
 ) ENGINE=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

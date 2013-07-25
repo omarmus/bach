@@ -79,10 +79,10 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     protected $id_rol;
 
     /**
-     * The value for the id_image field.
+     * The value for the id_photo field.
      * @var        int
      */
-    protected $id_image;
+    protected $id_photo;
 
     /**
      * The value for the created field.
@@ -97,9 +97,33 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     protected $phone;
 
     /**
+     * The value for the modified field.
+     * @var        string
+     */
+    protected $modified;
+
+    /**
+     * The value for the lang_code field.
+     * Note: this column has a database default value of: 'EN'
+     * @var        string
+     */
+    protected $lang_code;
+
+    /**
+     * The value for the mobile field.
+     * @var        string
+     */
+    protected $mobile;
+
+    /**
      * @var        SysRoles
      */
     protected $aSysRoles;
+
+    /**
+     * @var        SysFiles
+     */
+    protected $aSysFiles;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -130,6 +154,7 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     public function applyDefaultValues()
     {
         $this->state = 'CREATE';
+        $this->lang_code = 'EN';
     }
 
     /**
@@ -231,14 +256,14 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [id_image] column value.
+     * Get the [id_photo] column value.
      * 
      * @return int
      */
-    public function getIdImage()
+    public function getIdPhoto()
     {
 
-        return $this->id_image;
+        return $this->id_photo;
     }
 
     /**
@@ -290,6 +315,68 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     {
 
         return $this->phone;
+    }
+
+    /**
+     * Get the [optionally formatted] temporal [modified] column value.
+     * 
+     *
+     * @param string $format The date/time format string (either date()-style or strftime()-style).
+     *				 If format is null, then the raw DateTime object will be returned.
+     * @return mixed Formatted date/time value as string or DateTime object (if format is null), null if column is null, and 0 if column value is 0000-00-00 00:00:00
+     * @throws PropelException - if unable to parse/validate the date/time value.
+     */
+    public function getModified($format = 'Y-m-d H:i:s')
+    {
+        if ($this->modified === null) {
+            return null;
+        }
+
+        if ($this->modified === '0000-00-00 00:00:00') {
+            // while technically this is not a default value of null,
+            // this seems to be closest in meaning.
+            return null;
+        }
+
+        try {
+            $dt = new DateTime($this->modified);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->modified, true), $x);
+        }
+
+        if ($format === null) {
+            // Because propel.useDateTimeClass is true, we return a DateTime object.
+            return $dt;
+        }
+
+        if (strpos($format, '%') !== false) {
+            return strftime($format, $dt->format('U'));
+        }
+
+        return $dt->format($format);
+        
+    }
+
+    /**
+     * Get the [lang_code] column value.
+     * 
+     * @return string
+     */
+    public function getLangCode()
+    {
+
+        return $this->lang_code;
+    }
+
+    /**
+     * Get the [mobile] column value.
+     * 
+     * @return string
+     */
+    public function getMobile()
+    {
+
+        return $this->mobile;
     }
 
     /**
@@ -465,25 +552,29 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     } // setIdRol()
 
     /**
-     * Set the value of [id_image] column.
+     * Set the value of [id_photo] column.
      * 
      * @param  int $v new value
      * @return SysUsers The current object (for fluent API support)
      */
-    public function setIdImage($v)
+    public function setIdPhoto($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->id_image !== $v) {
-            $this->id_image = $v;
-            $this->modifiedColumns[] = SysUsersPeer::ID_IMAGE;
+        if ($this->id_photo !== $v) {
+            $this->id_photo = $v;
+            $this->modifiedColumns[] = SysUsersPeer::ID_PHOTO;
+        }
+
+        if ($this->aSysFiles !== null && $this->aSysFiles->getIdFile() !== $v) {
+            $this->aSysFiles = null;
         }
 
 
         return $this;
-    } // setIdImage()
+    } // setIdPhoto()
 
     /**
      * Sets the value of [created] column to a normalized version of the date/time value specified.
@@ -530,6 +621,71 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     } // setPhone()
 
     /**
+     * Sets the value of [modified] column to a normalized version of the date/time value specified.
+     * 
+     * @param mixed $v string, integer (timestamp), or DateTime value.
+     *               Empty strings are treated as null.
+     * @return SysUsers The current object (for fluent API support)
+     */
+    public function setModified($v)
+    {
+        $dt = PropelDateTime::newInstance($v, null, 'DateTime');
+        if ($this->modified !== null || $dt !== null) {
+            $currentDateAsString = ($this->modified !== null && $tmpDt = new DateTime($this->modified)) ? $tmpDt->format('Y-m-d H:i:s') : null;
+            $newDateAsString = $dt ? $dt->format('Y-m-d H:i:s') : null;
+            if ($currentDateAsString !== $newDateAsString) {
+                $this->modified = $newDateAsString;
+                $this->modifiedColumns[] = SysUsersPeer::MODIFIED;
+            }
+        } // if either are not null
+
+
+        return $this;
+    } // setModified()
+
+    /**
+     * Set the value of [lang_code] column.
+     * 
+     * @param  string $v new value
+     * @return SysUsers The current object (for fluent API support)
+     */
+    public function setLangCode($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->lang_code !== $v) {
+            $this->lang_code = $v;
+            $this->modifiedColumns[] = SysUsersPeer::LANG_CODE;
+        }
+
+
+        return $this;
+    } // setLangCode()
+
+    /**
+     * Set the value of [mobile] column.
+     * 
+     * @param  string $v new value
+     * @return SysUsers The current object (for fluent API support)
+     */
+    public function setMobile($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->mobile !== $v) {
+            $this->mobile = $v;
+            $this->modifiedColumns[] = SysUsersPeer::MOBILE;
+        }
+
+
+        return $this;
+    } // setMobile()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -540,6 +696,10 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     public function hasOnlyDefaultValues()
     {
             if ($this->state !== 'CREATE') {
+                return false;
+            }
+
+            if ($this->lang_code !== 'EN') {
                 return false;
             }
 
@@ -573,9 +733,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             $this->last_name = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
             $this->state = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
             $this->id_rol = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
-            $this->id_image = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->id_photo = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
             $this->created = ($row[$startcol + 9] !== null) ? (string) $row[$startcol + 9] : null;
             $this->phone = ($row[$startcol + 10] !== null) ? (string) $row[$startcol + 10] : null;
+            $this->modified = ($row[$startcol + 11] !== null) ? (string) $row[$startcol + 11] : null;
+            $this->lang_code = ($row[$startcol + 12] !== null) ? (string) $row[$startcol + 12] : null;
+            $this->mobile = ($row[$startcol + 13] !== null) ? (string) $row[$startcol + 13] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -585,7 +748,7 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 11; // 11 = SysUsersPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 14; // 14 = SysUsersPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating SysUsers object", $e);
@@ -610,6 +773,9 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
 
         if ($this->aSysRoles !== null && $this->id_rol !== $this->aSysRoles->getIdRol()) {
             $this->aSysRoles = null;
+        }
+        if ($this->aSysFiles !== null && $this->id_photo !== $this->aSysFiles->getIdFile()) {
+            $this->aSysFiles = null;
         }
     } // ensureConsistency
 
@@ -651,6 +817,7 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         if ($deep) {  // also de-associate any related objects?
 
             $this->aSysRoles = null;
+            $this->aSysFiles = null;
         } // if (deep)
     }
 
@@ -776,6 +943,13 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                 $this->setSysRoles($this->aSysRoles);
             }
 
+            if ($this->aSysFiles !== null) {
+                if ($this->aSysFiles->isModified() || $this->aSysFiles->isNew()) {
+                    $affectedRows += $this->aSysFiles->save($con);
+                }
+                $this->setSysFiles($this->aSysFiles);
+            }
+
             if ($this->isNew() || $this->isModified()) {
                 // persist changes
                 if ($this->isNew()) {
@@ -837,14 +1011,23 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         if ($this->isColumnModified(SysUsersPeer::ID_ROL)) {
             $modifiedColumns[':p' . $index++]  = '`id_rol`';
         }
-        if ($this->isColumnModified(SysUsersPeer::ID_IMAGE)) {
-            $modifiedColumns[':p' . $index++]  = '`id_image`';
+        if ($this->isColumnModified(SysUsersPeer::ID_PHOTO)) {
+            $modifiedColumns[':p' . $index++]  = '`id_photo`';
         }
         if ($this->isColumnModified(SysUsersPeer::CREATED)) {
             $modifiedColumns[':p' . $index++]  = '`created`';
         }
         if ($this->isColumnModified(SysUsersPeer::PHONE)) {
             $modifiedColumns[':p' . $index++]  = '`phone`';
+        }
+        if ($this->isColumnModified(SysUsersPeer::MODIFIED)) {
+            $modifiedColumns[':p' . $index++]  = '`modified`';
+        }
+        if ($this->isColumnModified(SysUsersPeer::LANG_CODE)) {
+            $modifiedColumns[':p' . $index++]  = '`lang_code`';
+        }
+        if ($this->isColumnModified(SysUsersPeer::MOBILE)) {
+            $modifiedColumns[':p' . $index++]  = '`mobile`';
         }
 
         $sql = sprintf(
@@ -881,14 +1064,23 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                     case '`id_rol`':						
                         $stmt->bindValue($identifier, $this->id_rol, PDO::PARAM_INT);
                         break;
-                    case '`id_image`':						
-                        $stmt->bindValue($identifier, $this->id_image, PDO::PARAM_INT);
+                    case '`id_photo`':						
+                        $stmt->bindValue($identifier, $this->id_photo, PDO::PARAM_INT);
                         break;
                     case '`created`':						
                         $stmt->bindValue($identifier, $this->created, PDO::PARAM_STR);
                         break;
                     case '`phone`':						
                         $stmt->bindValue($identifier, $this->phone, PDO::PARAM_STR);
+                        break;
+                    case '`modified`':						
+                        $stmt->bindValue($identifier, $this->modified, PDO::PARAM_STR);
+                        break;
+                    case '`lang_code`':						
+                        $stmt->bindValue($identifier, $this->lang_code, PDO::PARAM_STR);
+                        break;
+                    case '`mobile`':						
+                        $stmt->bindValue($identifier, $this->mobile, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -995,6 +1187,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                 }
             }
 
+            if ($this->aSysFiles !== null) {
+                if (!$this->aSysFiles->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aSysFiles->getValidationFailures());
+                }
+            }
+
 
             if (($retval = SysUsersPeer::doValidate($this, $columns)) !== true) {
                 $failureMap = array_merge($failureMap, $retval);
@@ -1061,13 +1259,22 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                 return $this->getIdRol();
                 break;
             case 8:
-                return $this->getIdImage();
+                return $this->getIdPhoto();
                 break;
             case 9:
                 return $this->getCreated();
                 break;
             case 10:
                 return $this->getPhone();
+                break;
+            case 11:
+                return $this->getModified();
+                break;
+            case 12:
+                return $this->getLangCode();
+                break;
+            case 13:
+                return $this->getMobile();
                 break;
             default:
                 return null;
@@ -1106,9 +1313,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             $keys[5] => $this->getLastName(),
             $keys[6] => $this->getState(),
             $keys[7] => $this->getIdRol(),
-            $keys[8] => $this->getIdImage(),
+            $keys[8] => $this->getIdPhoto(),
             $keys[9] => $this->getCreated(),
             $keys[10] => $this->getPhone(),
+            $keys[11] => $this->getModified(),
+            $keys[12] => $this->getLangCode(),
+            $keys[13] => $this->getMobile(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -1119,6 +1329,9 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         if ($includeForeignObjects) {
             if (null !== $this->aSysRoles) {
                 $result['SysRoles'] = $this->aSysRoles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aSysFiles) {
+                $result['SysFiles'] = $this->aSysFiles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -1179,13 +1392,22 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                 $this->setIdRol($value);
                 break;
             case 8:
-                $this->setIdImage($value);
+                $this->setIdPhoto($value);
                 break;
             case 9:
                 $this->setCreated($value);
                 break;
             case 10:
                 $this->setPhone($value);
+                break;
+            case 11:
+                $this->setModified($value);
+                break;
+            case 12:
+                $this->setLangCode($value);
+                break;
+            case 13:
+                $this->setMobile($value);
                 break;
         } // switch()
     }
@@ -1219,9 +1441,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         if (array_key_exists($keys[5], $arr)) $this->setLastName($arr[$keys[5]]);
         if (array_key_exists($keys[6], $arr)) $this->setState($arr[$keys[6]]);
         if (array_key_exists($keys[7], $arr)) $this->setIdRol($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setIdImage($arr[$keys[8]]);
+        if (array_key_exists($keys[8], $arr)) $this->setIdPhoto($arr[$keys[8]]);
         if (array_key_exists($keys[9], $arr)) $this->setCreated($arr[$keys[9]]);
         if (array_key_exists($keys[10], $arr)) $this->setPhone($arr[$keys[10]]);
+        if (array_key_exists($keys[11], $arr)) $this->setModified($arr[$keys[11]]);
+        if (array_key_exists($keys[12], $arr)) $this->setLangCode($arr[$keys[12]]);
+        if (array_key_exists($keys[13], $arr)) $this->setMobile($arr[$keys[13]]);
     }
 
     /**
@@ -1241,9 +1466,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         if ($this->isColumnModified(SysUsersPeer::LAST_NAME)) $criteria->add(SysUsersPeer::LAST_NAME, $this->last_name);
         if ($this->isColumnModified(SysUsersPeer::STATE)) $criteria->add(SysUsersPeer::STATE, $this->state);
         if ($this->isColumnModified(SysUsersPeer::ID_ROL)) $criteria->add(SysUsersPeer::ID_ROL, $this->id_rol);
-        if ($this->isColumnModified(SysUsersPeer::ID_IMAGE)) $criteria->add(SysUsersPeer::ID_IMAGE, $this->id_image);
+        if ($this->isColumnModified(SysUsersPeer::ID_PHOTO)) $criteria->add(SysUsersPeer::ID_PHOTO, $this->id_photo);
         if ($this->isColumnModified(SysUsersPeer::CREATED)) $criteria->add(SysUsersPeer::CREATED, $this->created);
         if ($this->isColumnModified(SysUsersPeer::PHONE)) $criteria->add(SysUsersPeer::PHONE, $this->phone);
+        if ($this->isColumnModified(SysUsersPeer::MODIFIED)) $criteria->add(SysUsersPeer::MODIFIED, $this->modified);
+        if ($this->isColumnModified(SysUsersPeer::LANG_CODE)) $criteria->add(SysUsersPeer::LANG_CODE, $this->lang_code);
+        if ($this->isColumnModified(SysUsersPeer::MOBILE)) $criteria->add(SysUsersPeer::MOBILE, $this->mobile);
 
         return $criteria;
     }
@@ -1314,9 +1542,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         $copyObj->setLastName($this->getLastName());
         $copyObj->setState($this->getState());
         $copyObj->setIdRol($this->getIdRol());
-        $copyObj->setIdImage($this->getIdImage());
+        $copyObj->setIdPhoto($this->getIdPhoto());
         $copyObj->setCreated($this->getCreated());
         $copyObj->setPhone($this->getPhone());
+        $copyObj->setModified($this->getModified());
+        $copyObj->setLangCode($this->getLangCode());
+        $copyObj->setMobile($this->getMobile());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1428,6 +1659,58 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     }
 
     /**
+     * Declares an association between this object and a SysFiles object.
+     *
+     * @param                  SysFiles $v
+     * @return SysUsers The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setSysFiles(SysFiles $v = null)
+    {
+        if ($v === null) {
+            $this->setIdPhoto(NULL);
+        } else {
+            $this->setIdPhoto($v->getIdFile());
+        }
+
+        $this->aSysFiles = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the SysFiles object, it will not be re-added.
+        if ($v !== null) {
+            $v->addSysUsers($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated SysFiles object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return SysFiles The associated SysFiles object.
+     * @throws PropelException
+     */
+    public function getSysFiles(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aSysFiles === null && ($this->id_photo !== null) && $doQuery) {
+            $this->aSysFiles = SysFilesQuery::create()->findPk($this->id_photo, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aSysFiles->addSysUserss($this);
+             */
+        }
+
+        return $this->aSysFiles;
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1440,9 +1723,12 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         $this->last_name = null;
         $this->state = null;
         $this->id_rol = null;
-        $this->id_image = null;
+        $this->id_photo = null;
         $this->created = null;
         $this->phone = null;
+        $this->modified = null;
+        $this->lang_code = null;
+        $this->mobile = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;
@@ -1469,11 +1755,15 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             if ($this->aSysRoles instanceof Persistent) {
               $this->aSysRoles->clearAllReferences($deep);
             }
+            if ($this->aSysFiles instanceof Persistent) {
+              $this->aSysFiles->clearAllReferences($deep);
+            }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
         $this->aSysRoles = null;
+        $this->aSysFiles = null;
     }
 
     /**

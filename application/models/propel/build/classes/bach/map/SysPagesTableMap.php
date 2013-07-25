@@ -51,6 +51,7 @@ class SysPagesTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('SysPermissions', 'SysPermissions', RelationMap::ONE_TO_MANY, array('id_page' => 'id_page', ), null, null, 'SysPermissionss');
     } // buildRelations()
 
 } // SysPagesTableMap
