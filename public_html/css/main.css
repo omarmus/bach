@@ -51,6 +51,20 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .n-success {background-color: rgba(65, 187, 25, .8);}
 .n-error {background-color: rgba(245, 15, 67, .8);}
 
+.fileinput-button {
+  overflow: hidden;
+  position: relative;
+}
+
+.fileinput-button input {
+  height: 71px;
+  left: -40px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 300px;
+}
+
 /* ==========================================================================
                       T A B L E  A N D  D A T A T A B L E S
    ========================================================================== */

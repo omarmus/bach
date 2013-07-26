@@ -52,12 +52,32 @@
 				$.gritter.add(options);
 			}
 		</script>
+		<style type="text/css">
+			.fileinput-button {
+			    overflow: hidden;
+			    position: relative;
+			}
+
+			.fileinput-button input {
+			    height: 71px;
+			    left: -40px;
+			    opacity: 0;
+			    position: absolute;
+			    top: 0;
+			    width: 300px;
+			}
+
+		</style>
 	</head>
 	<body style="background: #eee;">
 		<div class="container" style="margin-top: 20px;">
 			<div class="row-fluid">
 				<button onclick="messageOk()">Ok!</button>
 				<button onclick="messageError()">Cancel!</button>
+				<span class="btn btn-primary fileinput-button">
+					<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
+					<input type="file" name="photo" id="photo" size="20">
+				</span>
 				<table style=" display: none;"class="table table-striped table-bordered table-hover data-table">
 					<thead>
 						<tr>

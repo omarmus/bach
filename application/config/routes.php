@@ -43,6 +43,12 @@ $route['login'] = "admin/user/login";
 $route['logout'] = "admin/user/logout";
 $route['404_override'] = '';
 
+// URI like '/en/about' -> use controller 'about'
+$route['^(en|es)/(.+)$'] = "$2";
+
+// '/en', '/de', '/fr' and '/nl' URIs -> use default controller
+$route['^(en|es)$'] = $route['default_controller'];
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

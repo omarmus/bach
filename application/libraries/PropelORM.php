@@ -23,7 +23,7 @@ class PropelORM
         require_once $this->_propel_main_script;
         // Initialize Propel with the runtime configuration
 
-        require_once('Propel/PropelLogger.php');
+        require_once('propel/PropelLogger.php');
         $logger = new PropelLogger();
 
         Propel::setLogger($logger);
