@@ -21,6 +21,7 @@
 			<th>Name</th>
 			<th>URI</th>
 			<th>Module</th>
+			<th>Section</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,7 +33,8 @@
 			<td class="edit"><?php echo btn_permissions('admin/page/permissions/' . $page->id_page) ?></td>
 			<td><?php echo $page->title; ?></td>
 			<td><?php echo $page->slug; ?></td>
-			<td><?php echo $page->parent_title ?></td>
+			<td><?php echo $page->module ?></td>
+			<td><?php echo $page->section ?></td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>

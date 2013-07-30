@@ -64,10 +64,14 @@ class Page_m extends BC_Model {
 		
 		$array = array();
 		foreach ($pages as $page) {
-			if (! $page['IdModule']) {
+			if (!$page['IdModule'] && !$page['IdSection']) {
 				$array[$page['IdPage']] = $page;
 			} else {
-				$array[$page['IdModule']]['children'][] = $page;
+				if (!$page['IdSection']) {
+					$array[$page['IdModule']]['section'][] = $page;
+				} else {
+
+				}
 			}
 		}
 		return $array;
@@ -75,11 +79,13 @@ class Page_m extends BC_Model {
 
 	public function get_with_parent ()
 	{
-		// Propel no soporta el join de una tabla con sigo misma si es que no existe una relación
+		// Propel no soporta el join de una tabla con sigo misma a menos que se lo defina como un árbol binario
+		// si es que no existe una relación entre si misma
 		// La consulta se realizó con ActiveRecord de Codeigniter
-		return $this->db->select('sys_pages.*, p.slug as parent_slug, p.title as parent_title')
+		return $this->db->select('sys_pages.*, m.slug as parent_slug, m.title as module, s.title as section')
 						->from('sys_pages')
-						->join('sys_pages as p', 'sys_pages.id_parent=p.id_page', 'left')
+						->join('sys_pages as m', 'sys_pages.id_module=m.id_page', 'left')
+						->join('sys_pages as s', 'sys_pages.id_section=s.id_page', 'left')
 						->order_by('sys_pages.order', 'asc')
 						->get()->result();
 	}
