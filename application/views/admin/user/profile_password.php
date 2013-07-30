@@ -1,29 +1,17 @@
-<div class="control-group">
-	<label class="control-label">Contraseña anterior <strong>*</strong></label>
-	<div class="controls">
-		<div class="input-icon left">                                          
-			<input type="password" name="old_password" class="m-wrap medium">
-		</div>
-		<?php echo form_error('old_password'); ?>		
-	</div>
+<div>
+	<label for="">Contraseña anterior <strong>*</strong></label>
+	<input type="password" name="OldPassword">
+	<?php echo form_error('OldPassword'); ?>
 </div>
-<div class="control-group">
-	<label class="control-label">Nueva contraseña <strong>*</strong></label>
-	<div class="controls">
-		<div class="input-icon left">                                          
-			<input type="password" name="password_usr" class="m-wrap medium">
-		</div>
-		<?php echo form_error('password_usr'); ?>		
-	</div>
+<div>
+	<label for="">Nueva contraseña <strong>*</strong></label>
+	<input type="password" name="Password">
+	<?php echo form_error('Password'); ?>
 </div>
-<div class="control-group">
-	<label class="control-label">Confirmar nueva contraseña</label>
-	<div class="controls">
-		<div class="input-icon left">                                          
-			<input type="password" name="rpassword" id="rpassword" class="m-wrap medium">
-		</div>
-		<?php echo form_error('rpassword'); ?>		
-	</div>
+<div>
+	<label for="">Confirmar nueva contraseña</label>
+	<input type="password" name="rpassword">
+	<?php echo form_error('rpassword'); ?>
 </div>
-<hr class="line-form">
+<hr>
 <button class="btn btn-success" type="submit">Cambiar contraseña</button>

@@ -49,20 +49,20 @@ class User_M extends BC_Model {
 	);
 
 	public $rules_password = array(
-		'old_password' => array(
-			'field' => 'old_password',
+		'OldPassword' => array(
+			'field' => 'OldPassword',
 			'label' => 'Contraseña anterior',
 			'rules' => 'trim|required|callback__verify_old_password'
 		),
-		'password_usr' => array(
-			'field' => 'password_usr',
+		'Password' => array(
+			'field' => 'Password',
 			'label' => 'Nueva contraseña',
-			'rules' => 'trim|required|matches[rpassword]'
+			'rules' => 'trim|required|matches[RPassword]'
 		),
-		'rpassword' => array(
-			'field' => 'rpassword',
+		'RPassword' => array(
+			'field' => 'RPassword',
 			'label' => 'Confirmar password',
-			'rules' => 'trim|matches[password_usr]'
+			'rules' => 'trim|matches[Password]'
 		)
 	);
 	
@@ -91,16 +91,23 @@ class User_M extends BC_Model {
 		if (count($user)) {
 			//Log in user
 			if($this->bcrypt->check_password($this->input->post('password'), $user->getPassword())) {
-                $data = array(
-					'username' => $user->getUsername(), 
-					'email' => $user->getEmail(), 
-					'id_user' => $user->getIdUser(),
-					'id_rol' => $user->getIdRol(),
-					'loggedin' => TRUE, 
-				);
-				$this->session->set_userdata($data);
+                $this->set_session_data($user);
             }
 		}
+	}
+
+	public function set_session_data($user)
+	{
+		$data = array(
+			'username' => $user->getUsername(),
+			'email' => $user->getEmail(), 
+			'id_user' => $user->getIdUser(),
+			'id_rol' => $user->getIdRol(),
+			'loggedin' => TRUE, 
+			'id_photo' => $user->getIdPhoto(),
+			'photo' => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : ''
+		);
+		$this->session->set_userdata($data);
 	}
 
 	public function logout()

@@ -5,8 +5,8 @@ class Page_m extends BC_Model {
 	protected $_primary_key = 'IdPage';
 
 	public $rules = array(
-		'IdParent' => array(
-			'field' => 'IdParent',
+		'IdModule' => array(
+			'field' => 'IdModule',
 			'label' => 'Parent',
 			'rules' => 'trim|intval'
 		),
@@ -33,7 +33,7 @@ class Page_m extends BC_Model {
 		return array(
 			'Title' => '',
 			'Slug' => '',
-			'IdParent' => 0
+			'IdModule' => 0
 		);
 	}
 
@@ -42,8 +42,8 @@ class Page_m extends BC_Model {
 		// Delete a page
 		parent::delete($pk);
 
-		// Reset parent ID for its children
-		SysPagesQuery::create()->filterByIdParent($pk)->update(array('IdParent' => 0));
+		// Reset modules ID for its children
+		SysPagesQuery::create()->filterByIdModule($pk)->update(array('IdModule' => 0));
 	}
 
 	public function save_order($pages)
@@ -51,7 +51,7 @@ class Page_m extends BC_Model {
 		if (count($pages)) {
 			foreach ($pages as $order => $page) {
 				if ($page['item_id'] != '') {
-					$data = array('IdParent' => (int)$page['parent_id'], 'Order' => $order);
+					$data = array('IdModule' => (int)$page['parent_id'], 'Order' => $order);
 					SysPagesQuery::create()->filterByIdPage($page['item_id'])->update($data);
 				}
 			}
@@ -64,10 +64,10 @@ class Page_m extends BC_Model {
 		
 		$array = array();
 		foreach ($pages as $page) {
-			if (! $page['IdParent']) {
+			if (! $page['IdModule']) {
 				$array[$page['IdPage']] = $page;
 			} else {
-				$array[$page['IdParent']]['children'][] = $page;
+				$array[$page['IdModule']]['children'][] = $page;
 			}
 		}
 		return $array;
@@ -87,7 +87,7 @@ class Page_m extends BC_Model {
 	public function get_no_parents()
 	{
 		// Fetch pages without parents
-		$pages = parent::get_by(array('IdParent' => 0));
+		$pages = parent::get_by(array('IdModule' => 0));
 
 		// Return key =>  value pair array
 		$array = array();

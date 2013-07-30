@@ -24,13 +24,13 @@ abstract class BaseSysPagesPeer
     const TM_CLASS = 'SysPagesTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 5;
+    const NUM_COLUMNS = 7;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 5;
+    const NUM_HYDRATE_COLUMNS = 7;
 
     /** the column name for the id_page field */
     const ID_PAGE = 'sys_pages.id_page';
@@ -44,8 +44,14 @@ abstract class BaseSysPagesPeer
     /** the column name for the order field */
     const ORDER = 'sys_pages.order';
 
-    /** the column name for the id_parent field */
-    const ID_PARENT = 'sys_pages.id_parent';
+    /** the column name for the id_module field */
+    const ID_MODULE = 'sys_pages.id_module';
+
+    /** the column name for the id_section field */
+    const ID_SECTION = 'sys_pages.id_section';
+
+    /** the column name for the state field */
+    const STATE = 'sys_pages.state';
 
     /** The default string format for model objects of the related table **/
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -66,12 +72,12 @@ abstract class BaseSysPagesPeer
      * e.g. SysPagesPeer::$fieldNames[SysPagesPeer::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('IdPage', 'Title', 'Slug', 'Order', 'IdParent', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idPage', 'title', 'slug', 'order', 'idParent', ),
-        BasePeer::TYPE_COLNAME => array (SysPagesPeer::ID_PAGE, SysPagesPeer::TITLE, SysPagesPeer::SLUG, SysPagesPeer::ORDER, SysPagesPeer::ID_PARENT, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_PAGE', 'TITLE', 'SLUG', 'ORDER', 'ID_PARENT', ),
-        BasePeer::TYPE_FIELDNAME => array ('id_page', 'title', 'slug', 'order', 'id_parent', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('IdPage', 'Title', 'Slug', 'Order', 'IdModule', 'IdSection', 'State', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idPage', 'title', 'slug', 'order', 'idModule', 'idSection', 'state', ),
+        BasePeer::TYPE_COLNAME => array (SysPagesPeer::ID_PAGE, SysPagesPeer::TITLE, SysPagesPeer::SLUG, SysPagesPeer::ORDER, SysPagesPeer::ID_MODULE, SysPagesPeer::ID_SECTION, SysPagesPeer::STATE, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_PAGE', 'TITLE', 'SLUG', 'ORDER', 'ID_MODULE', 'ID_SECTION', 'STATE', ),
+        BasePeer::TYPE_FIELDNAME => array ('id_page', 'title', 'slug', 'order', 'id_module', 'id_section', 'state', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -81,12 +87,12 @@ abstract class BaseSysPagesPeer
      * e.g. SysPagesPeer::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('IdPage' => 0, 'Title' => 1, 'Slug' => 2, 'Order' => 3, 'IdParent' => 4, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('idPage' => 0, 'title' => 1, 'slug' => 2, 'order' => 3, 'idParent' => 4, ),
-        BasePeer::TYPE_COLNAME => array (SysPagesPeer::ID_PAGE => 0, SysPagesPeer::TITLE => 1, SysPagesPeer::SLUG => 2, SysPagesPeer::ORDER => 3, SysPagesPeer::ID_PARENT => 4, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID_PAGE' => 0, 'TITLE' => 1, 'SLUG' => 2, 'ORDER' => 3, 'ID_PARENT' => 4, ),
-        BasePeer::TYPE_FIELDNAME => array ('id_page' => 0, 'title' => 1, 'slug' => 2, 'order' => 3, 'id_parent' => 4, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+        BasePeer::TYPE_PHPNAME => array ('IdPage' => 0, 'Title' => 1, 'Slug' => 2, 'Order' => 3, 'IdModule' => 4, 'IdSection' => 5, 'State' => 6, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('idPage' => 0, 'title' => 1, 'slug' => 2, 'order' => 3, 'idModule' => 4, 'idSection' => 5, 'state' => 6, ),
+        BasePeer::TYPE_COLNAME => array (SysPagesPeer::ID_PAGE => 0, SysPagesPeer::TITLE => 1, SysPagesPeer::SLUG => 2, SysPagesPeer::ORDER => 3, SysPagesPeer::ID_MODULE => 4, SysPagesPeer::ID_SECTION => 5, SysPagesPeer::STATE => 6, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID_PAGE' => 0, 'TITLE' => 1, 'SLUG' => 2, 'ORDER' => 3, 'ID_MODULE' => 4, 'ID_SECTION' => 5, 'STATE' => 6, ),
+        BasePeer::TYPE_FIELDNAME => array ('id_page' => 0, 'title' => 1, 'slug' => 2, 'order' => 3, 'id_module' => 4, 'id_section' => 5, 'state' => 6, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
     );
 
     /**
@@ -164,13 +170,17 @@ abstract class BaseSysPagesPeer
             $criteria->addSelectColumn(SysPagesPeer::TITLE);
             $criteria->addSelectColumn(SysPagesPeer::SLUG);
             $criteria->addSelectColumn(SysPagesPeer::ORDER);
-            $criteria->addSelectColumn(SysPagesPeer::ID_PARENT);
+            $criteria->addSelectColumn(SysPagesPeer::ID_MODULE);
+            $criteria->addSelectColumn(SysPagesPeer::ID_SECTION);
+            $criteria->addSelectColumn(SysPagesPeer::STATE);
         } else {
             $criteria->addSelectColumn($alias . '.id_page');
             $criteria->addSelectColumn($alias . '.title');
             $criteria->addSelectColumn($alias . '.slug');
             $criteria->addSelectColumn($alias . '.order');
-            $criteria->addSelectColumn($alias . '.id_parent');
+            $criteria->addSelectColumn($alias . '.id_module');
+            $criteria->addSelectColumn($alias . '.id_section');
+            $criteria->addSelectColumn($alias . '.state');
         }
     }
 

@@ -42,7 +42,9 @@ class SysPagesTableMap extends TableMap
         $this->addColumn('title', 'Title', 'VARCHAR', true, 100, null);
         $this->addColumn('slug', 'Slug', 'VARCHAR', true, 100, null);
         $this->addColumn('order', 'Order', 'INTEGER', true, null, null);
-        $this->addColumn('id_parent', 'IdParent', 'INTEGER', false, null, 0);
+        $this->addColumn('id_module', 'IdModule', 'INTEGER', false, null, 0);
+        $this->addColumn('id_section', 'IdSection', 'INTEGER', false, null, 0);
+        $this->addColumn('state', 'State', 'VARCHAR', false, 20, 'ACTIVE');
         // validators
     } // initialize()
 

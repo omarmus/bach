@@ -24,13 +24,13 @@
  * @method SysPermissionsQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
  * @method SysPermissionsQuery innerJoin($relation) Adds a INNER JOIN clause to the query
  *
- * @method SysPermissionsQuery leftJoinSysRoles($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysRoles relation
- * @method SysPermissionsQuery rightJoinSysRoles($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysRoles relation
- * @method SysPermissionsQuery innerJoinSysRoles($relationAlias = null) Adds a INNER JOIN clause to the query using the SysRoles relation
- *
  * @method SysPermissionsQuery leftJoinSysPages($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysPages relation
  * @method SysPermissionsQuery rightJoinSysPages($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysPages relation
  * @method SysPermissionsQuery innerJoinSysPages($relationAlias = null) Adds a INNER JOIN clause to the query using the SysPages relation
+ *
+ * @method SysPermissionsQuery leftJoinSysRoles($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysRoles relation
+ * @method SysPermissionsQuery rightJoinSysRoles($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysRoles relation
+ * @method SysPermissionsQuery innerJoinSysRoles($relationAlias = null) Adds a INNER JOIN clause to the query using the SysRoles relation
  *
  * @method SysPermissions findOne(PropelPDO $con = null) Return the first SysPermissions matching the query
  * @method SysPermissions findOneOrCreate(PropelPDO $con = null) Return the first SysPermissions matching the query, or a new SysPermissions object populated from the query conditions when no match is found
@@ -448,82 +448,6 @@ abstract class BaseSysPermissionsQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query by a related SysRoles object
-     *
-     * @param   SysRoles|PropelObjectCollection $sysRoles The related object(s) to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return                 SysPermissionsQuery The current query, for fluid interface
-     * @throws PropelException - if the provided filter is invalid.
-     */
-    public function filterBySysRoles($sysRoles, $comparison = null)
-    {
-        if ($sysRoles instanceof SysRoles) {
-            return $this
-                ->addUsingAlias(SysPermissionsPeer::ID_ROL, $sysRoles->getIdRol(), $comparison);
-        } elseif ($sysRoles instanceof PropelObjectCollection) {
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-
-            return $this
-                ->addUsingAlias(SysPermissionsPeer::ID_ROL, $sysRoles->toKeyValue('PrimaryKey', 'IdRol'), $comparison);
-        } else {
-            throw new PropelException('filterBySysRoles() only accepts arguments of type SysRoles or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the SysRoles relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return SysPermissionsQuery The current query, for fluid interface
-     */
-    public function joinSysRoles($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('SysRoles');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'SysRoles');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the SysRoles relation SysRoles object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   SysRolesQuery A secondary query class using the current class as primary query
-     */
-    public function useSysRolesQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
-    {
-        return $this
-            ->joinSysRoles($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'SysRoles', 'SysRolesQuery');
-    }
-
-    /**
      * Filter the query by a related SysPages object
      *
      * @param   SysPages|PropelObjectCollection $sysPages The related object(s) to use as filter
@@ -597,6 +521,82 @@ abstract class BaseSysPermissionsQuery extends ModelCriteria
         return $this
             ->joinSysPages($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'SysPages', 'SysPagesQuery');
+    }
+
+    /**
+     * Filter the query by a related SysRoles object
+     *
+     * @param   SysRoles|PropelObjectCollection $sysRoles The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 SysPermissionsQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterBySysRoles($sysRoles, $comparison = null)
+    {
+        if ($sysRoles instanceof SysRoles) {
+            return $this
+                ->addUsingAlias(SysPermissionsPeer::ID_ROL, $sysRoles->getIdRol(), $comparison);
+        } elseif ($sysRoles instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(SysPermissionsPeer::ID_ROL, $sysRoles->toKeyValue('PrimaryKey', 'IdRol'), $comparison);
+        } else {
+            throw new PropelException('filterBySysRoles() only accepts arguments of type SysRoles or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the SysRoles relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return SysPermissionsQuery The current query, for fluid interface
+     */
+    public function joinSysRoles($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('SysRoles');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'SysRoles');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the SysRoles relation SysRoles object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   SysRolesQuery A secondary query class using the current class as primary query
+     */
+    public function useSysRolesQuery($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    {
+        return $this
+            ->joinSysRoles($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'SysRoles', 'SysRolesQuery');
     }
 
     /**

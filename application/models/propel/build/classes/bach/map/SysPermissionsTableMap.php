@@ -52,8 +52,8 @@ class SysPermissionsTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('SysRoles', 'SysRoles', RelationMap::MANY_TO_ONE, array('id_rol' => 'id_rol', ), null, null);
         $this->addRelation('SysPages', 'SysPages', RelationMap::MANY_TO_ONE, array('id_page' => 'id_page', ), null, null);
+        $this->addRelation('SysRoles', 'SysRoles', RelationMap::MANY_TO_ONE, array('id_rol' => 'id_rol', ), null, null);
     } // buildRelations()
 
 } // SysPermissionsTableMap

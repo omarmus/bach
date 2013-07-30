@@ -29,37 +29,37 @@ class BC_Lang extends CI_Lang {
 	{
 		parent::__construct();
 
-		global $CFG;
-		global $URI;
-		global $RTR;
+		// global $CFG;
+		// global $URI;
+		// global $RTR;
 
-		$this->uri = $URI->uri_string();
-		$this->default_uri = $RTR->default_controller;
+		// $this->uri = $URI->uri_string();
+		// $this->default_uri = $RTR->default_controller;
 
-		$uri_segment = $this->get_uri_lang($this->uri);
-		$this->lang_code = $uri_segment['lang'] ;
+		// $uri_segment = $this->get_uri_lang($this->uri);
+		// $this->lang_code = $uri_segment['lang'] ;
 
-		$url_ok = false;
-		if ((!empty($this->lang_code)) && (array_key_exists($this->lang_code, $this->languages))) 
-		{
-			$language = $this->languages[$this->lang_code];
-			$CFG->set_item('language', $language);
-			$url_ok = true;
-		}
+		// $url_ok = false;
+		// if ((!empty($this->lang_code)) && (array_key_exists($this->lang_code, $this->languages))) 
+		// {
+		// 	$language = $this->languages[$this->lang_code];
+		// 	$CFG->set_item('language', $language);
+		// 	$url_ok = true;
+		// }
 
-		if ((!$url_ok) && (!$this->is_special($uri_segment['parts'][0]))) // special URI -> no redirect
-		{ 
-			// set default language
-			$CFG->set_item('language', $this->languages[$this->default_lang()]);
+		// if ((!$url_ok) && (!$this->is_special($uri_segment['parts'][0]))) // special URI -> no redirect
+		// { 
+		// 	// set default language
+		// 	$CFG->set_item('language', $this->languages[$this->default_lang()]);
 
-			$uri = (!empty($this->uri)) ? $this->uri: $this->default_uri;
-			//OPB - modification to use i18n also without changing the .htaccess (without pretty url) 
-			$index_url = empty($CFG->config['index_page']) ? '' : $CFG->config['index_page']."/";
-			$new_url = $CFG->config['base_url'].$index_url.$this->default_lang().$uri;
+		// 	$uri = (!empty($this->uri)) ? $this->uri: $this->default_uri;
+		// 	//OPB - modification to use i18n also without changing the .htaccess (without pretty url) 
+		// 	$index_url = empty($CFG->config['index_page']) ? '' : $CFG->config['index_page']."/";
+		// 	$new_url = $CFG->config['base_url'].$index_url.$this->default_lang().$uri;
 
-			header("Location: " . $new_url, TRUE, 302);
-			exit;
-		}
+		// 	header("Location: " . $new_url, TRUE, 302);
+		// 	exit;
+		// }
 	}
 
 

@@ -11,15 +11,7 @@ DROP TABLE IF EXISTS `sys_files`;
 
 CREATE TABLE `sys_files`
 (
-<<<<<<< HEAD:application/models/propel/build/sql/schema.sql
-<<<<<<< HEAD:application/libraries/propel/build/sql/schema.sql
-    `id_file` INTEGER NOT NULL AUTO_INCREMENT,
-=======
     `id_file` int(11) unsigned NOT NULL AUTO_INCREMENT,
->>>>>>> 746f7c578cd95ce5ada7ab960dbfb3cb5b5c525e:application/models/propel/build/sql/schema.sql
-=======
-    `id_file` int(11) unsigned NOT NULL AUTO_INCREMENT,
->>>>>>> 746f7c578cd95ce5ada7ab960dbfb3cb5b5c525e:application/models/propel/build/sql/schema.sql
     `filename` VARCHAR(255),
     `title` VARCHAR(100),
     `type` VARCHAR(20),
@@ -56,7 +48,9 @@ CREATE TABLE `sys_pages`
     `title` VARCHAR(100) NOT NULL,
     `slug` VARCHAR(100) NOT NULL,
     `order` int(11) unsigned NOT NULL,
-    `id_parent` int(11) unsigned DEFAULT 0,
+    `id_module` int(11) unsigned DEFAULT 0,
+    `id_section` INTEGER DEFAULT 0,
+    `state` VARCHAR(20) DEFAULT 'ACTIVE',
     PRIMARY KEY (`id_page`)
 ) ENGINE=InnoDB;
 
@@ -77,12 +71,12 @@ CREATE TABLE `sys_permissions`
     PRIMARY KEY (`id_page`,`id_rol`),
     INDEX `id_page` (`id_page`),
     INDEX `id_rol` (`id_rol`),
-    CONSTRAINT `sys_permissions_fk1`
-        FOREIGN KEY (`id_rol`)
-        REFERENCES `sys_roles` (`id_rol`),
     CONSTRAINT `sys_permissions_fk`
         FOREIGN KEY (`id_page`)
-        REFERENCES `sys_pages` (`id_page`)
+        REFERENCES `sys_pages` (`id_page`),
+    CONSTRAINT `sys_permissions_fk1`
+        FOREIGN KEY (`id_rol`)
+        REFERENCES `sys_roles` (`id_rol`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

@@ -70,14 +70,14 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
     protected $delete;
 
     /**
-     * @var        SysRoles
-     */
-    protected $aSysRoles;
-
-    /**
      * @var        SysPages
      */
     protected $aSysPages;
+
+    /**
+     * @var        SysRoles
+     */
+    protected $aSysRoles;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -454,8 +454,8 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aSysRoles = null;
             $this->aSysPages = null;
+            $this->aSysRoles = null;
         } // if (deep)
     }
 
@@ -574,18 +574,18 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aSysRoles !== null) {
-                if ($this->aSysRoles->isModified() || $this->aSysRoles->isNew()) {
-                    $affectedRows += $this->aSysRoles->save($con);
-                }
-                $this->setSysRoles($this->aSysRoles);
-            }
-
             if ($this->aSysPages !== null) {
                 if ($this->aSysPages->isModified() || $this->aSysPages->isNew()) {
                     $affectedRows += $this->aSysPages->save($con);
                 }
                 $this->setSysPages($this->aSysPages);
+            }
+
+            if ($this->aSysRoles !== null) {
+                if ($this->aSysRoles->isModified() || $this->aSysRoles->isNew()) {
+                    $affectedRows += $this->aSysRoles->save($con);
+                }
+                $this->setSysRoles($this->aSysRoles);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -760,15 +760,15 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aSysRoles !== null) {
-                if (!$this->aSysRoles->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aSysRoles->getValidationFailures());
-                }
-            }
-
             if ($this->aSysPages !== null) {
                 if (!$this->aSysPages->validate($columns)) {
                     $failureMap = array_merge($failureMap, $this->aSysPages->getValidationFailures());
+                }
+            }
+
+            if ($this->aSysRoles !== null) {
+                if (!$this->aSysRoles->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aSysRoles->getValidationFailures());
                 }
             }
 
@@ -874,11 +874,11 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
         }
         
         if ($includeForeignObjects) {
-            if (null !== $this->aSysRoles) {
-                $result['SysRoles'] = $this->aSysRoles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
             if (null !== $this->aSysPages) {
                 $result['SysPages'] = $this->aSysPages->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aSysRoles) {
+                $result['SysRoles'] = $this->aSysRoles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -1113,58 +1113,6 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
     }
 
     /**
-     * Declares an association between this object and a SysRoles object.
-     *
-     * @param                  SysRoles $v
-     * @return SysPermissions The current object (for fluent API support)
-     * @throws PropelException
-     */
-    public function setSysRoles(SysRoles $v = null)
-    {
-        if ($v === null) {
-            $this->setIdRol(NULL);
-        } else {
-            $this->setIdRol($v->getIdRol());
-        }
-
-        $this->aSysRoles = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the SysRoles object, it will not be re-added.
-        if ($v !== null) {
-            $v->addSysPermissions($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated SysRoles object
-     *
-     * @param PropelPDO $con Optional Connection object.
-     * @param $doQuery Executes a query to get the object if required
-     * @return SysRoles The associated SysRoles object.
-     * @throws PropelException
-     */
-    public function getSysRoles(PropelPDO $con = null, $doQuery = true)
-    {
-        if ($this->aSysRoles === null && ($this->id_rol !== null) && $doQuery) {
-            $this->aSysRoles = SysRolesQuery::create()->findPk($this->id_rol, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aSysRoles->addSysPermissionss($this);
-             */
-        }
-
-        return $this->aSysRoles;
-    }
-
-    /**
      * Declares an association between this object and a SysPages object.
      *
      * @param                  SysPages $v
@@ -1217,6 +1165,58 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
     }
 
     /**
+     * Declares an association between this object and a SysRoles object.
+     *
+     * @param                  SysRoles $v
+     * @return SysPermissions The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setSysRoles(SysRoles $v = null)
+    {
+        if ($v === null) {
+            $this->setIdRol(NULL);
+        } else {
+            $this->setIdRol($v->getIdRol());
+        }
+
+        $this->aSysRoles = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the SysRoles object, it will not be re-added.
+        if ($v !== null) {
+            $v->addSysPermissions($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated SysRoles object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return SysRoles The associated SysRoles object.
+     * @throws PropelException
+     */
+    public function getSysRoles(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aSysRoles === null && ($this->id_rol !== null) && $doQuery) {
+            $this->aSysRoles = SysRolesQuery::create()->findPk($this->id_rol, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aSysRoles->addSysPermissionss($this);
+             */
+        }
+
+        return $this->aSysRoles;
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1250,18 +1250,18 @@ abstract class BaseSysPermissions extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->aSysRoles instanceof Persistent) {
-              $this->aSysRoles->clearAllReferences($deep);
-            }
             if ($this->aSysPages instanceof Persistent) {
               $this->aSysPages->clearAllReferences($deep);
+            }
+            if ($this->aSysRoles instanceof Persistent) {
+              $this->aSysRoles->clearAllReferences($deep);
             }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        $this->aSysRoles = null;
         $this->aSysPages = null;
+        $this->aSysRoles = null;
     }
 
     /**

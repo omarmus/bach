@@ -83,7 +83,22 @@ function validate (form, url) {
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);
 			$('#main-modal').find('input').on('keypress', function () {
 				$(this).next().fadeOut();
-			})
+			});
+		}
+	});
+	return false;
+}
+
+function validate_data (form, url) {
+	$.post(url, $(form).serialize(), function (response) {
+		var error = $(form).html(response).find('.error');
+		if (error.length) {
+			setTimeout(function () {$(error[0]).prev().focus()}, 500);
+			$(form).find('input').on('keypress', function () {
+				$(this).next().fadeOut();
+			});
+		} else {
+			messageOk("Save changes!");
 		}
 	});
 	return false;

@@ -15,109 +15,97 @@ class Profile extends Admin_Controller {
 
 	public function index()
 	{   
-		// $this->form_validation->set_rules($this->rules);
-		// $this->form_validation->set_error_delimiters('<div class="inline_validation_message">','</div>');
-		// if ($this->form_validation->run() == TRUE) {
-		// 	$data = $this->array_request($_POST);
-		// 	$this->user->edit($data, 'id_usr', $this->id_user);
-		// 	$this->mysecurity->autologin($this->id_user);
-		// }
 		$this->data['user'] = $this->user->get($this->id_user)->toArray();
-		// if (!is_null($this->data['user']['id_file'])) {
-		// 	$file = $this->files_model->get_file($this->data['user']['id_file']);
-		// 	$this->data['user']['photo'] = $file['filename'];
-		// }
+
+		if ($this->data['user']['IdPhoto']) {
+			$file = $this->file->get($this->data['user']['IdPhoto'])->toArray();
+			$this->data['user']['photo'] = $file['Filename'];
+		}
 
 		$this->data['subview'] = 'admin/user/profile';
 		$this->load->view('admin/_layout_main', $this->data);
 	}
 
-	public function change_password()
+	public function update_data()
 	{
-		$this->form_validation->set_rules($this->rules_password);
-		$this->form_validation->set_error_delimiters('<div class="inline_validation_message">','</div>');
+		$rules = $this->user->rules_edit;
+		$this->form_validation->set_rules($rules);
 		if ($this->form_validation->run() == TRUE) {
-			$data = $this->array_request($_POST);
-			$data['password_usr'] = $this->mysecurity->passwordencrypt($data["password_usr"]);
-			unset($data['old_password'], $data['rpassword']);
-			$this->user->edit($data, 'id_usr', $this->id_user);
+
+			// Save a new data user
+			$data = $this->user->array_request($_POST);
+			$this->user->save($data, $this->id_user);
+
+			// Set a new data session
+			$user = $this->user->get($this->id_user);
+			$this->user->set_session_data($user);
+			$this->data['user'] = $user->toArray();
+		} else {
+			$this->data['user'] = $this->user->get($this->id_user)->toArray();
 		}
-		$this->load->view('panel/sec/profile_password');
+		$this->load->view('admin/user/profile_data', $this->data);
+	}
+
+	public function update_password()
+	{
+		$this->form_validation->set_rules($this->user->rules_password);
+		if ($this->form_validation->run() == TRUE) {
+			$this->load->library('bcrypt');
+			$data = $this->user->array_request($_POST);
+			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
+			$this->user->save($data, $this->id_user);
+		}
+		$this->load->view('admin/user/profile_password');
 	}
 
 	public function update_photo()
 	{
-		$this->data['user'] = $this->user->get_user($this->id_user);
-		if (!is_null($this->data['user']['id_file'])) {
-			$file = $this->files_model->get_file($this->data['user']['id_file']);
-			$this->data['user']['photo'] = $file['filename'];
+		$this->data['user'] = $this->user->get($this->id_user)->toArray();
+		if (!is_null($this->data['user']['id_photo'])) {
+			$file = $this->file->get($this->data['user']['id_photo']);
+			$this->data['user']['photo'] = $file['Filename'];
 		}
-		$this->mysecurity->autologin($this->id_user);
+		// Set a new data session
+		$user = $this->user->get($this->id_user);
+		$this->user->set_session_data($user);
+		$this->data['user'] = $user->toArray();
+		
 		$this->load->view('panel/sec/profile_photo', $this->data);
 	}
 
 	public function delete_photo()
 	{
-		$this->files_model->delete_file($this->session->userdata('id_file'));
-		$this->user->edit(array('id_file' => null), 'id_usr', $this->id_user);
+		$this->file->delete($this->session->userdata('id_photo'));
+		$this->user->save(array('IdPhoto' => NULL), $this->id_user);
 
-		$this->update_photo();
+		// $this->update_photo();
 	}
 
 	public function upload_photo()
 	{
-		$status = "";
-		$msg = "";
-		$file_element_name = 'photo';
+		$config['field'] = 'photo';
 		$config['upload_path'] = './static/files/user_profile/';
 		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']  = 1024 * 8;
-		$config['encrypt_name'] = TRUE;
 
-		$this->load->library('upload', $config);
+		$file = upload_file($config);
 
-		if (!$this->upload->do_upload($file_element_name)) {
-			$status = 'ERROR';
-			$msg = $this->upload->display_errors('', '');
-		} else {
-			$data = $this->upload->data();
-			$id_file = $this->files_model->insert_file($data);
-			if($id_file) {
-				$this->user->edit(array('id_file' => $id_file), 'id_usr', $this->id_user);
-				$status = "OK";
-			} else {
-				unlink($data['full_path']);
-				$status = "ERROR";
-				$msg = "Something went wrong when saving the file, please try again.";
-			}
+		if($file['id_file']) {
+			$this->user->save(array('IdPhoto' => $file['id_file']), $this->id_user);
 		}
-		@unlink($_FILES[$file_element_name]);
-		echo json_encode(array('status' => $status, 'msg' => $msg));
-	}
 
-	public function array_request($request)
-	{
-		$data = array();
-		foreach ($request as $key => $value) {
-			$data[$key] = $this->input->post($key);
-		}
-		return $data;
+		echo json_encode($file);
 	}
 
 	public function _verify_old_password()
 	{
-		$user = $this->user->get_user($this->id_user);
+		$user = $this->user->get($this->id_user);
 
-		$passwords = array(
-			"pass1" => $this->input->post('old_password'),
-			"pass2" => $user['password_usr']
-	   	);
-		if ($this->mysecurity->checkpassword($passwords)) {
-			return TRUE;
-		} else {
-			$this->form_validation->set_message('_verify_old_password', 'La %s es incorrecta.');
+		if($this->bcrypt->check_password($this->input->post('Password'), $user->getPassword())) {
+            return TRUE;
+        } else {
+        	$this->form_validation->set_message('_verify_old_password', 'La %s es incorrecta.');
 			return FALSE;
-		}
+        }
 	}
 
 }

@@ -54,11 +54,25 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $order;
 
     /**
-     * The value for the id_parent field.
+     * The value for the id_module field.
      * Note: this column has a database default value of: 0
      * @var        int
      */
-    protected $id_parent;
+    protected $id_module;
+
+    /**
+     * The value for the id_section field.
+     * Note: this column has a database default value of: 0
+     * @var        int
+     */
+    protected $id_section;
+
+    /**
+     * The value for the state field.
+     * Note: this column has a database default value of: 'ACTIVE'
+     * @var        string
+     */
+    protected $state;
 
     /**
      * @var        PropelObjectCollection|SysPermissions[] Collection to store aggregation of SysPermissions objects.
@@ -100,7 +114,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function applyDefaultValues()
     {
-        $this->id_parent = 0;
+        $this->id_module = 0;
+        $this->id_section = 0;
+        $this->state = 'ACTIVE';
     }
 
     /**
@@ -158,14 +174,36 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     }
 
     /**
-     * Get the [id_parent] column value.
+     * Get the [id_module] column value.
      * 
      * @return int
      */
-    public function getIdParent()
+    public function getIdModule()
     {
 
-        return $this->id_parent;
+        return $this->id_module;
+    }
+
+    /**
+     * Get the [id_section] column value.
+     * 
+     * @return int
+     */
+    public function getIdSection()
+    {
+
+        return $this->id_section;
+    }
+
+    /**
+     * Get the [state] column value.
+     * 
+     * @return string
+     */
+    public function getState()
+    {
+
+        return $this->state;
     }
 
     /**
@@ -253,25 +291,67 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     } // setOrder()
 
     /**
-     * Set the value of [id_parent] column.
+     * Set the value of [id_module] column.
      * 
      * @param  int $v new value
      * @return SysPages The current object (for fluent API support)
      */
-    public function setIdParent($v)
+    public function setIdModule($v)
     {
         if ($v !== null && is_numeric($v)) {
             $v = (int) $v;
         }
 
-        if ($this->id_parent !== $v) {
-            $this->id_parent = $v;
-            $this->modifiedColumns[] = SysPagesPeer::ID_PARENT;
+        if ($this->id_module !== $v) {
+            $this->id_module = $v;
+            $this->modifiedColumns[] = SysPagesPeer::ID_MODULE;
         }
 
 
         return $this;
-    } // setIdParent()
+    } // setIdModule()
+
+    /**
+     * Set the value of [id_section] column.
+     * 
+     * @param  int $v new value
+     * @return SysPages The current object (for fluent API support)
+     */
+    public function setIdSection($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (int) $v;
+        }
+
+        if ($this->id_section !== $v) {
+            $this->id_section = $v;
+            $this->modifiedColumns[] = SysPagesPeer::ID_SECTION;
+        }
+
+
+        return $this;
+    } // setIdSection()
+
+    /**
+     * Set the value of [state] column.
+     * 
+     * @param  string $v new value
+     * @return SysPages The current object (for fluent API support)
+     */
+    public function setState($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->state !== $v) {
+            $this->state = $v;
+            $this->modifiedColumns[] = SysPagesPeer::STATE;
+        }
+
+
+        return $this;
+    } // setState()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -283,7 +363,15 @@ abstract class BaseSysPages extends BaseObject implements Persistent
      */
     public function hasOnlyDefaultValues()
     {
-            if ($this->id_parent !== 0) {
+            if ($this->id_module !== 0) {
+                return false;
+            }
+
+            if ($this->id_section !== 0) {
+                return false;
+            }
+
+            if ($this->state !== 'ACTIVE') {
                 return false;
             }
 
@@ -313,7 +401,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $this->title = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
             $this->slug = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->order = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
-            $this->id_parent = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->id_module = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->id_section = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+            $this->state = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -323,7 +413,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 5; // 5 = SysPagesPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 7; // 7 = SysPagesPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating SysPages object", $e);
@@ -566,8 +656,14 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if ($this->isColumnModified(SysPagesPeer::ORDER)) {
             $modifiedColumns[':p' . $index++]  = '`order`';
         }
-        if ($this->isColumnModified(SysPagesPeer::ID_PARENT)) {
-            $modifiedColumns[':p' . $index++]  = '`id_parent`';
+        if ($this->isColumnModified(SysPagesPeer::ID_MODULE)) {
+            $modifiedColumns[':p' . $index++]  = '`id_module`';
+        }
+        if ($this->isColumnModified(SysPagesPeer::ID_SECTION)) {
+            $modifiedColumns[':p' . $index++]  = '`id_section`';
+        }
+        if ($this->isColumnModified(SysPagesPeer::STATE)) {
+            $modifiedColumns[':p' . $index++]  = '`state`';
         }
 
         $sql = sprintf(
@@ -592,8 +688,14 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                     case '`order`':						
                         $stmt->bindValue($identifier, $this->order, PDO::PARAM_INT);
                         break;
-                    case '`id_parent`':						
-                        $stmt->bindValue($identifier, $this->id_parent, PDO::PARAM_INT);
+                    case '`id_module`':						
+                        $stmt->bindValue($identifier, $this->id_module, PDO::PARAM_INT);
+                        break;
+                    case '`id_section`':						
+                        $stmt->bindValue($identifier, $this->id_section, PDO::PARAM_INT);
+                        break;
+                    case '`state`':						
+                        $stmt->bindValue($identifier, $this->state, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -750,7 +852,13 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                 return $this->getOrder();
                 break;
             case 4:
-                return $this->getIdParent();
+                return $this->getIdModule();
+                break;
+            case 5:
+                return $this->getIdSection();
+                break;
+            case 6:
+                return $this->getState();
                 break;
             default:
                 return null;
@@ -785,7 +893,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $keys[1] => $this->getTitle(),
             $keys[2] => $this->getSlug(),
             $keys[3] => $this->getOrder(),
-            $keys[4] => $this->getIdParent(),
+            $keys[4] => $this->getIdModule(),
+            $keys[5] => $this->getIdSection(),
+            $keys[6] => $this->getState(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -844,7 +954,13 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                 $this->setOrder($value);
                 break;
             case 4:
-                $this->setIdParent($value);
+                $this->setIdModule($value);
+                break;
+            case 5:
+                $this->setIdSection($value);
+                break;
+            case 6:
+                $this->setState($value);
                 break;
         } // switch()
     }
@@ -874,7 +990,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setSlug($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setOrder($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setIdParent($arr[$keys[4]]);
+        if (array_key_exists($keys[4], $arr)) $this->setIdModule($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setIdSection($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setState($arr[$keys[6]]);
     }
 
     /**
@@ -890,7 +1008,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if ($this->isColumnModified(SysPagesPeer::TITLE)) $criteria->add(SysPagesPeer::TITLE, $this->title);
         if ($this->isColumnModified(SysPagesPeer::SLUG)) $criteria->add(SysPagesPeer::SLUG, $this->slug);
         if ($this->isColumnModified(SysPagesPeer::ORDER)) $criteria->add(SysPagesPeer::ORDER, $this->order);
-        if ($this->isColumnModified(SysPagesPeer::ID_PARENT)) $criteria->add(SysPagesPeer::ID_PARENT, $this->id_parent);
+        if ($this->isColumnModified(SysPagesPeer::ID_MODULE)) $criteria->add(SysPagesPeer::ID_MODULE, $this->id_module);
+        if ($this->isColumnModified(SysPagesPeer::ID_SECTION)) $criteria->add(SysPagesPeer::ID_SECTION, $this->id_section);
+        if ($this->isColumnModified(SysPagesPeer::STATE)) $criteria->add(SysPagesPeer::STATE, $this->state);
 
         return $criteria;
     }
@@ -957,7 +1077,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $copyObj->setTitle($this->getTitle());
         $copyObj->setSlug($this->getSlug());
         $copyObj->setOrder($this->getOrder());
-        $copyObj->setIdParent($this->getIdParent());
+        $copyObj->setIdModule($this->getIdModule());
+        $copyObj->setIdSection($this->getIdSection());
+        $copyObj->setState($this->getState());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1295,7 +1417,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $this->title = null;
         $this->slug = null;
         $this->order = null;
-        $this->id_parent = null;
+        $this->id_module = null;
+        $this->id_section = null;
+        $this->state = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

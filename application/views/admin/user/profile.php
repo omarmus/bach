@@ -12,7 +12,7 @@
 			<?php endif ?>
 				<div class="loading-img" style="display: none"></div>
 				<figcaption>
-					<span style="display: none" class="btn btn-primary fileinput-button">
+					<span class="btn btn-primary fileinput-button">
 						<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
 						<input type="file" name="photo" id="photo" size="20">
 					</span>
@@ -27,46 +27,17 @@
 	<div class="span9">
 		<div class="tabbable tabs-left profile">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#data" data-toggle="tab">My data</a></li>
-				<li class=""><a href="#password" data-toggle="tab">My password</a></li>
+				<li class="active"><a href="#p-data" data-toggle="tab">My data</a></li>
+				<li class=""><a href="#p-password" data-toggle="tab">My password</a></li>
 			</ul>
 			<div class="tab-content well">
-				<div class="tab-pane active" id="data">
-					<form action="" class="form form-horizontal form-add" method="post">
-						<div class="control-group">
-							<label for="" class="control-label">Firstname <strong>*</strong></label>
-							<div class="controls">
-								<input type="text" name="FirstName" value="<?php echo set_value('FirstName', $user['FirstName']) ?>">
-								<?php echo form_error('FirstName'); ?>		
-							</div>
-						</div>
-						<div class="control-group">
-							<label for="" class="control-label">Lastname <strong>*</strong></label>
-							<div class="controls">
-								<input type="text" name="LastName" value="<?php echo set_value('LastName', $user['LastName']) ?>">
-								<?php echo form_error('LastName'); ?>		
-							</div>
-						</div>
-						<div class="control-group">
-							<label for="" class="control-label">Email <strong>*</strong></label>
-							<div class="controls">
-								<input type="text" name="Email" value="<?php echo set_value('Email', $user['Email']) ?>">
-								<?php echo form_error('Email'); ?>		
-							</div>
-						</div>
-						<div class="control-group">
-							<label for="" class="control-label">Phone</label>
-							<div class="controls">
-								<input type="text" name="Phone" value="<?php echo set_value('Phone', $user['Phone']) ?>">
-								<?php echo form_error('Phone'); ?>
-							</div>
-						</div>
-						<hr class="line-form">
-						<button class="btn btn-success" type="submit">Actualizar mis datos</button>
+				<div class="tab-pane active" id="p-data">
+					<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url('admin/profile/update_data') ?>')" >
+						<?php $this->load->view('admin/user/profile_data'); ?>
 					</form>
 				</div>
-				<div class="tab-pane" id="password">
-					<form id="form-password" class="form form-horizontal form-add" method="post">
+				<div class="tab-pane" id="p-password">
+					<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url('admin/profile/update_password') ?>')">
 						<?php $this->load->view('admin/user/profile_password'); ?>
 					</form>
 				</div>

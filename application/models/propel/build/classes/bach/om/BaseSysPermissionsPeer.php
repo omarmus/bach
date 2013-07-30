@@ -478,57 +478,6 @@ abstract class BaseSysPermissionsPeer
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related SysRoles table
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return int Number of matching rows.
-     */
-    public static function doCountJoinSysRoles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        // we're going to modify criteria, so copy it first
-        $criteria = clone $criteria;
-
-        // We need to set the primary table name, since in the case that there are no WHERE columns
-        // it will be impossible for the BasePeer::createSelectSql() method to determine which
-        // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SysPermissionsPeer::TABLE_NAME);
-
-        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-            $criteria->setDistinct();
-        }
-
-        if (!$criteria->hasSelectClause()) {
-            SysPermissionsPeer::addSelectColumns($criteria);
-        }
-
-        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-
-        // Set the correct dbName
-        $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
-
-        if ($con === null) {
-            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
-        }
-
-        $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
-
-        $stmt = BasePeer::doCount($criteria, $con);
-
-        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $count = (int) $row[0];
-        } else {
-            $count = 0; // no rows returned; we infer that means 0 matches.
-        }
-        $stmt->closeCursor();
-
-        return $count;
-    }
-
-
-    /**
      * Returns the number of rows matching criteria, joining the related SysPages table
      *
      * @param      Criteria $criteria
@@ -580,69 +529,53 @@ abstract class BaseSysPermissionsPeer
 
 
     /**
-     * Selects a collection of SysPermissions objects pre-filled with their SysRoles objects.
-     * @param      Criteria  $criteria
+     * Returns the number of rows matching criteria, joining the related SysRoles table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of SysPermissions objects.
-     * @throws PropelException Any exceptions caught during processing will be
-     *		 rethrown wrapped into a PropelException.
+     * @return int Number of matching rows.
      */
-    public static function doSelectJoinSysRoles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinSysRoles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
+        // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
 
-        // Set the correct dbName if it has not been overridden
-        if ($criteria->getDbName() == Propel::getDefaultDB()) {
-            $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysPermissionsPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
         }
 
-        SysPermissionsPeer::addSelectColumns($criteria);
-        $startcol = SysPermissionsPeer::NUM_HYDRATE_COLUMNS;
-        SysRolesPeer::addSelectColumns($criteria);
+        if (!$criteria->hasSelectClause()) {
+            SysPermissionsPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
 
         $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
 
-        $stmt = BasePeer::doSelect($criteria, $con);
-        $results = array();
+        $stmt = BasePeer::doCount($criteria, $con);
 
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = SysPermissionsPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = SysPermissionsPeer::getInstanceFromPool($key1))) {
-                // We no longer rehydrate the object, since this can cause data loss.
-                // See http://www.propelorm.org/ticket/509
-                // $obj1->hydrate($row, 0, true); // rehydrate
-            } else {
-
-                $cls = SysPermissionsPeer::getOMClass();
-
-                $obj1 = new $cls();
-                $obj1->hydrate($row);
-                SysPermissionsPeer::addInstanceToPool($obj1, $key1);
-            } // if $obj1 already loaded
-
-            $key2 = SysRolesPeer::getPrimaryKeyHashFromRow($row, $startcol);
-            if ($key2 !== null) {
-                $obj2 = SysRolesPeer::getInstanceFromPool($key2);
-                if (!$obj2) {
-
-                    $cls = SysRolesPeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol);
-                    SysRolesPeer::addInstanceToPool($obj2, $key2);
-                } // if obj2 already loaded
-
-                // Add the $obj1 (SysPermissions) to $obj2 (SysRoles)
-                $obj2->addSysPermissions($obj1);
-
-            } // if joined row was not null
-
-            $results[] = $obj1;
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
         }
         $stmt->closeCursor();
 
-        return $results;
+        return $count;
     }
 
 
@@ -714,6 +647,73 @@ abstract class BaseSysPermissionsPeer
 
 
     /**
+     * Selects a collection of SysPermissions objects pre-filled with their SysRoles objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of SysPermissions objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinSysRoles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
+        }
+
+        SysPermissionsPeer::addSelectColumns($criteria);
+        $startcol = SysPermissionsPeer::NUM_HYDRATE_COLUMNS;
+        SysRolesPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = SysPermissionsPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = SysPermissionsPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = SysPermissionsPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                SysPermissionsPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = SysRolesPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = SysRolesPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = SysRolesPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    SysRolesPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (SysPermissions) to $obj2 (SysRoles)
+                $obj2->addSysPermissions($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
      * Returns the number of rows matching criteria, joining all related tables
      *
      * @param      Criteria $criteria
@@ -749,9 +749,9 @@ abstract class BaseSysPermissionsPeer
             $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
-
         $criteria->addJoin(SysPermissionsPeer::ID_PAGE, SysPagesPeer::ID_PAGE, $join_behavior);
+
+        $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
 
@@ -787,15 +787,15 @@ abstract class BaseSysPermissionsPeer
         SysPermissionsPeer::addSelectColumns($criteria);
         $startcol2 = SysPermissionsPeer::NUM_HYDRATE_COLUMNS;
 
-        SysRolesPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + SysRolesPeer::NUM_HYDRATE_COLUMNS;
-
         SysPagesPeer::addSelectColumns($criteria);
-        $startcol4 = $startcol3 + SysPagesPeer::NUM_HYDRATE_COLUMNS;
+        $startcol3 = $startcol2 + SysPagesPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
+        SysRolesPeer::addSelectColumns($criteria);
+        $startcol4 = $startcol3 + SysRolesPeer::NUM_HYDRATE_COLUMNS;
 
         $criteria->addJoin(SysPermissionsPeer::ID_PAGE, SysPagesPeer::ID_PAGE, $join_behavior);
+
+        $criteria->addJoin(SysPermissionsPeer::ID_ROL, SysRolesPeer::ID_ROL, $join_behavior);
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
@@ -814,39 +814,39 @@ abstract class BaseSysPermissionsPeer
                 SysPermissionsPeer::addInstanceToPool($obj1, $key1);
             } // if obj1 already loaded
 
-            // Add objects for joined SysRoles rows
-
-            $key2 = SysRolesPeer::getPrimaryKeyHashFromRow($row, $startcol2);
-            if ($key2 !== null) {
-                $obj2 = SysRolesPeer::getInstanceFromPool($key2);
-                if (!$obj2) {
-
-                    $cls = SysRolesPeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol2);
-                    SysRolesPeer::addInstanceToPool($obj2, $key2);
-                } // if obj2 loaded
-
-                // Add the $obj1 (SysPermissions) to the collection in $obj2 (SysRoles)
-                $obj2->addSysPermissions($obj1);
-            } // if joined row not null
-
             // Add objects for joined SysPages rows
 
-            $key3 = SysPagesPeer::getPrimaryKeyHashFromRow($row, $startcol3);
-            if ($key3 !== null) {
-                $obj3 = SysPagesPeer::getInstanceFromPool($key3);
-                if (!$obj3) {
+            $key2 = SysPagesPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+            if ($key2 !== null) {
+                $obj2 = SysPagesPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
 
                     $cls = SysPagesPeer::getOMClass();
 
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    SysPagesPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 loaded
+
+                // Add the $obj1 (SysPermissions) to the collection in $obj2 (SysPages)
+                $obj2->addSysPermissions($obj1);
+            } // if joined row not null
+
+            // Add objects for joined SysRoles rows
+
+            $key3 = SysRolesPeer::getPrimaryKeyHashFromRow($row, $startcol3);
+            if ($key3 !== null) {
+                $obj3 = SysRolesPeer::getInstanceFromPool($key3);
+                if (!$obj3) {
+
+                    $cls = SysRolesPeer::getOMClass();
+
                     $obj3 = new $cls();
                     $obj3->hydrate($row, $startcol3);
-                    SysPagesPeer::addInstanceToPool($obj3, $key3);
+                    SysRolesPeer::addInstanceToPool($obj3, $key3);
                 } // if obj3 loaded
 
-                // Add the $obj1 (SysPermissions) to the collection in $obj3 (SysPages)
+                // Add the $obj1 (SysPermissions) to the collection in $obj3 (SysRoles)
                 $obj3->addSysPermissions($obj1);
             } // if joined row not null
 
@@ -855,57 +855,6 @@ abstract class BaseSysPermissionsPeer
         $stmt->closeCursor();
 
         return $results;
-    }
-
-
-    /**
-     * Returns the number of rows matching criteria, joining the related SysRoles table
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return int Number of matching rows.
-     */
-    public static function doCountJoinAllExceptSysRoles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        // we're going to modify criteria, so copy it first
-        $criteria = clone $criteria;
-
-        // We need to set the primary table name, since in the case that there are no WHERE columns
-        // it will be impossible for the BasePeer::createSelectSql() method to determine which
-        // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SysPermissionsPeer::TABLE_NAME);
-
-        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-            $criteria->setDistinct();
-        }
-
-        if (!$criteria->hasSelectClause()) {
-            SysPermissionsPeer::addSelectColumns($criteria);
-        }
-
-        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
-
-        // Set the correct dbName
-        $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
-
-        if ($con === null) {
-            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
-        }
-    
-        $criteria->addJoin(SysPermissionsPeer::ID_PAGE, SysPagesPeer::ID_PAGE, $join_behavior);
-
-        $stmt = BasePeer::doCount($criteria, $con);
-
-        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $count = (int) $row[0];
-        } else {
-            $count = 0; // no rows returned; we infer that means 0 matches.
-        }
-        $stmt->closeCursor();
-
-        return $count;
     }
 
 
@@ -961,76 +910,53 @@ abstract class BaseSysPermissionsPeer
 
 
     /**
-     * Selects a collection of SysPermissions objects pre-filled with all related objects except SysRoles.
+     * Returns the number of rows matching criteria, joining the related SysRoles table
      *
-     * @param      Criteria  $criteria
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of SysPermissions objects.
-     * @throws PropelException Any exceptions caught during processing will be
-     *		 rethrown wrapped into a PropelException.
+     * @return int Number of matching rows.
      */
-    public static function doSelectJoinAllExceptSysRoles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinAllExceptSysRoles(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
+        // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
 
-        // Set the correct dbName if it has not been overridden
-        // $criteria->getDbName() will return the same object if not set to another value
-        // so == check is okay and faster
-        if ($criteria->getDbName() == Propel::getDefaultDB()) {
-            $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysPermissionsPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
         }
 
-        SysPermissionsPeer::addSelectColumns($criteria);
-        $startcol2 = SysPermissionsPeer::NUM_HYDRATE_COLUMNS;
+        if (!$criteria->hasSelectClause()) {
+            SysPermissionsPeer::addSelectColumns($criteria);
+        }
 
-        SysPagesPeer::addSelectColumns($criteria);
-        $startcol3 = $startcol2 + SysPagesPeer::NUM_HYDRATE_COLUMNS;
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
 
+        // Set the correct dbName
+        $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysPermissionsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
         $criteria->addJoin(SysPermissionsPeer::ID_PAGE, SysPagesPeer::ID_PAGE, $join_behavior);
 
+        $stmt = BasePeer::doCount($criteria, $con);
 
-        $stmt = BasePeer::doSelect($criteria, $con);
-        $results = array();
-
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = SysPermissionsPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = SysPermissionsPeer::getInstanceFromPool($key1))) {
-                // We no longer rehydrate the object, since this can cause data loss.
-                // See http://www.propelorm.org/ticket/509
-                // $obj1->hydrate($row, 0, true); // rehydrate
-            } else {
-                $cls = SysPermissionsPeer::getOMClass();
-
-                $obj1 = new $cls();
-                $obj1->hydrate($row);
-                SysPermissionsPeer::addInstanceToPool($obj1, $key1);
-            } // if obj1 already loaded
-
-                // Add objects for joined SysPages rows
-
-                $key2 = SysPagesPeer::getPrimaryKeyHashFromRow($row, $startcol2);
-                if ($key2 !== null) {
-                    $obj2 = SysPagesPeer::getInstanceFromPool($key2);
-                    if (!$obj2) {
-    
-                        $cls = SysPagesPeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol2);
-                    SysPagesPeer::addInstanceToPool($obj2, $key2);
-                } // if $obj2 already loaded
-
-                // Add the $obj1 (SysPermissions) to the collection in $obj2 (SysPages)
-                $obj2->addSysPermissions($obj1);
-
-            } // if joined row is not null
-
-            $results[] = $obj1;
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
         }
         $stmt->closeCursor();
 
-        return $results;
+        return $count;
     }
 
 
@@ -1096,6 +1022,80 @@ abstract class BaseSysPermissionsPeer
                 } // if $obj2 already loaded
 
                 // Add the $obj1 (SysPermissions) to the collection in $obj2 (SysRoles)
+                $obj2->addSysPermissions($obj1);
+
+            } // if joined row is not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
+     * Selects a collection of SysPermissions objects pre-filled with all related objects except SysRoles.
+     *
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of SysPermissions objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinAllExceptSysRoles(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        // $criteria->getDbName() will return the same object if not set to another value
+        // so == check is okay and faster
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(SysPermissionsPeer::DATABASE_NAME);
+        }
+
+        SysPermissionsPeer::addSelectColumns($criteria);
+        $startcol2 = SysPermissionsPeer::NUM_HYDRATE_COLUMNS;
+
+        SysPagesPeer::addSelectColumns($criteria);
+        $startcol3 = $startcol2 + SysPagesPeer::NUM_HYDRATE_COLUMNS;
+
+        $criteria->addJoin(SysPermissionsPeer::ID_PAGE, SysPagesPeer::ID_PAGE, $join_behavior);
+
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = SysPermissionsPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = SysPermissionsPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+                $cls = SysPermissionsPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                SysPermissionsPeer::addInstanceToPool($obj1, $key1);
+            } // if obj1 already loaded
+
+                // Add objects for joined SysPages rows
+
+                $key2 = SysPagesPeer::getPrimaryKeyHashFromRow($row, $startcol2);
+                if ($key2 !== null) {
+                    $obj2 = SysPagesPeer::getInstanceFromPool($key2);
+                    if (!$obj2) {
+    
+                        $cls = SysPagesPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol2);
+                    SysPagesPeer::addInstanceToPool($obj2, $key2);
+                } // if $obj2 already loaded
+
+                // Add the $obj1 (SysPermissions) to the collection in $obj2 (SysPages)
                 $obj2->addSysPermissions($obj1);
 
             } // if joined row is not null

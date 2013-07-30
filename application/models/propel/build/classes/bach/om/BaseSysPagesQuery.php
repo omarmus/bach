@@ -10,13 +10,17 @@
  * @method SysPagesQuery orderByTitle($order = Criteria::ASC) Order by the title column
  * @method SysPagesQuery orderBySlug($order = Criteria::ASC) Order by the slug column
  * @method SysPagesQuery orderByOrder($order = Criteria::ASC) Order by the order column
- * @method SysPagesQuery orderByIdParent($order = Criteria::ASC) Order by the id_parent column
+ * @method SysPagesQuery orderByIdModule($order = Criteria::ASC) Order by the id_module column
+ * @method SysPagesQuery orderByIdSection($order = Criteria::ASC) Order by the id_section column
+ * @method SysPagesQuery orderByState($order = Criteria::ASC) Order by the state column
  *
  * @method SysPagesQuery groupByIdPage() Group by the id_page column
  * @method SysPagesQuery groupByTitle() Group by the title column
  * @method SysPagesQuery groupBySlug() Group by the slug column
  * @method SysPagesQuery groupByOrder() Group by the order column
- * @method SysPagesQuery groupByIdParent() Group by the id_parent column
+ * @method SysPagesQuery groupByIdModule() Group by the id_module column
+ * @method SysPagesQuery groupByIdSection() Group by the id_section column
+ * @method SysPagesQuery groupByState() Group by the state column
  *
  * @method SysPagesQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method SysPagesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -32,13 +36,17 @@
  * @method SysPages findOneByTitle(string $title) Return the first SysPages filtered by the title column
  * @method SysPages findOneBySlug(string $slug) Return the first SysPages filtered by the slug column
  * @method SysPages findOneByOrder(int $order) Return the first SysPages filtered by the order column
- * @method SysPages findOneByIdParent(int $id_parent) Return the first SysPages filtered by the id_parent column
+ * @method SysPages findOneByIdModule(int $id_module) Return the first SysPages filtered by the id_module column
+ * @method SysPages findOneByIdSection(int $id_section) Return the first SysPages filtered by the id_section column
+ * @method SysPages findOneByState(string $state) Return the first SysPages filtered by the state column
  *
  * @method array findByIdPage(int $id_page) Return SysPages objects filtered by the id_page column
  * @method array findByTitle(string $title) Return SysPages objects filtered by the title column
  * @method array findBySlug(string $slug) Return SysPages objects filtered by the slug column
  * @method array findByOrder(int $order) Return SysPages objects filtered by the order column
- * @method array findByIdParent(int $id_parent) Return SysPages objects filtered by the id_parent column
+ * @method array findByIdModule(int $id_module) Return SysPages objects filtered by the id_module column
+ * @method array findByIdSection(int $id_section) Return SysPages objects filtered by the id_section column
+ * @method array findByState(string $state) Return SysPages objects filtered by the state column
  *
  * @package    propel.generator.bach.om
  */
@@ -146,7 +154,7 @@ abstract class BaseSysPagesQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id_page`, `title`, `slug`, `order`, `id_parent` FROM `sys_pages` WHERE `id_page` = :p0';
+        $sql = 'SELECT `id_page`, `title`, `slug`, `order`, `id_module`, `id_section`, `state` FROM `sys_pages` WHERE `id_page` = :p0';
         try {
             $stmt = $con->prepare($sql);			
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -378,17 +386,17 @@ abstract class BaseSysPagesQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the id_parent column
+     * Filter the query on the id_module column
      *
      * Example usage:
      * <code>
-     * $query->filterByIdParent(1234); // WHERE id_parent = 1234
-     * $query->filterByIdParent(array(12, 34)); // WHERE id_parent IN (12, 34)
-     * $query->filterByIdParent(array('min' => 12)); // WHERE id_parent >= 12
-     * $query->filterByIdParent(array('max' => 12)); // WHERE id_parent <= 12
+     * $query->filterByIdModule(1234); // WHERE id_module = 1234
+     * $query->filterByIdModule(array(12, 34)); // WHERE id_module IN (12, 34)
+     * $query->filterByIdModule(array('min' => 12)); // WHERE id_module >= 12
+     * $query->filterByIdModule(array('max' => 12)); // WHERE id_module <= 12
      * </code>
      *
-     * @param     mixed $idParent The value to use as filter.
+     * @param     mixed $idModule The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -396,16 +404,16 @@ abstract class BaseSysPagesQuery extends ModelCriteria
      *
      * @return SysPagesQuery The current query, for fluid interface
      */
-    public function filterByIdParent($idParent = null, $comparison = null)
+    public function filterByIdModule($idModule = null, $comparison = null)
     {
-        if (is_array($idParent)) {
+        if (is_array($idModule)) {
             $useMinMax = false;
-            if (isset($idParent['min'])) {
-                $this->addUsingAlias(SysPagesPeer::ID_PARENT, $idParent['min'], Criteria::GREATER_EQUAL);
+            if (isset($idModule['min'])) {
+                $this->addUsingAlias(SysPagesPeer::ID_MODULE, $idModule['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($idParent['max'])) {
-                $this->addUsingAlias(SysPagesPeer::ID_PARENT, $idParent['max'], Criteria::LESS_EQUAL);
+            if (isset($idModule['max'])) {
+                $this->addUsingAlias(SysPagesPeer::ID_MODULE, $idModule['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -416,7 +424,78 @@ abstract class BaseSysPagesQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(SysPagesPeer::ID_PARENT, $idParent, $comparison);
+        return $this->addUsingAlias(SysPagesPeer::ID_MODULE, $idModule, $comparison);
+    }
+
+    /**
+     * Filter the query on the id_section column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByIdSection(1234); // WHERE id_section = 1234
+     * $query->filterByIdSection(array(12, 34)); // WHERE id_section IN (12, 34)
+     * $query->filterByIdSection(array('min' => 12)); // WHERE id_section >= 12
+     * $query->filterByIdSection(array('max' => 12)); // WHERE id_section <= 12
+     * </code>
+     *
+     * @param     mixed $idSection The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysPagesQuery The current query, for fluid interface
+     */
+    public function filterByIdSection($idSection = null, $comparison = null)
+    {
+        if (is_array($idSection)) {
+            $useMinMax = false;
+            if (isset($idSection['min'])) {
+                $this->addUsingAlias(SysPagesPeer::ID_SECTION, $idSection['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($idSection['max'])) {
+                $this->addUsingAlias(SysPagesPeer::ID_SECTION, $idSection['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(SysPagesPeer::ID_SECTION, $idSection, $comparison);
+    }
+
+    /**
+     * Filter the query on the state column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByState('fooValue');   // WHERE state = 'fooValue'
+     * $query->filterByState('%fooValue%'); // WHERE state LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $state The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysPagesQuery The current query, for fluid interface
+     */
+    public function filterByState($state = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($state)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $state)) {
+                $state = str_replace('*', '%', $state);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(SysPagesPeer::STATE, $state, $comparison);
     }
 
     /**
