@@ -6,3 +6,6 @@ ERROR - 2013-07-30 13:02:46 --> Severity: Notice  --> Undefined property: stdCla
 ERROR - 2013-07-30 13:02:46 --> Severity: Notice  --> Undefined property: stdClass::$section C:\wamp\www\bach\application\views\admin\page\index.php 37
 ERROR - 2013-07-30 13:02:46 --> Severity: Notice  --> Undefined property: stdClass::$section C:\wamp\www\bach\application\views\admin\page\index.php 37
 ERROR - 2013-07-30 13:02:46 --> Severity: Notice  --> Undefined property: stdClass::$section C:\wamp\www\bach\application\views\admin\page\index.php 37
+ERROR - 2013-07-30 21:46:46 --> 404 Page Not Found --> admin/configuration
+ERROR - 2013-07-30 23:49:27 --> Severity: Notice  --> Undefined property: Profile::$bcrypt C:\wamp\www\bach\application\controllers\admin\profile.php 103
+ERROR - 2013-07-30 23:52:29 --> 404 Page Not Found --> page/permissions

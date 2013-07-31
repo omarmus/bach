@@ -6,23 +6,19 @@
 		<?php echo form_open_multipart('', array('id' => 'form-photo'));?>
 			<figure class="photo-user">
 			<?php if (isset($user['photo'])): ?>
-				<img src="<?php echo site_url('static/files/user_profile') . '/'.$user['photo'] ?>" style="display: none;" />
+				<img src="<?php echo site_url('static/files/user_profile') . '/'.$user['photo'] ?>" />
 			<?php else: ?>
-				<img src="<?php echo site_url('img/profile.png') ?>" style="display: none;" />
+				<img src="<?php echo site_url('img/profile.png') ?>" />
 			<?php endif ?>
-				<div class="loading-img" style="display: none"></div>
 				<figcaption>
 					<span class="btn btn-primary fileinput-button">
 						<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
 						<input type="file" name="photo" id="photo" size="20">
 					</span>
-				<?php if (isset($user['photo'])): ?>
-					<button type="button" class="btn btn-danger" onclick="delete_photo()"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
-				<?php endif ?>
-					<button type="submit" class="btn btn-success" style="display: none;"><i class="icon-upload icon-white"></i> Subir foto de perfil</button>
+					<button type="button" class="btn btn-danger hide" id="delete-photo"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
 				</figcaption>
 			</figure>
-		</form>
+		<?php echo form_close(); ?>
 	</div>
 	<div class="span9">
 		<div class="tabbable tabs-left profile">
@@ -45,60 +41,44 @@
         </div>
 	</div>
 </div>
+<script src="<?php echo site_url('lib/ajax-file-uploader/ajaxfileupload.js') ?>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$('#photo').on('change', function (event) {
 	    	event.preventDefault();
 	    	$('#form-photo').submit();
-	    });
-	    $('#form-password').on('submit', function (event) {
-	    	event.preventDefault();
-	    	var form = this;
-	    	$.post('<?= base_url('panel/sec/profile/change_password')?>', $(form).serialize(), function (response) {
-	    		$(form).html(response);
-	    		if($(form).find('.inline_validation_message').length == 0) {
-	    			alert('Su contraseña se cambió con éxitó.')
-	    		}
-	    	});
 	    });
 
 	    $('#form-photo').on('submit', function (event) {
 	    	var form = this;
             event.preventDefault();
             $.ajaxFileUpload({
-               url         :'<?= base_url('panel/sec/profile/upload_photo')?>',
+               url         :'<?= base_url('admin/profile/upload_photo')?>',
                secureuri      :false,
                fileElementId  :'photo',
                dataType    : 'json',
                data        : {},
-               success  : function (data, status) {
-               		if (data.status == 'ERROR') {
-						alert(data.msg);
+               success  : function (response) {
+               		if (response.status == 'ERROR') {
+						messageError(response.msg);
                		} else {
-               			$(form).load('<?= base_url('panel/sec/profile/update_photo')?>', function () {
-               				window.location = '';
-               			});
+               			$.post('<?= base_url('admin/profile/update_photo')?>', function (response) {
+               				messageOK(response.msg);
+               			})
                		}                	
                }
             });
             return false;
         });
 
-        $("#form-photo img").on('load', function () {
-        	var img = this;
-        	$('.loading-img').fadeOut(function () {
-        		$(img).fadeIn();
-        	});
-        })
+	    $('#delete-photo').on('click', function () {
+	    	if (confirm('Se borrará su imagen de perfil.')) {
+				$.post('<?= base_url('admin/profile/delete_photo')?>', function () {
+	   				messageOK('Delete photo!');
+	   			});
+			};	
+	    })
+
 	});
-
-	function delete_photo () {
-		if (confirm('Se borrará su imagen de perfil.')) {
-			$('#form-photo').load('<?= base_url('panel/sec/profile/delete_photo')?>', function () {
-   				window.location = '';
-   			});
-		};	
-	}
-
-
 </script>

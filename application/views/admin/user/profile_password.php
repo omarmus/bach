@@ -10,8 +10,8 @@
 </div>
 <div>
 	<label for="">Confirmar nueva contraseña</label>
-	<input type="password" name="rpassword">
-	<?php echo form_error('rpassword'); ?>
+	<input type="password" name="PasswordConfirm">
+	<?php echo form_error('PasswordConfirm'); ?>
 </div>
 <hr>
 <button class="btn btn-success" type="submit">Cambiar contraseña</button>

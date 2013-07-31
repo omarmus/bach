@@ -57,10 +57,10 @@ class User_M extends BC_Model {
 		'Password' => array(
 			'field' => 'Password',
 			'label' => 'Nueva contraseña',
-			'rules' => 'trim|required|matches[RPassword]'
+			'rules' => 'trim|required|matches[PasswordConfirm]'
 		),
-		'RPassword' => array(
-			'field' => 'RPassword',
+		'PasswordConfirm' => array(
+			'field' => 'PasswordConfirm',
 			'label' => 'Confirmar password',
 			'rules' => 'trim|matches[Password]'
 		)

@@ -34,7 +34,7 @@
                 </a>
             </div>
             <div>
-               <a href="#" id="dashboard" class="active"></a>
+               <a href="<?php echo site_url('admin/dashboard') ?>" id="dashboard" <?php echo $this->uri->segment(2) == 'dashboard' ? 'class="active"' : '' ?>></a>
             </div>
             <div>
                 <a href="#" id="settings"></a>

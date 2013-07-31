@@ -48,15 +48,16 @@ function get_menu($array, $child = FALSE)
     $str = '';
 
     if (count($array)) {
-        $str .= $child == FALSE ? '<ul class="nav">' . PHP_EOL : '<ul class="dropdown-menu">' . PHP_EOL;
+        $str .= $child == FALSE ? '<ul class="nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
 
         foreach ($array as $item) {
-
             $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
             if (isset($item['children']) && count($item['children'])) {
-                $str .= $active ? '<li class="dropdown active">' : '<li class="dropdown">';
+                $submenu = $item['Type'] == "section" ? 'dropdown-submenu' : 'dropdown';
+                $active = $active ? ' active' : '';
+                $str .= '<li class="'. $submenu . $active . '">';
                 $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
-                $str .= '<b class="caret"></b></a>' . PHP_EOL;
+                $str .= ($item['Type'] == "section" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
                 $str .= get_menu($item['children'], TRUE);
             } else {
                 $str .= $active ? '<li class="active">' : '<li>';
@@ -76,7 +77,7 @@ function get_menu($array, $child = FALSE)
 function upload_file($opts = array())
 {
     $CI =& get_instance();
-    $CI->load->model('files_m');
+    // $CI->load->model('files');
 
     $idFile = 0;
     $status = "";
@@ -102,7 +103,7 @@ function upload_file($opts = array())
         }
 
         //Create file in SysFiles
-        $idFile = $CI->files_m->save($data);
+        $idFile = $CI->files->save($data);
         if($idFile) {
             $status = "success";
             $msg = "File successfully uploaded";

@@ -65,15 +65,19 @@ class Page_m extends BC_Model {
 		$array = array();
 		foreach ($pages as $page) {
 			if (!$page['IdModule'] && !$page['IdSection']) {
+				$page['Type'] = 'module';
 				$array[$page['IdPage']] = $page;
 			} else {
 				if (!$page['IdSection']) {
-					$array[$page['IdModule']]['section'][] = $page;
+					$page['Type'] = 'section';
+					$array[$page['IdModule']]['children'][$page['IdPage']] = $page;
 				} else {
-
+					$page['Type'] = 'subsection';
+					$array[$page['IdModule']]['children'][$page['IdSection']]['children'][$page['IdPage']] = $page;
 				}
 			}
 		}
+
 		return $array;
 	}
 

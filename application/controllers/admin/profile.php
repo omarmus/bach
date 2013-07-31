@@ -10,7 +10,6 @@ class Profile extends Admin_Controller {
 
 		$this->id_user = $this->data['userdata']['id_user'];
 		$this->load->model('file_m', 'file');
- 	// 	$this->data["scripts"]=array('lib/ajax-file-uploader/ajaxfileupload.js');
 	}
 
 	public function index()
@@ -48,9 +47,10 @@ class Profile extends Admin_Controller {
 
 	public function update_password()
 	{
+		$this->load->library('bcrypt');
+
 		$this->form_validation->set_rules($this->user->rules_password);
 		if ($this->form_validation->run() == TRUE) {
-			$this->load->library('bcrypt');
 			$data = $this->user->array_request($_POST);
 			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
 			$this->user->save($data, $this->id_user);
@@ -69,7 +69,7 @@ class Profile extends Admin_Controller {
 		$user = $this->user->get($this->id_user);
 		$this->user->set_session_data($user);
 		$this->data['user'] = $user->toArray();
-		
+
 		$this->load->view('panel/sec/profile_photo', $this->data);
 	}
 
@@ -100,7 +100,7 @@ class Profile extends Admin_Controller {
 	{
 		$user = $this->user->get($this->id_user);
 
-		if($this->bcrypt->check_password($this->input->post('Password'), $user->getPassword())) {
+		if($this->bcrypt->check_password($this->input->post('OldPassword'), $user->getPassword())) {
             return TRUE;
         } else {
         	$this->form_validation->set_message('_verify_old_password', 'La %s es incorrecta.');
