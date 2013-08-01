@@ -7,9 +7,28 @@
 <form onsubmit="return validate(this, '<?php echo site_url('admin/page/edit'. (isset($page['IdPage'])?'/'.$page['IdPage']:'')) ?>')">
 	<div class="modal-body">
 		<div>
-	    	<label for="">Module</label> 
-			<?php echo form_dropdown('IdParent', $pages_no_parents, set_value('IdParent', $page['IdParent'])); ?>
-			<?php echo form_error('IdParent'); ?>
+			<label class="radio">
+				<input type="radio" name="page-type" value="" checked>
+				Module
+			</label>
+			<label class="radio">
+				<input type="radio" name="page-type" value="">
+				Section
+			</label>
+			<label class="radio">
+				<input type="radio" name="page-type" value="">
+				Subsection
+			</label>
+		</div>
+		<div>
+			<div>
+				<label for="">Module</label> 
+				<?php echo form_dropdown('IdModule', $pages_no_parents, set_value('IdModule', $page['IdModule'])); ?>
+				<?php echo form_error('IdModule'); ?>
+			</div>
+			<div>
+				
+			</div>
 		</div>
 	    <div>
 	    	<label for="">Name <strong>*</strong></label> 

@@ -94,13 +94,15 @@ class Page_m extends BC_Model {
 						->get()->result();
 	}
 
-	public function get_no_parents()
+	public function get_no_parents($id)
 	{
+		$where = $id ? array('IdSection' => $id) : array('IdModule' => 0);
+
 		// Fetch pages without parents
-		$pages = parent::get_by(array('IdModule' => 0));
+		$pages = parent::get_by($where);
 
 		// Return key =>  value pair array
-		$array = array();
+		$array[0] = 'Select ' . ($id ? 'section' : 'module') . '...';
 
 		if (count($pages)) {
 			foreach ($pages as $page) {
@@ -108,9 +110,6 @@ class Page_m extends BC_Model {
 			}
 		}
 
-		return array(
-			0 => 'Create a new module',
-			'Select module...' => $array
-		);
+		return $array;
 	}
 }

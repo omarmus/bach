@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+Definición de HTML Diferencias respecto a otras versiones Interacción con el DOM 
+HTML5Nuevos elementos
+Elementos Estructurales 
+Elementos Media 
+Elementos de Dibujo 
+Elementos de FormularioCanvas: 
+Imágenes Colores y estilos Formas y figuras 
+Uso de drag&drop 
+Eventos Practica
+Arrastrando y soltando elementos por la Controlando con JavaScript
+Formas y figuras Eventos Controlando con JavaScript 
+SGV vs Canvas Graficando algunos datos en barras y paysGeo localización
+Mostrando en google maps la localización Uso de geo localización actual Integración con Google Maps Practica: Trazando la ruta a mi casa Trazar ruta
+Almacenamiento local 
+Guardando info para cuando no hay Almacenamiento por sesión conexiónCache<!DOCTYPE html>
  
 <html lang="en">
 	<head>
