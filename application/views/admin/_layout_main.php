@@ -29,8 +29,12 @@
         </header><!-- /header -->
         <nav id="nav-left">
             <div class="profile">
-                <a href="<?php echo site_url('admin/profile') ?>">
-                    <img src="<?php echo site_url('img/profile.png') ?>" alt="Foto">
+                <a href="<?php echo site_url('admin/profile') ?>" class="photo-user">
+                <?php if ($userdata['photo'] != ""): ?>
+                    <img src="<?php echo site_url('files/users') . '/'.$userdata['photo'] ?>" alt="user image"/>
+                <?php else: ?>
+                    <img src="<?php echo site_url('img/profile.png') ?>" />
+                <?php endif ?>
                 </a>
             </div>
             <div>

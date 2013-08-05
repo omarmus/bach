@@ -5,8 +5,8 @@
 	<div class="span3">
 		<?php echo form_open_multipart('', array('id' => 'form-photo'));?>
 			<figure class="photo-user">
-			<?php if (isset($user['photo'])): ?>
-				<img src="<?php echo site_url('static/files/user_profile') . '/'.$user['photo'] ?>" />
+			<?php if ($userdata['photo'] != "") : ?>
+				<img src="<?php echo site_url('files/users') . '/'.$userdata['photo'] ?>" alt="user image"/>
 			<?php else: ?>
 				<img src="<?php echo site_url('img/profile.png') ?>" />
 			<?php endif ?>
@@ -15,7 +15,7 @@
 						<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
 						<input type="file" name="photo" id="photo" size="20">
 					</span>
-					<button type="button" class="btn btn-danger hide" id="delete-photo"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
+					<button type="button" class="btn btn-danger<?php echo $userdata['photo'] == "" ? ' hide': '' ?>" id="delete-photo"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
 				</figcaption>
 			</figure>
 		<?php echo form_close(); ?>
@@ -54,31 +54,31 @@
 	    	var form = this;
             event.preventDefault();
             $.ajaxFileUpload({
-               url         :'<?= base_url('admin/profile/upload_photo')?>',
-               secureuri      :false,
-               fileElementId  :'photo',
-               dataType    : 'json',
-               data        : {},
-               success  : function (response) {
-               		if (response.status == 'ERROR') {
+				url           : '<?= base_url('admin/profile/upload_photo')?>',
+				secureuri     : false,
+				fileElementId : 'photo',
+				dataType      : 'json',
+				data          : {},
+				success  : function (response) {
+               		if (response.status == 'error') {
 						messageError(response.msg);
                		} else {
-               			$.post('<?= base_url('admin/profile/update_photo')?>', function (response) {
-               				messageOK(response.msg);
-               			})
+               			$('.photo-user > img').prop('src', '<?php echo site_url('files/users') ?>/' + response.filename);
+               			messageOk(response.msg);
                		}                	
-               }
+                }
             });
-            return false;
         });
 
 	    $('#delete-photo').on('click', function () {
 	    	if (confirm('Se borrará su imagen de perfil.')) {
 				$.post('<?= base_url('admin/profile/delete_photo')?>', function () {
-	   				messageOK('Delete photo!');
+					$('#delete-photo').addClass('hide');
+					$('.photo-user > img').prop('src', '<?php echo site_url('img/profile.png') ?>');
+	   				messageOk('Delete photo!');
 	   			});
 			};	
-	    })
+	    });
 
 	});
 </script>

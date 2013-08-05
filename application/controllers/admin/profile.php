@@ -15,12 +15,6 @@ class Profile extends Admin_Controller {
 	public function index()
 	{   
 		$this->data['user'] = $this->user->get($this->id_user)->toArray();
-
-		if ($this->data['user']['IdPhoto']) {
-			$file = $this->file->get($this->data['user']['IdPhoto'])->toArray();
-			$this->data['user']['photo'] = $file['Filename'];
-		}
-
 		$this->data['subview'] = 'admin/user/profile';
 		$this->load->view('admin/_layout_main', $this->data);
 	}
@@ -33,11 +27,10 @@ class Profile extends Admin_Controller {
 
 			// Save a new data user
 			$data = $this->user->array_request($_POST);
-			$this->user->save($data, $this->id_user);
+			$user = $this->user->save($data, $this->id_user, TRUE);
 
 			// Set a new data session
-			$user = $this->user->get($this->id_user);
-			$this->user->set_session_data($user);
+			$this->user->set_userdata($user);
 			$this->data['user'] = $user->toArray();
 		} else {
 			$this->data['user'] = $this->user->get($this->id_user)->toArray();
@@ -58,39 +51,27 @@ class Profile extends Admin_Controller {
 		$this->load->view('admin/user/profile_password');
 	}
 
-	public function update_photo()
-	{
-		$this->data['user'] = $this->user->get($this->id_user)->toArray();
-		if (!is_null($this->data['user']['id_photo'])) {
-			$file = $this->file->get($this->data['user']['id_photo']);
-			$this->data['user']['photo'] = $file['Filename'];
-		}
-		// Set a new data session
-		$user = $this->user->get($this->id_user);
-		$this->user->set_session_data($user);
-		$this->data['user'] = $user->toArray();
-
-		$this->load->view('panel/sec/profile_photo', $this->data);
-	}
-
 	public function delete_photo()
 	{
-		$this->file->delete($this->session->userdata('id_photo'));
-		$this->user->save(array('IdPhoto' => NULL), $this->id_user);
+		$user = $this->user->save(array('IdPhoto' => NULL), $this->id_user, TRUE);
 
-		// $this->update_photo();
+		$this->file->delete($this->session->userdata('id_photo'));
+		
+		$user = $this->user->save(array('IdPhoto' => NULL), $this->id_user, TRUE);
+		$this->user->set_userdata($user);
 	}
 
 	public function upload_photo()
 	{
 		$config['field'] = 'photo';
-		$config['upload_path'] = './static/files/user_profile/';
-		$config['allowed_types'] = 'gif|jpg|png';
+		$config['path'] = './files/users/';
+		$config['types'] = 'gif|jpg|png';
 
 		$file = upload_file($config);
 
 		if($file['id_file']) {
-			$this->user->save(array('IdPhoto' => $file['id_file']), $this->id_user);
+			$user = $this->user->save(array('IdPhoto' => $file['id_file']), $this->id_user, TRUE);
+			$this->user->set_userdata($user);
 		}
 
 		echo json_encode($file);

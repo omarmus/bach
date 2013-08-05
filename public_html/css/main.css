@@ -81,8 +81,36 @@ header .dropdown:hover > .dropdown-menu {display: block;}
 .n-success {background-color: rgba(65, 187, 25, .8);}
 .n-error {background-color: rgba(245, 15, 67, .8);}
 
-
-
+/* ==========================================================================
+                                  P R O F I L E
+   ========================================================================== */
+figure.photo-user {
+  margin: 20px;
+  position: relative;
+}
+figure.photo-user img {
+  box-shadow: 3px 3px 5px -2px rgba(0, 0, 0, 0.8);
+}
+figure.photo-user figcaption {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+}
+figure.photo-user:hover figcaption {
+  display: block;
+}
+figure.photo-user figcaption > .btn.btn-primary {
+  margin-top: 50px;
+}
+figure.photo-user figcaption > .btn {
+  float: none;
+  margin: 0 0 10px;
+}
 /* ==========================================================================
                       T A B L E  A N D  D A T A T A B L E S
    ========================================================================== */

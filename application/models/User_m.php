@@ -91,12 +91,12 @@ class User_M extends BC_Model {
 		if (count($user)) {
 			//Log in user
 			if($this->bcrypt->check_password($this->input->post('password'), $user->getPassword())) {
-                $this->set_session_data($user);
+                $this->set_userdata($user);
             }
 		}
 	}
 
-	public function set_session_data($user)
+	public function set_userdata($user)
 	{
 		$data = array(
 			'username' => $user->getUsername(),

@@ -5,7 +5,7 @@ class File_m extends BC_Model {
 	protected $_table_name = 'SysFiles';
 	protected $_primary_key = 'IdFile';
 
-	public function save($data, $pk = NULL)
+	public function save($data, $pk = NULL, $obj)
 	{
 		$data = array(
 			'Filename' => $data['file_name'],
@@ -18,7 +18,7 @@ class File_m extends BC_Model {
 			'ImageType' => $data['is_image']?$data['image_type']:'',
 			'Title' => isset($data['Title'])?$data['Title']:''
 		);
-		parent::save($data, $pk);
+		return parent::save($data, $pk, $obj);
 	}
 }
 

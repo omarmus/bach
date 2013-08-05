@@ -50,7 +50,7 @@ class BC_Model extends CI_Model {
 		return $this->_query->$method();
 	}
 	
-	public function save($data, $pk = NULL) 
+	public function save($data, $pk = NULL, $object = FALSE) 
 	{
 		// Set timestamps
 		if ($this->_timestamps == TRUE) {
@@ -72,7 +72,7 @@ class BC_Model extends CI_Model {
 
 		$obj->fromArray($data);
 		if ($obj->save()) {
-            return $obj->getPrimaryKey();
+            return $object ? $obj : $obj->getPrimaryKey();
         }
 		return null;
 	}

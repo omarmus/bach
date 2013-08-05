@@ -77,14 +77,14 @@ function get_menu($array, $child = FALSE)
 function upload_file($opts = array())
 {
     $CI =& get_instance();
-    // $CI->load->model('files');
+    $CI->load->model('file_m', 'file');
 
-    $idFile = 0;
+    $file = array('IdFile' => 0, 'Filename' => '');
     $status = "";
     $msg = "";
 
     $file_element_name = isset($opts['field']) ? $opts['field'] : 'file';
-    $config['upload_path'] = isset($opts['path']) ? $opts['path'] : './static/files/';
+    $config['upload_path'] = isset($opts['path']) ? $opts['path'] : './files/';
     $config['allowed_types'] = isset($opts['types']) ? $opts['types'] : 'gif|jpg|png|doc|txt';
     $config['max_size']  = isset($opts['max_size']) ? $opts['max_size'] : 1024 * 8;
     $config['encrypt_name'] = isset($opts['encrypt']) ? $opts['encrypt'] : TRUE;
@@ -98,23 +98,21 @@ function upload_file($opts = array())
         $data = $CI->upload->data();
 
         // Exist field 'Title'
-        if (isset($opts['Title'])) {
-            $data['Title'] = $opts['Title'];
-        }
+        !isset($opts['Title']) || $data['Title'] = $opts['Title'];
 
-        //Create file in SysFiles
-        $idFile = $CI->files->save($data);
-        if($idFile) {
-            $status = "success";
+        // Create file in SysFiles
+        $file = $CI->file->save($data, NULL, TRUE)->toArray();
+        if($file) {
+            $status = 'success';
             $msg = "File successfully uploaded";
         } else {
             unlink($data['full_path']);
-            $status = "error";
+            $status = 'error';
             $msg = "Something went wrong when saving the file, please try again.";
         }
     }
     @unlink($_FILES[$file_element_name]);
 
     //Convert to json in controller
-    return array('status' => $status, 'msg' => $msg, 'id_file' => $idFile);
+    return array('status' => $status, 'msg' => $msg, 'id_file' => $file['IdFile'], 'filename' => $file['Filename']);
 }
