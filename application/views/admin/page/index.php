@@ -48,5 +48,24 @@ $(document).ready(function() {
 			{"bSortable": false, "aTargets": [ 1, 2 ] }
 		],
 	});
+	$('#page-type input').on('click', function () {
+		switch (this.value) {
+			case 'module' : 
+				$('#container-module, #container-section').hide()
+				break;
+			case 'section' : 
+				$('#container-module').show();
+				$('#container-section').hide();
+				break;
+			case 'subsection' : 
+				$('#container-module, #container-section').show();
+				break;
+		}
+	});
+	$('#container-module select').on('change', function () {
+		$.post('<?= base_url('admin/page/get_sections')?>', {idModule : this.value}, function (response) {
+			
+		});
+	})
 });
 </script>

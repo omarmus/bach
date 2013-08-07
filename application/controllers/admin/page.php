@@ -102,6 +102,12 @@ class Page extends Admin_Controller
 		}
 		return TRUE;
 	}
+
+	public function get_sections()
+	{
+		$idModule = $this->input->post('idModule');
+		$this->page->get_no_parents($this->input->post('idModule'));
+	}
 }
 
 /* End of file page.php */

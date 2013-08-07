@@ -96,10 +96,8 @@ class Page_m extends BC_Model {
 
 	public function get_no_parents($id)
 	{
-		$where = $id ? array('IdSection' => $id) : array('IdModule' => 0);
-
 		// Fetch pages without parents
-		$pages = parent::get_by($where);
+		$pages = parent::get_by(array('IdModule' => $id));
 
 		// Return key =>  value pair array
 		$array[0] = 'Select ' . ($id ? 'section' : 'module') . '...';
