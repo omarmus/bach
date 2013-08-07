@@ -5,4 +5,5 @@ Bach PHP
 
 ===
 
-Versión Alfa del proyecto
+[MIT Licence](http://opensource.org/licenses/MIT "Licencia")
+

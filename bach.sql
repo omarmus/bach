@@ -69,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `sys_pages` (
   `title` varchar(100) NOT NULL,
   `slug` varchar(100) NOT NULL,
   `order` int(11) unsigned NOT NULL,
-  `id_parent` int(11) unsigned DEFAULT '0',
+  `id_module` int(11) unsigned DEFAULT '0',
+  `id_section` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id_page`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
@@ -77,11 +78,11 @@ CREATE TABLE IF NOT EXISTS `sys_pages` (
 -- Volcado de datos para la tabla `sys_pages`
 --
 
-INSERT INTO `sys_pages` (`id_page`, `title`, `slug`, `order`, `id_parent`) VALUES
-(1, 'Configuration', 'configuration', 1, 0),
-(7, 'Pages', 'page', 2, 1),
-(8, 'Users', 'user', 3, 1),
-(14, 'Profile', 'profile', 4, 1);
+INSERT INTO `sys_pages` (`id_page`, `title`, `slug`, `order`, `id_module`, `id_section`) VALUES
+(1, 'Configuration', 'configuration', 1, 0, 0),
+(7, 'Pages', 'page', 2, 1, 0),
+(8, 'Users', 'user', 3, 1, 0),
+(14, 'Profile', 'profile', 4, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -180,8 +181,7 @@ CREATE TABLE IF NOT EXISTS `sys_users` (
 --
 
 INSERT INTO `sys_users` (`id_user`, `username`, `password`, `email`, `first_name`, `last_name`, `state`, `id_rol`, `id_photo`, `created`, `phone`, `modified`, `lang_code`, `mobile`) VALUES
-(1, 'omar.mus', '$2a$08$DC64wIdzwT1lwNmmEqd2gunVxX7VG9s05tAud/4ZGrwRIpPTAcdTu', 'omargc.mus@gmail.com', 'Omar', 'Gutiérrez', 'CREATE', 1, NULL, NULL, NULL, NULL, 'EN', NULL),
-(23, 'jocabed@mail.com', '$2a$08$fmP1LU.3pn/E1A9A/VnFZuw7HwQwsgowo4gHSmZj.fIVeonG4qOnW', 'jocabed@mail.com', 'Jocabed', 'Carrillo', 'CREATE', 1, NULL, '2013-07-18 01:03:38', NULL, NULL, 'EN', NULL);
+(1, 'omar.mus', '$2a$08$DC64wIdzwT1lwNmmEqd2gunVxX7VG9s05tAud/4ZGrwRIpPTAcdTu', 'omargc.mus@gmail.com', 'Omar', 'Gutiérrez', 'CREATE', 1, NULL, NULL, NULL, NULL, 'EN', NULL);
 
 --
 -- Restricciones para tablas volcadas
