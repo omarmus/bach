@@ -1,7 +1,8 @@
-            <div id="push"></div>
         </div> <!-- /wrap -->
         <footer>
-            <p>&copy; Bach PHP <?php echo date('Y') ?> - Disponible en <?php echo anchor('https://github.com/ozielmus/bach', 'Github') ?></p>
+            <div class="container">
+                <p class="text-muted credit">&copy; Bach PHP <?php echo date('Y') ?> - Disponible en <?php echo anchor('https://github.com/ozielmus/bach', 'Github') ?></p>
+            </div>
         </footer>
         <!-- Modal main -->
         <div id="main-modal" class="modal hide fade" tabindex="-1" role="dialog"></div>

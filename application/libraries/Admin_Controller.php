@@ -18,7 +18,7 @@ class Admin_Controller extends BC_Controller
  		$this->load->model('page_m', 'page');
 
  		//Configurations
-		$this->form_validation->set_error_delimiters('<div class="error">','</div>');
+		$this->form_validation->set_error_delimiters('<div class="input-error">','</div>');
 		//$this->output->enable_profiler(TRUE);
 
  		// Login check

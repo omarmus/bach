@@ -1,30 +1,37 @@
-<h1><a href="" class="brand">Bach PHP</a></h1>
 <div class="form-login">
-	<?php $error = $this->session->flashdata('error'); ?>
-	<?php if ($error): ?>
-	<div class="msg msg-alert"><?php echo $error ?></div>	
-	<?php endif ?>
-	<?php $success = $this->session->flashdata('success'); ?>
-	<?php if ($success): ?>
-	<div class="msg msg-success"><?php echo $success ?></div>	
-	<?php endif ?>
 	<?php echo form_open(); ?>
-		<div class="input-append">
-			<input type="text" name="email" placeholder="Email">
-			<span class="add-on"><i class="icon-user"></i></span>
+		<?php $error = $this->session->flashdata('error'); ?>
+		<?php if ($error): ?>
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<?php echo $error ?>
+		</div>	
+		<?php endif ?>
+		<?php $success = $this->session->flashdata('success'); ?>
+		<?php if ($success): ?>
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<?php echo $success ?></div>	
+		<?php endif ?>
+
+		<h3 class="form-signin-heading">Please sign in</h3>
+
+		<div class="input-group">
+			<span class="input-group-addon">@</span>
+			<input type="text" name="email" class="form-control" placeholder="Email address" autofocus>
 		</div>
 		<?php echo form_error('email'); ?>
-		<div class="input-append">
-			<input type="password" name="password" placeholder="Password">
-			<span class="add-on"><i class="icon-lock"></i></span>
+
+		<div class="input-group">
+			<span class="input-group-addon">@</span>
+			<input type="password" name="password" class="form-control" placeholder="Password">
 		</div>
 		<?php echo form_error('password'); ?>
-		<div class="options">
-			<!-- <label class="checkbox">
-				<input type="checkbox" value="remember-me"> Remember me
-			</label> -->
-			<label><a href="">¿Sé olvidó su contraseña?</a></label>
-		</div>
-		<?php echo form_submit('submit', 'Log in', 'class="btn btn-large btn-primary"'); ?>
+
+		<label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+		</label>
+		<label><a href="">¿Sé olvidó su contraseña?</a></label>
+		<button class="btn btn-large btn-primary btn-block" type="submit">Sign in</button>
 	<?php echo form_close(); ?>
 </div>

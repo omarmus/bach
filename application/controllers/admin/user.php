@@ -85,7 +85,7 @@ class User extends Admin_Controller
 			if ($this->user->login() == TRUE) {
 				redirect($dashboard);
 			} else {
-				$this->session->set_flashdata('error', 'That email/password combination does not exist');
+				$this->session->set_flashdata('error', 'That <strong>email/password</strong> combination does not exist');
 				redirect('login', 'refresh');
 			}
 		}

@@ -48,7 +48,7 @@ function get_menu($array, $child = FALSE)
     $str = '';
 
     if (count($array)) {
-        $str .= $child == FALSE ? '<ul class="nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
+        $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
 
         foreach ($array as $item) {
             $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
