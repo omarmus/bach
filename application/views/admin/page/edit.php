@@ -6,7 +6,7 @@
 </div>
 <form onsubmit="return validate(this, '<?php echo site_url('admin/page/edit'. (isset($page['IdPage'])?'/'.$page['IdPage']:'')) ?>')">
 	<div class="modal-body">
-		<div id="type-page">
+		<div id="page-type">
 			<label>Tipo de página</label>
 			<label class="radio">
 				<input type="radio" name="type-page" value="module">

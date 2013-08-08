@@ -53,11 +53,11 @@ function get_menu($array, $child = FALSE)
         foreach ($array as $item) {
             $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
             if (isset($item['children']) && count($item['children'])) {
-                $submenu = $item['Type'] == "section" ? 'dropdown-submenu' : 'dropdown';
+                $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
                 $active = $active ? ' active' : '';
                 $str .= '<li class="'. $submenu . $active . '">';
                 $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
-                $str .= ($item['Type'] == "section" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
+                $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
                 $str .= get_menu($item['children'], TRUE);
             } else {
                 $str .= $active ? '<li class="active">' : '<li>';

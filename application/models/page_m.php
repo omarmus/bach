@@ -100,7 +100,6 @@ class Page_m extends BC_Model {
 		$pages = parent::get_by(array('IdModule' => $id));
 
 		// Return key =>  value pair array
-		$array = array();
 		$array[0] = 'Seleccione ' . ($id ? 'una sección' : 'un módulo') . '...';
 		if (count($pages)) {
 			foreach ($pages as $page) {
