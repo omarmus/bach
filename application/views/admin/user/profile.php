@@ -63,8 +63,10 @@
                		if (response.status == 'error') {
 						messageError(response.msg);
                		} else {
-               			$('.photo-user > img').prop('src', '<?php echo site_url('files/users') ?>/' + response.filename);
                			messageOk(response.msg);
+               			setTimeout(function () {
+               				window.location = '';
+               			}, 2000)
                		}                	
                 }
             });

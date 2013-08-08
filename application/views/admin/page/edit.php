@@ -6,10 +6,30 @@
 </div>
 <form onsubmit="return validate(this, '<?php echo site_url('admin/page/edit'. (isset($page['IdPage'])?'/'.$page['IdPage']:'')) ?>')">
 	<div class="modal-body">
+		<div id="type-page">
+			<label>Tipo de página</label>
+			<label class="radio">
+				<input type="radio" name="type-page" value="module">
+				Módulo
+			</label>
+			<label class="radio">
+				<input type="radio" name="type-page" value="section">
+				Sección
+			</label>
+			<label class="radio">
+				<input type="radio" name="type-page" value="subsection">
+				Subsección
+			</label>
+		</div>
 		<div>
-	    	<label for="">Module</label> 
-			<?php echo form_dropdown('IdParent', $pages_no_parents, set_value('IdParent', $page['IdParent'])); ?>
-			<?php echo form_error('IdParent'); ?>
+			<div id="container-module" style="display : none;"> 
+				<?php echo form_dropdown('IdModule', $list_modules, set_value('IdModule', $page['IdModule'])); ?>
+				<?php echo form_error('IdModule'); ?>
+			</div>
+			<div id="container-section" style="display : none;">
+				<?php echo form_dropdown('IdSection', array(0 => 'Seleccione una sección')); ?>				
+				<?php echo form_error('IdSection'); ?>
+			</div>
 		</div>
 	    <div>
 	    	<label for="">Name <strong>*</strong></label> 

@@ -43,7 +43,7 @@ class Page_m extends BC_Model {
 		parent::delete($pk);
 
 		// Reset modules ID for its children
-		SysPagesQuery::create()->filterByIdModule($pk)->update(array('IdModule' => 0));
+		SysPagesQuery::create()->filterByIdModule($pk)->update(array('IdModule' => 0, 'IdSection' => 0));
 	}
 
 	public function save_order($pages)
@@ -94,23 +94,20 @@ class Page_m extends BC_Model {
 						->get()->result();
 	}
 
-	public function get_no_parents()
+	public function get_no_parents($id)
 	{
 		// Fetch pages without parents
-		$pages = parent::get_by(array('IdModule' => 0));
+		$pages = parent::get_by(array('IdModule' => $id));
 
 		// Return key =>  value pair array
 		$array = array();
-
+		$array[0] = 'Seleccione ' . ($id ? 'una sección' : 'un módulo') . '...';
 		if (count($pages)) {
 			foreach ($pages as $page) {
 				$array[$page->getIdPage()] = $page->getTitle();
 			}
 		}
 
-		return array(
-			0 => 'Create a new module',
-			'Select module...' => $array
-		);
+		return $array;
 	}
 }

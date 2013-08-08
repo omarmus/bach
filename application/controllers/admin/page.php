@@ -60,7 +60,7 @@ class Page extends Admin_Controller
 		}
 
 		// Pages for dropdown
-		$this->data['pages_no_parents'] = $this->page->get_no_parents();
+		$this->data['list_modules'] = $this->page->get_no_parents(0);
 
 		// Set up the form
 		$rules = $this->page->rules;

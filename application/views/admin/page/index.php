@@ -41,12 +41,26 @@
 	</tbody>
 </table>
 <script type="text/javascript">
-$(document).ready(function() {
-	oTable = $('#main-table').dataTable({
-		"aoColumnDefs" : [
-			{"bVisible": false, "aTargets": [ 0 ]}, 
-			{"bSortable": false, "aTargets": [ 1, 2 ] }
-		],
+	$(document).ready(function() {
+		oTable = $('#main-table').dataTable({
+			"aoColumnDefs" : [
+				{"bVisible": false, "aTargets": [ 0 ]}, 
+				{"bSortable": false, "aTargets": [ 1, 2 ] }
+			],
+		});
 	});
-});
+	$('#type-page input').on('click', function () {
+		switch (this.value) {
+			case 'module' : 
+				$('#container-module, #container-section').hide();
+				break;
+			case 'section' : 
+				$('#container-module').show();
+				$('#container-section').hide();	
+				break;
+			case 'subsection' : 
+				$('#container-module, #container-section').show();		
+				break;
+		}
+	})
 </script>
