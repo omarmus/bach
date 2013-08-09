@@ -5,7 +5,11 @@
             </div>
         </footer>
         <!-- Modal main -->
-        <div id="main-modal" class="modal hide fade" tabindex="-1" role="dialog"></div>
+        <div id="main-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content"></div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
         <!-- /Modal main -->
         <script src="<?php echo site_url('lib/jquery.easing/jquery.easing.1.3.js') ?>"></script>
         <script type="text/javascript">      

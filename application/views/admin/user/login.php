@@ -17,13 +17,13 @@
 		<h3 class="form-signin-heading">Please sign in</h3>
 
 		<div class="input-group">
-			<span class="input-group-addon">@</span>
+			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
 			<input type="text" name="email" class="form-control" placeholder="Email address" autofocus>
 		</div>
 		<?php echo form_error('email'); ?>
 
 		<div class="input-group">
-			<span class="input-group-addon">@</span>
+			<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
 			<input type="password" name="password" class="form-control" placeholder="Password">
 		</div>
 		<?php echo form_error('password'); ?>

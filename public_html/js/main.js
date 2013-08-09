@@ -62,9 +62,9 @@ $.extend( true, $.fn.dataTable.defaults, {
 } );
 
 function showModal (url) {
-	$('#main-modal').load(url, function () {
-		var input = $(this).modal().find('input');
-		setTimeout(function () {$(input[0]).focus()}, 500);
+	$('#main-modal .modal-content').load(url, function () {
+		var input = $('#main-modal').modal().find('input[type=text]').get(0);
+		setTimeout(function () {input.focus()}, 500);
 	});
 }
 
@@ -79,8 +79,8 @@ function validate (form, url) {
 			messageOk(response == "CREATE"?"Create!":"Update!", 1000);
 			setTimeout(function () {window.location = '';}, 1200);
 		} else {
-			var error = $('#main-modal').html(response).find('.error');
-			setTimeout(function () {$(error[0]).prev().focus()}, 500);
+			var error = $('#main-modal .modal-content').html(response).find('.input-error').get(0);
+			setTimeout(function () {$(error).prev().focus()}, 300);
 			$('#main-modal').find('input').on('keypress', function () {
 				$(this).next().fadeOut();
 			});
@@ -106,8 +106,8 @@ function validate_data (form, url) {
 
 function edit (url, e) {
 	e.preventDefault();
-	$('#main-modal').load(url, function () {
-		$(this).modal();
+	$('#main-modal .modal-content').load(url, function () {
+		$('#main-modal').modal();
 	})
 }
 

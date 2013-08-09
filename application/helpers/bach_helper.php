@@ -2,16 +2,16 @@
 function btn_edit($uri)
 {
     $uri = site_url($uri);
-    return anchor('#', '<img src="'.site_url('img/glyphicons/glyphicons_150_edit.png').'">', array(
-        'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-mini'
+    return anchor('#', '<span class="glyphicon glyphicon-edit"></span>', array(
+        'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-default'
     ));
 }
 
 function btn_permissions($uri)
 {
 	$uri = site_url($uri);
-	return anchor('#', '<img src="'.site_url('img/glyphicons/glyphicons_203_lock.png').'">', array(
-		'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-mini'
+	return anchor('#', '<span class="glyphicon glyphicon-lock"></span>', array(
+		'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-default'
 	));
 }
 
