@@ -1,4 +1,4 @@
-<nav id="nav-left">
+<nav id="nav-lateral">
     <div class="profile">
         <a href="<?php echo site_url('admin/profile') ?>" class="photo-user">
         <?php if ($userdata['photo'] != ""): ?>

@@ -12,7 +12,7 @@
                 <input class="form-control" style="display: none; margin-right: 14px;" type="text" placeholder="Search">
                 <button type="submit" class="btn btn-inverse hide" ><i class="icon-search icon-white"></i></button>
                 <button type="submit" class="btn btn-inverse hide" ><i class="icon-question-sign icon-white"></i></button>
-                <a href="<?php echo site_url('logout') ?>" class="btn btn-danger"><i class="icon-off icon-white">Log out</i></a>
+                <a href="<?php echo site_url('logout') ?>" class="btn btn-danger"><i class="icon-off icon-white"><span class="glyphicon glyphicon-off"></span></i></a>
             </form>
         </nav><!--/.nav-collapse -->
     </div>

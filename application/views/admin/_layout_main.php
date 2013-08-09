@@ -7,13 +7,13 @@
     <div id="wrap">
         <?php $this->load->view('admin/components/nav_main'); ?>
         <?php $this->load->view('admin/components/nav_lateral'); ?>
+        <ul class="breadcrumb">
+        <?php if (count($page)) : ?>
+            <li><a href="<?php echo site_url('admin/dashboard') ?>">Dashboard</a></li>
+        <?php endif ?>
+            <li class="active"><?php echo $title ?></li>
+        </ul>
         <div class="container">
-            <ul class="breadcrumb">
-            <?php if (count($page)) : ?>
-                <li><a href="<?php echo site_url('admin/dashboard') ?>">Dashboard</a> <span class="divider">/</span></li>
-            <?php endif ?>
-                <li class="active"><?php echo $title ?></li>
-            </ul>
             <?php $this->load->view($subview); ?>
         </div>
     <?php $this->load->view('admin/components/footer'); ?>

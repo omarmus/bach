@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700">
         <link rel="stylesheet" href="<?php echo site_url('lib/bootstrap/css/bootstrap.css') ?>">
+        <link rel="stylesheet" href="<?php echo site_url('lib/bootstrap-glyphicons/css/bootstrap-glyphicons.css') ?>">
         <link rel="stylesheet" href="<?php echo site_url('lib/jquery.gritter/css/jquery.gritter.css') ?>">
         <link rel="stylesheet" href="<?php echo site_url('css/main.css') ?>">
         <link rel="stylesheet" href="<?php echo site_url('css/themes/default/style.css') ?>">

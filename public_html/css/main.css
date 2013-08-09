@@ -22,8 +22,24 @@ body.body-login {
 }
 
 #wrap > .container {
-  padding: 60px 15px 0 75px;
+  padding: 100px 75px 0 15px;
 }
+
+.body-login #wrap > .container{
+  padding: 0 15px;
+}
+
+.breadcrumb {
+  top: 50px;
+  position: absolute;
+  width: 100%;
+  z-index: 100;
+}
+
+/* ==========================================================================
+                                  H E A D E R
+   ========================================================================== */
+header > .container {max-width: none;}
 
 /* ==========================================================================
                                   L O G  I N
@@ -50,14 +66,29 @@ body.body-login {
 /* ==========================================================================
                               N A V  L A T E R A L
    ========================================================================== */
-#nav-left {
+#nav-lateral {
   background-color: #F5F5F5;
-  left: 0;
+  right: 0;
   position: fixed;
   height: 100%;
   top: 0;
   width: 60px;
-  margin-top: 50px; 
+  margin-top: 50px;
+  z-index: 101;
+}
+
+/* ==========================================================================
+                                   M O D A L
+   ========================================================================== */
+.modal-body {font-size: 0;}
+.modal-body > .form-group {
+    display: inline-block;
+    padding: 0 5px;
+    vertical-align: top;
+    width: 50%;
+}
+.form-group, .modal-body label {
+    font-size: 14px;
 }
 
 /* ==========================================================================
@@ -80,6 +111,7 @@ footer {
   line-height: 30px;
 }
 footer p {margin: 0;}
+.body-login footer {text-align: center;}
 
 
 /* ==========================================================================
