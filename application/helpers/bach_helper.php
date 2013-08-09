@@ -97,6 +97,23 @@ function upload_file($opts = array())
     } else {
         $data = $CI->upload->data();
 
+        if (isset($opts['thumbnail']) && $opts['thumbnail']) {
+
+            $config_2['image_library'] = 'gd2';
+            $config_2['source_image'] = $config['upload_path'] . $data['file_name'];
+            $config_2['create_thumb'] = TRUE;
+            $config_2['maintain_ratio'] = TRUE;
+            $config_2['width'] = 75;
+            $config_2['height'] = 50;
+
+            $CI->load->library('image_lib', $config_2);
+            if ( ! $CI->image_lib->resize() )
+            {
+                $status = 'error';
+                $msg = $CI->image_lib->display_errors('', '');
+            }
+        }
+
         // Exist field 'Title'
         !isset($opts['Title']) || $data['Title'] = $opts['Title'];
 

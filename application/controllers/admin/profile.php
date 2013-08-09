@@ -66,6 +66,7 @@ class Profile extends Admin_Controller {
 		$config['field'] = 'photo';
 		$config['path'] = './files/users/';
 		$config['types'] = 'gif|jpg|png';
+		$config['thumbnail'] = TRUE;
 
 		$file = upload_file($config);
 
