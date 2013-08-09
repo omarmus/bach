@@ -14,6 +14,6 @@
             <li class="active"><?php echo $title ?></li>
         </ul>
         <div class="container">
-            <?php $this->load->view($subview); ?>
+            <?php $this->load->view($subview); // Cargando la sub vista ?>
         </div>
     <?php $this->load->view('admin/components/footer'); ?>
