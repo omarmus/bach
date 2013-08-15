@@ -74,7 +74,7 @@ function get_menu($array, $child = FALSE)
 } 
 
 //Upload File for Ajax
-function upload_file($opts = array())
+function upload_file($options = null)
 {
     $CI =& get_instance();
     $CI->load->model('file_m', 'file');
@@ -83,12 +83,18 @@ function upload_file($opts = array())
     $status = "";
     $msg = "";
 
-    $file_element_name = isset($opts['field']) ? $opts['field'] : 'file';
-    $config['upload_path'] = isset($opts['path']) ? $opts['path'] : './files/';
-    $config['allowed_types'] = isset($opts['types']) ? $opts['types'] : 'gif|jpg|png|doc|txt';
-    $config['max_size']  = isset($opts['max_size']) ? $opts['max_size'] : 1024 * 8;
-    $config['encrypt_name'] = isset($opts['encrypt']) ? $opts['encrypt'] : TRUE;
+    $file_element_name = isset($options['field']) ? $options['field'] : 'file';
 
+    $config = array(
+        'upload_path' => './files/', 
+        'allowed_types' => 'gif|jpg|png|doc|txt', 
+        'max_size' => 1024 * 8, 
+        'encrypt_name' => TRUE
+    );
+
+    if ($options) {
+        $config = array_merge($config, $options);
+    }
     $CI->load->library('upload', $config);
 
     if (!$CI->upload->do_upload($file_element_name)) {
@@ -97,25 +103,24 @@ function upload_file($opts = array())
     } else {
         $data = $CI->upload->data();
 
-        if (isset($opts['thumbnail']) && $opts['thumbnail']) {
+        if (isset($options['thumbnail']) && $options['thumbnail']) {
 
-            $config_2['image_library'] = 'gd2';
-            $config_2['source_image'] = $config['upload_path'] . $data['file_name'];
-            $config_2['create_thumb'] = TRUE;
-            $config_2['maintain_ratio'] = TRUE;
-            $config_2['width'] = 75;
-            $config_2['height'] = 50;
+            $config_thumb['image_library'] = 'gd2';
+            $config_thumb['source_image'] = $config['upload_path'] . $data['file_name'];
+            $config_thumb['create_thumb'] = TRUE;
+            $config_thumb['maintain_ratio'] = TRUE;
+            $config_thumb['width'] = 75;
+            $config_thumb['height'] = 50;
 
-            $CI->load->library('image_lib', $config_2);
-            if ( ! $CI->image_lib->resize() )
-            {
+            $CI->load->library('image_lib', $config_thumb);
+            if ( ! $CI->image_lib->resize() ) {
                 $status = 'error';
                 $msg = $CI->image_lib->display_errors('', '');
             }
         }
 
         // Exist field 'Title'
-        !isset($opts['Title']) || $data['Title'] = $opts['Title'];
+        !isset($options['Title']) || $data['Title'] = $options['Title'];
 
         // Create file in SysFiles
         $file = $CI->file->save($data, NULL, TRUE)->toArray();
@@ -132,4 +137,66 @@ function upload_file($opts = array())
 
     //Convert to json in controller
     return array('status' => $status, 'msg' => $msg, 'id_file' => $file['IdFile'], 'filename' => $file['Filename']);
+}
+
+// Send mail
+function send_mail($options = null)
+{
+    $CI =& get_instance();
+    $CI->load->library('email');
+
+    $data = array(
+        'from' => 'info@bach.com', 
+        'name'=> 'Bach', 
+        'to' => 'alguien@ejemplo.com', 
+        'subject' => 'Email de Prueba', 
+        'message' => '',
+        'mailtype' => 'html'
+    );
+
+    if ($options) {
+        $data = array_merge($data, $options);
+    }
+
+    $CI->email->set_mailtype($data['mailtype']);
+
+    if (isset($options['smtp']) && $options['smtp']) {
+        $CI->email->set_smtp_host('');
+        $CI->email->set_smtp_user('');
+        $CI->email->set_smtp_pass('');
+        $CI->email->set_smtp_port(25);
+    }
+
+    if (isset($options['clear']) && $options['clear']) {
+        $CI->email->clear(isset($options['clear_adjunt']) && $options['clear_adjunt']);
+    }
+
+    $CI->email->from($data['from'], $data['name']);
+    $CI->email->to($data['to']);
+    $CI->email->subject($data['subject']);
+    $CI->email->message($data['message']);
+
+    if (isset($options['cc'])) {
+        $CI->email->cc($options['cc']);
+    }
+
+    if (isset($options['bcc'])) {
+        $CI->email->bcc($options['bcc']);
+    }
+
+    if (isset($options['attach'])) {
+        if (!is_array($options['attach'])) {
+            $options['attach'] = array($options['attach']);
+        }
+        foreach ($options['attach'] as $attach) {
+            $CI->email->attach( getcwd() . $attach );
+        }
+    }
+
+    if (isset($options['debug']) && $options['debug']) {
+        $CI->email->send();
+        echo $CI->email->print_debugger();
+    } else {
+        return $CI->email->send();
+    }   
 }
