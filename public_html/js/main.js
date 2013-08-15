@@ -11,7 +11,7 @@ $(document).ready(function() {
 });
 
 $.extend( true, $.fn.dataTable.defaults, {
-	"sDom": "<'row-fluid'<'span9'><'span3'l>r>t<'row-fluid'<'span4'i><'span8'p>>",
+	"sDom": "<'row'<'col-xs-6 col-md-9'><'col-xs-6 col-md-3'l>r>t<'row'<'col-xs-6 col-md-4'i><'col-xs-6 col-md-8'p>>",
 	"bFilter": false,
 	"sPaginationType": "full_numbers",
 	"aoColumnDefs" : [
@@ -36,12 +36,12 @@ $.extend( true, $.fn.dataTable.defaults, {
     	th.innerHTML = "<i></i>";
     	th.className = "check-all";
     	th.onclick = function () {
-    		var toggle = (that.$('tr').length == that.$('tr.info').length?'remove':'add') + 'Class';
+    		var toggle = (that.$('tr').length == that.$('tr.active').length?'remove':'add') + 'Class';
     		$(firstTH).parent()[toggle]('all-selected');
-    		that.$('tr')[toggle]('info');
-    		var now = that.$('tr.info').length;
+    		that.$('tr')[toggle]('active');
+    		var now = that.$('tr.active').length;
     		$('#delete-rows')[(now?'remove':'add') + 'Class']('disabled');
-    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
+    		$($(that).parent().find('.row .col-md-9')[0]).html(now?'<span class="label label-warning"><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</span>':'');
     	}
 		$(firstTH).parent().prepend(th);
 		that.$('tr').each(function () {
@@ -50,11 +50,11 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    	td.className = "check-item";
 	    	td.innerHTML = '<i></i>';
 	    	td.onclick = function () {
-	    		$(firstTD).toggleClass('info');
-	    		var now = that.$('tr.info').length;
+	    		$(firstTD).toggleClass('active');
+	    		var now = that.$('tr.active').length;
 	    		$(firstTH).parent()[(that.$('tr').length == now?'add':'remove') + 'Class']('all-selected');
 	    		$('#delete-rows')[(now?'remove':'add') + 'Class']('disabled');
-	    		$($(that).parent().find('.row-fluid .span9')[0]).html(now?'<label><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</label>':'');
+	    		$($(that).parent().find('.row .col-md-9')[0]).html(now?'<span class="label label-warning"><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</span>':'');
 	    	}
 	    	$(firstTD).prepend(td);
 		})
@@ -119,7 +119,7 @@ function deleteSelected (oTable, url, refresh) {
 				deleteRows(oTable);
 				messageOk('Delete!');
 				$(oTable.find('th')[0]).parent().removeClass('all-selected');
-				$(oTable.parent().find('.row-fluid .span9')[0]).html('');
+				$(oTable.parent().find('.row .col-md-9')[0]).html('');
 				if (refresh) {
 					setTimeout(function () {
 						window.location = '';
@@ -131,7 +131,7 @@ function deleteSelected (oTable, url, refresh) {
 }
 
 function deleteRows(oTable){
-	var anSelected = oTable.$('tr.info');
+	var anSelected = oTable.$('tr.active');
 	if (anSelected.length) {
 		anSelected.each(function (index) {
 			deleteRow(oTable, this);
@@ -145,7 +145,7 @@ function deleteRow (oTable, td) {
 
 function getPks(oTable) {
 	var pks = [];
-	oTable.$('tr.info').each(function () {
+	oTable.$('tr.active').each(function () {
 		pks.push(oTable.fnGetData(this)[0]);
 	});
 	return pks;
@@ -198,4 +198,13 @@ function message (title, text, img, class_name, sticky) {
 		options = $.extend(options, {image: img}); // (string | optional) the image to display on the left
 	}
 	$.gritter.add(options);
+}
+
+/* Nano Templates (Tomasz Mazur, Jacek Becela) */
+function nano(template, data) {
+  return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
+    var keys = key.split("."), v = data[keys.shift()];
+    for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
+    return (typeof v !== "undefined" && v !== null) ? v : "";
+  });
 }

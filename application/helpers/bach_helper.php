@@ -149,7 +149,7 @@ function send_mail($options = null)
         'from' => 'info@bach.com', 
         'name'=> 'Bach', 
         'to' => 'alguien@ejemplo.com', 
-        'subject' => 'Email de Prueba', 
+        'subject' => 'Sin asunto', 
         'message' => '',
         'mailtype' => 'html'
     );

@@ -99,13 +99,14 @@ class User_M extends BC_Model {
 	public function set_userdata($user)
 	{
 		$data = array(
-			'username' => $user->getUsername(),
-			'email' => $user->getEmail(), 
-			'id_user' => $user->getIdUser(),
-			'id_rol' => $user->getIdRol(),
-			'loggedin' => TRUE, 
-			'id_photo' => $user->getIdPhoto(),
-			'photo' => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : ''
+			'username'   => $user->getUsername(),
+			'email' 	 => $user->getEmail(), 
+			'id_user'    => $user->getIdUser(),
+			'id_rol' 	 => $user->getIdRol(),
+			'loggedin'   => TRUE, 
+			'id_photo'   => $user->getIdPhoto(),
+			'photo' 	 => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : '',
+			'parameters' => SysParametersQuery::create()->find()->toArray()
 		);
 		$this->session->set_userdata($data);
 	}

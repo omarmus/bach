@@ -12,7 +12,7 @@
 		<span class="glyphicon glyphicon-trash"></span>
 	</button>
 </div>
-<table id="main-table" class="table table-striped table-bordered table-hover data-table">
+<table id="main-table" class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
 			<th></th>
