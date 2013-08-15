@@ -9,17 +9,17 @@ function btn_edit($uri)
 
 function btn_permissions($uri)
 {
-	$uri = site_url($uri);
-	return anchor('#', '<span class="glyphicon glyphicon-lock"></span>', array(
-		'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-default'
-	));
+    $uri = site_url($uri);
+    return anchor('#', '<span class="glyphicon glyphicon-lock"></span>', array(
+        'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-default'
+    ));
 }
 
 function btn_delete($uri)
 {
-	return anchor($uri, '<i class="icon-remove"></i>', array(
-		'onclick' => "return confirm('You are about to delete a record. This cannot be undone. Are you sure?')")
-	);
+    return anchor($uri, '<i class="icon-remove"></i>', array(
+        'onclick' => "return confirm('You are about to delete a record. This cannot be undone. Are you sure?')")
+    );
 }
 
 function add_meta_title($string)
@@ -145,11 +145,17 @@ function send_mail($options = null)
     $CI =& get_instance();
     $CI->load->library('email');
 
+    $CI->load->library('session');
+    $parameters = $CI->session->userdata('parameters');
+    if (!$parameters) {
+        $parameters = get_parameters();  
+    } 
+    
     $data = array(
-        'from' => 'info@bach.com', 
-        'name'=> 'Bach', 
-        'to' => 'alguien@ejemplo.com', 
-        'subject' => 'Sin asunto', 
+        'from' => $parameters['SYSTEM_MAIL'], 
+        'name'=> $parameters['SYSTEM_NAME'], 
+        'to' => $parameters['SYSTEM_MAIL'], 
+        'subject' => 'Test', 
         'message' => '',
         'mailtype' => 'html'
     );
@@ -199,4 +205,17 @@ function send_mail($options = null)
     } else {
         return $CI->email->send();
     }   
+}
+
+function get_parameters()
+{
+    $items = array();
+    $parameters = SysParametersQuery::create()->find();
+    foreach ($parameters as $param) {
+        $items[$param->getName()] = array(
+            'Value' => $param->getValue(),
+            'Title' => $param->getTitle()
+        );
+    }
+    return $items;
 }

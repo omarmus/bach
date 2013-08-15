@@ -106,7 +106,7 @@ class User_M extends BC_Model {
 			'loggedin'   => TRUE, 
 			'id_photo'   => $user->getIdPhoto(),
 			'photo' 	 => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : '',
-			'parameters' => SysParametersQuery::create()->find()->toArray()
+			'parameters' => get_parameters()
 		);
 		$this->session->set_userdata($data);
 	}
