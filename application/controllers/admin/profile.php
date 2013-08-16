@@ -15,7 +15,7 @@ class Profile extends Admin_Controller {
 	public function index()
 	{   
 		$this->data['user'] = $this->user->get($this->id_user)->toArray();
-		$this->data['subview'] = 'admin/user/profile';
+		$this->data['subview'] = 'admin/profile/profile';
 		$this->load->view('admin/_layout_main', $this->data);
 	}
 
@@ -35,7 +35,7 @@ class Profile extends Admin_Controller {
 		} else {
 			$this->data['user'] = $this->user->get($this->id_user)->toArray();
 		}
-		$this->load->view('admin/user/profile_data', $this->data);
+		$this->load->view('admin/profile/profile_data', $this->data);
 	}
 
 	public function update_password()
@@ -48,7 +48,7 @@ class Profile extends Admin_Controller {
 			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
 			$this->user->save($data, $this->id_user);
 		}
-		$this->load->view('admin/user/profile_password');
+		$this->load->view('admin/profile/profile_password');
 	}
 
 	public function delete_photo()
@@ -64,8 +64,8 @@ class Profile extends Admin_Controller {
 	public function upload_photo()
 	{
 		$config['field'] = 'photo';
-		$config['path'] = './files/users/';
-		$config['types'] = 'gif|jpg|png';
+		$config['upload_path'] = './files/users/';
+		$config['allowed_types'] = 'gif|jpg|png';
 		$config['thumbnail'] = TRUE;
 
 		$file = upload_file($config);

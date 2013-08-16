@@ -13,22 +13,22 @@
         <meta name="description" content="">
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700">
-        <link rel="stylesheet" href="<?php echo site_url('lib/bootstrap/css/bootstrap.css') ?>">
-        <link rel="stylesheet" href="<?php echo site_url('lib/bootstrap-glyphicons/css/bootstrap-glyphicons.css') ?>">
-        <link rel="stylesheet" href="<?php echo site_url('lib/jquery.gritter/css/jquery.gritter.css') ?>">
-        <link rel="stylesheet" href="<?php echo site_url('css/main.css') ?>">
-        <link rel="stylesheet" href="<?php echo site_url('css/themes/default/style.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('lib/bootstrap/css/bootstrap.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('lib/bootstrap-glyphicons/css/bootstrap-glyphicons.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('lib/jquery.gritter/css/jquery.gritter.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
+        <link rel="stylesheet" href="<?php echo base_url('css/themes/default/style.css') ?>">
         <!--[if lt IE 9]>
-            <script src="<?php echo site_url('js/html5-3.6-respond-1.1.0.min.js') ?>"></script>
+            <script src="<?php echo base_url('js/html5-3.6-respond-1.1.0.min.js') ?>"></script>
         <![endif]-->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo site_url('lib/jquery/jquery-1.9.1.min.js') ?>"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="<?php echo base_url('lib/jquery/jquery-1.9.1.min.js') ?>"><\/script>')</script>
         <?php if (isset($sortable) && $sortable == TRUE): ?>
-            <script src="<?php echo site_url('lib/jqueryui/jquery-ui-1.10.3.custom.min.js') ?>"></script>
-            <script src="<?php echo site_url('lib/jquery.nestedSortable/jquery.mjs.nestedSortable.js') ?>"></script>
+            <script src="<?php echo base_url('lib/jqueryui/jquery-ui-1.10.3.custom.min.js') ?>"></script>
+            <script src="<?php echo base_url('lib/jquery.nestedSortable/jquery.mjs.nestedSortable.js') ?>"></script>
         <?php endif; ?>
         <script type="text/javascript">
-            var _site_url = '<?php echo site_url() ?>',
+            var _base_url = '<?php echo base_url() ?>',
                 _uri = '<?php echo $this->uri->uri_string() ?>';
         </script>
     </head>

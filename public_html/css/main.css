@@ -1,43 +1,13 @@
 /* ==========================================================================
                                 G E N E R A L
    ========================================================================== */
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-body.body-login {
-  background-color: #EEEEEE;
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -30px;
-  padding: 0 0 30px;
-}
-
-#wrap > .container {
-  padding: 100px 75px 0 15px;
-}
-
-.body-login #wrap > .container{
-  padding: 0 15px;
-}
-
-.breadcrumb {
-  top: 50px;
-  position: absolute;
-  width: 100%;
-  z-index: 100;
-}
-
-.section-buttons {
-  margin-bottom: 10px;
-}
-
+html, body {height: 100%;}
+body.body-login {background-color: #EEEEEE;}
+#wrap {min-height: 100%;height: auto !important;height: 100%;margin: 0 auto -30px;padding: 0 0 30px;}
+#wrap > .container {padding: 100px 75px 0 15px;}
+.body-login #wrap > .container{padding: 0 15px;}
+.breadcrumb {top: 50px;position: absolute;width: 100%;z-index: 100;}
+.section-buttons {margin-bottom: 10px;}
 /* ==========================================================================
                                   H E A D E R
    ========================================================================== */
@@ -47,47 +17,32 @@ body.body-login {
                                   L O G  I N
    ========================================================================== */
 .body-login h3 {text-align: center;}
-.form-login {
-  margin: 80px auto 0;
-  max-width: 380px;
-  padding: 15px;
-}
+.form-login {margin: 80px auto 0;max-width: 380px;padding: 15px;}
 .form-login input[type="text"],
-.form-login input[type="password"] {
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-.form-login .input-group{
-  margin-top: 10px;
-}
+.form-login input[type="password"] {font-size: 16px;height: auto;padding: 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+.form-login .input-group{margin-top: 10px;}
 
 /* ==========================================================================
                               N A V  L A T E R A L
    ========================================================================== */
-#nav-lateral {
-  background-color: #F5F5F5;
-  right: 0;
-  position: fixed;
-  height: 100%;
-  top: 0;
-  width: 60px;
-  margin-top: 50px;
-  z-index: 101;
+#nav-lateral {background-color: #F5F5F5;right: 0;position: fixed;height: 100%;top: 0;width: 60px;margin-top: 50px;z-index: 101;}
+a.photo-user {
+  background-position: center;
+  background-size: auto 100%;
+    display: block;
+    height: 60px;
+    width: 60px;
 }
 
 /* ==========================================================================
                       T A B L E  A N D  D A T A T A B L E S
    ========================================================================== */
 table .sorting, table .sorting_asc, table .sorting_desc, table .sorting_asc_disabled, table .sorting_desc_disabled {cursor: pointer;}
-table .sorting { background: url('../lib/jquery.datatables/images/sort_both.png') no-repeat center right; }
-table .sorting_asc { background: url('../lib/jquery.datatables/images/sort_asc.png') no-repeat center right; }
-table .sorting_desc { background: url('../lib/jquery.datatables/images/sort_desc.png') no-repeat center right; }
-table .sorting_asc_disabled { background: url('../lib/jquery.datatables/images/sort_asc_disabled.png') no-repeat center right; }
-table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/sort_desc_disabled.png') no-repeat center right; }
+table .sorting { background: url('../lib/jquery.datatables/images/sort_both.png') no-repeat center right;}
+table .sorting_asc { background: url('../lib/jquery.datatables/images/sort_asc.png') no-repeat center right;}
+table .sorting_desc { background: url('../lib/jquery.datatables/images/sort_desc.png') no-repeat center right;}
+table .sorting_asc_disabled { background: url('../lib/jquery.datatables/images/sort_asc_disabled.png') no-repeat center right;}
+table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/sort_desc_disabled.png') no-repeat center right;}
 .table td.edit {padding: 3px 0; text-align: center;}
 .table th.edit {width: 48px !important; text-align: center;}
 .check-item, .table th.check-all {cursor: pointer;}
@@ -99,116 +54,76 @@ table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/
 .dataTables_paginate a{ border: 1px solid #DDDDDD; display: inline-block; margin-left: 2px; padding: 4px 12px; text-decoration: none;}
 .dataTables_paginate a:hover, .dataTables_paginate a.paginate_active, .dataTables_paginate a.paginate_button_disabled {background-color: #F5F5F5;}
 .dataTables_paginate a.paginate_active, .dataTables_paginate a.paginate_button_disabled {color: #999999; cursor: default;}
-#main-table_length, #main-table_paginate { text-align: right; }
+#main-table_length, #main-table_paginate { text-align: right;}
 
 /* ==========================================================================
                                    M O D A L
    ========================================================================== */
 .modal-body {font-size: 0;}
-.modal-body > .form-group {
-    display: inline-block;
-    padding: 0 5px;
-    vertical-align: top;
-    width: 50%;
-}
-.form-group, .modal-body label {
-    font-size: 14px;
-}
+.modal-body > .form-group {display: inline-block;padding: 0 5px;vertical-align: top;width: 50%;}
+.form-group, .modal-body label {font-size: 14px;}
 
 /* ==========================================================================
-                                  M E S S A G E S
+                            F O R M  A N D  I N P U T
    ========================================================================== */
-.input-error {
-  background-color: #F2DEDE;
-  border-color: #EED3D7;
-  color: #B94A48;
-  padding: 3px 10px;
-  margin-top: 5px; 
-}
+.fileinput-button {overflow: hidden;position: relative;}
+.fileinput-button input {height: 71px;left: -40px;opacity: 0;position: absolute;top: 0;width: 300px;}
+.modal-header h3, .modal-body label > strong, form label > strong {color: #B94A48;}
+
+/* ==========================================================================
+                                P R O F I L E
+   ========================================================================== */
+figure.photo-user {margin: 10px;position: relative;text-align: center;}
+figure.photo-user img {box-shadow: 3px 3px 5px -2px rgba(0, 0, 0, 0.8);}
+figure.photo-user figcaption {background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);display: none;height: 100%;left: 0;position: absolute;text-align: center;top: 0;width: 100%;}
+figure.photo-user:hover figcaption {display: block;}
+figure.photo-user figcaption > .btn.btn-primary {margin-top: 50px;}
+figure.photo-user figcaption > .btn {float: none;margin: 0 0 10px;}
+
+/* ==========================================================================
+                                M E S S A G E S
+   ========================================================================== */
+.input-error:before {border-bottom: 4px solid #EED3D7; border-right: 7px solid transparent; content: ""; height: 0; margin: -7px 0 0 10px; position: absolute; width: 0; -webkit-transform: skew(25deg); -moz-transform: skew(25deg); -o-transform: skew(25deg); transform: skew(25deg);}
+.input-error {background-color: #F2DEDE;border-color: #EED3D7;color: #B94A48;padding: 3px 10px;margin-top: 5px;}
+.n-success {background-color: rgba(65, 187, 25, .8);}
+.n-error {background-color: rgba(245, 15, 67, .8);}
+
+/* ==========================================================================
+                                  C A L L  O U T
+   ========================================================================== */
+.bs-callout {border-left: 5px solid #EEEEEE; margin: 20px 0; padding: 15px 30px 15px 15px;}
+.bs-callout-danger {background-color: #FCF2F2; border-color: #DFB5B4;}
+.bs-callout-warning {background-color: #FEFBED; border-color: #F1E7BC;}
+.bs-callout-info {background-color: #F0F7FD; border-color: #D0E3F0;}
 
 /* ==========================================================================
                                   F O O T E R
    ========================================================================== */
-footer {
-  height: 30px;
-  background-color: #f5f5f5;
-  line-height: 30px;
-}
+footer {height: 30px;background-color: #f5f5f5;line-height: 30px;}
 footer p {margin: 0;}
 .body-login footer {text-align: center;}
-
 
 /* ==========================================================================
                                     R W D
    ========================================================================== */
 /* Small devices (tablets, 768px and up) */
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
+  footer {padding-left: 20px;padding-right: 20px;}
+  .table {display: block;font-size: 0;}
+  .table thead {display: inline-block;font-size: 14px;padding-left: 0;vertical-align: top;width: 30%;}
+  .table tbody {display: inline-block;font-size: 0;margin-top: -1px;overflow: auto;white-space: nowrap;width: 70%;}
+  .table thead tr, .table thead th {display: block;}
+  .table tbody tr {display: inline-block;font-size: 14px;vertical-align: top;}
+  .table tbody td {border-width: 1px 1px 0 0 !important;display: block;height: 40px;}
+  .table thead th {border-bottom: 1px solid #E0E0E0;height: 40px;line-height: 36px;overflow: hidden;padding: 0;text-indent: 10px;width: 100% !important;}
+  .check-all i {margin: 12px 10px 0;}
+  .check-all i:after {content: "Select all";float: left;margin: -3px 0 0 10px;width: 80px;}
+  .table th.edit {text-align: left;width: auto !important;}
+  .table th.check-all {padding: 10px 8px;}
+  .table td.check-item {padding: 9px 0;cursor: pointer;border-radius: 2px;}
+  .modal-body > .form-group {display: block; width: 100%;}
   #nav-lateral {display: none;}
   #wrap > .container {padding-right: 15px;}
-  footer {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .table {
-    display: block;
-    font-size: 0;
-  }
-  .table thead {
-    display: inline-block;
-    font-size: 14px;
-    padding-left: 0;
-    vertical-align: top;
-    width: 30%;
-  }
-  .table tbody {
-    display: inline-block;
-    font-size: 0;
-    margin-top: -1px;
-    overflow: auto;
-    white-space: nowrap;
-    width: 70%;
-  }
-  .table thead tr, .table thead th {
-    display: block;
-  }
-  .table tbody tr {
-    display: inline-block;
-    font-size: 14px;
-    vertical-align: top;
-  }
-  .table tbody td {
-    border-width: 1px 1px 0 0 !important;
-    display: block;
-    height: 40px;
-  }
-  .table thead th {
-    border-bottom: 1px solid #E0E0E0;
-    height: 40px;
-    line-height: 36px;
-    overflow: hidden;
-    padding: 0;
-    text-indent: 10px;
-    width: 100% !important;
-  }
-  
-  .check-all i {margin: 12px 10px 0;}
-  .check-all i:after {
-    content: "Select all";
-    float: left;
-    margin: -3px 0 0 10px;
-    width: 80px;
-  }
-  .table th.edit {
-    text-align: left;
-    width: auto !important;
-  }
-  .table th.check-all {
-    padding: 10px 8px;
-  }
-  .table td.check-item {
-    padding: 9px 0;
-    cursor: pointer;
-  }
 }
 
 /* Medium devices (tablets, 992px and up) */

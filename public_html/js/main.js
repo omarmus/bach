@@ -1,15 +1,10 @@
 var oTable;
 
 $(document).ready(function() {
-	if ($("body").width() > 979) {
-		// showNavs();
-	}
-
 	oTable = $('#main-table').dataTable();
-	
-    $("#slide-toggle-bar").on("click", showNavs)
 });
 
+// Data table
 $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row'<'col-xs-6 col-md-9'><'col-xs-6 col-md-3'l>r>t<'row'<'col-xs-6 col-md-4'i><'col-xs-6 col-md-8'p>>",
 	"bFilter": false,
@@ -73,7 +68,9 @@ function hideModal() {
 }
 
 function validate (form, url) {
+	$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
 	$.post(url, $(form).serialize(), function (response) {
+		$(form).find('input[type=submit], button[type=submit]').prop({disabled : false});
 		if (response == "CREATE" || response == 'UPDATE') {
 			hideModal();
 			messageOk(response == "CREATE"?"Create!":"Update!", 1000);
@@ -91,7 +88,7 @@ function validate (form, url) {
 
 function validate_data (form, url) {
 	$.post(url, $(form).serialize(), function (response) {
-		var error = $(form).html(response).find('.error');
+		var error = $(form).html(response).find('.input-error');
 		if (error.length) {
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);
 			$(form).find('input').on('keypress', function () {
@@ -155,31 +152,17 @@ function addRow(oTable, data) {
     oTable.fnAddData(data);
 }
 
-var showNavs = function() {
-	var header = $("#header"), 
-		show = header.css("marginTop") == "0px",
-		layer1 = show ? $("#nav-left") : header,
-		layer2 = show ? header : $("#nav-left"),
-		container = $("#container-main");
-	layer1.animate(show ? {marginRight: -79} : {marginTop: 0}, function () {
-		layer2.animate(show ? {marginTop: -53} : {marginRight: 0});
-		$("#slide-toggle-bar strong").animate({opacity: show ? 1 : 0});
-		container.animate(show ? {paddingTop: 3} : {paddingRight: 60});
-	});
-	container.animate(show ? {paddingRight: 0} : {paddingTop: 53}).toggleClass("nav-hidden");
-}
-
 function messageOk (text, delay) {
 	text = text || 'Operation has been successful.';
 	setTimeout(function () {
-		message('Success!', text, _site_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
+		message('Success!', text, _base_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
 	}, delay || 0);
 }
 
 function messageError (text, delay) {
 	text = text || 'There was an error.';
 	setTimeout(function () {
-		message('Error!', text, _site_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
+		message('Error!', text, _base_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
 	}, delay || 0);
 }
 

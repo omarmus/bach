@@ -1,10 +1,8 @@
 <nav id="nav-lateral">
     <div class="profile">
-        <a href="<?php echo site_url('admin/profile') ?>" class="photo-user">
-        <?php if ($userdata['photo'] != ""): ?>
-            <img src="<?php echo site_url('files/users') . '/'.$userdata['photo'] ?>" alt="user image" class="img-responsive" />
-        <?php else: ?>
-            <img src="<?php echo site_url('img/profile.png') ?>" class="img-responsive" />
+        <a href="<?php echo site_url('admin/profile') ?>" class="photo-user" style="<?php echo $userdata['photo'] != "" ? "background-image: url('" . site_url() . 'files/users/thumbnail/'. thumb_image($userdata['photo']) . "'" : '' ?>">
+        <?php if ($userdata['photo'] == ""): ?>
+            <img src="<?php echo site_url('img/profile.png') ?>" />
         <?php endif ?>
         </a>
     </div>

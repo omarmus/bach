@@ -107,10 +107,11 @@ function upload_file($options = null)
 
             $config_thumb['image_library'] = 'gd2';
             $config_thumb['source_image'] = $config['upload_path'] . $data['file_name'];
+            $config_thumb['new_image'] = $config['upload_path'] . '/thumbnail/';
             $config_thumb['create_thumb'] = TRUE;
             $config_thumb['maintain_ratio'] = TRUE;
-            $config_thumb['width'] = 75;
-            $config_thumb['height'] = 50;
+            $config_thumb['width'] = 80;
+            $config_thumb['height'] = 80;
 
             $CI->load->library('image_lib', $config_thumb);
             if ( ! $CI->image_lib->resize() ) {
@@ -218,4 +219,10 @@ function get_parameters()
         );
     }
     return $items;
+}
+
+function thumb_image($photo)
+{
+    $photo = explode('.', $photo);
+    return $photo[0] . '_thumb.' . $photo[1];
 }
