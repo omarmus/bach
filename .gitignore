@@ -34,4 +34,4 @@ php.ini
 bach.sublime-project
 bach.sublime-workspace
 test.php
-*public_html/files*
+public_html/files/

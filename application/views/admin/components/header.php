@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="<?php echo base_url('lib/jquery.gritter/css/jquery.gritter.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
         <link rel="stylesheet" href="<?php echo base_url('css/themes/default/style.css') ?>">
+        <!-- <link rel="stylesheet" href="<?php echo base_url('lib/bootstrap/css/bootstrap-theme.min.css') ?>"> -->
         <!--[if lt IE 9]>
             <script src="<?php echo base_url('js/html5-3.6-respond-1.1.0.min.js') ?>"></script>
         <![endif]-->

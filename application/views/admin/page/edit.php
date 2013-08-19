@@ -21,15 +21,20 @@
 			</div>
 		</div>
 		<div>
-			<div class="form-group" id="container-module" <?php echo $page_type == 'section' || $page_type == 'subsection' ? '' : 'style="display : none;"' ?>> 
+			<div class="form-group" id="container-module" <?php echo $page_type == 'section' || $page_type == 'subsection' || $page['IdModule'] || $page['IdSection'] ? '' : 'style="display : none;"' ?>> 
 				<div class="alert alert-info">Seleccione el módulo al que pertenecerá la página.</div>
 				<?php echo form_dropdown('IdModule', $list_modules, set_value('IdModule', $page['IdModule']), 'class="form-control" onchange="get_sections(this)"'); ?>
 				<?php echo form_error('IdModule'); ?>
 			</div>
-			<div class="form-group" id="container-section" <?php echo $page_type == 'subsection' ? '' : 'style="display : none;"' ?>>
+			<div class="form-group" id="container-section" <?php echo $page_type == 'subsection' || $page['IdSection'] ? '' : 'style="display : none;"' ?>>
 				<div class="alert alert-info">Seleccione la sección a la que pertenecerá la página.</div>
 				<?php echo form_dropdown('IdSection', array(0 => 'Seleccione una sección'), '', 'class="form-control"'); ?>				
 				<?php echo form_error('IdSection'); ?>
+				<?php if ($page['IdSection']) : ?>
+					<script type="text/javascript">
+						$('#container-section select').val(<?php echo $page['IdSection'] ?>);
+					</script>
+				<?php endif ?>
 			</div>
 		</div>
 	    <div class="form-group">
