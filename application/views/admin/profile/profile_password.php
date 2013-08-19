@@ -14,4 +14,4 @@
 	<?php echo form_error('PasswordConfirm'); ?>
 </div>
 <hr>
-<button class="btn btn-primary" type="submit">cambiar contraseña</button>
+<button class="btn btn-primary" type="submit">Cambiar mi contraseña</button>

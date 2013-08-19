@@ -178,8 +178,7 @@ table.table thead .sorting_desc_disabled { background: url('../lib/jquery.datata
 
 .table-bordered, .table-bordered thead:first-child tr:first-child > th:first-child, .table-bordered tbody:first-child tr:first-child > td:first-child, .table-bordered tbody:first-child tr:first-child > th:first-child {border-radius: 0;}
 .check-item, .table th.check-all {
-    cursor: pointer;
-    padding: 8px 12px;
+  cursor: pointer;
 }
 .check-item i, .check-all i {
     background: url("../img/checkbox.png") no-repeat 0 0 transparent;

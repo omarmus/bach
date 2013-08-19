@@ -32,6 +32,6 @@
 			<input type="checkbox" value="remember-me"> Remember me
 		</label>
 		<label><a href="">¿Sé olvidó su contraseña?</a></label>
-		<button class="btn btn-large btn-primary btn-block" type="submit">Sign in</button>
+		<button class="btn btn-primary btn-block btn-lg" type="submit">Sign in</button>
 	<?php echo form_close(); ?>
 </div>

@@ -7,7 +7,12 @@ class Page_m extends BC_Model {
 	public $rules = array(
 		'IdModule' => array(
 			'field' => 'IdModule',
-			'label' => 'Parent',
+			'label' => 'Module',
+			'rules' => 'trim|intval'
+		),
+		'IdSection' => array(
+			'field' => 'IdSection',
+			'label' => 'Section',
 			'rules' => 'trim|intval'
 		),
 		'Title' => array(
@@ -51,11 +56,25 @@ class Page_m extends BC_Model {
 		if (count($pages)) {
 			foreach ($pages as $order => $page) {
 				if ($page['item_id'] != '') {
-					$data = array('IdModule' => (int)$page['parent_id'], 'Order' => $order);
+					if ($page['depth'] == 2) {
+						$data = array('IdModule' => (int)$page['parent_id'], 'IdSection' => 0, 'Order' => $order);
+					} else {
+						$data = array('IdModule' => $this->get_parent($pages, $page['parent_id']), 'IdSection' => (int)$page['parent_id'], 'Order' => $order);
+					}
 					SysPagesQuery::create()->filterByIdPage($page['item_id'])->update($data);
 				}
 			}
 		}
+	}
+
+	public function get_parent($array, $id_parent)
+	{
+		foreach ($array as $order => $page) {
+			if ($page['item_id'] == $id_parent) {
+				return $page['parent_id'];
+			}
+		}
+		return 0;
 	}
 
 	public function get_nested ()

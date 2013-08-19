@@ -68,6 +68,7 @@
 	    $('#form-photo').on('submit', function (event) {
 	    	var form = this;
             event.preventDefault();
+            show_loading('Subiendo imagen...')
             $.ajaxFileUpload({
 				url           : _base_url + 'admin/profile/upload_photo',
 				secureuri     : false,
@@ -75,6 +76,7 @@
 				dataType      : 'json',
 				data          : {},
 				success  : function (response) {
+					hide_loading();
                		if (response.status == 'error') {
 						messageError(response.msg);
                		} else {
@@ -92,6 +94,7 @@
 				$.post(_base_url + 'admin/profile/delete_photo', function () {
 					$('#delete-photo').addClass('hide');
 					$('.photo-user > img').prop('src', _base_url + 'img/profile.png');
+					$('a.photo-user').css('backgroundImage', 'url("'+_base_url + 'img/profile.png")');
 	   				messageOk('Delete photo!');
 	   			});
 			};	

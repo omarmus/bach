@@ -7,8 +7,8 @@
 			onclick="showModal('<?php echo site_url('admin/page/order') ?>')">
 		<span class="glyphicon glyphicon-list"></span> Order page
 	</button>
-	<button type="button" id="delete-rows" class="btn btn-danger input-mini disabled" 
-			onclick="deleteSelected(oTable, '<?php echo site_url('admin/page/deleteSelected') ?>', true)">
+	<button type="button" id="delete-rows" class="btn btn-danger disabled" 
+			onclick="delete_selected(oTable, '<?php echo site_url('admin/page/delete_selected') ?>', true)">
 		<span class="glyphicon glyphicon-trash"></span>
 	</button>
 </div>
@@ -22,6 +22,7 @@
 			<th>URI</th>
 			<th>Module</th>
 			<th>Section</th>
+			<th class="state">Active</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,6 +36,16 @@
 			<td><?php echo $page->slug; ?></td>
 			<td><?php echo $page->module ?></td>
 			<td><?php echo $page->section ?></td>
+			<td class="edit">
+				<div class="btn-group" data-toggle="buttons">
+					<label class="btn btn-primary<?php echo $page->state == 'ACTIVE' ? ' active' : '' ?>" >
+						<input type="radio" name="options" id="option1" <?php echo $page->state == 'ACTIVE' ? 'checked' : '' ?>> ON
+					</label>
+					<label class="btn btn-primary<?php echo $page->state == 'INACTIVE' ? ' active' : '' ?>" >
+						<input type="radio" name="options" id="option2" <?php echo $page->state == 'INACTIVE' ? 'checked' : '' ?>> OFF
+					</label>
+				</div>
+			</td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>
@@ -45,27 +56,27 @@
 		oTable = $('#main-table').dataTable({
 			"aoColumnDefs" : [
 				{"bVisible": false, "aTargets": [ 0 ]}, 
-				{"bSortable": false, "aTargets": [ 1, 2 ] }
+				{"bSortable": false, "aTargets": [ 1, 2, 7 ] }
 			],
 		});
-	});
-	$('#page-type input').on('click', function () {
-		switch (this.value) {
-			case 'module' : 
-				$('#container-module, #container-section').hide()
-				break;
-			case 'section' : 
-				$('#container-module').show();
-				$('#container-section').hide();
-				break;
-			case 'subsection' : 
-				$('#container-module, #container-section').show();
-				break;
-		}
-	});
-	$('#container-module select').on('change', function () {
-		$.post('<?= base_url('admin/page/get_sections')?>', {idModule : this.value}, function (response) {
-			
-		});
-	});
+	});	
+
+	function page_type (input) {
+		$('#container-module')[input.value == 'section' || input.value == 'subsection' ? 'show' : 'hide']();
+		$('#container-section')[input.value == 'subsection' ? 'show' : 'hide']();
+	}
+
+	function get_sections (input) {
+		$.post('<?= base_url('admin/page/get_sections')?>', {idModule : input.value}, function (response) {
+			var select = $('#container-section select');
+			select.empty();
+			for (var i = 0; i < response.length; i++) {
+				select.append(new Option(response[i].text, response[i].value));
+			};				
+		}, 'json');
+	}
+
+	function load_sections () {
+		$('#container-module select').change();
+	}
 </script>

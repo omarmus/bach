@@ -55,7 +55,7 @@ class User extends Admin_Controller
 		}	
 	}
 
-	public function deleteSelected()
+	public function delete_selected()
 	{
 		is_ajax();
 

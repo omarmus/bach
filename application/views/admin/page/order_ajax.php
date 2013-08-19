@@ -10,8 +10,8 @@ function get_ol($array, $child = FALSE)
 		$str .= $child == FALSE ? '<ol class="sortable">' : '<ol>';
 
 		foreach ($array as $item) {
-			$str .= '<li id="list_'.$item['IdPage'].'">';
-			$str .= '<div>' . $item['Title'] . '</div>';
+			$str .= '<li id="list_'.$item['IdPage'].'" >';
+			$str .= '<div class="btn btn-default btn-block">' . $item['Title'] . '<span class="badge"> </span></div>';
 
 			// Do we have any children?
 			if (isset($item['children']) && count($item['children'])) {
@@ -34,8 +34,7 @@ function get_ol($array, $child = FALSE)
             handle: 'div',
             items: 'li',
             toleranceElement: '> div',
-            maxLevels: 2
+            maxLevels: 3
         });
-
     });
 </script>

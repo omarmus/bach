@@ -167,10 +167,10 @@ function send_mail($options = null)
 
     $CI->email->set_mailtype($data['mailtype']);
 
-    if (isset($options['smtp']) && $options['smtp']) {
-        $CI->email->set_smtp_host('');
-        $CI->email->set_smtp_user('');
-        $CI->email->set_smtp_pass('');
+    if ($parameters['SMTP'] == 'ON') {
+        $CI->email->set_smtp_host($parameters['SMTP_HOST']);
+        $CI->email->set_smtp_user($parameters['SMTP_USER']);
+        $CI->email->set_smtp_pass($parameters['SMTP_PASS']);
         $CI->email->set_smtp_port(25);
     }
 
@@ -225,4 +225,31 @@ function thumb_image($photo)
 {
     $photo = explode('.', $photo);
     return $photo[0] . '_thumb.' . $photo[1];
+}
+
+function get_states_user()
+{
+    return array(
+        'ACTIVE' => 'ACTIVE',
+        'CREATED' => 'CREATED',
+        'INACTIVE' => 'INACTIVE',
+        'BLOQUED' => 'BLOQUED',
+    );
+}
+
+function get_states()
+{
+    return array(
+        'ACTIVE' => 'ACTIVE',
+        'INACTIVE' => 'INACTIVE'
+    );
+}
+
+function json_dropdown($array)
+{
+    $json = array();
+    foreach ($array as $key => $value) {
+        $json[] = array('value' => $key, 'text' => $value);
+    }
+    return $json;
 }

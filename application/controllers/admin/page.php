@@ -64,6 +64,15 @@ class Page extends Admin_Controller
 
 		// Set up the form
 		$rules = $this->page->rules;
+
+		$page_type = $this->input->post('PageType');
+		if ($page_type == 'section' || $page_type == 'subsection') {
+			$rules['IdModule']['rules'] .= '|callback__required_dropdown[IdModule]';
+		}
+		if ($page_type == 'subsection') {
+			$rules['IdSection']['rules'] .= '|callback__required_dropdown[IdSection]';
+		}
+
 		$this->form_validation->set_rules($rules);
 
 		// Process the form
@@ -72,12 +81,13 @@ class Page extends Admin_Controller
 			$this->page->save($data, $pk);
 			echo $pk?'UPDATE':'CREATE';
 		} else {
+			$this->data['page_type'] = $page_type ? $page_type : 'module';
 			// Load the view
 			$this->load->view('admin/page/edit', $this->data);
 		}	
 	}
 
-	public function deleteSelected()
+	public function delete_selected()
 	{
 		is_ajax();
 		
@@ -106,7 +116,11 @@ class Page extends Admin_Controller
 	public function get_sections()
 	{
 		$idModule = $this->input->post('idModule');
-		$this->page->get_no_parents($this->input->post('idModule'));
+		if ($idModule) {
+			echo json_encode(json_dropdown($this->page->get_no_parents($this->input->post('idModule'))));
+		} else {
+			echo json_encode(array(array('value' => 0, 'text' => 'Seleccione una sección')));
+		}
 	}
 }
 

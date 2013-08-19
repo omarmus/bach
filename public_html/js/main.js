@@ -56,10 +56,17 @@ $.extend( true, $.fn.dataTable.defaults, {
     }
 } );
 
-function showModal (url) {
+function showModal (url, callback) {
+	show_loading();
 	$('#main-modal .modal-content').load(url, function () {
+		hide_loading();
 		var input = $('#main-modal').modal().find('input[type=text]').get(0);
-		setTimeout(function () {input.focus()}, 500);
+		if (input) {
+			setTimeout(function () {input.focus()}, 500);
+		}
+		if (callback) {
+            callback.apply(window);
+        }
 	});
 }
 
@@ -67,10 +74,11 @@ function hideModal() {
 	$('#main-modal').modal('hide');
 }
 
-function validate (form, url) {
+function validate (form, url, callback_error) {
+	show_loading();
 	$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
 	$.post(url, $(form).serialize(), function (response) {
-		$(form).find('input[type=submit], button[type=submit]').prop({disabled : false});
+		hide_loading();
 		if (response == "CREATE" || response == 'UPDATE') {
 			hideModal();
 			messageOk(response == "CREATE"?"Create!":"Update!", 1000);
@@ -81,13 +89,18 @@ function validate (form, url) {
 			$('#main-modal').find('input').on('keypress', function () {
 				$(this).next().fadeOut();
 			});
+			if (callback_error) {
+	            callback_error.apply(window);
+	        }
 		}
 	});
 	return false;
 }
 
 function validate_data (form, url) {
+	show_loading();
 	$.post(url, $(form).serialize(), function (response) {
+		hideModal();
 		var error = $(form).html(response).find('.input-error');
 		if (error.length) {
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);
@@ -103,7 +116,9 @@ function validate_data (form, url) {
 
 function edit (url, e) {
 	e.preventDefault();
+	show_loading();
 	$('#main-modal .modal-content').load(url, function () {
+		hide_loading();
 		$('#main-modal').modal();
 	})
 }
@@ -181,6 +196,15 @@ function message (title, text, img, class_name, sticky) {
 		options = $.extend(options, {image: img}); // (string | optional) the image to display on the left
 	}
 	$.gritter.add(options);
+}
+
+function show_loading (text) {
+	$('#loading-ajax').fadeIn(200);
+	$('#loading-ajax > label').html(text || 'Loading...')
+}
+
+function hide_loading () {
+	$('#loading-ajax').fadeOut(200);
 }
 
 /* Nano Templates (Tomasz Mazur, Jacek Becela) */
