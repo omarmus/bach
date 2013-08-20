@@ -20,8 +20,7 @@
 			<th class="edit">Permissions</th>
 			<th>Name</th>
 			<th>URI</th>
-			<th>Module</th>
-			<th>Section</th>
+			<th>Type</th>
 			<th class="state">Active</th>
 		</tr>
 	</thead>
@@ -30,22 +29,16 @@
 		<?php foreach ($pages as $page): ?>
 		<tr>
 			<td><?php echo $page->id_page ?></td>
-			<td class="edit"><?php echo btn_edit('admin/page/edit/' . $page->id_page) ?></td>
+			<td class="edit"><?php echo btn_edit('admin/page/edit/' . $page->id_page, 'load_sections') ?></td>
 			<td class="edit"><?php echo btn_permissions('admin/page/permissions/' . $page->id_page) ?></td>
 			<td><?php echo $page->title; ?></td>
 			<td><?php echo $page->slug; ?></td>
-			<td><?php echo $page->module ?></td>
-			<td><?php echo $page->section ?></td>
-			<td class="edit">
-				<div class="btn-group" data-toggle="buttons">
-					<label class="btn btn-primary<?php echo $page->state == 'ACTIVE' ? ' active' : '' ?>" >
-						<input type="radio" name="options" id="option1" <?php echo $page->state == 'ACTIVE' ? 'checked' : '' ?>> ON
-					</label>
-					<label class="btn btn-primary<?php echo $page->state == 'INACTIVE' ? ' active' : '' ?>" >
-						<input type="radio" name="options" id="option2" <?php echo $page->state == 'INACTIVE' ? 'checked' : '' ?>> OFF
-					</label>
-				</div>
+			<td>
+				<span class="label label-<?php echo $page->module == '' ? 'primary' : ( $page->section == '' ? 'warning' : 'info'); ?>">
+					<?php echo $page->module == '' ? 'Module' : ( $page->section == '' ? 'Subsection' : 'Section'); ?>
+				</span>
 			</td>
+			<td class="edit"><?php echo $page->module ? button_on_off($page->state, 'admin/page/set_on_off/'. $page->id_page) : '' ?></td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>
@@ -56,7 +49,7 @@
 		oTable = $('#main-table').dataTable({
 			"aoColumnDefs" : [
 				{"bVisible": false, "aTargets": [ 0 ]}, 
-				{"bSortable": false, "aTargets": [ 1, 2, 7 ] }
+				{"bSortable": false, "aTargets": [ 1, 2, 6 ] }
 			],
 		});
 	});	
@@ -67,7 +60,7 @@
 	}
 
 	function get_sections (input) {
-		$.post('<?= base_url('admin/page/get_sections')?>', {idModule : input.value}, function (response) {
+		$.post(_base_url + 'admin/page/get_sections', {idModule : input.value}, function (response) {
 			var select = $('#container-section select');
 			select.empty();
 			for (var i = 0; i < response.length; i++) {

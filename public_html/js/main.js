@@ -114,12 +114,15 @@ function validate_data (form, url) {
 	return false;
 }
 
-function edit (url, e) {
+function edit (url, e, callback_function) {
 	e.preventDefault();
 	show_loading();
 	$('#main-modal .modal-content').load(url, function () {
 		hide_loading();
 		$('#main-modal').modal();
+		if (callback_function) {
+            callback_function.apply(window);
+        }
 	})
 }
 
@@ -205,6 +208,10 @@ function show_loading (text) {
 
 function hide_loading () {
 	$('#loading-ajax').fadeOut(200);
+}
+
+function button_on_off (input, url) {
+	$.post(url, {state: $(input).children('input').val()});
 }
 
 /* Nano Templates (Tomasz Mazur, Jacek Becela) */

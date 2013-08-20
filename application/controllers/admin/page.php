@@ -67,10 +67,10 @@ class Page extends Admin_Controller
 
 		$page_type = $this->input->post('PageType');
 		if ($page_type == 'section' || $page_type == 'subsection') {
-			$rules['IdModule']['rules'] .= '|callback__required_dropdown[IdModule]';
+			$rules['IdModule']['rules'] .= '|callback__required_dropdown';
 		}
 		if ($page_type == 'subsection') {
-			$rules['IdSection']['rules'] .= '|callback__required_dropdown[IdSection]';
+			$rules['IdSection']['rules'] .= '|callback__required_dropdown';
 		}
 
 		$this->form_validation->set_rules($rules);
@@ -121,6 +121,11 @@ class Page extends Admin_Controller
 		} else {
 			echo json_encode(array(array('value' => 0, 'text' => 'Seleccione una sección')));
 		}
+	}
+
+	public function set_on_off($id_page)
+	{
+		echo $this->page->save(array('State' => $this->input->post('state')), $id_page);
 	}
 }
 

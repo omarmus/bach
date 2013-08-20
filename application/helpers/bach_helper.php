@@ -1,23 +1,23 @@
 <?php 
-function btn_edit($uri)
+function btn_edit($url)
 {
-    $uri = site_url($uri);
+    $url = site_url($url);
     return anchor('#', '<span class="glyphicon glyphicon-edit"></span>', array(
-        'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-default'
+        'onclick' => "edit('{$url}', event)", 'class' => 'btn btn-default'
     ));
 }
 
-function btn_permissions($uri)
+function btn_permissions($url)
 {
-    $uri = site_url($uri);
+    $url = site_url($url);
     return anchor('#', '<span class="glyphicon glyphicon-lock"></span>', array(
-        'onclick' => "edit('{$uri}', event)", 'class' => 'btn btn-default'
+        'onclick' => "edit('{$url}', event)", 'class' => 'btn btn-default'
     ));
 }
 
-function btn_delete($uri)
+function btn_delete($url)
 {
-    return anchor($uri, '<i class="icon-remove"></i>', array(
+    return anchor($url, '<i class="icon-remove"></i>', array(
         'onclick' => "return confirm('You are about to delete a record. This cannot be undone. Are you sure?')")
     );
 }
@@ -85,16 +85,21 @@ function upload_file($options = null)
 
     $file_element_name = isset($options['field']) ? $options['field'] : 'file';
 
+    // Configuration default
     $config = array(
         'upload_path' => './files/', 
         'allowed_types' => 'gif|jpg|png|doc|txt', 
         'max_size' => 1024 * 8, 
-        'encrypt_name' => TRUE
+        'encrypt_name' => TRUE,
+        'width' => 80,
+        'height' => 80,
+        'thumb_path' => 'thumbnail/'
     );
 
     if ($options) {
         $config = array_merge($config, $options);
     }
+
     $CI->load->library('upload', $config);
 
     if (!$CI->upload->do_upload($file_element_name)) {
@@ -103,15 +108,15 @@ function upload_file($options = null)
     } else {
         $data = $CI->upload->data();
 
+        // Create thumbnail for image upload
         if (isset($options['thumbnail']) && $options['thumbnail']) {
-
             $config_thumb['image_library'] = 'gd2';
             $config_thumb['source_image'] = $config['upload_path'] . $data['file_name'];
-            $config_thumb['new_image'] = $config['upload_path'] . '/thumbnail/';
+            $config_thumb['new_image'] = $config['upload_path'] . $config['thumb_path'];
             $config_thumb['create_thumb'] = TRUE;
             $config_thumb['maintain_ratio'] = TRUE;
-            $config_thumb['width'] = 80;
-            $config_thumb['height'] = 80;
+            $config_thumb['width'] = $config['width'];
+            $config_thumb['height'] = $config['height'];
 
             $CI->load->library('image_lib', $config_thumb);
             if ( ! $CI->image_lib->resize() ) {
@@ -145,13 +150,14 @@ function send_mail($options = null)
 {
     $CI =& get_instance();
     $CI->load->library('email');
-
     $CI->load->library('session');
+
     $parameters = $CI->session->userdata('parameters');
     if (!$parameters) {
         $parameters = get_parameters();  
     } 
     
+    // Configuration default
     $data = array(
         'from' => $parameters['SYSTEM_MAIL'], 
         'name'=> $parameters['SYSTEM_NAME'], 
@@ -252,4 +258,20 @@ function json_dropdown($array)
         $json[] = array('value' => $key, 'text' => $value);
     }
     return $json;
+}
+
+function button_on_off($state, $url)
+{
+    $url = site_url($url);
+    ob_start(); ?>
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary<?php echo $state == 'ACTIVE' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
+            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' ? 'checked' : '' ?>> ON
+        </label>
+        <label class="btn btn-primary<?php echo $state == 'INACTIVE' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
+            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' ? 'checked' : '' ?>> OFF
+        </label>
+    </div>
+    <?php
+    return ob_get_clean();
 }
