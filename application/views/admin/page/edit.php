@@ -6,35 +6,30 @@
 	<div class="modal-body">
 		<div id="page-type">
 			<div>
-				<label>¿Que tipo de página deséa crear? </label>
+				<label><?php echo empty($page['IdPage']) ? '¿Que tipo de página deséa crear?' : 'Seleccione el tipo de página para:' ?></label>
 			</div>
 			<div class="form-group radio-group">
 				<label class="radio-inline">
-					<input type="radio" name="PageType" onclick="page_type(this)" value="module" <?php echo $page_type == 'module' ? 'checked' : '' ?>> Un módulo
+					<input type="radio" name="PageType" onclick="page_type(this)" value="module" <?php echo $page_type == 'module' || $page['IdModule'] == 0 ? 'checked' : '' ?>> Un módulo
 				</label>
 				<label class="radio-inline">
-					<input type="radio" name="PageType" onclick="page_type(this)" value="section" <?php echo $page_type == 'section' ? 'checked' : '' ?>> Una sección
+					<input type="radio" name="PageType" onclick="page_type(this)" value="section" <?php echo $page_type == 'section' || $page['IdModule'] ? 'checked' : '' ?>> Una sección
 				</label>
 				<label class="radio-inline">
-					<input type="radio" name="PageType" onclick="page_type(this)" value="subsection" <?php echo $page_type == 'subsection' ? 'checked' : '' ?>> Una subsección
+					<input type="radio" name="PageType" onclick="page_type(this)" value="subsection" <?php echo $page_type == 'subsection' || $page['IdSection'] ? 'checked' : '' ?>> Una subsección
 				</label>
 			</div>
 		</div>
 		<div>
 			<div class="form-group" id="container-module" <?php echo $page_type == 'section' || $page_type == 'subsection' || $page['IdModule'] || $page['IdSection'] ? '' : 'style="display : none;"' ?>> 
 				<div class="alert alert-info">Seleccione el módulo al que pertenecerá la página.</div>
-				<?php echo form_dropdown('IdModule', $list_modules, set_value('IdModule', $page['IdModule']), 'class="form-control" onchange="get_sections(this)"'); ?>
+				<?php echo form_dropdown('IdModule', $list_modules, set_value('IdModule', $page['IdModule']), 'class="form-control" onchange="get_sections(this, '.$page['IdSection'].')"'); ?>
 				<?php echo form_error('IdModule'); ?>
 			</div>
 			<div class="form-group" id="container-section" <?php echo $page_type == 'subsection' || $page['IdSection'] ? '' : 'style="display : none;"' ?>>
 				<div class="alert alert-info">Seleccione la sección a la que pertenecerá la página.</div>
-				<?php echo form_dropdown('IdSection', array(0 => 'Seleccione una sección'), '', 'class="form-control"'); ?>				
+				<?php echo form_dropdown('IdSection', array(0 => 'Seleccione una sección'), set_value('IdSection', $page['IdSection']), 'class="form-control"'); ?>				
 				<?php echo form_error('IdSection'); ?>
-				<?php if ($page['IdSection']) : ?>
-					<script type="text/javascript">
-						$('#container-section select').val(<?php echo $page['IdSection'] ?>);
-					</script>
-				<?php endif ?>
 			</div>
 		</div>
 	    <div class="form-group">

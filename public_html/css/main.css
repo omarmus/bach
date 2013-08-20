@@ -8,7 +8,7 @@ body.body-login {background-color: #EEEEEE;}
 .body-login #wrap > .container{padding: 0 15px;}
 .breadcrumb {top: 50px;position: absolute;width: 100%;z-index: 100;}
 .section-buttons {margin-bottom: 10px;}
-#loading-ajax {background-color: #428BCA; color: #FFFFFF; display: none; left: 50%; margin: 0 0 0 -50px; padding: 13px 15px; position: fixed; z-index: 10000; }
+#loading-ajax {background-color: #428BCA; color: #FFFFFF; display: none; left: 50%; line-height: 23px; margin: 0 0 0 -65px; padding: 3px 15px 0; position: fixed; z-index: 10000; }
 #loading-ajax > img {width: 20px;}
 
 /* ==========================================================================
@@ -66,35 +66,28 @@ table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/
 .radio-group label {width: 25%;}
 .font-default {font-size: 14px;}
 
-ol.sortable div {
-    margin: 0 0 3px;
-    text-align: left;
-    text-indent: 20px;
-    cursor: move;
-    position: relative;
-}
-ol.sortable, ol.sortable ol {
-    list-style: none outside none;
-}
-ol.sortable {
-    padding: 0 30px;
-}
-ol.sortable .badge:after {
-    content: "module";
-    font: bold 12px Arial;
-    margin: 0 0 0 -20px;
-}
-ol.sortable .badge {
-    position: absolute;
-    right: 15px;
-    top: 5px;
-}
-ol.sortable ol .badge:after {
-  content: "section";
-}
-ol.sortable ol ol .badge:after {
-  content: "subsection";
-}
+/* ==========================================================================
+                                S O R T A B L E
+   ========================================================================== */
+ol.sortable div {margin: 0 0 3px; text-align: left; text-indent: 20px; cursor: move; position: relative; }
+ol.sortable, ol.sortable ol {list-style: none outside none; }
+ol.sortable {padding: 0 30px; }
+ol.sortable .badge:after {content: "module"; font: bold 12px Arial; margin: 0 0 0 -20px; }
+ol.sortable .badge {position: absolute; right: 15px; top: 5px; }
+ol.sortable ol .badge:after {content: "section"; }
+ol.sortable ol ol .badge:after {content: "subsection"; }
+
+/* ==========================================================================
+                                  S U B M E N U
+   ========================================================================== */
+.dropdown-submenu {position: relative; }
+.dropdown-submenu > .dropdown-menu {top: 0; left: 100%; margin-top: -6px; margin-left: -1px; -webkit-border-radius: 0 6px 6px 6px; -moz-border-radius: 0 6px 6px 6px; border-radius: 0 6px 6px 6px; }
+.dropdown-submenu:hover > .dropdown-menu {display: block; }
+.dropup .dropdown-submenu > .dropdown-menu {top: auto; bottom: 0; margin-top: 0; margin-bottom: -2px; -webkit-border-radius: 5px 5px 5px 0; -moz-border-radius: 5px 5px 5px 0; border-radius: 5px 5px 5px 0; }
+.dropdown-submenu > a:after {display: block; float: right; width: 0; height: 0; margin-top: 5px; margin-right: -10px; border-color: transparent; border-left-color: #cccccc; border-style: solid; border-width: 5px 0 5px 5px; content: " "; }
+.dropdown-submenu:hover > a:after {border-left-color: #ffffff; }
+.dropdown-submenu.pull-left {float: none; }
+.dropdown-submenu.pull-left > .dropdown-menu {left: -100%; margin-left: 10px; -webkit-border-radius: 6px 0 6px 6px; -moz-border-radius: 6px 0 6px 6px; border-radius: 6px 0 6px 6px; }
 
 /* ==========================================================================
                             F O R M  A N D  I N P U T
@@ -168,3 +161,4 @@ footer p {margin: 0 10px;}
 @media (max-width: 1200px) { 
 
 }
+

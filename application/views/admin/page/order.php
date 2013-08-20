@@ -22,7 +22,7 @@
 		$.post(_base_url + 'admin/page/order_ajax', { sortable: oSortable }, function (response) {
 			console.log(response);
 			hide_loading();
-			hideModal();
+			hide_modal();
 			messageOk('Order!', 1000);
 			setTimeout(function () {window.location = '';}, 1200);
 		});

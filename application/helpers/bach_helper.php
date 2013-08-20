@@ -1,9 +1,9 @@
 <?php 
-function btn_edit($url)
+function btn_edit($url, $callback = null)
 {
     $url = site_url($url);
     return anchor('#', '<span class="glyphicon glyphicon-edit"></span>', array(
-        'onclick' => "edit('{$url}', event)", 'class' => 'btn btn-default'
+        'onclick' => "edit('{$url}', event" . ( $callback ? ', ' . $callback : '') . ")", 'class' => 'btn btn-default'
     ));
 }
 
@@ -51,20 +51,22 @@ function get_menu($array, $child = FALSE)
         $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
 
         foreach ($array as $item) {
-            $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
-            if (isset($item['children']) && count($item['children'])) {
-                $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
-                $active = $active ? ' active' : '';
-                $str .= '<li class="'. $submenu . $active . '">';
-                $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
-                $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
-                $str .= get_menu($item['children'], TRUE);
-            } else {
-                $str .= $active ? '<li class="active">' : '<li>';
-                $str .= '<a href="' . site_url('admin/'.$item['Slug']) . '">' .$item['Title'] . '</a>';
-            }
+            if ($item['State'] == 'ACTIVE') {
+                $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
+                if (isset($item['children']) && count($item['children'])) {
+                    $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
+                    $active = $active ? ' active' : '';
+                    $str .= '<li class="'. $submenu . $active . '">';
+                    $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
+                    $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
+                    $str .= get_menu($item['children'], TRUE);
+                } else {
+                    $str .= $active ? '<li class="active">' : '<li>';
+                    $str .= '<a href="' . site_url('admin/'.$item['Slug']) . '">' .$item['Title'] . '</a>';
+                }
 
-            $str .= '</li>' . PHP_EOL;
+                $str .= '</li>' . PHP_EOL;
+            }
         }
 
         $str .= '</ul>' . PHP_EOL;      

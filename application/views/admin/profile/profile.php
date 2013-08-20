@@ -1,6 +1,6 @@
 <div class="row profile-form">
 	<div class="col-md-4">
-		<div class="panel">
+		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">My photo</h3>
 			</div>
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-md-8">
-		<div class="panel">
+		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title">My profile</h3>
 			</div>
@@ -55,10 +55,9 @@
 	$(document).ready(function() {
 
 		$('#my-profile a').click(function (e) {
-		  e.preventDefault()
-		  $(this).tab('show')
+			e.preventDefault();
+			$(this).tab('show');
 		})
-
 
 		$('#photo').on('change', function (event) {
 	    	event.preventDefault();

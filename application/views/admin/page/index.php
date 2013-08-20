@@ -21,6 +21,7 @@
 			<th>Name</th>
 			<th>URI</th>
 			<th>Type</th>
+			<th>Parent</th>
 			<th class="state">Active</th>
 		</tr>
 	</thead>
@@ -34,11 +35,14 @@
 			<td><?php echo $page->title; ?></td>
 			<td><?php echo $page->slug; ?></td>
 			<td>
-				<span class="label label-<?php echo $page->module == '' ? 'primary' : ( $page->section == '' ? 'warning' : 'info'); ?>">
-					<?php echo $page->module == '' ? 'Module' : ( $page->section == '' ? 'Subsection' : 'Section'); ?>
+				<span class="label label-<?php echo $page->module == '' ? 'primary' : ( $page->section == '' ? 'success' : 'info'); ?>">
+					<?php echo $page->module == '' ? 'Module' : ( $page->section == '' ? 'Section' : 'Subsection'); ?>
 				</span>
 			</td>
-			<td class="edit"><?php echo $page->module ? button_on_off($page->state, 'admin/page/set_on_off/'. $page->id_page) : '' ?></td>
+			<td>
+				<?php echo $page->module == '' ? '' : ( $page->section == '' ? $page->module : $page->section); ?>
+			</td>
+			<td class="edit"><?php echo button_on_off($page->state, 'admin/page/set_on_off/'. $page->id_page) ?></td>
 		</tr>
 		<?php endforeach ?>
 	<?php endif ?>
@@ -49,7 +53,7 @@
 		oTable = $('#main-table').dataTable({
 			"aoColumnDefs" : [
 				{"bVisible": false, "aTargets": [ 0 ]}, 
-				{"bSortable": false, "aTargets": [ 1, 2, 6 ] }
+				{"bSortable": false, "aTargets": [ 1, 2, 7 ] }
 			],
 		});
 	});	
@@ -59,13 +63,16 @@
 		$('#container-section')[input.value == 'subsection' ? 'show' : 'hide']();
 	}
 
-	function get_sections (input) {
+	function get_sections (input, value) {
 		$.post(_base_url + 'admin/page/get_sections', {idModule : input.value}, function (response) {
 			var select = $('#container-section select');
 			select.empty();
 			for (var i = 0; i < response.length; i++) {
 				select.append(new Option(response[i].text, response[i].value));
-			};				
+			};
+			if (value) {
+				select.val(value);
+			}			
 		}, 'json');
 	}
 

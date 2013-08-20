@@ -77,6 +77,14 @@ class Page extends Admin_Controller
 
 		// Process the form
 		if ($this->form_validation->run() == TRUE) {
+			if ($pk) {
+				if ($page_type == 'module') {
+					$_POST['IdModule'] = $_POST['IdSection'] = 0;
+				}
+				if ($page_type == 'section') {
+					$_POST['IdSection'] = 0;
+				}
+			}
 			$data = $this->page->array_request($_POST);
 			$this->page->save($data, $pk);
 			echo $pk?'UPDATE':'CREATE';

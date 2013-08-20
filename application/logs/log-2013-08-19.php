@@ -45,3 +45,30 @@ ERROR - 2013-08-19 16:04:30 --> Severity: Notice  --> Undefined index: Slug C:\w
 ERROR - 2013-08-19 16:04:30 --> Severity: Notice  --> Undefined index: Type C:\wamp\www\bach\application\helpers\bach_helper.php 56
 ERROR - 2013-08-19 16:04:30 --> Severity: Notice  --> Undefined index: Title C:\wamp\www\bach\application\helpers\bach_helper.php 59
 ERROR - 2013-08-19 16:04:30 --> Severity: Notice  --> Undefined index: Type C:\wamp\www\bach\application\helpers\bach_helper.php 60
+ERROR - 2013-08-19 22:03:46 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 22:03:56 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 22:03:56 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 22:03:56 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 22:04:02 --> Severity: Warning  --> unlink() expects parameter 1 to be string, array given C:\wamp\www\bach\application\helpers\bach_helper.php 142
+ERROR - 2013-08-19 22:40:30 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 24
+ERROR - 2013-08-19 22:40:30 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 29
+ERROR - 2013-08-19 22:40:30 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 33
+ERROR - 2013-08-19 22:40:35 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 24
+ERROR - 2013-08-19 22:40:35 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 29
+ERROR - 2013-08-19 22:40:35 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 33
+ERROR - 2013-08-19 22:40:38 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 24
+ERROR - 2013-08-19 22:40:38 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 29
+ERROR - 2013-08-19 22:40:38 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 33
+ERROR - 2013-08-19 22:41:20 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 24
+ERROR - 2013-08-19 22:41:20 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 29
+ERROR - 2013-08-19 22:41:20 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 33
+ERROR - 2013-08-19 22:42:26 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 24
+ERROR - 2013-08-19 22:42:26 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 29
+ERROR - 2013-08-19 22:42:27 --> Severity: Notice  --> Undefined index: IdSection C:\wamp\www\bach\application\views\admin\page\edit.php 33
+ERROR - 2013-08-19 23:19:24 --> 404 Page Not Found --> page/permissions
+ERROR - 2013-08-19 23:51:27 --> Severity: Warning  --> Missing argument 2 for btn_edit(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
+ERROR - 2013-08-19 23:51:27 --> Severity: Notice  --> Undefined variable: callback C:\wamp\www\bach\application\helpers\bach_helper.php 6
+ERROR - 2013-08-19 23:51:27 --> Severity: Warning  --> Missing argument 2 for btn_edit(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
+ERROR - 2013-08-19 23:51:27 --> Severity: Notice  --> Undefined variable: callback C:\wamp\www\bach\application\helpers\bach_helper.php 6
+ERROR - 2013-08-19 23:51:27 --> Severity: Warning  --> Missing argument 2 for btn_edit(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
+ERROR - 2013-08-19 23:51:27 --> Severity: Notice  --> Undefined variable: callback C:\wamp\www\bach\application\helpers\bach_helper.php 6

@@ -70,7 +70,7 @@ function showModal (url, callback) {
 	});
 }
 
-function hideModal() {
+function hide_modal() {
 	$('#main-modal').modal('hide');
 }
 
@@ -80,7 +80,7 @@ function validate (form, url, callback_error) {
 	$.post(url, $(form).serialize(), function (response) {
 		hide_loading();
 		if (response == "CREATE" || response == 'UPDATE') {
-			hideModal();
+			hide_modal();
 			messageOk(response == "CREATE"?"Create!":"Update!", 1000);
 			setTimeout(function () {window.location = '';}, 1200);
 		} else {
@@ -100,7 +100,8 @@ function validate (form, url, callback_error) {
 function validate_data (form, url) {
 	show_loading();
 	$.post(url, $(form).serialize(), function (response) {
-		hideModal();
+		hide_loading();
+		hide_modal();
 		var error = $(form).html(response).find('.input-error');
 		if (error.length) {
 			setTimeout(function () {$(error[0]).prev().focus()}, 500);

@@ -38,7 +38,8 @@ class Page_m extends BC_Model {
 		return array(
 			'Title' => '',
 			'Slug' => '',
-			'IdModule' => 0
+			'IdModule' => 0,
+			'IdSection' => 0
 		);
 	}
 
