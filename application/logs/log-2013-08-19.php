@@ -8,3 +8,8 @@ ERROR - 2013-08-19 01:16:49 --> Severity: Notice  --> Undefined index: IdPage C:
 ERROR - 2013-08-19 01:16:49 --> Severity: Notice  --> Undefined index: Title C:\wamp\www\bach\application\views\admin\page\order_ajax.php 14
 ERROR - 2013-08-19 01:16:49 --> Severity: Notice  --> Undefined index: IdPage C:\wamp\www\bach\application\views\admin\page\order_ajax.php 13
 ERROR - 2013-08-19 01:16:49 --> Severity: Notice  --> Undefined index: Title C:\wamp\www\bach\application\views\admin\page\order_ajax.php 14
+ERROR - 2013-08-19 02:11:58 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 02:11:58 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 02:12:27 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 02:12:27 --> 404 Page Not Found --> files
+ERROR - 2013-08-19 02:12:27 --> 404 Page Not Found --> files
