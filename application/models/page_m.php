@@ -123,7 +123,8 @@ class Page_m extends BC_Model {
 		$array[0] = 'Seleccione ' . ($id ? 'una sección' : 'un módulo') . '...';
 		if (count($pages)) {
 			foreach ($pages as $page) {
-				$array[$page->getIdPage()] = $page->getTitle();
+				if ( !$page->getIdSection() )
+					$array[$page->getIdPage()] = $page->getTitle();
 			}
 		}
 

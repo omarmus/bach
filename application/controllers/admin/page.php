@@ -47,6 +47,12 @@ class Page extends Admin_Controller
 		$this->load->view('admin/page/order_ajax', $this->data);
 	}
 
+	public function permissions($id_page)
+	{
+		$this->data['page'] = $this->page->get($id_page);
+		$this->load->view('admin/page/permissions', $this->data);
+	}
+
 	public function edit($pk = NULL)
 	{
 		is_ajax();
@@ -125,7 +131,7 @@ class Page extends Admin_Controller
 	{
 		$idModule = $this->input->post('idModule');
 		if ($idModule) {
-			echo json_encode(json_dropdown($this->page->get_no_parents($this->input->post('idModule'))));
+			echo json_encode(json_dropdown($this->page->get_no_parents($idModule)));
 		} else {
 			echo json_encode(array(array('value' => 0, 'text' => 'Seleccione una sección')));
 		}

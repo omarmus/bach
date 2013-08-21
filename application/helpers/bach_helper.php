@@ -1,25 +1,15 @@
 <?php 
-function btn_edit($url, $callback = null)
+function btn_panel($url, $icon, $callback_function = null)
 {
     $url = site_url($url);
-    return anchor('#', '<span class="glyphicon glyphicon-edit"></span>', array(
-        'onclick' => "edit('{$url}', event" . ( $callback ? ', ' . $callback : '') . ")", 'class' => 'btn btn-default'
-    ));
-}
-
-function btn_permissions($url)
-{
-    $url = site_url($url);
-    return anchor('#', '<span class="glyphicon glyphicon-lock"></span>', array(
-        'onclick' => "edit('{$url}', event)", 'class' => 'btn btn-default'
-    ));
-}
-
-function btn_delete($url)
-{
-    return anchor($url, '<i class="icon-remove"></i>', array(
-        'onclick' => "return confirm('You are about to delete a record. This cannot be undone. Are you sure?')")
-    );
+    ob_start(); ?>
+    <button type="button" 
+            class="btn btn-default" 
+            onclick="show_modal('<?php echo $url ?>'<?php echo $callback_function ? ', ' . $callback_function : '' ?>)">
+        <span class="glyphicon <?php echo $icon ?>"></span>
+    </button>
+    <?php
+    return ob_get_clean();
 }
 
 function add_meta_title($string)
@@ -266,12 +256,12 @@ function button_on_off($state, $url)
 {
     $url = site_url($url);
     ob_start(); ?>
-    <div class="btn-group" data-toggle="buttons">
+    <div class="btn-group btn-on-off" data-toggle="buttons">
         <label class="btn btn-primary<?php echo $state == 'ACTIVE' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
-            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' ? 'checked' : '' ?>> ON
+            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' ? 'checked' : '' ?>> <strong>ON</strong>
         </label>
         <label class="btn btn-primary<?php echo $state == 'INACTIVE' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
-            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' ? 'checked' : '' ?>> OFF
+            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' ? 'checked' : '' ?>> <strong>OFF</strong>
         </label>
     </div>
     <?php

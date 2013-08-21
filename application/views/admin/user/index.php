@@ -1,6 +1,6 @@
 <div class="section-buttons">
 	<button class="btn btn-primary" type="button" 
-			onclick="showModal('<?php echo site_url('admin/user/edit') ?>')">
+			onclick="show_modal('<?php echo site_url('admin/user/edit') ?>')">
 		<span class="glyphicon glyphicon-plus"></span> Add a user
 	</button>
 	<button type="button" id="delete-rows" class="btn btn-danger disabled" 

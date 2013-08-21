@@ -56,7 +56,7 @@ $.extend( true, $.fn.dataTable.defaults, {
     }
 } );
 
-function showModal (url, callback) {
+function show_modal (url, callback_function) {
 	show_loading();
 	$('#main-modal .modal-content').load(url, function () {
 		hide_loading();
@@ -64,8 +64,8 @@ function showModal (url, callback) {
 		if (input) {
 			setTimeout(function () {input.focus()}, 500);
 		}
-		if (callback) {
-            callback.apply(window);
+		if (callback_function) {
+            callback_function.apply(window);
         }
 	});
 }
@@ -115,17 +115,7 @@ function validate_data (form, url) {
 	return false;
 }
 
-function edit (url, e, callback_function) {
-	e.preventDefault();
-	show_loading();
-	$('#main-modal .modal-content').load(url, function () {
-		hide_loading();
-		$('#main-modal').modal();
-		if (callback_function) {
-            callback_function.apply(window);
-        }
-	})
-}
+
 
 function deleteSelected (oTable, url, refresh) {
 	var pks = getPks(oTable);

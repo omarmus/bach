@@ -1,10 +1,10 @@
 <div class="section-buttons">
 	<button class="btn btn-primary" type="button" 
-			onclick="showModal('<?php echo site_url('admin/page/edit') ?>')">
+			onclick="show_modal('<?php echo site_url('admin/page/edit') ?>')">
 		<span class="glyphicon glyphicon-plus"></span> Add a page
 	</button>
 	<button class="btn btn-default" type="button" 
-			onclick="showModal('<?php echo site_url('admin/page/order') ?>')">
+			onclick="show_modal('<?php echo site_url('admin/page/order') ?>')">
 		<span class="glyphicon glyphicon-list"></span> Order page
 	</button>
 	<button type="button" id="delete-rows" class="btn btn-danger disabled" 
@@ -30,8 +30,12 @@
 		<?php foreach ($pages as $page): ?>
 		<tr>
 			<td><?php echo $page->id_page ?></td>
-			<td class="edit"><?php echo btn_edit('admin/page/edit/' . $page->id_page, 'load_sections') ?></td>
-			<td class="edit"><?php echo btn_permissions('admin/page/permissions/' . $page->id_page) ?></td>
+			<td class="edit">
+				<?php echo btn_panel('admin/page/edit/' . $page->id_page, 'glyphicon-edit', 'load_sections') ?>
+			</td>
+			<td class="edit">
+				<?php echo btn_panel('admin/page/permissions/' . $page->id_page, 'glyphicon-lock') ?>
+			</td>
 			<td><?php echo $page->title; ?></td>
 			<td><?php echo $page->slug; ?></td>
 			<td>
