@@ -74,14 +74,17 @@ function hide_modal() {
 	$('#main-modal').modal('hide');
 }
 
-function validate (form, url, callback_error) {
+function validate (form, url, callback_error, callback_success) {
 	show_loading();
 	$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
 	$.post(url, $(form).serialize(), function (response) {
 		hide_loading();
 		if (response == "CREATE" || response == 'UPDATE') {
 			hide_modal();
-			messageOk(response == "CREATE"?"Create!":"Update!", 1000);
+			messageOk(response == "CREATE"?"Create!":"Update!", 500);
+			if (callback_success) {
+	            callback_success.apply(window);
+	        }
 			setTimeout(function () {window.location = '';}, 1200);
 		} else {
 			var error = $('#main-modal .modal-content').html(response).find('.input-error').get(0);
@@ -129,7 +132,7 @@ function deleteSelected (oTable, url, refresh) {
 				if (refresh) {
 					setTimeout(function () {
 						window.location = '';
-					}, 1000);
+					}, 500);
 				}
 			});
 		}

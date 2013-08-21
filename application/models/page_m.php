@@ -29,7 +29,10 @@ class Page_m extends BC_Model {
 
 	public function save($data, $pk = NULL)
 	{
-		!is_null($pk) || $data['Order'] = SysPagesQuery::create()->count()+1;
+		if (!is_null($pk)) {
+			$page = SysPagesQuery::create()->orderByOrder('DESC')->findOne();
+			$data['Order'] = count($page) ? $page->getOrder() + 1 : 1;
+		}
 		parent::save($data, $pk);
 	}
 
@@ -130,4 +133,5 @@ class Page_m extends BC_Model {
 
 		return $array;
 	}
+	
 }

@@ -34,7 +34,7 @@
 				<?php echo btn_panel('admin/page/edit/' . $page->id_page, 'glyphicon-edit', 'load_sections') ?>
 			</td>
 			<td class="edit">
-				<?php echo btn_panel('admin/page/permissions/' . $page->id_page, 'glyphicon-lock') ?>
+				<?php echo btn_panel('admin/page/get_permissions/' . $page->id_page, 'glyphicon-lock') ?>
 			</td>
 			<td><?php echo $page->title; ?></td>
 			<td><?php echo $page->slug; ?></td>

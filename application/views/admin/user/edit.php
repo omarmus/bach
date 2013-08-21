@@ -1,8 +1,9 @@
+<?php $new = isset($page['IdUser']); ?>
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title"><?php echo empty($user['IdUser']) ? 'Add a new user' : 'Edit user ' .$user['FirstName'] ?></h4>
+    <h4 class="modal-title"><?php echo $new ? 'Add a new user' : 'Edit user ' .$user['FirstName'] ?></h4>
 </div>
-<form onsubmit="return validate(this, '<?php echo site_url('admin/user/edit'. (isset($user['IdUser'])?'/'.$user['IdUser']:'')) ?>')">
+<form onsubmit="return validate(this, '<?php echo site_url('admin/user/edit'. $new ?'/'.$user['IdUser']:'')) ?>')">
 	<div class="modal-body">
 	    <div class="form-group">
 	    	<label for="">First name <strong>*</strong></label> 
@@ -24,7 +25,7 @@
 			<?php echo form_dropdown('IdRol', $roles, set_value('IdRol', $user['IdRol']), 'class="form-control"'); ?>
 			<?php echo form_error('IdRol'); ?>
 		</div>
-		<?php if (!isset($user['IdUser'])) : ?>
+		<?php if ( !$new ) : ?>
 		<div class="form-group">
 			<label for="">Password <strong>*</strong></label>
 			<?php echo form_password('Password', '', 'class="form-control"'); ?>

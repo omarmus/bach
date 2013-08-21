@@ -47,12 +47,6 @@ class Page extends Admin_Controller
 		$this->load->view('admin/page/order_ajax', $this->data);
 	}
 
-	public function permissions($id_page)
-	{
-		$this->data['page'] = $this->page->get($id_page);
-		$this->load->view('admin/page/permissions', $this->data);
-	}
-
 	public function edit($pk = NULL)
 	{
 		is_ajax();
@@ -92,7 +86,11 @@ class Page extends Admin_Controller
 				}
 			}
 			$data = $this->page->array_request($_POST);
-			$this->page->save($data, $pk);
+			$id_page = $this->page->save($data, $pk);
+			if (is_null($pk)) {
+				$this->load->model('permission_m', 'permission');
+				$this->permission->create_rols_permission($id_page);
+			}
 			echo $pk?'UPDATE':'CREATE';
 		} else {
 			$this->data['page_type'] = $page_type ? $page_type : 'module';
@@ -127,6 +125,15 @@ class Page extends Admin_Controller
 		return TRUE;
 	}
 
+	public function get_permissions($id_page)
+	{
+		$this->load->model('permission_m', 'permission');
+
+		$this->data['page'] = $this->page->get($id_page);
+		$this->data['permissions'] = $this->permission->get_permissions_page($id_page);
+		$this->load->view('admin/page/permissions', $this->data);
+	}
+
 	public function get_sections()
 	{
 		$idModule = $this->input->post('idModule');
@@ -140,6 +147,15 @@ class Page extends Admin_Controller
 	public function set_on_off($id_page)
 	{
 		echo $this->page->save(array('State' => $this->input->post('state')), $id_page);
+	}
+
+	public function set_permission($id_page, $id_rol, $type)
+	{
+		$this->load->model('permission_m', 'permission');
+
+		$state = $this->input->post('state') == 'ACTIVE' ? 'YES' : 'NO';
+
+		echo $this->permission->set_permission($id_page, $id_rol, $type, $state);
 	}
 }
 

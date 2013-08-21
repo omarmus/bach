@@ -1,3 +1,6 @@
+<?php 
+	$id_page = $page->getIdPage();
+?>
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title">Permissions / <?php echo $page->getTitle() ?></h4>
@@ -15,30 +18,18 @@
 	    		</tr>
 	    	</thead>
 	    	<tbody>
-	    		<?php if (count($pages)): ?>
-	    		<?php foreach ($pages as $page): ?>
+	    	<?php if (count($permissions)): ?>
+	    		<?php foreach ($permissions as $permission): ?>
+	    			<?php $id_rol = $permission->getIdRol() ?>
 	    		<tr>
-	    			<td><?php echo $page->id_page ?></td>
-	    			<td class="edit">
-	    				<?php echo btn_panel('admin/page/edit/' . $page->id_page, 'glyphicon-edit', 'load_sections') ?>
-	    			</td>
-	    			<td class="edit">
-	    				<?php echo btn_panel('admin/page/permissions/' . $page->id_page, 'glyphicon-lock') ?>
-	    			</td>
-	    			<td><?php echo $page->title; ?></td>
-	    			<td><?php echo $page->slug; ?></td>
-	    			<td>
-	    				<span class="label label-<?php echo $page->module == '' ? 'primary' : ( $page->section == '' ? 'success' : 'info'); ?>">
-	    					<?php echo $page->module == '' ? 'Module' : ( $page->section == '' ? 'Section' : 'Subsection'); ?>
-	    				</span>
-	    			</td>
-	    			<td>
-	    				<?php echo $page->module == '' ? '' : ( $page->section == '' ? $page->module : $page->section); ?>
-	    			</td>
-	    			<td class="edit"><?php echo button_on_off($page->state, 'admin/page/set_on_off/'. $page->id_page) ?></td>
+	    			<td><?php echo $permision->getSysRoles()->getName() ?></td>
+	    			<td><?php echo button_yes_no($permision->getRead(), 'admin/page/set_permission/'. $id_page . '/' . $id_rol . '/Read') ?></td>
+	    			<td><?php echo button_yes_no($permision->getCreate(), 'admin/page/set_permission/'. $id_page . '/' . $id_rol . '/Create') ?></td>
+	    			<td><?php echo button_yes_no($permision->getUpdate(), 'admin/page/set_permission/'. $id_page . '/' . $id_rol . '/Update') ?></td>
+	    			<td><?php echo button_yes_no($permision->getDelete(), 'admin/page/set_permission/'. $id_page . '/' . $id_rol . '/Delete') ?></td>
 	    		</tr>
-	    	<?php endforeach ?>
-			    <?php endif ?>
+	    		<?php endforeach ?>
+			<?php endif ?>
 			</tbody>
 		</table>
 	</div>

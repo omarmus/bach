@@ -252,7 +252,7 @@ function json_dropdown($array)
     return $json;
 }
 
-function button_on_off($state, $url)
+function button_on_off($state, $url, $label_on = 'ON', $label_off = 'OFF')
 {
     $url = site_url($url);
     ob_start(); ?>
@@ -266,4 +266,9 @@ function button_on_off($state, $url)
     </div>
     <?php
     return ob_get_clean();
+}
+
+function button_yes_no($state, $url)
+{
+    return button_on_off($state, $url, 'YES', 'NO')
 }

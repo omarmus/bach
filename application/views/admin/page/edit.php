@@ -1,12 +1,13 @@
+<?php $new = isset($page['IdPage']); ?>
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title"><?php echo empty($page['IdPage']) ? 'Add a new page' : 'Edit page ' .$page['Title'] ?></h4>
+    <h4 class="modal-title"><?php echo $new ? 'Add a new page' : 'Edit page ' .$page['Title'] ?></h4>
 </div>
-<form onsubmit="return validate(this, '<?php echo site_url('admin/page/edit'. (isset($page['IdPage'])?'/'.$page['IdPage']:'')) ?>', load_sections)">
+<form onsubmit="return validate(this, '<?php echo site_url('admin/page/edit'. $new ?'/'.$page['IdPage']:'')) ?>', load_sections <?php $new ? ',' : '' ?>)">
 	<div class="modal-body">
 		<div id="page-type">
 			<div>
-				<label><?php echo empty($page['IdPage']) ? '¿Que tipo de página deséa crear?' : 'Seleccione el tipo de página para:' ?></label>
+				<label><?php echo $new ? '¿Que tipo de página deséa crear?' : 'Seleccione el tipo de página para:' ?></label>
 			</div>
 			<div class="form-group radio-group">
 				<label class="radio-inline">
