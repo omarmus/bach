@@ -22,6 +22,7 @@
 			<th>URI</th>
 			<th>Type</th>
 			<th>Parent</th>
+			<th class="state">View menu</th>
 			<th class="state">Active</th>
 		</tr>
 	</thead>
@@ -46,6 +47,7 @@
 			<td>
 				<?php echo $page->module == '' ? '' : ( $page->section == '' ? $page->module : $page->section); ?>
 			</td>
+			<td class="edit"><?php echo button_yes_no($page->visible, 'admin/page/set_yes_no/'. $page->id_page) ?></td>
 			<td class="edit"><?php echo button_on_off($page->state, 'admin/page/set_on_off/'. $page->id_page) ?></td>
 		</tr>
 		<?php endforeach ?>
@@ -57,7 +59,7 @@
 		oTable = $('#main-table').dataTable({
 			"aoColumnDefs" : [
 				{"bVisible": false, "aTargets": [ 0 ]}, 
-				{"bSortable": false, "aTargets": [ 1, 2, 7 ] }
+				{"bSortable": false, "aTargets": [ 1, 2, 7, 8 ] }
 			],
 		});
 	});	
@@ -82,5 +84,39 @@
 
 	function load_sections () {
 		$('#container-module select').change();
+	}
+
+	function validate_page (form, url) {
+		show_loading();
+		$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
+		$.post(url, $(form).serialize(), function (response) {
+			hide_loading();
+			if (response == "UPDATE") {
+				hide_modal();
+				messageOk("Update success!", 500);
+				setTimeout(function () {window.location = '';}, 1000);
+			} else {
+				if (!isNaN(response)) {
+					hide_modal();
+					messageOk("Create success!", 500);
+					setTimeout(function () {
+						show_modal(_base_url + 'admin/page/get_permissions/' + response, function () {
+							$('#main-modal').modal({keyboard : false});
+							$('.modal-footer button, .modal-header button, .modal-backdrop').on('click', function () {
+								window.location = '';
+							});
+						});
+					}, 500);
+				} else {
+					var error = $('#main-modal .modal-content').html(response).find('.input-error').get(0);
+					setTimeout(function () {$(error).prev().focus()}, 300);
+					$('#main-modal').find('input').on('keypress', function () {
+						$(this).next().fadeOut();
+					});
+					load_sections();
+				}
+			}
+		});
+		return false;
 	}
 </script>

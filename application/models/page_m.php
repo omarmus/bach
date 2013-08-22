@@ -29,11 +29,12 @@ class Page_m extends BC_Model {
 
 	public function save($data, $pk = NULL)
 	{
-		if (!is_null($pk)) {
+		if (is_null($pk)) {
 			$page = SysPagesQuery::create()->orderByOrder('DESC')->findOne();
 			$data['Order'] = count($page) ? $page->getOrder() + 1 : 1;
 		}
-		parent::save($data, $pk);
+		$data['Visible'] = isset($data['Visible']) ? $data['Visible'] : 'NO';
+		return parent::save($data, $pk);
 	}
 
 	public function get_new()
@@ -48,11 +49,14 @@ class Page_m extends BC_Model {
 
 	public function delete($pk)
 	{
-		// Delete a page
-		parent::delete($pk);
-
+		// Delete permissions page
+		SysPermissionsQuery::create()->filterByIdPage($pk)->delete();
+		
 		// Reset modules ID for its children
 		SysPagesQuery::create()->filterByIdModule($pk)->update(array('IdModule' => 0, 'IdSection' => 0));
+
+		// Delete a page
+		parent::delete($pk);
 	}
 
 	public function save_order($pages)

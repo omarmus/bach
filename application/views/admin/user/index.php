@@ -25,7 +25,7 @@
 		<?php foreach ($users as $user): ?>
 		<tr>
 			<td><?php echo $user->getPrimaryKey() ?></td>
-			<td class="edit"><?php echo btn_edit('admin/user/edit/' . $user->getIdUser()) ?></td>
+			<td class="edit"><?php echo btn_panel('admin/user/edit/' . $user->getIdUser(), 'glyphicon-edit') ?></td>
 			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName() ?></td>
 			<td><?php echo $user->getLastName() ?></td>

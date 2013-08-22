@@ -91,7 +91,7 @@ class Page extends Admin_Controller
 				$this->load->model('permission_m', 'permission');
 				$this->permission->create_rols_permission($id_page);
 			}
-			echo $pk?'UPDATE':'CREATE';
+			echo $pk?'UPDATE':$id_page;
 		} else {
 			$this->data['page_type'] = $page_type ? $page_type : 'module';
 			// Load the view
@@ -149,13 +149,18 @@ class Page extends Admin_Controller
 		echo $this->page->save(array('State' => $this->input->post('state')), $id_page);
 	}
 
+	public function set_yes_no($id_page)
+	{
+		$state = $this->input->post('state') == 'ACTIVE' ? 'YES' : 'NO';
+		echo $this->page->save(array('Visible' => $state), $id_page);
+	}
+
 	public function set_permission($id_page, $id_rol, $type)
 	{
 		$this->load->model('permission_m', 'permission');
-
 		$state = $this->input->post('state') == 'ACTIVE' ? 'YES' : 'NO';
-
-		echo $this->permission->set_permission($id_page, $id_rol, $type, $state);
+		$this->permission->set_permission($id_page, $id_rol, $type, $state);
+		echo "OK";
 	}
 }
 

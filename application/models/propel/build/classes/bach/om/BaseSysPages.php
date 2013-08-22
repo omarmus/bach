@@ -75,6 +75,13 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     protected $state;
 
     /**
+     * The value for the visible field.
+     * Note: this column has a database default value of: 'YES'
+     * @var        string
+     */
+    protected $visible;
+
+    /**
      * @var        PropelObjectCollection|SysPermissions[] Collection to store aggregation of SysPermissions objects.
      */
     protected $collSysPermissionss;
@@ -117,6 +124,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $this->id_module = 0;
         $this->id_section = 0;
         $this->state = 'ACTIVE';
+        $this->visible = 'YES';
     }
 
     /**
@@ -204,6 +212,17 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     {
 
         return $this->state;
+    }
+
+    /**
+     * Get the [visible] column value.
+     * 
+     * @return string
+     */
+    public function getVisible()
+    {
+
+        return $this->visible;
     }
 
     /**
@@ -354,6 +373,27 @@ abstract class BaseSysPages extends BaseObject implements Persistent
     } // setState()
 
     /**
+     * Set the value of [visible] column.
+     * 
+     * @param  string $v new value
+     * @return SysPages The current object (for fluent API support)
+     */
+    public function setVisible($v)
+    {
+        if ($v !== null && is_numeric($v)) {
+            $v = (string) $v;
+        }
+
+        if ($this->visible !== $v) {
+            $this->visible = $v;
+            $this->modifiedColumns[] = SysPagesPeer::VISIBLE;
+        }
+
+
+        return $this;
+    } // setVisible()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -372,6 +412,10 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             }
 
             if ($this->state !== 'ACTIVE') {
+                return false;
+            }
+
+            if ($this->visible !== 'YES') {
                 return false;
             }
 
@@ -404,6 +448,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $this->id_module = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
             $this->id_section = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
             $this->state = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->visible = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -413,7 +458,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             }
             $this->postHydrate($row, $startcol, $rehydrate);
 
-            return $startcol + 7; // 7 = SysPagesPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 8; // 8 = SysPagesPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating SysPages object", $e);
@@ -665,6 +710,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if ($this->isColumnModified(SysPagesPeer::STATE)) {
             $modifiedColumns[':p' . $index++]  = '`state`';
         }
+        if ($this->isColumnModified(SysPagesPeer::VISIBLE)) {
+            $modifiedColumns[':p' . $index++]  = '`visible`';
+        }
 
         $sql = sprintf(
             'INSERT INTO `sys_pages` (%s) VALUES (%s)',
@@ -696,6 +744,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
                         break;
                     case '`state`':						
                         $stmt->bindValue($identifier, $this->state, PDO::PARAM_STR);
+                        break;
+                    case '`visible`':						
+                        $stmt->bindValue($identifier, $this->visible, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -860,6 +911,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             case 6:
                 return $this->getState();
                 break;
+            case 7:
+                return $this->getVisible();
+                break;
             default:
                 return null;
                 break;
@@ -896,6 +950,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             $keys[4] => $this->getIdModule(),
             $keys[5] => $this->getIdSection(),
             $keys[6] => $this->getState(),
+            $keys[7] => $this->getVisible(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach($virtualColumns as $key => $virtualColumn)
@@ -962,6 +1017,9 @@ abstract class BaseSysPages extends BaseObject implements Persistent
             case 6:
                 $this->setState($value);
                 break;
+            case 7:
+                $this->setVisible($value);
+                break;
         } // switch()
     }
 
@@ -993,6 +1051,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if (array_key_exists($keys[4], $arr)) $this->setIdModule($arr[$keys[4]]);
         if (array_key_exists($keys[5], $arr)) $this->setIdSection($arr[$keys[5]]);
         if (array_key_exists($keys[6], $arr)) $this->setState($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setVisible($arr[$keys[7]]);
     }
 
     /**
@@ -1011,6 +1070,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         if ($this->isColumnModified(SysPagesPeer::ID_MODULE)) $criteria->add(SysPagesPeer::ID_MODULE, $this->id_module);
         if ($this->isColumnModified(SysPagesPeer::ID_SECTION)) $criteria->add(SysPagesPeer::ID_SECTION, $this->id_section);
         if ($this->isColumnModified(SysPagesPeer::STATE)) $criteria->add(SysPagesPeer::STATE, $this->state);
+        if ($this->isColumnModified(SysPagesPeer::VISIBLE)) $criteria->add(SysPagesPeer::VISIBLE, $this->visible);
 
         return $criteria;
     }
@@ -1080,6 +1140,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $copyObj->setIdModule($this->getIdModule());
         $copyObj->setIdSection($this->getIdSection());
         $copyObj->setState($this->getState());
+        $copyObj->setVisible($this->getVisible());
 
         if ($deepCopy && !$this->startCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1420,6 +1481,7 @@ abstract class BaseSysPages extends BaseObject implements Persistent
         $this->id_module = null;
         $this->id_section = null;
         $this->state = null;
+        $this->visible = null;
         $this->alreadyInSave = false;
         $this->alreadyInValidation = false;
         $this->alreadyInClearAllReferencesDeep = false;

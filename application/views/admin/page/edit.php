@@ -1,9 +1,9 @@
-<?php $new = isset($page['IdPage']); ?>
+<?php $new = ! isset($page['IdPage']); ?>
 <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h4 class="modal-title"><?php echo $new ? 'Add a new page' : 'Edit page ' .$page['Title'] ?></h4>
 </div>
-<form onsubmit="return validate(this, '<?php echo site_url('admin/page/edit'. $new ?'/'.$page['IdPage']:'')) ?>', load_sections <?php $new ? ',' : '' ?>)">
+<form onsubmit="return validate_page(this, '<?php echo site_url('admin/page/edit'. ( $new ? '' : '/' . $page['IdPage'] )) ?>')">
 	<div class="modal-body">
 		<div id="page-type">
 			<div>
@@ -33,6 +33,13 @@
 				<?php echo form_error('IdSection'); ?>
 			</div>
 		</div>
+		<?php if ( $new ) : ?>
+		<div class="form-group" style="width: 100%;">
+			<label class="checkbox-inline">
+				<input type="checkbox" name="Visible" value="YES" checked> La página será parte del menú principal
+			</label>
+		</div>
+		<?php endif ?>
 	    <div class="form-group">
 	    	<label for="">Name <strong>*</strong></label> 
 			<?php echo form_input('Title', set_value('Title', $page['Title']), 'class="form-control"'); ?>

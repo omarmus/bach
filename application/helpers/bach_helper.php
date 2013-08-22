@@ -1,5 +1,5 @@
 <?php 
-function btn_panel($url, $icon, $callback_function = null)
+function btn_panel($url, $icon = '', $callback_function = null)
 {
     $url = site_url($url);
     ob_start(); ?>
@@ -257,11 +257,11 @@ function button_on_off($state, $url, $label_on = 'ON', $label_off = 'OFF')
     $url = site_url($url);
     ob_start(); ?>
     <div class="btn-group btn-on-off" data-toggle="buttons">
-        <label class="btn btn-primary<?php echo $state == 'ACTIVE' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
-            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' ? 'checked' : '' ?>> <strong>ON</strong>
+        <label class="btn btn-primary<?php echo $state == 'ACTIVE' || $state == 'YES' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
+            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' || $state == 'YES' ? 'checked' : '' ?>> <strong><?php echo $label_on ?></strong>
         </label>
-        <label class="btn btn-primary<?php echo $state == 'INACTIVE' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
-            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' ? 'checked' : '' ?>> <strong>OFF</strong>
+        <label class="btn btn-primary<?php echo $state == 'INACTIVE' || $state == 'NO' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
+            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' || $state == 'NO' ? 'checked' : '' ?>> <strong><?php echo $label_off ?></strong>
         </label>
     </div>
     <?php
@@ -270,5 +270,5 @@ function button_on_off($state, $url, $label_on = 'ON', $label_off = 'OFF')
 
 function button_yes_no($state, $url)
 {
-    return button_on_off($state, $url, 'YES', 'NO')
+    return button_on_off($state, $url, 'YES', 'NO');
 }

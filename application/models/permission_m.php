@@ -9,7 +9,10 @@ class Permission_m extends BC_Model {
 	{
 		$roles = SysRolesQuery::create()->find();
 		foreach ($roles as $rol) {
-			parent::save(array('IdPage' => $id_page, 'IdRol' => $rol->getIdRol()));
+			$id_rol = $rol->getIdRol();
+			$data = array('IdPage' => $id_page, 'IdRol' => $id_rol);
+			$data =  $id_rol == 1 ? array_merge($data, array('Create' => 'YES', 'Read' => 'YES', 'Update' => 'YES', 'Delete' => 'YES')) : $data;
+			parent::save($data);
 		}
 	}
 
@@ -20,7 +23,7 @@ class Permission_m extends BC_Model {
 
 	public function set_permission($id_page, $id_rol, $type, $state)
 	{
-		SysPermissionsQuery::create()->findPks(array($id_page, $id_rol))->update(array($type => $state));
+		SysPermissionsQuery::create()->filterByIdPage($id_page)->filterByIdRol($id_rol)->update(array($type => $state));
 	}
 }
 

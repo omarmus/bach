@@ -13,6 +13,7 @@
  * @method SysPagesQuery orderByIdModule($order = Criteria::ASC) Order by the id_module column
  * @method SysPagesQuery orderByIdSection($order = Criteria::ASC) Order by the id_section column
  * @method SysPagesQuery orderByState($order = Criteria::ASC) Order by the state column
+ * @method SysPagesQuery orderByVisible($order = Criteria::ASC) Order by the visible column
  *
  * @method SysPagesQuery groupByIdPage() Group by the id_page column
  * @method SysPagesQuery groupByTitle() Group by the title column
@@ -21,6 +22,7 @@
  * @method SysPagesQuery groupByIdModule() Group by the id_module column
  * @method SysPagesQuery groupByIdSection() Group by the id_section column
  * @method SysPagesQuery groupByState() Group by the state column
+ * @method SysPagesQuery groupByVisible() Group by the visible column
  *
  * @method SysPagesQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method SysPagesQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -39,6 +41,7 @@
  * @method SysPages findOneByIdModule(int $id_module) Return the first SysPages filtered by the id_module column
  * @method SysPages findOneByIdSection(int $id_section) Return the first SysPages filtered by the id_section column
  * @method SysPages findOneByState(string $state) Return the first SysPages filtered by the state column
+ * @method SysPages findOneByVisible(string $visible) Return the first SysPages filtered by the visible column
  *
  * @method array findByIdPage(int $id_page) Return SysPages objects filtered by the id_page column
  * @method array findByTitle(string $title) Return SysPages objects filtered by the title column
@@ -47,6 +50,7 @@
  * @method array findByIdModule(int $id_module) Return SysPages objects filtered by the id_module column
  * @method array findByIdSection(int $id_section) Return SysPages objects filtered by the id_section column
  * @method array findByState(string $state) Return SysPages objects filtered by the state column
+ * @method array findByVisible(string $visible) Return SysPages objects filtered by the visible column
  *
  * @package    propel.generator.bach.om
  */
@@ -154,7 +158,7 @@ abstract class BaseSysPagesQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `id_page`, `title`, `slug`, `order`, `id_module`, `id_section`, `state` FROM `sys_pages` WHERE `id_page` = :p0';
+        $sql = 'SELECT `id_page`, `title`, `slug`, `order`, `id_module`, `id_section`, `state`, `visible` FROM `sys_pages` WHERE `id_page` = :p0';
         try {
             $stmt = $con->prepare($sql);			
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -496,6 +500,35 @@ abstract class BaseSysPagesQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(SysPagesPeer::STATE, $state, $comparison);
+    }
+
+    /**
+     * Filter the query on the visible column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByVisible('fooValue');   // WHERE visible = 'fooValue'
+     * $query->filterByVisible('%fooValue%'); // WHERE visible LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $visible The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SysPagesQuery The current query, for fluid interface
+     */
+    public function filterByVisible($visible = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($visible)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $visible)) {
+                $visible = str_replace('*', '%', $visible);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(SysPagesPeer::VISIBLE, $visible, $comparison);
     }
 
     /**

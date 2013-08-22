@@ -45,6 +45,7 @@ class SysPagesTableMap extends TableMap
         $this->addColumn('id_module', 'IdModule', 'INTEGER', false, null, 0);
         $this->addColumn('id_section', 'IdSection', 'INTEGER', false, null, 0);
         $this->addColumn('state', 'State', 'VARCHAR', false, 20, 'ACTIVE');
+        $this->addColumn('visible', 'Visible', 'VARCHAR', false, 20, 'YES');
         // validators
     } // initialize()
 

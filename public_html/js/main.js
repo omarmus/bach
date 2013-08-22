@@ -39,6 +39,9 @@ $.extend( true, $.fn.dataTable.defaults, {
     		$($(that).parent().find('.row .col-md-9')[0]).html(now?'<span class="label label-warning"><strong>'+now+'</strong> row'+(now>1?'s':'')+' selected.</span>':'');
     	}
 		$(firstTH).parent().prepend(th);
+		if (that.$('tr').length == 0) {
+			$(that).find('td').prop('colspan', $(that).find('td').prop('colspan') + 1);
+		}
 		that.$('tr').each(function () {
 			var firstTD = this;
 	    	var td = document.createElement('td');
@@ -74,17 +77,14 @@ function hide_modal() {
 	$('#main-modal').modal('hide');
 }
 
-function validate (form, url, callback_error, callback_success) {
+function validate (form, url, callback_error) {
 	show_loading();
 	$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
 	$.post(url, $(form).serialize(), function (response) {
 		hide_loading();
 		if (response == "CREATE" || response == 'UPDATE') {
 			hide_modal();
-			messageOk(response == "CREATE"?"Create!":"Update!", 500);
-			if (callback_success) {
-	            callback_success.apply(window);
-	        }
+			messageOk(response == "CREATE"?"Create success!":"Update success!", 500);
 			setTimeout(function () {window.location = '';}, 1200);
 		} else {
 			var error = $('#main-modal .modal-content').html(response).find('.input-error').get(0);
@@ -120,7 +120,7 @@ function validate_data (form, url) {
 
 
 
-function deleteSelected (oTable, url, refresh) {
+function delete_selected (oTable, url, refresh) {
 	var pks = getPks(oTable);
 	if (pks.length) {
 		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
