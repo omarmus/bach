@@ -41,6 +41,7 @@ table .sorting_asc { background: url('../lib/jquery.datatables/images/sort_asc.p
 table .sorting_desc { background: url('../lib/jquery.datatables/images/sort_desc.png') no-repeat center right;}
 table .sorting_asc_disabled { background: url('../lib/jquery.datatables/images/sort_asc_disabled.png') no-repeat center right;}
 table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/sort_desc_disabled.png') no-repeat center right;}
+.dataTables_wrapper {margin-bottom: 10px;}
 .table td.edit {padding: 3px 0; text-align: center;}
 .table th.edit {width: 48px !important; text-align: center;}
 .table th.state {width: 92px !important; text-align: center;}

@@ -183,7 +183,7 @@ function message (title, text, img, class_name, sticky) {
 		title: title || 'Message', // (string | mandatory) the heading of the notification
 		text: text || '', // (string | mandatory) the text inside the notification
 		sticky: sticky || false, // (bool | optional) if you want it to fade out on its own or just sit there
-		time: 4000,// (int | optional) the time you want it to be alive for before fading out
+		time: 3000,// (int | optional) the time you want it to be alive for before fading out
 		class_name: class_name || '', // for light notifications (can be added directly to $.gritter.add too)
 		position: 'top-right', // possibilities: bottom-left, bottom-right, top-left, top-right
 		fade_in_speed: 80, 

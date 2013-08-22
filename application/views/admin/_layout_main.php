@@ -12,10 +12,10 @@
         <?php $this->load->view('admin/components/nav_main'); ?>
         <?php $this->load->view('admin/components/nav_lateral'); ?>
         <ul class="breadcrumb">
-        <?php if (count($page)) : ?>
+        <?php if (count($page_)) : ?>
             <li><a href="<?php echo base_url('admin/dashboard') ?>">Dashboard</a></li>
         <?php endif ?>
-            <li class="active"><?php echo $title ?></li>
+            <li class="active"><?php echo $title_ ?></li>
         </ul>
         <div class="container">
             <?php $this->load->view($subview); // Cargando la sub vista ?>

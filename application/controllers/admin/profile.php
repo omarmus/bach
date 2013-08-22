@@ -54,7 +54,7 @@ class Profile extends Admin_Controller {
 	public function delete_photo()
 	{
 		$user = $this->user->save(array('IdPhoto' => NULL), $this->id_user, TRUE);
-		$this->file->delete($this->session->userdata('id_photo'));		
+		$this->file->delete($this->session->userdata('id_photo'));
 		$this->user->set_userdata($user);
 	}
 

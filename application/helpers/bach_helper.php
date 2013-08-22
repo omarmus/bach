@@ -1,22 +1,4 @@
 <?php 
-function btn_panel($url, $icon = '', $callback_function = null)
-{
-    $url = site_url($url);
-    ob_start(); ?>
-    <button type="button" 
-            class="btn btn-default" 
-            onclick="show_modal('<?php echo $url ?>'<?php echo $callback_function ? ', ' . $callback_function : '' ?>)">
-        <span class="glyphicon <?php echo $icon ?>"></span>
-    </button>
-    <?php
-    return ob_get_clean();
-}
-
-function add_meta_title($string)
-{
-    $CI =& get_instance();
-    $CI->data['meta_title'] = e($string) . ' - ' . $CI->data['meta_title'];
-}
 
 function e($string)
 {
@@ -32,7 +14,7 @@ function is_ajax()
 }
 
 //Main menu pages
-function get_menu($array, $child = FALSE)
+function get_menu($array, $child = FALSE, $permisions = null)
 {
     $CI =& get_instance();
     $str = '';
@@ -41,7 +23,7 @@ function get_menu($array, $child = FALSE)
         $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
 
         foreach ($array as $item) {
-            if ($item['State'] == 'ACTIVE') {
+            if ($item['State'] == 'ACTIVE' && $permisions[$item['Slug']]['READ'] == "YES") {
                 $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
                 if (isset($item['children']) && count($item['children'])) {
                     $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
@@ -49,7 +31,7 @@ function get_menu($array, $child = FALSE)
                     $str .= '<li class="'. $submenu . $active . '">';
                     $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
                     $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
-                    $str .= get_menu($item['children'], TRUE);
+                    $str .= get_menu($item['children'], TRUE, $permisions);
                 } else {
                     $str .= $active ? '<li class="active">' : '<li>';
                     $str .= '<a href="' . site_url('admin/'.$item['Slug']) . '">' .$item['Title'] . '</a>';
@@ -219,6 +201,21 @@ function get_parameters()
     return $items;
 }
 
+function get_permissions($id_rol)
+{
+    $items = array();
+    $permissions = SysPermissionsQuery::create()->filterByIdRol($id_rol)->find();
+    foreach ($permissions as $item) {
+        $items[$item->getSysPages()->getSlug()] = array(
+            'CREATED' => $item->getCreate(),
+            'READ' => $item->getRead(),
+            'UPDATE' => $item->getUpdate(),
+            'DELETE' => $item->getDelete()
+        );
+    }
+    return $items;
+}
+
 function thumb_image($photo)
 {
     $photo = explode('.', $photo);
@@ -250,6 +247,19 @@ function json_dropdown($array)
         $json[] = array('value' => $key, 'text' => $value);
     }
     return $json;
+}
+
+function btn_panel($url, $icon = '', $callback_function = null)
+{
+    $url = site_url($url);
+    ob_start(); ?>
+    <button type="button" 
+            class="btn btn-default" 
+            onclick="show_modal('<?php echo $url ?>'<?php echo $callback_function ? ', ' . $callback_function : '' ?>)">
+        <span class="glyphicon <?php echo $icon ?>"></span>
+    </button>
+    <?php
+    return ob_get_clean();
 }
 
 function button_on_off($state, $url, $label_on = 'ON', $label_off = 'OFF')

@@ -88,8 +88,12 @@ class Page extends Admin_Controller
 			$data = $this->page->array_request($_POST);
 			$id_page = $this->page->save($data, $pk);
 			if (is_null($pk)) {
+				// Created permissions to rols
 				$this->load->model('permission_m', 'permission');
 				$this->permission->create_rols_permission($id_page);
+
+				// Asigned new permission user
+				parent::set_permissions_session();
 			}
 			echo $pk?'UPDATE':$id_page;
 		} else {
@@ -104,11 +108,7 @@ class Page extends Admin_Controller
 		is_ajax();
 		
 		echo $this->page->deleteItems($this->input->post('pks'))?"OK":"ERROR";
-	}
-
-	public function delete($id)
-	{
-		echo $this->page->delete($id)?"OK":"ERROR";
+		parent::set_permissions_session();
 	}
 
 	public function _unique_slug()
@@ -127,6 +127,8 @@ class Page extends Admin_Controller
 
 	public function get_permissions($id_page)
 	{
+		is_ajax();
+
 		$this->load->model('permission_m', 'permission');
 
 		$this->data['page'] = $this->page->get($id_page);
@@ -146,21 +148,34 @@ class Page extends Admin_Controller
 
 	public function set_on_off($id_page)
 	{
+		is_ajax();
+
 		echo $this->page->save(array('State' => $this->input->post('state')), $id_page);
 	}
 
 	public function set_yes_no($id_page)
 	{
+		is_ajax();
+
 		$state = $this->input->post('state') == 'ACTIVE' ? 'YES' : 'NO';
 		echo $this->page->save(array('Visible' => $state), $id_page);
 	}
 
 	public function set_permission($id_page, $id_rol, $type)
 	{
+		is_ajax();
+
 		$this->load->model('permission_m', 'permission');
 		$state = $this->input->post('state') == 'ACTIVE' ? 'YES' : 'NO';
 		$this->permission->set_permission($id_page, $id_rol, $type, $state);
 		echo "OK";
+	}
+
+	public function set_permissions_session()
+	{
+		is_ajax();
+		
+		parent::set_permissions_session();
 	}
 }
 

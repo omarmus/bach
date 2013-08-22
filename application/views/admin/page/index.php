@@ -35,7 +35,7 @@
 				<?php echo btn_panel('admin/page/edit/' . $page->id_page, 'glyphicon-edit', 'load_sections') ?>
 			</td>
 			<td class="edit">
-				<?php echo btn_panel('admin/page/get_permissions/' . $page->id_page, 'glyphicon-lock') ?>
+				<?php echo btn_panel('admin/page/get_permissions/' . $page->id_page, 'glyphicon-lock', 'set_permissions_session') ?>
 			</td>
 			<td><?php echo $page->title; ?></td>
 			<td><?php echo $page->slug; ?></td>
@@ -86,6 +86,12 @@
 		$('#container-module select').change();
 	}
 
+	function set_permissions_session () {
+		$('#main-modal').on('hidden.bs.modal', function () {
+			$.post(_base_url + 'admin/page/set_permissions_session');
+		});
+	}
+
 	function validate_page (form, url) {
 		show_loading();
 		$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
@@ -101,9 +107,8 @@
 					messageOk("Create success!", 500);
 					setTimeout(function () {
 						show_modal(_base_url + 'admin/page/get_permissions/' + response, function () {
-							$('#main-modal').modal({keyboard : false});
-							$('.modal-footer button, .modal-header button, .modal-backdrop').on('click', function () {
-								window.location = '';
+							$('#main-modal').on('hidden.bs.modal', function () {
+							  window.location = '';
 							});
 						});
 					}, 500);

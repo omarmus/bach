@@ -25,6 +25,7 @@ class Permission_m extends BC_Model {
 	{
 		SysPermissionsQuery::create()->filterByIdPage($id_page)->filterByIdRol($id_rol)->update(array($type => $state));
 	}
+	
 }
 
 /* End of file permission_m.php */
