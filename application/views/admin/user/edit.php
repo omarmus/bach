@@ -28,7 +28,7 @@
 		<?php if ( $new ) : ?>
 		<div class="form-group" style="width: 100%;">
 			<label class="checkbox-inline">
-				<input type="checkbox" name="Visible" onclick="toggle_password(this)" value="YES"> Generar contraseña automáticamente
+				<input type="checkbox" name="Generate" onclick="toggle_password(this)" value="YES"> Generar contraseña automáticamente
 			</label>
 		</div>
 		<div class="form-group password">
