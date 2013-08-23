@@ -67,3 +67,24 @@ ERROR - 2013-08-22 17:28:30 --> Severity: Notice  --> Undefined index: dashboard
 ERROR - 2013-08-22 17:28:30 --> Severity: Notice  --> Undefined variable: title C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 10
 ERROR - 2013-08-22 17:28:30 --> Severity: Notice  --> Undefined variable: title C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 13
 ERROR - 2013-08-22 17:30:31 --> Severity: Notice  --> Undefined index: dashboard C:\wamp\www\bach\application\libraries\Admin_Controller.php 41
+ERROR - 2013-08-22 22:03:19 --> Severity: Notice  --> Undefined variable: permisions_ C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 1
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined index: userdata C:\wamp\www\bach\application\controllers\admin\profile.php 11
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined variable: userdata C:\wamp\www\bach\application\views\admin\profile\profile.php 10
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined variable: userdata C:\wamp\www\bach\application\views\admin\profile\profile.php 20
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined index: FirstName C:\wamp\www\bach\application\views\admin\profile\profile_data.php 3
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined index: LastName C:\wamp\www\bach\application\views\admin\profile\profile_data.php 8
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined index: Email C:\wamp\www\bach\application\views\admin\profile\profile_data.php 13
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> Undefined index: Phone C:\wamp\www\bach\application\views\admin\profile\profile_data.php 18
+ERROR - 2013-08-22 22:07:41 --> Severity: Notice  --> ob_end_clean() [<a href='ref.outcontrol'>ref.outcontrol</a>]: failed to delete buffer. No buffer to delete C:\wamp\www\bach\system\core\Loader.php 863
+ERROR - 2013-08-22 22:08:28 --> Severity: Notice  --> Undefined index: userdata C:\wamp\www\bach\application\controllers\admin\profile.php 11
+ERROR - 2013-08-22 22:08:28 --> Severity: Notice  --> Undefined index: FirstName C:\wamp\www\bach\application\views\admin\profile\profile_data.php 3
+ERROR - 2013-08-22 22:08:28 --> Severity: Notice  --> Undefined index: LastName C:\wamp\www\bach\application\views\admin\profile\profile_data.php 8
+ERROR - 2013-08-22 22:08:28 --> Severity: Notice  --> Undefined index: Email C:\wamp\www\bach\application\views\admin\profile\profile_data.php 13
+ERROR - 2013-08-22 22:08:28 --> Severity: Notice  --> Undefined index: Phone C:\wamp\www\bach\application\views\admin\profile\profile_data.php 18
+ERROR - 2013-08-22 22:08:28 --> Severity: Notice  --> ob_end_clean() [<a href='ref.outcontrol'>ref.outcontrol</a>]: failed to delete buffer. No buffer to delete C:\wamp\www\bach\system\core\Loader.php 863
+ERROR - 2013-08-22 22:11:42 --> 404 Page Not Found --> 
+ERROR - 2013-08-22 23:34:15 --> Severity: Notice  --> Undefined index: Username C:\wamp\www\bach\application\views\admin\user\edit.php 10
+ERROR - 2013-08-22 23:53:14 --> Severity: Notice  --> Undefined index: first_name C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 4
+ERROR - 2013-08-22 23:53:14 --> Severity: Notice  --> Undefined index: last_name C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 4
+ERROR - 2013-08-22 23:53:27 --> Severity: Notice  --> Undefined index: first_name C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 4
+ERROR - 2013-08-22 23:53:27 --> Severity: Notice  --> Undefined index: last_name C:\wamp\www\bach\application\views\admin\components\nav_lateral.php 4

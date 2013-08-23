@@ -7,8 +7,8 @@
 			<div class="panel-body">
 				<?php echo form_open_multipart('', array('id' => 'form-photo'));?>
 					<figure class="photo-user">
-					<?php if ($userdata['photo'] != "") : ?>
-						<img src="<?php echo site_url('files/users') . '/'.$userdata['photo'] ?>" alt="user image"class="img-responsive"/>
+					<?php if ($userdata_['photo'] != "") : ?>
+						<img src="<?php echo site_url('files/users') . '/'.$userdata_['photo'] ?>" alt="user image"class="img-responsive"/>
 					<?php else: ?>
 						<img src="<?php echo site_url('img/profile.png') ?>" class="img-responsive"/>
 					<?php endif ?>
@@ -17,7 +17,7 @@
 								<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
 								<input type="file" name="photo" id="photo" size="20">
 							</span>
-							<button type="button" class="btn btn-danger<?php echo $userdata['photo'] == "" ? ' hide': '' ?>" id="delete-photo"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
+							<button type="button" class="btn btn-danger<?php echo $userdata_['photo'] == "" ? ' hide': '' ?>" id="delete-photo"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
 						</figcaption>
 					</figure>
 				<?php echo form_close(); ?>

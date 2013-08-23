@@ -5,6 +5,7 @@ function e($string)
     return htmlentities($string);
 }
 
+// Validate is ajax
 function is_ajax()
 {
     $CI =& get_instance();
@@ -23,7 +24,7 @@ function get_menu($array, $child = FALSE, $permisions = null)
         $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
 
         foreach ($array as $item) {
-            if ($item['State'] == 'ACTIVE' && $permisions[$item['Slug']]['READ'] == "YES") {
+            if ($permisions[$item['Slug']]['READ'] == "YES" && $item['State'] == 'ACTIVE' && $item['Visible'] == 'YES' ) {
                 $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
                 if (isset($item['children']) && count($item['children'])) {
                     $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
@@ -238,6 +239,23 @@ function get_states()
         'ACTIVE' => 'ACTIVE',
         'INACTIVE' => 'INACTIVE'
     );
+}
+
+function state_label($state)
+{
+    $type = array(
+        'ACTIVE'   => 'success',
+        'CREATED'  => 'default',
+        'INACTIVE' => 'info',
+        'BLOQUED'  => 'warning',
+        'DELETED' => 'danger'
+    );
+    ob_start(); ?>
+    <span class="label label-<?php echo $type[$state] ?>">
+        <?php echo $state; ?>
+    </span>
+    <?php
+    return ob_get_clean();
 }
 
 function json_dropdown($array)

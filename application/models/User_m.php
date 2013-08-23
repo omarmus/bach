@@ -8,19 +8,29 @@ class User_M extends BC_Model {
 	protected $_timestamps = TRUE;
 
 	public $rules_login = array(
-		'email' => array(
-			'field' => 'email',
+		'Email' => array(
+			'field' => 'Email',
 			'label' => 'Email',
-			'rules' => 'trim|required|valid_email|xss_clean'
+			'rules' => 'trim|required|xss_clean'
 		),
-		'password' => array(
-			'field' => 'password',
+		'Password' => array(
+			'field' => 'Password',
 			'label' => 'Password',
 			'rules' => 'trim|required'
 		)
 	);
 
 	public $rules_edit = array(
+		'Username' => array(
+			'field' => 'Username',
+			'label' => 'Username',
+			'rules' => 'trim|alpha_dash|callback__unique_username|xss_clean'
+		),
+		'Email' => array(
+			'field' => 'Email',
+			'label' => 'Email',
+			'rules' => 'trim|required|valid_email|callback__unique_email|xss_clean'
+		),
 		'FirstName' => array(
 			'field' => 'FirstName',
 			'label' => 'First name',
@@ -30,11 +40,6 @@ class User_M extends BC_Model {
 			'field' => 'LastName',
 			'label' => 'Last name',
 			'rules' => 'trim|required|xss_clean'
-		),
-		'Email' => array(
-			'field' => 'Email',
-			'label' => 'Email',
-			'rules' => 'trim|required|valid_email|callback__unique_email|xss_clean'
 		),
 		'Password' => array(
 			'field' => 'Password',
@@ -73,6 +78,7 @@ class User_M extends BC_Model {
 	public function get_new()
 	{
 		return array(
+			'Username' => '',
 			'FirstName' => '',
 			'LastName' => '',
 			'Email' => '',
@@ -87,11 +93,14 @@ class User_M extends BC_Model {
 
 	public function login()
 	{
-		$user = $this->get_by(array('Email' => $this->input->post('email')), TRUE);
+		$email = $this->input->post('Email');
+		$user = SysUsersQuery::create()->filterByEmail($email)->_or()->filterByUsername($email)->findOne();
 		if (count($user)) {
 			//Log in user
-			if($this->bcrypt->check_password($this->input->post('password'), $user->getPassword())) {
+			if($this->bcrypt->check_password($this->input->post('Password'), $user->getPassword())) {
                 $this->set_userdata($user);
+                $user->setState('ACTIVE');
+                $user->save();
             }
 		}
 	}
@@ -99,14 +108,16 @@ class User_M extends BC_Model {
 	public function set_userdata($user)
 	{
 		$data = array(
-			'username'   => $user->getUsername(),
-			'email' 	 => $user->getEmail(), 
-			'id_user'    => $user->getIdUser(),
-			'id_rol' 	 => $user->getIdRol(),
-			'loggedin'   => TRUE, 
-			'id_photo'   => $user->getIdPhoto(),
-			'photo' 	 => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : '',
-			'parameters' => get_parameters(),
+			'username'    => $user->getUsername(),
+			'first_name'  => $user->getFirstName(),
+			'last_name'	  => $user->getLastName(),
+			'email' 	  => $user->getEmail(), 
+			'id_user'     => $user->getIdUser(),
+			'id_rol' 	  => $user->getIdRol(),
+			'loggedin'    => TRUE, 
+			'id_photo'    => $user->getIdPhoto(),
+			'photo' 	  => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : '',
+			'parameters'  => get_parameters(),
 			'permissions' => get_permissions($user->getIdRol())
 		);
 		$this->session->set_userdata($data);

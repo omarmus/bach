@@ -46,13 +46,20 @@ class User extends Admin_Controller
 			$this->load->library('bcrypt');
 			$data = $this->user->array_request($_POST);
 			$pk || $data['Password'] = $this->bcrypt->hash_password($data['Password']);
-			$data['Username'] = $data['Email'];
 			$this->user->save($data, $pk);
 			echo $pk?'UPDATE':'CREATE';
 		} else {
 			// Load the view
 			$this->load->view('admin/user/edit', $this->data);
 		}	
+	}
+
+	public function password($id_user)
+	{
+		is_ajax();
+		
+		$this->data['user'] = $this->user->get($id_user)->toArray();
+		$this->load->view('admin/user/password', $this->data);
 	}
 
 	public function delete_selected()
@@ -112,6 +119,20 @@ class User extends Admin_Controller
 									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
 		if (count($user)) {
 			$this->form_validation->set_message('_unique_email', '%s should be unique');
+			return FALSE;
+		}
+		return TRUE;
+	}
+
+	public function _unique_username()
+	{
+		// Do NOT valide if emai already exists
+		//UNLESS it's the username for the current user
+		$id = $this->uri->segment(4);
+		$user = SysUsersQuery::create()->filterByUsername($this->input->post('Username'))
+									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
+		if (count($user)) {
+			$this->form_validation->set_message('_unique_username', '%s should be unique');
 			return FALSE;
 		}
 		return TRUE;

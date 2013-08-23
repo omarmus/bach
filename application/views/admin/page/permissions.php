@@ -4,7 +4,7 @@
     <h4 class="modal-title">Agregar permisos a <em><?php echo $page->getTitle() ?></em></h4>
 </div>
 <div class="modal-body font-default">
-	<div class="alert alert-info">Para poder acceder a la página minimamente necesita tener permisos de Lectura.</div>
+	<div class="alert alert-info">Para poder acceder a la página necesita permisos de Lectura.</div>
     <table id="main-table" class="table table-striped table-bordered">
     	<thead>
     		<tr>

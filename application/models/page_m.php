@@ -33,7 +33,6 @@ class Page_m extends BC_Model {
 			$page = SysPagesQuery::create()->orderByOrder('DESC')->findOne();
 			$data['Order'] = count($page) ? $page->getOrder() + 1 : 1;
 		}
-		$data['Visible'] = isset($data['Visible']) ? $data['Visible'] : 'NO';
 		return parent::save($data, $pk);
 	}
 

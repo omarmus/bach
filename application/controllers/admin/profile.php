@@ -8,7 +8,7 @@ class Profile extends Admin_Controller {
 	{
 		parent::__construct();
 
-		$this->id_user = $this->data['userdata']['id_user'];
+		$this->id_user = $this->data['userdata_']['id_user'];
 		$this->load->model('file_m', 'file');
 	}
 

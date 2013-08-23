@@ -14,24 +14,25 @@
 		<?php echo $success ?></div>	
 		<?php endif ?>
 
-		<h3 class="form-signin-heading">Please sign in</h3>
+		<h3 class="form-signin-heading">Please log in</h3>
 
 		<div class="input-group">
 			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-			<input type="text" name="email" class="form-control" placeholder="Email address" autofocus>
+			<input type="text" name="Email" class="form-control" placeholder="Email address or Username" autofocus>
 		</div>
-		<?php echo form_error('email'); ?>
+		<?php echo form_error('Email'); ?>
 
 		<div class="input-group">
 			<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-			<input type="password" name="password" class="form-control" placeholder="Password">
+			<input type="password" name="Password" class="form-control" placeholder="Password">
 		</div>
-		<?php echo form_error('password'); ?>
-
-		<label class="checkbox">
+		<?php echo form_error('Password'); ?>
+		<!-- <label class="checkbox">
 			<input type="checkbox" value="remember-me"> Remember me
-		</label>
-		<label><a href="">¿Sé olvidó su contraseña?</a></label>
-		<button class="btn btn-primary btn-block btn-lg" type="submit">Sign in</button>
+		</label> -->
+		<div class="input-group bottom">
+			<a href="">¿Sé olvidó su contraseña?</a>
+		</div>
+		<button class="btn btn-primary btn-block btn-lg" type="submit">Log in</button>
 	<?php echo form_close(); ?>
 </div>
