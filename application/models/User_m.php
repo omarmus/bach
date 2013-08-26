@@ -98,11 +98,16 @@ class User_M extends BC_Model {
 		if (count($user)) {
 			//Log in user
 			if($this->bcrypt->check_password($this->input->post('Password'), $user->getPassword())) {
-                $this->set_userdata($user);
-                $user->setState('ACTIVE');
-                $user->save();
-            }
+				if ($user->getState() == 'BLOQUED') {
+					return 'BLOQUED';
+				}
+				$this->set_userdata($user);
+				$user->setState('ACTIVE');
+				$user->save();
+				return TRUE;
+			}
 		}
+		return FALSE;
 	}
 
 	public function set_userdata($user)

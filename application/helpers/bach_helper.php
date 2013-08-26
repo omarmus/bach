@@ -134,9 +134,9 @@ function send_mail($options = null)
     
     // Configuration default
     $data = array(
-        'from' => $parameters['SYSTEM_MAIL'], 
-        'name'=> $parameters['SYSTEM_NAME'], 
-        'to' => $parameters['SYSTEM_MAIL'], 
+        'from' => $parameters['SYSTEM_EMAIL']['Value'], 
+        'name'=> $parameters['SYSTEM_NAME']['Value'], 
+        'to' => $parameters['SYSTEM_EMAIL']['Value'], 
         'subject' => 'Test', 
         'message' => '',
         'mailtype' => 'html'
@@ -146,14 +146,19 @@ function send_mail($options = null)
         $data = array_merge($data, $options);
     }
 
-    $CI->email->set_mailtype($data['mailtype']);
-
-    if ($parameters['SMTP'] == 'ON') {
-        $CI->email->set_smtp_host($parameters['SMTP_HOST']);
-        $CI->email->set_smtp_user($parameters['SMTP_USER']);
-        $CI->email->set_smtp_pass($parameters['SMTP_PASS']);
-        $CI->email->set_smtp_port(25);
+    
+    if ($parameters['SMTP']['Value'] == 'ON') {
+        $config = array(
+            'protocol'  => 'smtp',
+            'smtp_host' => $parameters['SMTP_HOST']['Value'],
+            'smtp_user' => $parameters['SMTP_HOST']['Value'],
+            'smtp_pass' => $parameters['SMTP_HOST']['Value'],
+            'smtp_port' => 25
+        );
+        $CI->email->initialize($config);
     }
+
+    $CI->email->set_mailtype($data['mailtype']);
 
     if (isset($options['clear']) && $options['clear']) {
         $CI->email->clear(isset($options['clear_adjunt']) && $options['clear_adjunt']);

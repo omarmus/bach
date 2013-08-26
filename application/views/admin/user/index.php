@@ -52,8 +52,21 @@
 				{"bSortable": false, "aTargets": [ 1, 2, 8 ] }
 			],
 		});
-	});	
+	});
+	
 	function toggle_password (input) {
 		$('#main-modal .password')[input.checked ? 'hide' : 'show']();
+	}
+
+	function reset_password (id_user) {
+		show_loading('Enviando mail...');
+		$.post(_base_url + 'admin/user/reset_password/' + id_user, function (response) {
+			hide_loading();
+			if (response.state == 'OK') {
+				message_ok('Mail sent!');
+			} else {
+				message_error('Error al enviar el mail');
+			};
+		}, 'json')
 	}
 </script>

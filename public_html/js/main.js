@@ -82,9 +82,12 @@ function validate (form, url, callback_error) {
 	$(form).find('input[type=submit], button[type=submit]').prop({disabled : true});
 	$.post(url, $(form).serialize(), function (response) {
 		hide_loading();
-		if (response == "CREATE" || response == 'UPDATE') {
+		if (response == "CREATE" || response == 'UPDATE' || response == 'CREATE-AND-MAIL') {
 			hide_modal();
-			messageOk(response == "CREATE"?"Create success!":"Update success!", 500);
+			message_ok(response == "CREATE"?"Create success!":"Update success!", 500);
+			if (response == 'CREATE-AND-MAIL') {
+				message_mail();
+			}
 			setTimeout(function () {window.location = '';}, 1200);
 		} else {
 			var error = $('#main-modal .modal-content').html(response).find('.input-error').get(0);
@@ -112,7 +115,7 @@ function validate_data (form, url) {
 				$(this).next().fadeOut();
 			});
 		} else {
-			messageOk("Save changes!");
+			message_ok("Save changes!");
 		}
 	});
 	return false;
@@ -126,7 +129,7 @@ function delete_selected (oTable, url, refresh) {
 		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
 			$.post(url, {pks: pks}, function (response) {
 				deleteRows(oTable);
-				messageOk('Delete!');
+				message_ok('Delete!');
 				$(oTable.find('th')[0]).parent().removeClass('all-selected');
 				$(oTable.parent().find('.row .col-md-9')[0]).html('');
 				if (refresh) {
@@ -164,17 +167,24 @@ function addRow(oTable, data) {
     oTable.fnAddData(data);
 }
 
-function messageOk (text, delay) {
+function message_ok (text, delay) {
 	text = text || 'Operation has been successful.';
 	setTimeout(function () {
 		message('Success!', text, _base_url + 'img/glyphicons/glyphicons_206_ok_2.png', 'n-success');
 	}, delay || 0);
 }
 
-function messageError (text, delay) {
+function message_error (text, delay) {
 	text = text || 'There was an error.';
 	setTimeout(function () {
 		message('Error!', text, _base_url + 'img/glyphicons/glyphicons_207_remove_2.png', 'n-error');
+	}, delay || 0);
+}
+
+function message_mail (text, delay) {
+	text = text || 'Sent mail!.';
+	setTimeout(function () {
+		message('Mail!', text, _base_url + 'img/glyphicons/glyphicons_129_message_new.png', 'n-mail');
 	}, delay || 0);
 }
 

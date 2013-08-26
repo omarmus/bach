@@ -99,12 +99,12 @@
 			hide_loading();
 			if (response == "UPDATE") {
 				hide_modal();
-				messageOk("Update success!", 500);
+				message_ok("Update success!", 500);
 				setTimeout(function () {window.location = '';}, 1000);
 			} else {
 				if (!isNaN(response)) {
 					hide_modal();
-					messageOk("Create success!", 500);
+					message_ok("Create success!", 500);
 					setTimeout(function () {
 						show_modal(_base_url + 'admin/page/get_permissions/' + response, function () {
 							$('#main-modal').on('hidden.bs.modal', function () {

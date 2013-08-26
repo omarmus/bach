@@ -15,7 +15,7 @@ class Profile extends Admin_Controller {
 	public function index()
 	{   
 		$this->data['user'] = $this->user->get($this->id_user)->toArray();
-		$this->data['subview'] = 'admin/profile/profile';
+		$this->data['subview'] = 'admin/profile/index';
 		$this->load->view('admin/_layout_main', $this->data);
 	}
 

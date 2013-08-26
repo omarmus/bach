@@ -38,16 +38,40 @@ class User extends Admin_Controller
 
 		// Set up the form
 		$rules = $this->user->rules_edit;
-		$pk || $rules['Password']['rules'] .= '|required';
+		if (is_null($pk) && !isset($_POST['Generate'])) {
+			$rules['Password']['rules'] .= '|required';
+		}
 		$this->form_validation->set_rules($rules);
 
 		// Process the form
 		if ($this->form_validation->run() == TRUE) {
-			$this->load->library('bcrypt');
+			
 			$data = $this->user->array_request($_POST);
-			$pk || $data['Password'] = $this->bcrypt->hash_password($data['Password']);
-			$this->user->save($data, $pk);
-			echo $pk?'UPDATE':'CREATE';
+			
+			if (is_null($pk)) {
+				$this->load->library('bcrypt');
+
+				if (isset($_POST['Generate'])) {
+					$this->load->helper('string');
+					$data['Password'] = random_string('alnum', 8);
+				}
+				$this->bcrypt->hash_password($data['Password']);
+			}
+			//$this->user->save($data, $pk);
+
+			// Send mail a new user
+			if (is_null($pk)) {
+
+				$message = $this->load->view('mail/welcome', $data, TRUE);
+				$config = array(
+					'to' => $data['Email'],
+					'subject' => 'Welcome!',
+					'message' => $this->load->view('mail/template', array('message' => $message), TRUE)
+				);
+
+				//send_mail($config);
+			}
+			echo $pk?'UPDATE':'CREATE-AND-MAIL';
 		} else {
 			// Load the view
 			$this->load->view('admin/user/edit', $this->data);
@@ -89,11 +113,17 @@ class User extends Admin_Controller
 		// Process form
 		if ($this->form_validation->run() == TRUE) {
 			//We can login and redirect
-			if ($this->user->login() == TRUE) {
-				redirect($dashboard);
-			} else {
-				$this->session->set_flashdata('error', 'That <strong>email/password</strong> combination does not exist');
+			$login = $this->user->login();
+			if ($login == 'BLOQUED') {
+				$this->session->set_flashdata('error', 'Su cuenta a sido bloqueada, contáctese con el administrador.');
 				redirect('login', 'refresh');
+			} else {
+				if ($login) {
+					redirect($dashboard);
+				} else {
+					$this->session->set_flashdata('error', 'That <strong>email/password</strong> combination does not exist');
+					redirect('login', 'refresh');
+				}
 			}
 		}
 
@@ -110,33 +140,33 @@ class User extends Admin_Controller
 		redirect('login');
 	}
 
-	public function _unique_email()
-	{
-		// Do NOT valide if emai already exists
-		//UNLESS it's the email for the current user
-		$id = $this->uri->segment(4);
-		$user = SysUsersQuery::create()->filterByEmail($this->input->post('Email'))
-									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
-		if (count($user)) {
-			$this->form_validation->set_message('_unique_email', '%s should be unique');
-			return FALSE;
-		}
-		return TRUE;
-	}
+	public function reset_password($id_user)
+    {
+    	is_ajax();
 
-	public function _unique_username()
-	{
-		// Do NOT valide if emai already exists
-		//UNLESS it's the username for the current user
-		$id = $this->uri->segment(4);
-		$user = SysUsersQuery::create()->filterByUsername($this->input->post('Username'))
-									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
-		if (count($user)) {
-			$this->form_validation->set_message('_unique_username', '%s should be unique');
-			return FALSE;
-		}
-		return TRUE;
-	}
+    	$this->load->helper('string');
+    	$this->load->library('bcrypt');
+
+    	$new_password = random_string('alnum', 8);
+
+    	$data = array();
+		// $data['Password'] = $this->bcrypt->hash_password($new_password);
+		$user = $this->user->save($data, $id_user, TRUE);
+
+    	$data['new_password'] = $new_password;
+    	$data['first_name'] = $user->getFirstName(); 
+    	$message = $this->load->view('mail/recover_password', $data, TRUE);
+    	$config = array(
+    		'to' => $user->getEmail(),
+    		'subject' => 'New password',
+    		'message' => $this->load->view('mail/template', array('message' => $message), TRUE)
+    	);
+    	if (send_mail($config)) {
+    		echo json_encode(array('state' => 'OK', 'msg' => 'Success!'));
+    	} else {
+    		echo json_encode(array('state' => 'ERROR', 'msg' => '<div class="input-error">Se produjo un error al enviar el mail.</div>'));
+    	}
+    }
 }
 
 /* End of file user.php */

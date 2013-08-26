@@ -23,7 +23,7 @@
 			console.log(response);
 			hide_loading();
 			hide_modal();
-			messageOk('Order!', 1000);
+			message_ok('Order!', 1000);
 			setTimeout(function () {window.location = '';}, 1200);
 		});
 	});

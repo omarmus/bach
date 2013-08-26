@@ -17,6 +17,7 @@
 								<span><i class="icon-plus icon-white"></i> Seleccionar imagen...</span>
 								<input type="file" name="photo" id="photo" size="20">
 							</span>
+							<div class="clear"></div>
 							<button type="button" class="btn btn-danger<?php echo $userdata_['photo'] == "" ? ' hide': '' ?>" id="delete-photo"><i class="icon-remove icon-white"></i> Eliminar imagen</button>
 						</figcaption>
 					</figure>
@@ -36,12 +37,12 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="data">
-						<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url('admin/profile/update_data') ?>')" >
+						<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url() ?>admin/profile/update_data/<?php echo $user['IdUser'] ?>')" >
 							<?php $this->load->view('admin/profile/profile_data'); ?>
 						</form>	
 					</div>
 					<div class="tab-pane" id="password">
-						<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url('admin/profile/update_password') ?>')">
+						<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url() ?>admin/profile/update_password')">
 							<?php $this->load->view('admin/profile/profile_password'); ?>
 						</form>
 					</div>
@@ -77,9 +78,9 @@
 				success  : function (response) {
 					hide_loading();
                		if (response.status == 'error') {
-						messageError(response.msg);
+						message_error(response.msg);
                		} else {
-               			messageOk(response.msg);
+               			message_ok(response.msg);
                			setTimeout(function () {
                				window.location = '';
                			}, 2000)
@@ -94,7 +95,7 @@
 					$('#delete-photo').addClass('hide');
 					$('.photo-user > img').prop('src', _base_url + 'img/profile.png');
 					$('a.photo-user').css('backgroundImage', 'url("'+_base_url + 'img/profile.png")');
-	   				messageOk('Delete photo!');
+	   				message_ok('Delete photo!');
 	   			});
 			};	
 	    });

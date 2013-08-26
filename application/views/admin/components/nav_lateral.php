@@ -1,8 +1,11 @@
 <nav id="nav-lateral">
     <?php if (isset($permissions_['profile']) && $permissions_['profile']['READ'] == "YES"): ?>
-    <div>
-        <div style="display: none;"><?php echo $userdata_['first_name'] . " " . $userdata_['last_name'] ?></div>
-        <a href="<?php echo site_url('admin/profile') ?>" class="photo-user" style="<?php echo $userdata_['photo'] != "" ? "background-image: url('" . site_url() . 'files/users/thumbnail/'. thumb_image($userdata_['photo']) . "'" : '' ?>">
+    <div class="profile">
+        <a href="<?php echo site_url('admin/profile') ?>" class="photo-user" style="<?php echo $userdata_['photo'] != "" ? "background-image: url('" . site_url() . 'files/users/thumbnail/'. thumb_image($userdata_['photo']) . "')" : '' ?>">
+            <div class="text-center" style="display: none;">
+                <?php echo $userdata_['first_name'] . " " . $userdata_['last_name'] ?>
+                <a href="<?php echo site_url('admin/profile') ?>">Editar perfil</a>
+            </div>
         <?php if ($userdata_['photo'] == ""): ?>
             <img src="<?php echo site_url('img/profile.png') ?>" class="img-responsive" />
         <?php endif ?>
