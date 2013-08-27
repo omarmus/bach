@@ -4,12 +4,11 @@
 html, body {height: 100%;}
 body.body-login {background-color: #EEEEEE;}
 #wrap {min-height: 100%;height: auto !important; height: 100%;margin: 0 auto -30px;padding: 0 0 30px;}
-#wrap > .container {padding: 100px 75px 0 15px;}
-.body-login #wrap > .container{padding: 0 15px;}
-.breadcrumb {top: 50px;position: absolute;width: 100%;z-index: 100;}
-.section-buttons {margin-bottom: 10px;}
+#wrap > .container {padding: 95px 75px 0 15px;}
 #loading-ajax {background-color: #428BCA; color: #FFFFFF; display: none; left: 50%; line-height: 23px; margin: 0 0 0 -65px; padding: 3px 15px 0; position: fixed; z-index: 10000; }
 #loading-ajax > img {width: 20px;}
+.body-login #wrap > .container{padding: 0 15px;}
+.breadcrumb {top: 50px;position: absolute;width: 100%;z-index: 100;}
 .bottom {margin-bottom: 10px;}
 .top {margin-top: 10px;}
 
@@ -98,11 +97,15 @@ table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/
    ========================================================================== */
 .modal-body {font-size: 0;}
 .modal-body .form-group {display: inline-block;padding: 0 5px;vertical-align: top;width: 50%;}
-.form-group, .modal-body label, .modal-body input, .modal-body select {font-size: 14px;}
+.form-group, .modal-body div, .modal-body label, .modal-body input, .modal-body select {font-size: 14px;}
 .modal-body .form-group > .alert{font-size: 12px; margin: 0 0 10px; padding: 10px;}
 .form-group.radio-group, .radio-group {width: 100%;}
 .radio-group label {width: 25%;}
 .font-default {font-size: 14px;}
+.filter, .section-buttons {margin: 0 0 10px; }
+.filter {border-bottom: 1px solid #eee;}
+.filter > div, .filter > button {display: inline-block; vertical-align: bottom; max-width: 200px; margin: 0 0 10px; }
+.filter > button {min-width: 80px; }
 
 /* ==========================================================================
                                 S O R T A B L E

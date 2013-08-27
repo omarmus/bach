@@ -6,22 +6,22 @@
 <form onsubmit="return validate(this, '<?php echo site_url('admin/user/edit'. ( $new ? '' : '/'.$user['IdUser'])) ?>')">
 	<div class="modal-body">
 		<div class="form-group">
-			<label for="">Username</label>
+			<label>Username</label>
 			<?php echo form_input('Username', set_value('Username', $user['Username']), 'class="form-control"'); ?>
 			<?php echo form_error('Username'); ?>
 		</div>
 		<div class="form-group">
-			<label for="">Email <strong>*</strong></label>
+			<label>Email <strong>*</strong></label>
 			<?php echo form_input('Email', set_value('Email', $user['Email']), 'class="form-control"'); ?>
 			<?php echo form_error('Email'); ?>
 		</div>
 	    <div class="form-group">
-	    	<label for="">First name <strong>*</strong></label> 
+	    	<label>First name <strong>*</strong></label> 
 			<?php echo form_input('FirstName', set_value('FirstName', $user['FirstName']), 'class="form-control"'); ?>
 			<?php echo form_error('FirstName'); ?>
 		</div>
 		<div class="form-group">
-			<label for="">Last name <strong>*</strong></label>
+			<label>Last name <strong>*</strong></label>
 			<?php echo form_input('LastName', set_value('LastName', $user['LastName']), 'class="form-control"'); ?>
 			<?php echo form_error('LastName'); ?>
 		</div>
@@ -32,24 +32,24 @@
 			</label>
 		</div>
 		<div class="form-group password">
-			<label for="">Password <strong>*</strong></label>
+			<label>Password <strong>*</strong></label>
 			<?php echo form_password('Password', '', 'class="form-control"'); ?>
 			<?php echo form_error('Password'); ?>
 		</div>
 		<div class="form-group password">
-			<label for="">Confirm password </label>
+			<label>Confirm password </label>
 			<?php echo form_password('PasswordConfirm', '', 'class="form-control"'); ?>
 			<?php echo form_error('PasswordConfirm'); ?>
 		</div>
 		<?php else : ?>
 		<div class="form-group">
-			<label for="">State</label>
+			<label>State</label>
 			<?php echo form_dropdown('State', get_states_user(), set_value('State', $user['State']), 'class="form-control"'); ?>
 			<?php echo form_error('State'); ?>
 		</div>
 		<?php endif ?>
 		<div class="form-group">
-			<label for="">Rol</label>
+			<label>Rol</label>
 			<?php echo form_dropdown('IdRol', $roles, set_value('IdRol', $user['IdRol']), 'class="form-control"'); ?>
 			<?php echo form_error('IdRol'); ?>
 		</div>
