@@ -63,7 +63,8 @@
 		$.post(_base_url + 'admin/user/reset_password/' + id_user, function (response) {
 			hide_loading();
 			if (response.state == 'OK') {
-				message_ok('Mail sent!');
+				hide_modal();
+				message_mail('Mail sent!', 300);
 			} else {
 				message_error('Error al enviar el mail');
 			};

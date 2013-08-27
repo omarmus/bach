@@ -57,7 +57,7 @@ class User extends Admin_Controller
 				}
 				$this->bcrypt->hash_password($data['Password']);
 			}
-			//$this->user->save($data, $pk);
+			$this->user->save($data, $pk);
 
 			// Send mail a new user
 			if (is_null($pk)) {
@@ -68,10 +68,9 @@ class User extends Admin_Controller
 					'subject' => 'Welcome!',
 					'message' => $this->load->view('mail/template', array('message' => $message), TRUE)
 				);
-
-				//send_mail($config);
+				send_mail($config);
 			}
-			echo $pk?'UPDATE':'CREATE-AND-MAIL';
+			echo $pk ? 'UPDATE' : 'CREATE-AND-MAIL';
 		} else {
 			// Load the view
 			$this->load->view('admin/user/edit', $this->data);

@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div style="background: #f5f5f5;font-family: Arial; overflow: hidden;">
-			<div style=" background: none repeat scroll 0 0 #FFFFFF; border: 0 solid #AAAAAA; border-radius: 5px; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3), 0 0 30px 0 rgba(0, 0, 0, 0.15); color: #444444; font-size: 0.9em; margin: 50px auto 20px; padding: 30px 50px; width: 80%; ">
+			<div style=" background: none repeat scroll 0 0 #FFFFFF; border: 0 solid #AAAAAA; border-radius: 5px; -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3), 0 0 30px 0 rgba(0, 0, 0, 0.15);-moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3), 0 0 30px 0 rgba(0, 0, 0, 0.15);box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3), 0 0 30px 0 rgba(0, 0, 0, 0.15); color: #444444; font-size: 0.9em; margin: 50px auto 20px; padding: 30px 50px; width: 80%; ">
 				<img src="" alt="Bach">
 				<hr>
 				<div>

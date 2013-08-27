@@ -23,8 +23,8 @@ class Ajax extends Frontend_Controller {
 
 			$new_password = random_string('alnum', 8);
 
-			// $data['Password'] = $this->bcrypt->hash_password($new_password);
-			// $this->user->save($data, $user->getIdUser());
+			$data['Password'] = $this->bcrypt->hash_password($new_password);
+			$this->user->save($data, $user->getIdUser());
 
 			$data['new_password'] = $new_password;
 			$data['first_name'] = $user->getFirstName(); 

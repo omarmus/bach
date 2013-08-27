@@ -30,18 +30,19 @@ class Admin_Controller extends BC_Controller
  		}
 
  		$this->data['userdata_'] = $this->session->all_userdata();
- 		$this->data['page_'] = $this->page->get_by(array("Slug" => $this->uri->segment(2)), TRUE);
+
+ 		$page = $this->uri->segment(2);
+ 		$this->data['page_'] = $this->page->get_by(array("Slug" => $page), TRUE);
 
  		//Verify permission to user for page
  		if (isset($this->data['userdata_']['permissions']) && in_array(uri_string(), $exception_uris) == FALSE) {
  			$this->data['permissions_'] = $this->data['userdata_']['permissions'];
- 			$controller = $this->uri->segment(2);
-			if ($controller != 'dashboard' && ($this->data['permissions_'][$controller]['READ'] == 'NO' || $this->data['page_']->getState() == 'INACTIVE')) {
+			if ($page != 'dashboard' && ($this->data['permissions_'][$page]['READ'] == 'NO' || $this->data['page_']->getState() == 'INACTIVE')) {
 				show_404();
 			}
  		}
 
- 		$this->data['title_'] = count($this->data['page_']) ? $this->data['page_']->getTitle() : 'Dashboard';
+ 		$this->data['title_'] = count($this->data['page_']) ? $this->data['page_']->getTitle() : ucfirst($page);
  		$this->data['meta_title_'] = $this->data['title_'] . ' - ' . $this->data["site_name_"];
  		$this->data['menu_'] = $this->page->get_nested();
  	}
