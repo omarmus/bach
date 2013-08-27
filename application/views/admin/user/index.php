@@ -1,3 +1,20 @@
+<form class="filter">
+	<div>
+		<label>Username</label>		
+		<input type="text" name="Username" class="form-control">
+	</div>
+	<div>
+		<label>First/Last name</label>		
+		<input type="text" name="Username" class="form-control">
+	</div>
+	<div>
+		<label>State</label>
+		<?php echo form_dropdown('State', get_states_user(), set_value('State'), 'class="form-control"'); ?>
+	</div>
+	<button class="btn btn-primary" type="submit">
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+</form>
 <div class="section-buttons">
 	<button class="btn btn-primary" type="button" 
 			onclick="show_modal('<?php echo site_url('admin/user/edit') ?>')">
@@ -53,7 +70,7 @@
 			],
 		});
 	});
-	
+
 	function toggle_password (input) {
 		$('#main-modal .password')[input.checked ? 'hide' : 'show']();
 	}
