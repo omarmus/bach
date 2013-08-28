@@ -150,8 +150,12 @@ class BC_Model extends CI_Model {
 			$key = array($key => $value);
 		}
 		foreach ($key as $k => $v) {
-			$filter = "filterBy{$k}";
-			$this->_query->$filter($v);
+			if ($v == 'OR') {
+				$this->_query->_or();
+			} else {
+				$filter = "filterBy{$k}";
+				$this->_query->$filter($v);
+			}	
 		}
 	}
 }

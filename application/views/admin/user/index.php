@@ -1,19 +1,25 @@
-<form class="filter">
+<form class="filter" method="post">
 	<div>
 		<label>Username</label>		
-		<input type="text" name="Username" class="form-control">
+		<input type="text" name="Username" value="<?php echo $this->input->post('Username') ?>" class="form-control">
 	</div>
 	<div>
 		<label>First/Last name</label>		
-		<input type="text" name="Username" class="form-control">
+		<input type="text" name="Name" value="<?php echo $this->input->post('Name') ?>" class="form-control">
 	</div>
 	<div>
 		<label>State</label>
-		<?php echo form_dropdown('State', get_states_user(), set_value('State'), 'class="form-control"'); ?>
+		<?php echo form_dropdown('State', array_merge(array('-' => 'ALL'), get_states_user()), set_value('State'), 'class="form-control"'); ?>
 	</div>
 	<button class="btn btn-primary" type="submit">
 		<span class="glyphicon glyphicon-search"></span>
 	</button>
+	<?php if (isset($filter)) : ?>
+	<button class="btn btn-default" type="button" onclick="window.location = ''">
+		<span class="glyphicon glyphicon-ban-circle"></span> Terminar búsqueda
+	</button>
+	<?php endif ?>
+	<input type="hidden" name="filter" value="OK">
 </form>
 <div class="section-buttons">
 	<button class="btn btn-primary" type="button" 

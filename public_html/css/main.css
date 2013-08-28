@@ -4,7 +4,7 @@
 html, body {height: 100%;}
 body.body-login {background-color: #EEEEEE;}
 #wrap {min-height: 100%;height: auto !important; height: 100%;margin: 0 auto -30px;padding: 0 0 30px;}
-#wrap > .container {padding: 95px 75px 0 15px;}
+#wrap > .container {padding: 100px 75px 0 15px;}
 #loading-ajax {background-color: #428BCA; color: #FFFFFF; display: none; left: 50%; line-height: 23px; margin: 0 0 0 -65px; padding: 3px 15px 0; position: fixed; z-index: 10000; }
 #loading-ajax > img {width: 20px;}
 .body-login #wrap > .container{padding: 0 15px;}

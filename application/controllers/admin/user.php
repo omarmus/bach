@@ -14,7 +14,22 @@ class User extends Admin_Controller
 	public function index()
 	{
 		// Fetch all users
-		$this->data['users'] = $this->user->get();
+		if (isset($_POST['filter'])) {
+			// $filters = array(
+			// 	'Username' => strlen($_POST['State']) ? '%' . $this->input->post('Username') . '%' : NULL,
+			// 	// 'FirstName' => '%' . $this->input->post('Name') . '%',
+			// 	// 'OR' => 'OR',
+			// 	// 'LastName' => '%' . $this->input->post('Name') . '%',
+			// 	// 'State' => ($_POST['State']) ? $_POST['State'] : NULL
+			// );
+			
+			
+			$this->data['users'] = $this->user->get_by(array());
+			// var_dump($this->data['users']);die();
+			$this->data['filter'] = TRUE;
+		} else {
+			$this->data['users'] = $this->user->get();
+		}
 
 		// Load view
 		$this->data['subview'] = 'admin/user/index';
