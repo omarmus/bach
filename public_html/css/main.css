@@ -11,6 +11,7 @@ body.body-login {background-color: #EEEEEE;}
 .breadcrumb {top: 50px;position: absolute;width: 100%;z-index: 100;}
 .bottom {margin-bottom: 10px;}
 .top {margin-top: 10px;}
+.margin-zero {margin: 0;}
 
 /* ==========================================================================
                                   H E A D E R
@@ -27,6 +28,7 @@ body.body-login {background-color: #EEEEEE;}
 .form-login .input-group{margin-top: 10px;}
 .form-login > form, .form-login > div {display: inline-block; font-size: 14px; max-width: 380px; padding: 15px; vertical-align: top; width: 100%;}
 .form-login .alert, .form-login h3 {white-space: normal;}
+
 /* ==========================================================================
                               N A V  L A T E R A L
    ========================================================================== */
@@ -97,7 +99,7 @@ table .sorting_desc_disabled { background: url('../lib/jquery.datatables/images/
    ========================================================================== */
 .modal-body {font-size: 0;}
 .modal-body .form-group {display: inline-block;padding: 0 5px;vertical-align: top;width: 50%;}
-.form-group, .modal-body div, .modal-body label, .modal-body input, .modal-body select {font-size: 14px;}
+.form-group, .modal-body p, .modal-body li, .modal-body .alert, .modal-body label, .modal-body input, .modal-body select {font-size: 14px;}
 .modal-body .form-group > .alert{font-size: 12px; margin: 0 0 10px; padding: 10px;}
 .form-group.radio-group, .radio-group {width: 100%;}
 .radio-group label {width: 25%;}

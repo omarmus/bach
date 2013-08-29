@@ -149,12 +149,15 @@ class BC_Model extends CI_Model {
 		if ( ! is_array($key)) {
 			$key = array($key => $value);
 		}
+		$exceptions = array('','-', '*');
 		foreach ($key as $k => $v) {
 			if ($v == 'OR') {
 				$this->_query->_or();
 			} else {
-				$filter = "filterBy{$k}";
-				$this->_query->$filter($v);
+				if (in_array($v, $exceptions) == FALSE) {
+					$filter = "filterBy{$k}";
+					$this->_query->$filter($v);
+				}
 			}	
 		}
 	}

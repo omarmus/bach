@@ -123,7 +123,7 @@ class Page_m extends BC_Model {
 	public function get_no_parents($id)
 	{
 		// Fetch pages without parents
-		$pages = parent::get_by(array('IdModule' => $id));
+		$pages = SysPagesQuery::create()->filterByIdModule($id)->find();
 
 		// Return key =>  value pair array
 		$array[0] = 'Seleccione ' . ($id ? 'una sección' : 'un módulo') . '...';

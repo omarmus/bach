@@ -14,9 +14,21 @@ class Page extends Admin_Controller
 	public function index()
 	{
 		$this->data['sortable'] = TRUE;
+		$this->data['list_modules'] = $this->page->get_no_parents(0);
 
 		// Fetch all pages
-		$this->data['pages'] = $this->page->get_with_parent();
+		if (isset($_POST['filter'])) {
+			$filters = array(
+				'FirstName' => '%' . $this->input->post('Name') . '%',
+				'OR' => 'OR',
+				'LastName' => '%' . $this->input->post('Name') . '%',
+				'State' => $this->input->post('State')
+			);
+			$this->data['pages'] = $this->page->get_with_parent($filters);
+			$this->data['filter'] = TRUE;
+		} else {
+			$this->data['pages'] = $this->page->get_with_parent();
+		}
 
 		// Load view
 		// Esta vista se generó usando el estandar de Codeigniter por fuerza mayor

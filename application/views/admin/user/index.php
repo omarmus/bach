@@ -1,15 +1,11 @@
 <form class="filter" method="post">
 	<div>
-		<label>Username</label>		
-		<input type="text" name="Username" value="<?php echo $this->input->post('Username') ?>" class="form-control">
-	</div>
-	<div>
 		<label>First/Last name</label>		
 		<input type="text" name="Name" value="<?php echo $this->input->post('Name') ?>" class="form-control">
 	</div>
 	<div>
 		<label>State</label>
-		<?php echo form_dropdown('State', array_merge(array('-' => 'ALL'), get_states_user()), set_value('State'), 'class="form-control"'); ?>
+		<?php echo form_dropdown('State', array_merge(array('-' => 'ALL'), get_states_user()), $this->input->post('State'), 'class="form-control"'); ?>
 	</div>
 	<button class="btn btn-primary" type="submit">
 		<span class="glyphicon glyphicon-search"></span>
@@ -91,6 +87,6 @@
 			} else {
 				message_error('Error al enviar el mail');
 			};
-		}, 'json')
+		}, 'json');
 	}
 </script>

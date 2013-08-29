@@ -5,27 +5,18 @@
 */
 class User extends Admin_Controller
 {
-	
-	public function __construct()
-	{
-		parent::__construct();
-	}
 
 	public function index()
 	{
 		// Fetch all users
 		if (isset($_POST['filter'])) {
-			// $filters = array(
-			// 	'Username' => strlen($_POST['State']) ? '%' . $this->input->post('Username') . '%' : NULL,
-			// 	// 'FirstName' => '%' . $this->input->post('Name') . '%',
-			// 	// 'OR' => 'OR',
-			// 	// 'LastName' => '%' . $this->input->post('Name') . '%',
-			// 	// 'State' => ($_POST['State']) ? $_POST['State'] : NULL
-			// );
-			
-			
-			$this->data['users'] = $this->user->get_by(array());
-			// var_dump($this->data['users']);die();
+			$filters = array(
+				'FirstName' => '%' . $this->input->post('Name') . '%',
+				'OR' => 'OR',
+				'LastName' => '%' . $this->input->post('Name') . '%',
+				'State' => $this->input->post('State')
+			);
+			$this->data['users'] = $this->user->get_by($filters);
 			$this->data['filter'] = TRUE;
 		} else {
 			$this->data['users'] = $this->user->get();
@@ -61,7 +52,7 @@ class User extends Admin_Controller
 		// Process the form
 		if ($this->form_validation->run() == TRUE) {
 			
-			$data = $this->user->array_request($_POST);
+			$data = $this->input->post();
 			
 			if (is_null($pk)) {
 				$this->load->library('bcrypt');
@@ -164,7 +155,7 @@ class User extends Admin_Controller
     	$new_password = random_string('alnum', 8);
 
     	$data = array();
-		// $data['Password'] = $this->bcrypt->hash_password($new_password);
+		$data['Password'] = $this->bcrypt->hash_password($new_password);
 		$user = $this->user->save($data, $id_user, TRUE);
 
     	$data['new_password'] = $new_password;

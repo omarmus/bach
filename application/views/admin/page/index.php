@@ -1,3 +1,26 @@
+<form class="filter" method="post">
+	<div>
+		<label>Name/URI</label>		
+		<input type="text" name="Name" value="<?php echo $this->input->post('Name') ?>" class="form-control">
+	</div>
+	<div>
+		<label>Module</label>
+		<?php echo form_dropdown('Module', $list_modules, $this->input->post('Module'), 'class="form-control"'); ?>
+	</div>
+	<div>
+		<label>Type</label>
+		<?php echo form_dropdown('State', array_merge(array('-' => 'ALL'), get_type_page()), $this->input->post('State'), 'class="form-control"'); ?>
+	</div>
+	<button class="btn btn-primary" type="submit">
+		<span class="glyphicon glyphicon-search"></span>
+	</button>
+	<?php if (isset($filter)) : ?>
+	<button class="btn btn-default" type="button" onclick="window.location = ''">
+		<span class="glyphicon glyphicon-ban-circle"></span> Terminar búsqueda
+	</button>
+	<?php endif ?>
+	<input type="hidden" name="filter" value="OK">
+</form>
 <div class="section-buttons">
 	<button class="btn btn-primary" type="button" 
 			onclick="show_modal('<?php echo site_url('admin/page/edit') ?>')">

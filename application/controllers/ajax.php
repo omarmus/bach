@@ -41,7 +41,6 @@ class Ajax extends Frontend_Controller {
 			}
 		}
     }
-
 }
 
 /* End of file ajax.php */

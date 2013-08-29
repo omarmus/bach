@@ -7,7 +7,7 @@
 	<div class="modal-body">
 		<div id="page-type">
 			<div>
-				<label><?php echo $new ? '¿Que tipo de página deséa crear?' : 'Seleccione el tipo de página para:' ?></label>
+				<label><?php echo $new ? '¿Que tipo de página deséa crear?' : 'Seleccione el nuevo tipo de página:' ?></label>
 			</div>
 			<div class="form-group radio-group">
 				<label class="radio-inline">
@@ -23,12 +23,12 @@
 		</div>
 		<div>
 			<div class="form-group" id="container-module" <?php echo $page_type == 'section' || $page_type == 'subsection' || $page['IdModule'] || $page['IdSection'] ? '' : 'style="display : none;"' ?>> 
-				<div class="alert alert-info">Seleccione el módulo al que pertenecerá la página.</div>
+				<div class="alert alert-info">Seleccione el módulo al que pertenecerá la sección.</div>
 				<?php echo form_dropdown('IdModule', $list_modules, set_value('IdModule', $page['IdModule']), 'class="form-control" onchange="get_sections(this, '.$page['IdSection'].')"'); ?>
 				<?php echo form_error('IdModule'); ?>
 			</div>
 			<div class="form-group" id="container-section" <?php echo $page_type == 'subsection' || $page['IdSection'] ? '' : 'style="display : none;"' ?>>
-				<div class="alert alert-info">Seleccione la sección a la que pertenecerá la página.</div>
+				<div class="alert alert-info">Seleccione la sección a la que pertenecerá la subsección.</div>
 				<?php echo form_dropdown('IdSection', array(0 => 'Seleccione una sección'), set_value('IdSection', $page['IdSection']), 'class="form-control"'); ?>				
 				<?php echo form_error('IdSection'); ?>
 			</div>

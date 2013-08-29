@@ -238,6 +238,15 @@ function get_states_user()
     );
 }
 
+function get_type_page()
+{
+    return array(
+        'MODULE' => 'MODULE',
+        'SECTION' => 'SECTION',
+        'SUBSECTION' => 'SUBSECTION'
+    );
+}
+
 function get_states()
 {
     return array(
