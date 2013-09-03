@@ -4,6 +4,30 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ---------------------------------------------------------------------
+-- sys_chats
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_chats`;
+
+CREATE TABLE `sys_chats`
+(
+    `id_chat` INTEGER NOT NULL AUTO_INCREMENT,
+    `id_sender` INTEGER,
+    `id_receiver` INTEGER,
+    `message` VARCHAR(255),
+    `created` DATETIME,
+    PRIMARY KEY (`id_chat`),
+    INDEX `id_sender` (`id_sender`),
+    INDEX `id_receiver` (`id_receiver`),
+    CONSTRAINT `sys_chats_fk1`
+        FOREIGN KEY (`id_receiver`)
+        REFERENCES `sys_users` (`id_user`),
+    CONSTRAINT `sys_chats_fk`
+        FOREIGN KEY (`id_sender`)
+        REFERENCES `sys_users` (`id_user`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- sys_files
 -- ---------------------------------------------------------------------
 
@@ -37,6 +61,33 @@ CREATE TABLE `sys_migrations`
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
+-- sys_notifications
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_notifications`;
+
+CREATE TABLE `sys_notifications`
+(
+    `id_notification` INTEGER NOT NULL AUTO_INCREMENT,
+    `id_sender` INTEGER,
+    `id_receiver` INTEGER,
+    `type` VARCHAR(20),
+    `reference` VARCHAR(255),
+    `message` TEXT,
+    `state` VARCHAR(20) DEFAULT 'CREATED',
+    `created` DATETIME,
+    PRIMARY KEY (`id_notification`),
+    INDEX `id_sender` (`id_sender`),
+    INDEX `id_receiver` (`id_receiver`),
+    CONSTRAINT `sys_notifications_fk`
+        FOREIGN KEY (`id_sender`)
+        REFERENCES `sys_users` (`id_user`),
+    CONSTRAINT `sys_notifications_fk1`
+        FOREIGN KEY (`id_receiver`)
+        REFERENCES `sys_users` (`id_user`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
 -- sys_pages
 -- ---------------------------------------------------------------------
 
@@ -51,7 +102,23 @@ CREATE TABLE `sys_pages`
     `id_module` int(11) unsigned DEFAULT 0,
     `id_section` INTEGER DEFAULT 0,
     `state` VARCHAR(20) DEFAULT 'ACTIVE',
+    `visible` VARCHAR(20) DEFAULT 'YES',
     PRIMARY KEY (`id_page`)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------------------
+-- sys_parameters
+-- ---------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_parameters`;
+
+CREATE TABLE `sys_parameters`
+(
+    `name` VARCHAR(50) NOT NULL,
+    `value` VARCHAR(255),
+    `title` VARCHAR(100),
+    `description` TEXT,
+    PRIMARY KEY (`name`)
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------
@@ -124,7 +191,7 @@ CREATE TABLE `sys_users`
     `email` VARCHAR(100),
     `first_name` VARCHAR(50),
     `last_name` VARCHAR(100),
-    `state` VARCHAR(20) DEFAULT 'CREATE',
+    `state` VARCHAR(20) DEFAULT 'CREATED',
     `id_rol` int(11) unsigned,
     `id_photo` int(11) unsigned,
     `created` DATETIME,

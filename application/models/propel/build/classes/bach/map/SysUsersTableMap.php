@@ -44,7 +44,7 @@ class SysUsersTableMap extends TableMap
         $this->addColumn('email', 'Email', 'VARCHAR', false, 100, null);
         $this->addColumn('first_name', 'FirstName', 'VARCHAR', false, 50, null);
         $this->addColumn('last_name', 'LastName', 'VARCHAR', false, 100, null);
-        $this->addColumn('state', 'State', 'VARCHAR', false, 20, 'CREATE');
+        $this->addColumn('state', 'State', 'VARCHAR', false, 20, 'CREATED');
         $this->addForeignKey('id_rol', 'IdRol', 'INTEGER', 'sys_roles', 'id_rol', false, null, null);
         $this->addForeignKey('id_photo', 'IdPhoto', 'INTEGER', 'sys_files', 'id_file', false, null, null);
         $this->addColumn('created', 'Created', 'TIMESTAMP', false, null, null);
@@ -62,6 +62,10 @@ class SysUsersTableMap extends TableMap
     {
         $this->addRelation('SysRoles', 'SysRoles', RelationMap::MANY_TO_ONE, array('id_rol' => 'id_rol', ), null, null);
         $this->addRelation('SysFiles', 'SysFiles', RelationMap::MANY_TO_ONE, array('id_photo' => 'id_file', ), null, null);
+        $this->addRelation('SysChatsRelatedByIdReceiver', 'SysChats', RelationMap::ONE_TO_MANY, array('id_user' => 'id_receiver', ), null, null, 'SysChatssRelatedByIdReceiver');
+        $this->addRelation('SysChatsRelatedByIdSender', 'SysChats', RelationMap::ONE_TO_MANY, array('id_user' => 'id_sender', ), null, null, 'SysChatssRelatedByIdSender');
+        $this->addRelation('SysNotificationsRelatedByIdSender', 'SysNotifications', RelationMap::ONE_TO_MANY, array('id_user' => 'id_sender', ), null, null, 'SysNotificationssRelatedByIdSender');
+        $this->addRelation('SysNotificationsRelatedByIdReceiver', 'SysNotifications', RelationMap::ONE_TO_MANY, array('id_user' => 'id_receiver', ), null, null, 'SysNotificationssRelatedByIdReceiver');
     } // buildRelations()
 
 } // SysUsersTableMap

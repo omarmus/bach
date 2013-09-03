@@ -4,12 +4,16 @@
 		<input type="text" name="Name" value="<?php echo $this->input->post('Name') ?>" class="form-control">
 	</div>
 	<div>
+		<label>Type</label>
+		<?php echo form_dropdown('Type', array_merge(array(0 => 'ALL'), get_type_page()), $this->input->post('Type'), 'class="form-control"'); ?>
+	</div>
+	<div style="display: none">
 		<label>Module</label>
 		<?php echo form_dropdown('Module', $list_modules, $this->input->post('Module'), 'class="form-control"'); ?>
 	</div>
-	<div>
-		<label>Type</label>
-		<?php echo form_dropdown('State', array_merge(array('-' => 'ALL'), get_type_page()), $this->input->post('State'), 'class="form-control"'); ?>
+	<div style="display: none">
+		<label>Section</label>
+		<?php echo form_dropdown('Section', array(0 => 'Select section'), $this->input->post('Section'), 'class="form-control"'); ?>
 	</div>
 	<button class="btn btn-primary" type="submit">
 		<span class="glyphicon glyphicon-search"></span>

@@ -19,10 +19,9 @@ class Page extends Admin_Controller
 		// Fetch all pages
 		if (isset($_POST['filter'])) {
 			$filters = array(
-				'FirstName' => '%' . $this->input->post('Name') . '%',
-				'OR' => 'OR',
-				'LastName' => '%' . $this->input->post('Name') . '%',
-				'State' => $this->input->post('State')
+				'Name' => $this->input->post('Name'),
+				'Module' => $this->input->post('Module'),
+				'Type' => $this->input->post('Type')
 			);
 			$this->data['pages'] = $this->page->get_with_parent($filters);
 			$this->data['filter'] = TRUE;
@@ -97,7 +96,7 @@ class Page extends Admin_Controller
 					$_POST['IdSection'] = 0;
 				}
 			}
-			$data = $this->page->array_request($_POST);
+			$data = $this->input->post();
 			$id_page = $this->page->save($data, $pk);
 			if (is_null($pk)) {
 				// Created permissions to rols

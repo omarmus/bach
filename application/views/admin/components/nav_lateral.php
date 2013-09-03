@@ -14,7 +14,17 @@
     <?php endif ?>
     <div>
        <a href="<?php echo site_url('admin/dashboard') ?>" <?php echo $title_ == 'Dashboard' ? 'class="active"' : '' ?>><span class="glyphicon glyphicon-home"></a>
-    </div>  
+    </div>
+    <?php if (isset($permissions_['notification']) && $permissions_['notification']['READ'] == "YES"): ?>
+    <div>
+        <a href="#" id="button-notifications"><span class="glyphicon glyphicon-globe"></a>
+    </div>    
+    <?php endif ?>
+    <?php if (isset($permissions_['chat']) && $permissions_['chat']['READ'] == "YES"): ?>
+    <div>
+        <a href="#" id="button-chat"><span class="glyphicon glyphicon-comment"></a>
+    </div>    
+    <?php endif ?>
     <?php if (isset($permissions_['setting']) && $permissions_['setting']['READ'] == "YES"): ?>
     <div>
         <a href="<?php echo site_url('admin/setting') ?>" <?php echo $title_ == 'Settings' ? 'class="active"' : '' ?>><span class="glyphicon glyphicon-cog"></a>

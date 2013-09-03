@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-08-2013 a las 04:50:58
+-- Tiempo de generación: 03-09-2013 a las 05:11:51
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.3.13
 
@@ -23,6 +23,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sys_chats`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_chats` (
+  `id_chat` int(11) NOT NULL AUTO_INCREMENT,
+  `id_sender` int(11) DEFAULT NULL COMMENT 'id_user del emisor del mensaje de chat',
+  `id_receiver` int(11) DEFAULT NULL COMMENT 'id_user del receptor del mensaje de chat',
+  `message` varchar(255) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_chat`),
+  KEY `id_sender` (`id_sender`),
+  KEY `id_receiver` (`id_receiver`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `sys_files`
 --
 
@@ -38,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `sys_files` (
   `image_type` varchar(20) DEFAULT NULL,
   `is_image` varchar(20) DEFAULT 'NO',
   PRIMARY KEY (`id_file`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `sys_files`
@@ -59,7 +76,8 @@ INSERT INTO `sys_files` (`id_file`, `filename`, `title`, `type`, `fullpath`, `si
 (14, '6fe7801fa29ff4bada283a06ee2f075b.jpg', '', 'image/jpeg', 'C:/wamp/www/bach/public_html/files/users/6fe7801fa29ff4bada283a06ee2f075b.jpg', '548', 1024, 768, 'jpeg', 'YES'),
 (15, '1ee8ef666d47aeac1e8b98d0d67fe8cc.jpg', '', 'image/jpeg', 'C:/wamp/www/bach/public_html/files/users/1ee8ef666d47aeac1e8b98d0d67fe8cc.jpg', '606', 1024, 768, 'jpeg', 'YES'),
 (22, '49cfa37d2f096f27d790a5d4855dacdd.jpg', '', 'image/jpeg', 'C:/wamp/www/bach/public_html/files/users/49cfa37d2f096f27d790a5d4855dacdd.jpg', '43', 587, 506, 'jpeg', 'YES'),
-(23, '565704463bf201323245ac3a227acd95.jpg', '', 'image/jpeg', 'C:/wamp/www/bach/public_html/files/users/565704463bf201323245ac3a227acd95.jpg', '43', 587, 506, 'jpeg', 'YES');
+(23, '565704463bf201323245ac3a227acd95.jpg', '', 'image/jpeg', 'C:/wamp/www/bach/public_html/files/users/565704463bf201323245ac3a227acd95.jpg', '43', 587, 506, 'jpeg', 'YES'),
+(24, '02d9defb740c31889710ada4319e92c9.jpg', '', 'image/jpeg', 'C:/wamp/www/bach/public_html/files/users/02d9defb740c31889710ada4319e92c9.jpg', '25', 466, 700, 'jpeg', 'YES');
 
 -- --------------------------------------------------------
 
@@ -82,6 +100,26 @@ INSERT INTO `sys_migrations` (`version`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sys_notifications`
+--
+
+CREATE TABLE IF NOT EXISTS `sys_notifications` (
+  `id_notification` int(11) NOT NULL AUTO_INCREMENT,
+  `id_sender` int(11) DEFAULT NULL COMMENT 'id_user del emisor de la notificación',
+  `id_receiver` int(11) DEFAULT NULL COMMENT 'id_user del receptor de la notificación',
+  `type` varchar(20) DEFAULT NULL COMMENT 'tipo de notificación: ALERT, MESSAGE, CHAT, INVITATION',
+  `reference` varchar(255) DEFAULT NULL,
+  `message` text,
+  `state` varchar(20) DEFAULT 'CREATED' COMMENT 'Estado de la notifiación: CREATED, VIEWED, READ',
+  `created` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_notification`),
+  KEY `id_sender` (`id_sender`),
+  KEY `id_receiver` (`id_receiver`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `sys_pages`
 --
 
@@ -95,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `sys_pages` (
   `state` varchar(20) DEFAULT 'ACTIVE',
   `visible` varchar(20) DEFAULT 'YES',
   PRIMARY KEY (`id_page`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- Volcado de datos para la tabla `sys_pages`
@@ -103,9 +141,12 @@ CREATE TABLE IF NOT EXISTS `sys_pages` (
 
 INSERT INTO `sys_pages` (`id_page`, `title`, `slug`, `order`, `id_module`, `id_section`, `state`, `visible`) VALUES
 (19, 'Configuration', 'configuration', 1, 0, 0, 'ACTIVE', 'YES'),
-(20, 'Pages & Permissions', 'page', 2, 19, 0, 'ACTIVE', 'YES'),
-(21, 'Users', 'user', 3, 19, 0, 'ACTIVE', 'YES'),
-(23, 'My profile', 'profile', 4, 19, 0, 'ACTIVE', 'YES');
+(20, 'Pages & Permissions', 'page', 3, 19, 0, 'ACTIVE', 'YES'),
+(21, 'Users', 'user', 2, 19, 0, 'ACTIVE', 'YES'),
+(23, 'My profile', 'profile', 5, 19, 0, 'ACTIVE', 'YES'),
+(24, 'Settings', 'setting', 4, 19, 0, 'ACTIVE', 'YES'),
+(25, 'Notifications', 'notification', 6, 19, 0, 'ACTIVE', 'NO'),
+(26, 'Chat', 'chat', 7, 19, 25, 'ACTIVE', 'NO');
 
 -- --------------------------------------------------------
 
@@ -129,7 +170,7 @@ INSERT INTO `sys_parameters` (`name`, `value`, `title`, `description`) VALUES
 ('SMTP', 'OFF', 'SMTP', NULL),
 ('SMTP_HOST', 'bach.com', 'SMTP Host', NULL),
 ('SMTP_PASS', 'bach123', 'SMTP Password', NULL),
-('SMTP_USER', 'bach', 'SMTP User', NULL),
+('SMTP_USER', 'mailer@bach.com', 'SMTP User', NULL),
 ('SYSTEM_EMAIL', 'omargc.mus@gmail.com', 'Email del sistema', NULL),
 ('SYSTEM_NAME', 'Bach', 'Nombre del sistema', NULL);
 
@@ -175,7 +216,22 @@ INSERT INTO `sys_permissions` (`id_page`, `id_rol`, `create`, `read`, `update`, 
 (23, 2, 'NO', 'YES', 'NO', 'NO'),
 (23, 3, 'NO', 'NO', 'NO', 'NO'),
 (23, 4, 'NO', 'NO', 'NO', 'NO'),
-(23, 5, 'NO', 'NO', 'NO', 'NO');
+(23, 5, 'NO', 'NO', 'NO', 'NO'),
+(24, 1, 'YES', 'YES', 'YES', 'YES'),
+(24, 2, 'NO', 'NO', 'NO', 'NO'),
+(24, 3, 'NO', 'NO', 'NO', 'NO'),
+(24, 4, 'NO', 'NO', 'NO', 'NO'),
+(24, 5, 'NO', 'NO', 'NO', 'NO'),
+(25, 1, 'YES', 'YES', 'YES', 'YES'),
+(25, 2, 'NO', 'NO', 'NO', 'NO'),
+(25, 3, 'NO', 'NO', 'NO', 'NO'),
+(25, 4, 'NO', 'NO', 'NO', 'NO'),
+(25, 5, 'NO', 'NO', 'NO', 'NO'),
+(26, 1, 'YES', 'YES', 'YES', 'YES'),
+(26, 2, 'NO', 'NO', 'NO', 'NO'),
+(26, 3, 'NO', 'NO', 'NO', 'NO'),
+(26, 4, 'NO', 'NO', 'NO', 'NO'),
+(26, 5, 'NO', 'NO', 'NO', 'NO');
 
 -- --------------------------------------------------------
 
@@ -222,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `sys_sessions` (
 --
 
 INSERT INTO `sys_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('6c5ce8a4e976efb927b13f11a536cba6', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0', 1377233183, 'a:10:{s:9:"user_data";s:0:"";s:8:"username";s:4:"bach";s:5:"email";s:20:"omargc.mus@gmail.com";s:7:"id_user";i:1;s:6:"id_rol";i:1;s:8:"loggedin";b:1;s:8:"id_photo";i:23;s:5:"photo";s:36:"565704463bf201323245ac3a227acd95.jpg";s:10:"parameters";a:6:{s:4:"SMTP";a:2:{s:5:"Value";s:3:"OFF";s:5:"Title";s:4:"SMTP";}s:9:"SMTP_HOST";a:2:{s:5:"Value";s:8:"bach.com";s:5:"Title";s:9:"SMTP Host";}s:9:"SMTP_PASS";a:2:{s:5:"Value";s:7:"bach123";s:5:"Title";s:13:"SMTP Password";}s:9:"SMTP_USER";a:2:{s:5:"Value";s:4:"bach";s:5:"Title";s:9:"SMTP User";}s:12:"SYSTEM_EMAIL";a:2:{s:5:"Value";s:20:"omargc.mus@gmail.com";s:5:"Title";s:17:"Email del sistema";}s:11:"SYSTEM_NAME";a:2:{s:5:"Value";s:4:"Bach";s:5:"Title";s:18:"Nombre del sistema";}}s:11:"permissions";a:4:{s:13:"configuration";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:4:"page";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:4:"user";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:7:"profile";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}}}');
+('54499f7b20cc7a6e73bb1f4cbff2f5ee', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:23.0) Gecko/20100101 Firefox/23.0', 1378184831, 'a:12:{s:9:"user_data";s:0:"";s:8:"username";s:4:"bach";s:10:"first_name";s:4:"Omar";s:9:"last_name";s:18:"Gutiérrez Condori";s:5:"email";s:20:"omargc.mus@gmail.com";s:7:"id_user";i:1;s:6:"id_rol";i:1;s:8:"loggedin";b:1;s:8:"id_photo";i:23;s:5:"photo";s:36:"565704463bf201323245ac3a227acd95.jpg";s:10:"parameters";a:6:{s:4:"SMTP";a:2:{s:5:"Value";s:3:"OFF";s:5:"Title";s:4:"SMTP";}s:9:"SMTP_HOST";a:2:{s:5:"Value";s:12:"inventic.com";s:5:"Title";s:9:"SMTP Host";}s:9:"SMTP_PASS";a:2:{s:5:"Value";s:9:"mailer123";s:5:"Title";s:13:"SMTP Password";}s:9:"SMTP_USER";a:2:{s:5:"Value";s:24:"yastamailer@inventic.com";s:5:"Title";s:9:"SMTP User";}s:12:"SYSTEM_EMAIL";a:2:{s:5:"Value";s:20:"omargc.mus@gmail.com";s:5:"Title";s:17:"Email del sistema";}s:11:"SYSTEM_NAME";a:2:{s:5:"Value";s:4:"Bach";s:5:"Title";s:18:"Nombre del sistema";}}s:11:"permissions";a:7:{s:13:"configuration";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:4:"page";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:4:"user";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:7:"profile";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:7:"setting";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:12:"notification";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}s:4:"chat";a:4:{s:7:"CREATED";s:3:"YES";s:4:"READ";s:3:"YES";s:6:"UPDATE";s:3:"YES";s:6:"DELETE";s:3:"YES";}}}');
 
 -- --------------------------------------------------------
 
@@ -249,18 +305,33 @@ CREATE TABLE IF NOT EXISTS `sys_users` (
   UNIQUE KEY `email` (`email`),
   KEY `id_rol` (`id_rol`),
   KEY `id_photo` (`id_photo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `sys_users`
 --
 
 INSERT INTO `sys_users` (`id_user`, `username`, `password`, `email`, `first_name`, `last_name`, `state`, `id_rol`, `id_photo`, `created`, `phone`, `modified`, `lang_code`, `mobile`) VALUES
-(1, 'bach', '$2a$08$lCkrUnqGscSUZ/x3/VPW9O92bPpb3vJIRgsKVulO0YY5hi2iUGfO2', 'omargc.mus@gmail.com', 'Omar', 'Gutiérrez Condori', 'ACTIVE', 1, 23, NULL, '70520083', '2013-08-22 23:29:10', 'EN', NULL);
+(1, 'bach', '$2a$08$lCkrUnqGscSUZ/x3/VPW9O92bPpb3vJIRgsKVulO0YY5hi2iUGfO2', 'omargc.mus@gmail.com', 'Omar', 'Gutiérrez Condori', 'ACTIVE', 1, 23, NULL, '70520083', '2013-09-02 23:37:44', 'EN', NULL),
+(2, 'admin', '$2a$08$c/sBZ/K9W6pPPpR1j8jXZu89Y.TQu.ZTGyAwuvgMtE04RfNerOoSa', 'admin@mail.com', 'Admin', 'Admin', 'BLOQUED', 2, 24, '2013-08-25 12:06:03', '72592414', '2013-09-03 01:09:44', 'EN', NULL);
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `sys_chats`
+--
+ALTER TABLE `sys_chats`
+  ADD CONSTRAINT `sys_chats_fk1` FOREIGN KEY (`id_receiver`) REFERENCES `sys_users` (`id_user`),
+  ADD CONSTRAINT `sys_chats_fk` FOREIGN KEY (`id_sender`) REFERENCES `sys_users` (`id_user`);
+
+--
+-- Filtros para la tabla `sys_notifications`
+--
+ALTER TABLE `sys_notifications`
+  ADD CONSTRAINT `sys_notifications_fk` FOREIGN KEY (`id_sender`) REFERENCES `sys_users` (`id_user`),
+  ADD CONSTRAINT `sys_notifications_fk1` FOREIGN KEY (`id_receiver`) REFERENCES `sys_users` (`id_user`);
 
 --
 -- Filtros para la tabla `sys_permissions`

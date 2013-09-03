@@ -107,17 +107,35 @@ class Page_m extends BC_Model {
 		return $array;
 	}
 
-	public function get_with_parent ()
+	public function get_with_parent ($filters = NULL)
 	{
 		// Propel no soporta el join de una tabla con sigo misma a menos que se lo defina como un árbol binario
 		// si es que no existe una relación entre si misma
 		// La consulta se realizó con ActiveRecord de Codeigniter
-		return $this->db->select('sys_pages.*, m.slug as parent_slug, m.title as module, s.title as section')
-						->from('sys_pages')
-						->join('sys_pages as m', 'sys_pages.id_module=m.id_page', 'left')
-						->join('sys_pages as s', 'sys_pages.id_section=s.id_page', 'left')
-						->order_by('sys_pages.order', 'asc')
-						->get()->result();
+		$this->db->select('sys_pages.*, m.slug as parent_slug, m.title as module, s.title as section')
+				 ->from('sys_pages')
+				 ->join('sys_pages as m', 'sys_pages.id_module=m.id_page', 'left')
+				 ->join('sys_pages as s', 'sys_pages.id_section=s.id_page', 'left');
+
+		if ($filters) {
+			if ($filters['Name'] != '') {
+				$this->db->like('sys_pages.title', $filters['Name']);
+				$this->db->or_like('sys_pages.slug', $filters['Name']);
+			}
+			
+			if ($filters['Type']) {
+				switch ($filters['Type']) {
+					case 'MODULE': $this->db->where('sys_pages.id_module', 0); break;
+					case 'SECTION': $this->db->where(array('sys_pages.id_module !=' => 0, 'sys_pages.id_section' => 0)); break;
+					case 'SUBSECTION': $this->db->where('sys_pages.id_section !=', 0);
+				}
+			}
+			// if ($filters['Module']) {
+			// 	$this->db->where('sys_pages.id_module', $filters['Module']);
+			// }
+		}
+		
+		return $this->db->order_by('sys_pages.order', 'asc')->get()->result();
 	}
 
 	public function get_no_parents($id)
