@@ -1,9 +1,7 @@
-<?php $id_page = $page->getIdPage(); ?>
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">Agregar permisos a <em><strong><?php echo $page->getTitle() ?></strong> (<?php echo $page->getIdModule() == 0 ? 'Module' : ( $page->getIdSection() == 0 ? 'Section' : 'Subsection'); ?>)</em></h4>
-</div>
-<div class="modal-body font-default">
+<?php $id_page = $page->getIdPage() ?>
+<?php $title = 'Agregar permisos a <em><strong>' . $page->getTitle() . '</strong> (' . ($page->getIdModule() == 0 ? 'Module' : ( $page->getIdSection() == 0 ? 'Section' : 'Subsection')) . ')</em>' ?>
+<?php echo modal_header($title) ?>
+<div class="modal-body">
 	<div class="alert alert-info">Si quita los permisos de <strong>lectura</strong> de <em><strong><?php echo $page->getTitle() ?></strong></em> esté se inhabilitará para dicho rol.</div>
     <?php if ($page->getIdModule() == 0): ?>
         <div class="alert alert-warning">Si quita los permisos de <strong>lectura</strong> al módulo <em><strong><?php echo $page->getTitle() ?></strong></em>, las secciones del mismo ya no se mostrarán en el menú principal.</div>

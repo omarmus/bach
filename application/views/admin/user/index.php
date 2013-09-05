@@ -7,26 +7,20 @@
 		<label>State</label>
 		<?php echo form_dropdown('State', array_merge(array('-' => 'ALL'), get_states_user()), $this->input->post('State'), 'class="form-control"'); ?>
 	</div>
-	<button class="btn btn-primary" type="submit">
-		<span class="glyphicon glyphicon-search"></span>
-	</button>
+
+	<?php echo button_filter() ?>
+
 	<?php if (isset($filter)) : ?>
-	<button class="btn btn-default" type="button" onclick="window.location = ''">
-		<span class="glyphicon glyphicon-ban-circle"></span> Terminar búsqueda
-	</button>
+		<?php echo button_end_filter() ?>
 	<?php endif ?>
 	<input type="hidden" name="filter" value="OK">
 </form>
+
 <div class="section-buttons">
-	<button class="btn btn-primary" type="button" 
-			onclick="show_modal('<?php echo site_url('admin/user/edit') ?>')">
-		<span class="glyphicon glyphicon-plus"></span> Add a user
-	</button>
-	<button type="button" id="delete-rows" class="btn btn-danger disabled" 
-			onclick="delete_selected(oTable, '<?php echo site_url('admin/user/delete_selected') ?>')">
-		<span class="glyphicon glyphicon-trash"></span>
-	</button>
+	<?php echo button_add('Add a user', 'admin/user/edit'); ?>
+	<?php echo button_delete('admin/user/delete_selected'); ?>
 </div>
+
 <table id="main-table" class="table table-striped table-bordered table-hover">
 	<thead>
 		<tr>
@@ -42,16 +36,11 @@
 		</tr>
 	</thead>
 	<tbody>
-	<?php if (count($users)): ?>
-		<?php foreach ($users as $user): ?>
+	<?php if (count($users)): foreach ($users as $user): ?>
 		<tr>
 			<td><?php echo $user->getPrimaryKey() ?></td>
-			<td class="edit">
-				<?php echo btn_panel('admin/user/edit/' . $user->getIdUser(), 'glyphicon-edit') ?>
-			</td>
-			<td class="edit">
-				<?php echo btn_panel('admin/user/password/' . $user->getIdUser(), 'glyphicon-lock') ?>
-			</td>
+			<td class="edit"><?php echo button_edit('admin/user/edit/' . $user->getIdUser()) ?></td>
+			<td class="edit"><?php echo button_modal('' ,'admin/user/password/' . $user->getIdUser(), 'glyphicon-lock', NULL, 'UPDATE') ?></td>
 			<td><?php echo $user->getUsername(); ?></td>
 			<td><?php echo $user->getEmail(); ?></td>
 			<td><?php echo $user->getFirstName(); ?></td>
@@ -59,17 +48,17 @@
 			<td><?php echo $user->getSysRoles()->getName(); ?></td>
 			<td><?php echo state_label($user->getState()); ?></td>
 		</tr>
-		<?php endforeach ?>
-	<?php endif ?>
+	<?php endforeach; endif ?>
 	</tbody>
 </table>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		oTable = $('#main-table').dataTable({
 			"aoColumnDefs" : [
 				{"bVisible": false, "aTargets": [ 0 ]}, 
 				{"bSortable": false, "aTargets": [ 1, 2, 8 ] }
-			],
+			]
 		});
 	});
 

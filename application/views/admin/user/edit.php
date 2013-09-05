@@ -1,8 +1,5 @@
 <?php $new = ! isset($user['IdUser']); ?>
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title"><?php echo $new ? 'Add a new user' : 'Edit user ' .$user['FirstName'] ?></h4>
-</div>
+<?php echo modal_header($new ? 'Add a new user' : 'Edit user ' . $user['FirstName']) ?>
 <form onsubmit="return validate(this, '<?php echo site_url('admin/user/edit'. ( $new ? '' : '/'.$user['IdUser'])) ?>')">
 	<div class="modal-body">
 		<div class="form-group">
@@ -54,8 +51,5 @@
 			<?php echo form_error('IdRol'); ?>
 		</div>
 	</div>
-	<div class="modal-footer">
-	    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Save</button>
-	</div>
+	<?php echo modal_footer() ?>
 </form>

@@ -9,15 +9,15 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         <!-- /Modal main -->
-        <script src="<?php echo site_url('lib/jquery.easing/jquery.easing.1.3.js') ?>"></script>
+        <script src="<?php echo base_url('lib/jquery.easing/jquery.easing.1.3.js') ?>"></script>
         <script type="text/javascript">      
             $(window).load(function() { 
                 $('.spinner').animate({'opacity':0},1000,'easeOutCubic',function (){$(this).css('display','none')});  
             });                         
         </script>
-        <script src="<?php echo site_url('lib/bootstrap/js/bootstrap.min.js') ?>"></script>
-        <script src="<?php echo site_url('lib/jquery.datatables/js/jquery.dataTables.min.js') ?>"></script>
-        <script src="<?php echo site_url('lib/jquery.gritter/js/jquery.gritter.min.js') ?>"></script>
-        <script src="<?php echo site_url('js/main.js') ?>"></script>
+        <script src="<?php echo base_url('lib/bootstrap/js/bootstrap.min.js') ?>"></script>
+        <script src="<?php echo base_url('lib/jquery.datatables/js/jquery.dataTables.min.js') ?>"></script>
+        <script src="<?php echo base_url('lib/jquery.gritter/js/jquery.gritter.min.js') ?>"></script>
+        <script src="<?php echo base_url('js/main.js') ?>"></script>
     </body>
 </html>

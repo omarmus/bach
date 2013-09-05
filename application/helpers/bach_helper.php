@@ -14,41 +14,8 @@ function is_ajax()
     }
 }
 
-//Main menu pages
-function get_menu($array, $child = FALSE, $permisions = null)
-{
-    $CI =& get_instance();
-    $str = '';
-
-    if (count($array)) {
-        $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
-
-        foreach ($array as $item) {
-            if ($permisions[$item['Slug']]['READ'] == "YES" && $item['State'] == 'ACTIVE' && $item['Visible'] == 'YES' ) {
-                $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
-                if (isset($item['children']) && count($item['children'])) {
-                    $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
-                    $active = $active ? ' active' : '';
-                    $str .= '<li class="'. $submenu . $active . '">';
-                    $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
-                    $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
-                    $str .= get_menu($item['children'], TRUE, $permisions);
-                } else {
-                    $str .= $active ? '<li class="active">' : '<li>';
-                    $str .= '<a href="' . site_url('admin/'.$item['Slug']) . '">' .$item['Title'] . '</a>';
-                }
-
-                $str .= '</li>' . PHP_EOL;
-            }
-        }
-
-        $str .= '</ul>' . PHP_EOL;      
-    }
-
-    return $str;
-} 
-
 //Upload File for Ajax
+
 function upload_file($options = null)
 {
     $CI =& get_instance();
@@ -120,6 +87,12 @@ function upload_file($options = null)
     return array('status' => $status, 'msg' => $msg, 'id_file' => $file['IdFile'], 'filename' => $file['Filename']);
 }
 
+function thumb_image($photo)
+{
+    $photo = explode('.', $photo);
+    return $photo[0] . '_thumb.' . $photo[1];
+}
+
 // Send mail
 function send_mail($options = null)
 {
@@ -146,7 +119,6 @@ function send_mail($options = null)
         $data = array_merge($data, $options);
     }
 
-    
     if ($parameters['SMTP']['Value'] == 'ON') {
         $config = array(
             'protocol'  => 'smtp',
@@ -222,11 +194,7 @@ function get_permissions($id_rol)
     return $items;
 }
 
-function thumb_image($photo)
-{
-    $photo = explode('.', $photo);
-    return $photo[0] . '_thumb.' . $photo[1];
-}
+// Arrays
 
 function get_states_user()
 {
@@ -281,14 +249,129 @@ function json_dropdown($array)
     return $json;
 }
 
-function btn_panel($url, $icon = '', $callback_function = null)
+//Main menu pages
+
+function get_menu($array, $child = FALSE, $permisions = null)
 {
+    $CI =& get_instance();
+    $str = '';
+
+    if (count($array)) {
+        $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
+
+        foreach ($array as $item) {
+            if ($permisions[$item['Slug']]['READ'] == "YES" && $item['State'] == 'ACTIVE' && $item['Visible'] == 'YES' ) {
+                $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
+                if (isset($item['children']) && count($item['children'])) {
+                    $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
+                    $active = $active ? ' active' : '';
+                    $str .= '<li class="'. $submenu . $active . '">';
+                    $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
+                    $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
+                    $str .= get_menu($item['children'], TRUE, $permisions);
+                } else {
+                    $str .= $active ? '<li class="active">' : '<li>';
+                    $str .= '<a href="' . site_url('admin/'.$item['Slug']) . '">' .$item['Title'] . '</a>';
+                }
+
+                $str .= '</li>' . PHP_EOL;
+            }
+        }
+
+        $str .= '</ul>' . PHP_EOL;      
+    }
+
+    return $str;
+} 
+
+// Buttons
+
+function button_modal($title = '', $url = '', $icon = '', $callback_function = NULL, $permission = NULL)
+{
+    if (!is_null($permission)) {
+        $CI =& get_instance();
+        $permissions = $CI->session->userdata('permissions');
+
+        if ($permissions[$CI->uri->segment(2)][$permission] == 'NO') {
+            return "";
+        }
+    }
     $url = site_url($url);
     ob_start(); ?>
     <button type="button" 
             class="btn btn-default" 
-            onclick="show_modal('<?php echo $url ?>'<?php echo $callback_function ? ', ' . $callback_function : '' ?>)">
-        <span class="glyphicon <?php echo $icon ?>"></span>
+            onclick="show_modal('<?php echo $url ?>' <?php echo $callback_function ? ', ' . $callback_function : '' ?>)">
+        <span class="glyphicon <?php echo $icon ?>"></span> <?php echo $title ?>
+    </button>
+    <?php
+    return ob_get_clean();
+}
+
+function button_add($title, $url, $callback_function = NULL)
+{
+    $CI =& get_instance();
+    $permissions = $CI->session->userdata('permissions');
+
+    if ($permissions[$CI->uri->segment(2)]['CREATED'] == 'NO') {
+        return "";
+    }
+
+    $url = site_url($url);
+    ob_start(); ?>
+    <button class="btn btn-primary" type="button" 
+            onclick="show_modal('<?php echo $url ?><?php echo $callback_function ? ', ' . $callback_function : '' ?>')">
+        <span class="glyphicon glyphicon-plus"></span> <?php echo $title ?>
+    </button>
+    <?php
+    return ob_get_clean();
+}
+
+function button_delete($url, $refresh = FALSE)
+{
+    $CI =& get_instance();
+    $permissions = $CI->session->userdata('permissions');
+
+    if ($permissions[$CI->uri->segment(2)]['DELETE'] == 'NO') {
+        return "";
+    }
+
+    $url = site_url($url);
+    ob_start(); ?>
+    <button type="button" id="delete-rows" class="btn btn-danger disabled" 
+            onclick="delete_selected(oTable, '<?php echo $url ?>'<?php $refresh ? ', true' : '' ?>)">
+        <span class="glyphicon glyphicon-trash"></span>
+    </button>
+    <?php
+    return ob_get_clean();
+}
+
+function button_edit($url, $callback_function = null)
+{
+    $CI =& get_instance();
+    $permissions = $CI->session->userdata('permissions');
+
+    if ($permissions[$CI->uri->segment(2)]['UPDATE'] == 'NO') {
+        return "";
+    }
+
+    return button_modal('', $url, 'glyphicon-edit', $callback_function);
+}
+
+function button_filter()
+{
+    ob_start(); ?>
+    <button class="btn btn-primary" type="submit">
+        <span class="glyphicon glyphicon-search"></span>
+    </button>
+    <?php
+    return ob_get_clean();
+}
+
+function button_end_filter()
+{
+    ob_start(); ?>
+    <button class="btn btn-default" type="button" onclick="window.location = ''">
+        <span class="glyphicon glyphicon-ban-circle"></span> Terminar búsqueda
     </button>
     <?php
     return ob_get_clean();
@@ -296,14 +379,21 @@ function btn_panel($url, $icon = '', $callback_function = null)
 
 function button_on_off($state, $url, $label_on = 'ON', $label_off = 'OFF')
 {
+    $CI =& get_instance();
+    $permissions = $CI->session->userdata('permissions');
+
+    if ($permissions[$CI->uri->segment(2)]['UPDATE'] == 'NO') {
+        return "";
+    }
+
     $url = site_url($url);
     ob_start(); ?>
     <div class="btn-group btn-on-off" data-toggle="buttons">
-        <label class="btn btn-primary<?php echo $state == 'ACTIVE' || $state == 'YES' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
-            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' || $state == 'YES' ? 'checked' : '' ?>> <strong><?php echo $label_on ?></strong>
+        <label class="btn btn-primary<?php echo $state == 'ACTIVE' || $state == 'YES' || $state == 'ON' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
+            <input type="radio" name="options" value="ACTIVE" <?php echo $state == 'ACTIVE' || $state == 'YES' || $state == 'ON' ? 'checked' : '' ?>> <strong><?php echo $label_on ?></strong>
         </label>
-        <label class="btn btn-primary<?php echo $state == 'INACTIVE' || $state == 'NO' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
-            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' || $state == 'NO' ? 'checked' : '' ?>> <strong><?php echo $label_off ?></strong>
+        <label class="btn btn-primary<?php echo $state == 'INACTIVE' || $state == 'NO' || $state == 'OFF' ? ' active' : '' ?>" onclick="button_on_off(this, '<?php echo $url ?>')">
+            <input type="radio" name="options" value="INACTIVE" <?php echo $state == 'INACTIVE' || $state == 'NO' || $state == 'OFF' ? 'checked' : '' ?>> <strong><?php echo $label_off ?></strong>
         </label>
     </div>
     <?php
@@ -313,4 +403,28 @@ function button_on_off($state, $url, $label_on = 'ON', $label_off = 'OFF')
 function button_yes_no($state, $url)
 {
     return button_on_off($state, $url, 'YES', 'NO');
+}
+
+// Modal
+
+function modal_header($title = '')
+{
+    ob_start(); ?>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><?php echo $title ?></h4>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
+function modal_footer($id_save = '')
+{
+    ob_start(); ?>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        <button type="submit" class="btn btn-primary" id="<?php echo $id_save ?>"><span class="glyphicon glyphicon-ok"></span> Save</button>
+    </div>
+    <?php
+    return ob_get_clean();
 }

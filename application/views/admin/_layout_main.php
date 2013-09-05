@@ -1,5 +1,10 @@
 <?php $this->load->view('admin/components/header'); ?>
 <body>
+    <?php if ($this->uri->segment(2) != 'dashboard' && $permissions_[$this->uri->segment(2)]['UPDATE'] == 'NO'): ?>
+        <style type="text/css">
+            .table th.edit, .table td.edit, .table th.state {display: none;}
+        </style>
+    <?php endif ?>
     <div class="spinner"></div>
     <div id="loading-ajax">
         <img src="<?php echo base_url() ?>/img/loader.gif">

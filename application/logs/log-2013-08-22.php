@@ -10,11 +10,11 @@ ERROR - 2013-08-22 01:33:47 --> Severity: Notice  --> Object of class SysRoles c
 ERROR - 2013-08-22 01:33:47 --> Severity: Notice  --> Object of class SysRoles could not be converted to int C:\wamp\www\bach\application\models\permission_m.php 13
 ERROR - 2013-08-22 01:33:47 --> Severity: Notice  --> Object of class SysRoles could not be converted to int C:\wamp\www\bach\application\models\permission_m.php 13
 ERROR - 2013-08-22 01:33:47 --> Severity: Notice  --> Object of class SysRoles could not be converted to int C:\wamp\www\bach\application\models\permission_m.php 13
-ERROR - 2013-08-22 02:38:31 --> Severity: Warning  --> Missing argument 2 for btn_panel(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
+ERROR - 2013-08-22 02:38:31 --> Severity: Warning  --> Missing argument 2 for button_modal(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
 ERROR - 2013-08-22 02:38:31 --> Severity: Notice  --> Undefined variable: icon C:\wamp\www\bach\application\helpers\bach_helper.php 9
-ERROR - 2013-08-22 02:38:31 --> Severity: Warning  --> Missing argument 2 for btn_panel(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
+ERROR - 2013-08-22 02:38:31 --> Severity: Warning  --> Missing argument 2 for button_modal(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
 ERROR - 2013-08-22 02:38:31 --> Severity: Notice  --> Undefined variable: icon C:\wamp\www\bach\application\helpers\bach_helper.php 9
-ERROR - 2013-08-22 02:38:31 --> Severity: Warning  --> Missing argument 2 for btn_panel(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
+ERROR - 2013-08-22 02:38:31 --> Severity: Warning  --> Missing argument 2 for button_modal(), called in C:\wamp\www\bach\application\views\admin\user\index.php on line 28 and defined C:\wamp\www\bach\application\helpers\bach_helper.php 2
 ERROR - 2013-08-22 02:38:31 --> Severity: Notice  --> Undefined variable: icon C:\wamp\www\bach\application\helpers\bach_helper.php 9
 ERROR - 2013-08-22 14:06:33 --> Severity: Notice  --> Undefined index: configuration C:\wamp\www\bach\application\helpers\bach_helper.php 44
 ERROR - 2013-08-22 14:07:57 --> Severity: Notice  --> Undefined index: configuration C:\wamp\www\bach\application\helpers\bach_helper.php 44

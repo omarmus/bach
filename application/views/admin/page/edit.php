@@ -1,8 +1,5 @@
 <?php $new = ! isset($page['IdPage']); ?>
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title"><?php echo $new ? 'Add a new page' : 'Edit page ' .$page['Title'] ?></h4>
-</div>
+<?php echo modal_header($new ? 'Add a new page' : 'Edit page ' . $page['Title']) ?>
 <form onsubmit="return validate_page(this, '<?php echo site_url('admin/page/edit'. ( $new ? '' : '/' . $page['IdPage'] )) ?>')">
 	<div class="modal-body">
 		<div id="page-type">
@@ -51,8 +48,5 @@
 			<?php echo form_error('Slug'); ?>
 		</div>
 	</div>
-	<div class="modal-footer">
-	    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Save</button>
-	</div>
+	<?php echo modal_footer() ?>
 </form>

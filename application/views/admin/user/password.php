@@ -1,8 +1,5 @@
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">Resetear password para <em><?php echo $user['FirstName'] ?> <?php echo $user['LastName'] ?></em></h4>
-</div>
-<div class="modal-body font-default">
+<?php echo modal_header('Resetear password para <em>' . $user['FirstName'] . ' ' . $user['LastName'] . '</em>') ?>
+<div class="modal-body">
 	<div class="alert alert-info">Se enviará la nueva contraseña a su cuenta de correo: <em><strong><?php echo $user['Email'] ?></strong></em></div>
 </div>
 <div class="modal-footer">
