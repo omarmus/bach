@@ -473,57 +473,6 @@ abstract class BaseSysChatsPeer
 
 
     /**
-     * Returns the number of rows matching criteria, joining the related SysUsersRelatedByIdReceiver table
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return int Number of matching rows.
-     */
-    public static function doCountJoinSysUsersRelatedByIdReceiver(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        // we're going to modify criteria, so copy it first
-        $criteria = clone $criteria;
-
-        // We need to set the primary table name, since in the case that there are no WHERE columns
-        // it will be impossible for the BasePeer::createSelectSql() method to determine which
-        // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SysChatsPeer::TABLE_NAME);
-
-        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-            $criteria->setDistinct();
-        }
-
-        if (!$criteria->hasSelectClause()) {
-            SysChatsPeer::addSelectColumns($criteria);
-        }
-
-        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
-
-        // Set the correct dbName
-        $criteria->setDbName(SysChatsPeer::DATABASE_NAME);
-
-        if ($con === null) {
-            $con = Propel::getConnection(SysChatsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
-        }
-
-        $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
-
-        $stmt = BasePeer::doCount($criteria, $con);
-
-        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $count = (int) $row[0];
-        } else {
-            $count = 0; // no rows returned; we infer that means 0 matches.
-        }
-        $stmt->closeCursor();
-
-        return $count;
-    }
-
-
-    /**
      * Returns the number of rows matching criteria, joining the related SysUsersRelatedByIdSender table
      *
      * @param      Criteria $criteria
@@ -575,69 +524,53 @@ abstract class BaseSysChatsPeer
 
 
     /**
-     * Selects a collection of SysChats objects pre-filled with their SysUsers objects.
-     * @param      Criteria  $criteria
+     * Returns the number of rows matching criteria, joining the related SysUsersRelatedByIdReceiver table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
      * @param      PropelPDO $con
      * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return array           Array of SysChats objects.
-     * @throws PropelException Any exceptions caught during processing will be
-     *		 rethrown wrapped into a PropelException.
+     * @return int Number of matching rows.
      */
-    public static function doSelectJoinSysUsersRelatedByIdReceiver(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doCountJoinSysUsersRelatedByIdReceiver(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
+        // we're going to modify criteria, so copy it first
         $criteria = clone $criteria;
 
-        // Set the correct dbName if it has not been overridden
-        if ($criteria->getDbName() == Propel::getDefaultDB()) {
-            $criteria->setDbName(SysChatsPeer::DATABASE_NAME);
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysChatsPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
         }
 
-        SysChatsPeer::addSelectColumns($criteria);
-        $startcol = SysChatsPeer::NUM_HYDRATE_COLUMNS;
-        SysUsersPeer::addSelectColumns($criteria);
+        if (!$criteria->hasSelectClause()) {
+            SysChatsPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY won't ever affect the count
+
+        // Set the correct dbName
+        $criteria->setDbName(SysChatsPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysChatsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
 
         $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
 
-        $stmt = BasePeer::doSelect($criteria, $con);
-        $results = array();
+        $stmt = BasePeer::doCount($criteria, $con);
 
-        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $key1 = SysChatsPeer::getPrimaryKeyHashFromRow($row, 0);
-            if (null !== ($obj1 = SysChatsPeer::getInstanceFromPool($key1))) {
-                // We no longer rehydrate the object, since this can cause data loss.
-                // See http://www.propelorm.org/ticket/509
-                // $obj1->hydrate($row, 0, true); // rehydrate
-            } else {
-
-                $cls = SysChatsPeer::getOMClass();
-
-                $obj1 = new $cls();
-                $obj1->hydrate($row);
-                SysChatsPeer::addInstanceToPool($obj1, $key1);
-            } // if $obj1 already loaded
-
-            $key2 = SysUsersPeer::getPrimaryKeyHashFromRow($row, $startcol);
-            if ($key2 !== null) {
-                $obj2 = SysUsersPeer::getInstanceFromPool($key2);
-                if (!$obj2) {
-
-                    $cls = SysUsersPeer::getOMClass();
-
-                    $obj2 = new $cls();
-                    $obj2->hydrate($row, $startcol);
-                    SysUsersPeer::addInstanceToPool($obj2, $key2);
-                } // if obj2 already loaded
-
-                // Add the $obj1 (SysChats) to $obj2 (SysUsers)
-                $obj2->addSysChatsRelatedByIdReceiver($obj1);
-
-            } // if joined row was not null
-
-            $results[] = $obj1;
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
         }
         $stmt->closeCursor();
 
-        return $results;
+        return $count;
     }
 
 
@@ -709,6 +642,73 @@ abstract class BaseSysChatsPeer
 
 
     /**
+     * Selects a collection of SysChats objects pre-filled with their SysUsers objects.
+     * @param      Criteria  $criteria
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return array           Array of SysChats objects.
+     * @throws PropelException Any exceptions caught during processing will be
+     *		 rethrown wrapped into a PropelException.
+     */
+    public static function doSelectJoinSysUsersRelatedByIdReceiver(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $criteria = clone $criteria;
+
+        // Set the correct dbName if it has not been overridden
+        if ($criteria->getDbName() == Propel::getDefaultDB()) {
+            $criteria->setDbName(SysChatsPeer::DATABASE_NAME);
+        }
+
+        SysChatsPeer::addSelectColumns($criteria);
+        $startcol = SysChatsPeer::NUM_HYDRATE_COLUMNS;
+        SysUsersPeer::addSelectColumns($criteria);
+
+        $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
+
+        $stmt = BasePeer::doSelect($criteria, $con);
+        $results = array();
+
+        while ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $key1 = SysChatsPeer::getPrimaryKeyHashFromRow($row, 0);
+            if (null !== ($obj1 = SysChatsPeer::getInstanceFromPool($key1))) {
+                // We no longer rehydrate the object, since this can cause data loss.
+                // See http://www.propelorm.org/ticket/509
+                // $obj1->hydrate($row, 0, true); // rehydrate
+            } else {
+
+                $cls = SysChatsPeer::getOMClass();
+
+                $obj1 = new $cls();
+                $obj1->hydrate($row);
+                SysChatsPeer::addInstanceToPool($obj1, $key1);
+            } // if $obj1 already loaded
+
+            $key2 = SysUsersPeer::getPrimaryKeyHashFromRow($row, $startcol);
+            if ($key2 !== null) {
+                $obj2 = SysUsersPeer::getInstanceFromPool($key2);
+                if (!$obj2) {
+
+                    $cls = SysUsersPeer::getOMClass();
+
+                    $obj2 = new $cls();
+                    $obj2->hydrate($row, $startcol);
+                    SysUsersPeer::addInstanceToPool($obj2, $key2);
+                } // if obj2 already loaded
+
+                // Add the $obj1 (SysChats) to $obj2 (SysUsers)
+                $obj2->addSysChatsRelatedByIdReceiver($obj1);
+
+            } // if joined row was not null
+
+            $results[] = $obj1;
+        }
+        $stmt->closeCursor();
+
+        return $results;
+    }
+
+
+    /**
      * Returns the number of rows matching criteria, joining all related tables
      *
      * @param      Criteria $criteria
@@ -744,9 +744,9 @@ abstract class BaseSysChatsPeer
             $con = Propel::getConnection(SysChatsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
         }
 
-        $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
-
         $criteria->addJoin(SysChatsPeer::ID_SENDER, SysUsersPeer::ID_USER, $join_behavior);
+
+        $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
 
         $stmt = BasePeer::doCount($criteria, $con);
 
@@ -788,9 +788,9 @@ abstract class BaseSysChatsPeer
         SysUsersPeer::addSelectColumns($criteria);
         $startcol4 = $startcol3 + SysUsersPeer::NUM_HYDRATE_COLUMNS;
 
-        $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
-
         $criteria->addJoin(SysChatsPeer::ID_SENDER, SysUsersPeer::ID_USER, $join_behavior);
+
+        $criteria->addJoin(SysChatsPeer::ID_RECEIVER, SysUsersPeer::ID_USER, $join_behavior);
 
         $stmt = BasePeer::doSelect($criteria, $con);
         $results = array();
@@ -824,7 +824,7 @@ abstract class BaseSysChatsPeer
                 } // if obj2 loaded
 
                 // Add the $obj1 (SysChats) to the collection in $obj2 (SysUsers)
-                $obj2->addSysChatsRelatedByIdReceiver($obj1);
+                $obj2->addSysChatsRelatedByIdSender($obj1);
             } // if joined row not null
 
             // Add objects for joined SysUsers rows
@@ -842,7 +842,7 @@ abstract class BaseSysChatsPeer
                 } // if obj3 loaded
 
                 // Add the $obj1 (SysChats) to the collection in $obj3 (SysUsers)
-                $obj3->addSysChatsRelatedByIdSender($obj1);
+                $obj3->addSysChatsRelatedByIdReceiver($obj1);
             } // if joined row not null
 
             $results[] = $obj1;
@@ -850,55 +850,6 @@ abstract class BaseSysChatsPeer
         $stmt->closeCursor();
 
         return $results;
-    }
-
-
-    /**
-     * Returns the number of rows matching criteria, joining the related SysUsersRelatedByIdReceiver table
-     *
-     * @param      Criteria $criteria
-     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
-     * @param      PropelPDO $con
-     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
-     * @return int Number of matching rows.
-     */
-    public static function doCountJoinAllExceptSysUsersRelatedByIdReceiver(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
-    {
-        // we're going to modify criteria, so copy it first
-        $criteria = clone $criteria;
-
-        // We need to set the primary table name, since in the case that there are no WHERE columns
-        // it will be impossible for the BasePeer::createSelectSql() method to determine which
-        // tables go into the FROM clause.
-        $criteria->setPrimaryTableName(SysChatsPeer::TABLE_NAME);
-
-        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-            $criteria->setDistinct();
-        }
-
-        if (!$criteria->hasSelectClause()) {
-            SysChatsPeer::addSelectColumns($criteria);
-        }
-
-        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
-
-        // Set the correct dbName
-        $criteria->setDbName(SysChatsPeer::DATABASE_NAME);
-
-        if ($con === null) {
-            $con = Propel::getConnection(SysChatsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
-        }
-    
-        $stmt = BasePeer::doCount($criteria, $con);
-
-        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
-            $count = (int) $row[0];
-        } else {
-            $count = 0; // no rows returned; we infer that means 0 matches.
-        }
-        $stmt->closeCursor();
-
-        return $count;
     }
 
 
@@ -952,7 +903,56 @@ abstract class BaseSysChatsPeer
 
 
     /**
-     * Selects a collection of SysChats objects pre-filled with all related objects except SysUsersRelatedByIdReceiver.
+     * Returns the number of rows matching criteria, joining the related SysUsersRelatedByIdReceiver table
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct Whether to select only distinct columns; deprecated: use Criteria->setDistinct() instead.
+     * @param      PropelPDO $con
+     * @param      String    $join_behavior the type of joins to use, defaults to Criteria::LEFT_JOIN
+     * @return int Number of matching rows.
+     */
+    public static function doCountJoinAllExceptSysUsersRelatedByIdReceiver(Criteria $criteria, $distinct = false, PropelPDO $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        // we're going to modify criteria, so copy it first
+        $criteria = clone $criteria;
+
+        // We need to set the primary table name, since in the case that there are no WHERE columns
+        // it will be impossible for the BasePeer::createSelectSql() method to determine which
+        // tables go into the FROM clause.
+        $criteria->setPrimaryTableName(SysChatsPeer::TABLE_NAME);
+
+        if ($distinct && !in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+            $criteria->setDistinct();
+        }
+
+        if (!$criteria->hasSelectClause()) {
+            SysChatsPeer::addSelectColumns($criteria);
+        }
+
+        $criteria->clearOrderByColumns(); // ORDER BY should not affect count
+
+        // Set the correct dbName
+        $criteria->setDbName(SysChatsPeer::DATABASE_NAME);
+
+        if ($con === null) {
+            $con = Propel::getConnection(SysChatsPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+    
+        $stmt = BasePeer::doCount($criteria, $con);
+
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $count = (int) $row[0];
+        } else {
+            $count = 0; // no rows returned; we infer that means 0 matches.
+        }
+        $stmt->closeCursor();
+
+        return $count;
+    }
+
+
+    /**
+     * Selects a collection of SysChats objects pre-filled with all related objects except SysUsersRelatedByIdSender.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -961,7 +961,7 @@ abstract class BaseSysChatsPeer
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptSysUsersRelatedByIdReceiver(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptSysUsersRelatedByIdSender(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 
@@ -1002,7 +1002,7 @@ abstract class BaseSysChatsPeer
 
 
     /**
-     * Selects a collection of SysChats objects pre-filled with all related objects except SysUsersRelatedByIdSender.
+     * Selects a collection of SysChats objects pre-filled with all related objects except SysUsersRelatedByIdReceiver.
      *
      * @param      Criteria  $criteria
      * @param      PropelPDO $con
@@ -1011,7 +1011,7 @@ abstract class BaseSysChatsPeer
      * @throws PropelException Any exceptions caught during processing will be
      *		 rethrown wrapped into a PropelException.
      */
-    public static function doSelectJoinAllExceptSysUsersRelatedByIdSender(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    public static function doSelectJoinAllExceptSysUsersRelatedByIdReceiver(Criteria $criteria, $con = null, $join_behavior = Criteria::LEFT_JOIN)
     {
         $criteria = clone $criteria;
 

@@ -4,6 +4,12 @@ $(document).ready(function() {
 	oTable = $('#main-table').dataTable();
 });
 
+$('header .dropdown-menu').filter(function () {
+	if ($(this).find('li').length == 0) {
+		$(this).parent().hide();
+	}
+});
+
 // Data table
 $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row'<'col-xs-6 col-md-9'><'col-xs-6 col-md-3'l>r>t<'row'<'col-xs-6 col-md-4'i><'col-xs-6 col-md-8'p>>",
@@ -57,7 +63,52 @@ $.extend( true, $.fn.dataTable.defaults, {
 	    	$(firstTD).prepend(td);
 		})
     }
-} );
+});
+
+function delete_selected (oTable, url, refresh) {
+	var pks = getPks(oTable);
+	if (pks.length) {
+		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
+			$.post(url, {pks: pks}, function (response) {
+				deleteRows(oTable);
+				message_ok('Delete!');
+				$('#delete-rows').addClass('disabled');
+				$(oTable.find('th')[0]).parent().removeClass('all-selected');
+				$(oTable.parent().find('.row .col-md-9')[0]).html('');
+				if (refresh) {
+					setTimeout(function () {
+						window.location = '';
+					}, 500);
+				}
+			});
+		}
+	}
+}
+
+function deleteRows(oTable){
+	var anSelected = oTable.$('tr.active');
+	if (anSelected.length) {
+		anSelected.each(function (index) {
+			deleteRow(oTable, this);
+		})
+	}
+}
+
+function deleteRow (oTable, td) {
+	oTable.fnDeleteRow( td )
+}
+
+function getPks(oTable) {
+	var pks = [];
+	oTable.$('tr.active').each(function () {
+		pks.push(oTable.fnGetData(this)[0]);
+	});
+	return pks;
+}
+
+function addRow(oTable, data) {
+    oTable.fnAddData(data);
+}
 
 function show_modal (url, callback_function) {
 	show_loading();
@@ -119,52 +170,6 @@ function validate_data (form, url) {
 		}
 	});
 	return false;
-}
-
-
-
-function delete_selected (oTable, url, refresh) {
-	var pks = getPks(oTable);
-	if (pks.length) {
-		if (confirm("You are about to delete a record. This cannot be undone. Are you sure?")) {
-			$.post(url, {pks: pks}, function (response) {
-				deleteRows(oTable);
-				message_ok('Delete!');
-				$(oTable.find('th')[0]).parent().removeClass('all-selected');
-				$(oTable.parent().find('.row .col-md-9')[0]).html('');
-				if (refresh) {
-					setTimeout(function () {
-						window.location = '';
-					}, 500);
-				}
-			});
-		}
-	}
-}
-
-function deleteRows(oTable){
-	var anSelected = oTable.$('tr.active');
-	if (anSelected.length) {
-		anSelected.each(function (index) {
-			deleteRow(oTable, this);
-		})
-	}
-}
-
-function deleteRow (oTable, td) {
-	oTable.fnDeleteRow( td )
-}
-
-function getPks(oTable) {
-	var pks = [];
-	oTable.$('tr.active').each(function () {
-		pks.push(oTable.fnGetData(this)[0]);
-	});
-	return pks;
-}
-
-function addRow(oTable, data) {
-    oTable.fnAddData(data);
 }
 
 function message_ok (text, delay) {

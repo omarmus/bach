@@ -251,27 +251,24 @@ function json_dropdown($array)
 
 //Main menu pages
 
-function get_menu($array, $child = FALSE, $permisions = null)
+function get_menu($pages, $child = FALSE, $permisions = null)
 {
     $CI =& get_instance();
     $str = '';
 
-    if (count($array)) {
+    if (count($pages)) {
         $str .= $child == FALSE ? '<ul class="nav navbar-nav">' . PHP_EOL : ('<ul class="dropdown-menu">' . PHP_EOL );
 
-        foreach ($array as $item) {
-            if ($permisions[$item['Slug']]['READ'] == "YES" && $item['State'] == 'ACTIVE' && $item['Visible'] == 'YES' ) {
-                $active = $CI->uri->segment(2) == $item['Slug'] ? TRUE : FALSE;
-                if (isset($item['children']) && count($item['children'])) {
-                    $submenu = $item['Type'] != "module" ? 'dropdown-submenu' : 'dropdown';
-                    $active = $active ? ' active' : '';
-                    $str .= '<li class="'. $submenu . $active . '">';
-                    $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $item['Title'];
-                    $str .= ($item['Type'] != "module" ? '' : '<b class="caret"></b>') . '</a>' . PHP_EOL;
-                    $str .= get_menu($item['children'], TRUE, $permisions);
+        foreach ($pages as $page) {
+            if ($permisions[$page['Slug']]['READ'] == "YES" && $page['State'] == 'ACTIVE' && $page['Visible'] == 'YES' ) {
+                $active = $CI->uri->segment(2) == $page['Slug'] ? TRUE : FALSE;
+                if (isset($page['children']) && count($page['children'])) {
+                    $str .= '<li class="dropdown '. ( $active ? ' active' : '' ) . '">';
+                    $str .= '<a class="dropdown-toggle" data-toggle="dropdown" href="#">' . $page['Title'] . '<b class="caret"></b></a>' . PHP_EOL;
+                    $str .= get_menu($page['children'], TRUE, $permisions);
                 } else {
                     $str .= $active ? '<li class="active">' : '<li>';
-                    $str .= '<a href="' . site_url('admin/'.$item['Slug']) . '">' .$item['Title'] . '</a>';
+                    $str .= '<a href="' . site_url('admin/'.$page['Slug']) . '">' .$page['Title'] . '</a>';
                 }
 
                 $str .= '</li>' . PHP_EOL;
@@ -338,7 +335,7 @@ function button_delete($url, $refresh = FALSE)
     $url = site_url($url);
     ob_start(); ?>
     <button type="button" id="delete-rows" class="btn btn-danger disabled" 
-            onclick="delete_selected(oTable, '<?php echo $url ?>'<?php $refresh ? ', true' : '' ?>)">
+            onclick="delete_selected(oTable, '<?php echo $url ?>'<?php echo $refresh ? ', true' : '' ?>)">
         <span class="glyphicon glyphicon-trash"></span>
     </button>
     <?php
@@ -347,14 +344,7 @@ function button_delete($url, $refresh = FALSE)
 
 function button_edit($url, $callback_function = null)
 {
-    $CI =& get_instance();
-    $permissions = $CI->session->userdata('permissions');
-
-    if ($permissions[$CI->uri->segment(2)]['UPDATE'] == 'NO') {
-        return "";
-    }
-
-    return button_modal('', $url, 'glyphicon-edit', $callback_function);
+    return button_modal('', $url, 'glyphicon-edit', $callback_function, 'UPDATE');
 }
 
 function button_filter()
@@ -371,7 +361,7 @@ function button_end_filter()
 {
     ob_start(); ?>
     <button class="btn btn-default" type="button" onclick="window.location = ''">
-        <span class="glyphicon glyphicon-ban-circle"></span> Terminar búsqueda
+        <span class="glyphicon glyphicon-ban-circle"></span> <?php echo lang('search_end') ?>Terminar búsqueda
     </button>
     <?php
     return ob_get_clean();
@@ -422,8 +412,8 @@ function modal_footer($id_save = '')
 {
     ob_start(); ?>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-        <button type="submit" class="btn btn-primary" id="<?php echo $id_save ?>"><span class="glyphicon glyphicon-ok"></span> Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> <?php echo lang('cancel') ?></button>
+        <button type="submit" class="btn btn-primary" id="<?php echo $id_save ?>"><span class="glyphicon glyphicon-ok"></span> <?php echo lang('save') ?></button>
     </div>
     <?php
     return ob_get_clean();

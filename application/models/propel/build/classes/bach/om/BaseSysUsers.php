@@ -104,7 +104,7 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
 
     /**
      * The value for the lang_code field.
-     * Note: this column has a database default value of: 'EN'
+     * Note: this column has a database default value of: 'english'
      * @var        string
      */
     protected $lang_code;
@@ -128,14 +128,14 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     /**
      * @var        PropelObjectCollection|SysChats[] Collection to store aggregation of SysChats objects.
      */
-    protected $collSysChatssRelatedByIdReceiver;
-    protected $collSysChatssRelatedByIdReceiverPartial;
+    protected $collSysChatssRelatedByIdSender;
+    protected $collSysChatssRelatedByIdSenderPartial;
 
     /**
      * @var        PropelObjectCollection|SysChats[] Collection to store aggregation of SysChats objects.
      */
-    protected $collSysChatssRelatedByIdSender;
-    protected $collSysChatssRelatedByIdSenderPartial;
+    protected $collSysChatssRelatedByIdReceiver;
+    protected $collSysChatssRelatedByIdReceiverPartial;
 
     /**
      * @var        PropelObjectCollection|SysNotifications[] Collection to store aggregation of SysNotifications objects.
@@ -173,13 +173,13 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $sysChatssRelatedByIdReceiverScheduledForDeletion = null;
+    protected $sysChatssRelatedByIdSenderScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
      * @var		PropelObjectCollection
      */
-    protected $sysChatssRelatedByIdSenderScheduledForDeletion = null;
+    protected $sysChatssRelatedByIdReceiverScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -202,7 +202,7 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     public function applyDefaultValues()
     {
         $this->state = 'CREATED';
-        $this->lang_code = 'EN';
+        $this->lang_code = 'english';
     }
 
     /**
@@ -747,7 +747,7 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                 return false;
             }
 
-            if ($this->lang_code !== 'EN') {
+            if ($this->lang_code !== 'english') {
                 return false;
             }
 
@@ -866,9 +866,9 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
 
             $this->aSysRoles = null;
             $this->aSysFiles = null;
-            $this->collSysChatssRelatedByIdReceiver = null;
-
             $this->collSysChatssRelatedByIdSender = null;
+
+            $this->collSysChatssRelatedByIdReceiver = null;
 
             $this->collSysNotificationssRelatedByIdSender = null;
 
@@ -1017,24 +1017,6 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
                 $this->resetModified();
             }
 
-            if ($this->sysChatssRelatedByIdReceiverScheduledForDeletion !== null) {
-                if (!$this->sysChatssRelatedByIdReceiverScheduledForDeletion->isEmpty()) {
-                    foreach ($this->sysChatssRelatedByIdReceiverScheduledForDeletion as $sysChatsRelatedByIdReceiver) {
-                        // need to save related object because we set the relation to null
-                        $sysChatsRelatedByIdReceiver->save($con);
-                    }
-                    $this->sysChatssRelatedByIdReceiverScheduledForDeletion = null;
-                }
-            }
-
-            if ($this->collSysChatssRelatedByIdReceiver !== null) {
-                foreach ($this->collSysChatssRelatedByIdReceiver as $referrerFK) {
-                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
-                        $affectedRows += $referrerFK->save($con);
-                    }
-                }
-            }
-
             if ($this->sysChatssRelatedByIdSenderScheduledForDeletion !== null) {
                 if (!$this->sysChatssRelatedByIdSenderScheduledForDeletion->isEmpty()) {
                     foreach ($this->sysChatssRelatedByIdSenderScheduledForDeletion as $sysChatsRelatedByIdSender) {
@@ -1047,6 +1029,24 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
 
             if ($this->collSysChatssRelatedByIdSender !== null) {
                 foreach ($this->collSysChatssRelatedByIdSender as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->sysChatssRelatedByIdReceiverScheduledForDeletion !== null) {
+                if (!$this->sysChatssRelatedByIdReceiverScheduledForDeletion->isEmpty()) {
+                    foreach ($this->sysChatssRelatedByIdReceiverScheduledForDeletion as $sysChatsRelatedByIdReceiver) {
+                        // need to save related object because we set the relation to null
+                        $sysChatsRelatedByIdReceiver->save($con);
+                    }
+                    $this->sysChatssRelatedByIdReceiverScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collSysChatssRelatedByIdReceiver !== null) {
+                foreach ($this->collSysChatssRelatedByIdReceiver as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -1327,16 +1327,16 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             }
 
 
-                if ($this->collSysChatssRelatedByIdReceiver !== null) {
-                    foreach ($this->collSysChatssRelatedByIdReceiver as $referrerFK) {
+                if ($this->collSysChatssRelatedByIdSender !== null) {
+                    foreach ($this->collSysChatssRelatedByIdSender as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
                     }
                 }
 
-                if ($this->collSysChatssRelatedByIdSender !== null) {
-                    foreach ($this->collSysChatssRelatedByIdSender as $referrerFK) {
+                if ($this->collSysChatssRelatedByIdReceiver !== null) {
+                    foreach ($this->collSysChatssRelatedByIdReceiver as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
                             $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
                         }
@@ -1493,11 +1493,11 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             if (null !== $this->aSysFiles) {
                 $result['SysFiles'] = $this->aSysFiles->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
-            if (null !== $this->collSysChatssRelatedByIdReceiver) {
-                $result['SysChatssRelatedByIdReceiver'] = $this->collSysChatssRelatedByIdReceiver->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
-            }
             if (null !== $this->collSysChatssRelatedByIdSender) {
                 $result['SysChatssRelatedByIdSender'] = $this->collSysChatssRelatedByIdSender->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collSysChatssRelatedByIdReceiver) {
+                $result['SysChatssRelatedByIdReceiver'] = $this->collSysChatssRelatedByIdReceiver->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collSysNotificationssRelatedByIdSender) {
                 $result['SysNotificationssRelatedByIdSender'] = $this->collSysNotificationssRelatedByIdSender->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -1728,15 +1728,15 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             // store object hash to prevent cycle
             $this->startCopy = true;
 
-            foreach ($this->getSysChatssRelatedByIdReceiver() as $relObj) {
-                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
-                    $copyObj->addSysChatsRelatedByIdReceiver($relObj->copy($deepCopy));
-                }
-            }
-
             foreach ($this->getSysChatssRelatedByIdSender() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addSysChatsRelatedByIdSender($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getSysChatssRelatedByIdReceiver() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addSysChatsRelatedByIdReceiver($relObj->copy($deepCopy));
                 }
             }
 
@@ -1917,11 +1917,11 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
      */
     public function initRelation($relationName)
     {
-        if ('SysChatsRelatedByIdReceiver' == $relationName) {
-            $this->initSysChatssRelatedByIdReceiver();
-        }
         if ('SysChatsRelatedByIdSender' == $relationName) {
             $this->initSysChatssRelatedByIdSender();
+        }
+        if ('SysChatsRelatedByIdReceiver' == $relationName) {
+            $this->initSysChatssRelatedByIdReceiver();
         }
         if ('SysNotificationsRelatedByIdSender' == $relationName) {
             $this->initSysNotificationssRelatedByIdSender();
@@ -1929,226 +1929,6 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
         if ('SysNotificationsRelatedByIdReceiver' == $relationName) {
             $this->initSysNotificationssRelatedByIdReceiver();
         }
-    }
-
-    /**
-     * Clears out the collSysChatssRelatedByIdReceiver collection
-     *
-     * This does not modify the database; however, it will remove any associated objects, causing
-     * them to be refetched by subsequent calls to accessor method.
-     *
-     * @return SysUsers The current object (for fluent API support)
-     * @see        addSysChatssRelatedByIdReceiver()
-     */
-    public function clearSysChatssRelatedByIdReceiver()
-    {
-        $this->collSysChatssRelatedByIdReceiver = null; // important to set this to null since that means it is uninitialized
-        $this->collSysChatssRelatedByIdReceiverPartial = null;
-
-        return $this;
-    }
-
-    /**
-     * reset is the collSysChatssRelatedByIdReceiver collection loaded partially
-     *
-     * @return void
-     */
-    public function resetPartialSysChatssRelatedByIdReceiver($v = true)
-    {
-        $this->collSysChatssRelatedByIdReceiverPartial = $v;
-    }
-
-    /**
-     * Initializes the collSysChatssRelatedByIdReceiver collection.
-     *
-     * By default this just sets the collSysChatssRelatedByIdReceiver collection to an empty array (like clearcollSysChatssRelatedByIdReceiver());
-     * however, you may wish to override this method in your stub class to provide setting appropriate
-     * to your application -- for example, setting the initial array to the values stored in database.
-     *
-     * @param boolean $overrideExisting If set to true, the method call initializes
-     *                                        the collection even if it is not empty
-     *
-     * @return void
-     */
-    public function initSysChatssRelatedByIdReceiver($overrideExisting = true)
-    {
-        if (null !== $this->collSysChatssRelatedByIdReceiver && !$overrideExisting) {
-            return;
-        }
-        $this->collSysChatssRelatedByIdReceiver = new PropelObjectCollection();
-        $this->collSysChatssRelatedByIdReceiver->setModel('SysChats');
-    }
-
-    /**
-     * Gets an array of SysChats objects which contain a foreign key that references this object.
-     *
-     * If the $criteria is not null, it is used to always fetch the results from the database.
-     * Otherwise the results are fetched from the database the first time, then cached.
-     * Next time the same method is called without $criteria, the cached collection is returned.
-     * If this SysUsers is new, it will return
-     * an empty collection or the current collection; the criteria is ignored on a new object.
-     *
-     * @param Criteria $criteria optional Criteria object to narrow the query
-     * @param PropelPDO $con optional connection object
-     * @return PropelObjectCollection|SysChats[] List of SysChats objects
-     * @throws PropelException
-     */
-    public function getSysChatssRelatedByIdReceiver($criteria = null, PropelPDO $con = null)
-    {
-        $partial = $this->collSysChatssRelatedByIdReceiverPartial && !$this->isNew();
-        if (null === $this->collSysChatssRelatedByIdReceiver || null !== $criteria  || $partial) {
-            if ($this->isNew() && null === $this->collSysChatssRelatedByIdReceiver) {
-                // return empty collection
-                $this->initSysChatssRelatedByIdReceiver();
-            } else {
-                $collSysChatssRelatedByIdReceiver = SysChatsQuery::create(null, $criteria)
-                    ->filterBySysUsersRelatedByIdReceiver($this)
-                    ->find($con);
-                if (null !== $criteria) {
-                    if (false !== $this->collSysChatssRelatedByIdReceiverPartial && count($collSysChatssRelatedByIdReceiver)) {
-                      $this->initSysChatssRelatedByIdReceiver(false);
-
-                      foreach ($collSysChatssRelatedByIdReceiver as $obj) {
-                        if (false == $this->collSysChatssRelatedByIdReceiver->contains($obj)) {
-                          $this->collSysChatssRelatedByIdReceiver->append($obj);
-                        }
-                      }
-
-                      $this->collSysChatssRelatedByIdReceiverPartial = true;
-                    }
-
-                    $collSysChatssRelatedByIdReceiver->getInternalIterator()->rewind();
-
-                    return $collSysChatssRelatedByIdReceiver;
-                }
-
-                if ($partial && $this->collSysChatssRelatedByIdReceiver) {
-                    foreach ($this->collSysChatssRelatedByIdReceiver as $obj) {
-                        if ($obj->isNew()) {
-                            $collSysChatssRelatedByIdReceiver[] = $obj;
-                        }
-                    }
-                }
-
-                $this->collSysChatssRelatedByIdReceiver = $collSysChatssRelatedByIdReceiver;
-                $this->collSysChatssRelatedByIdReceiverPartial = false;
-            }
-        }
-
-        return $this->collSysChatssRelatedByIdReceiver;
-    }
-
-    /**
-     * Sets a collection of SysChatsRelatedByIdReceiver objects related by a one-to-many relationship
-     * to the current object.
-     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
-     * and new objects from the given Propel collection.
-     *
-     * @param PropelCollection $sysChatssRelatedByIdReceiver A Propel collection.
-     * @param PropelPDO $con Optional connection object
-     * @return SysUsers The current object (for fluent API support)
-     */
-    public function setSysChatssRelatedByIdReceiver(PropelCollection $sysChatssRelatedByIdReceiver, PropelPDO $con = null)
-    {
-        $sysChatssRelatedByIdReceiverToDelete = $this->getSysChatssRelatedByIdReceiver(new Criteria(), $con)->diff($sysChatssRelatedByIdReceiver);
-
-
-        $this->sysChatssRelatedByIdReceiverScheduledForDeletion = $sysChatssRelatedByIdReceiverToDelete;
-
-        foreach ($sysChatssRelatedByIdReceiverToDelete as $sysChatsRelatedByIdReceiverRemoved) {
-            $sysChatsRelatedByIdReceiverRemoved->setSysUsersRelatedByIdReceiver(null);
-        }
-
-        $this->collSysChatssRelatedByIdReceiver = null;
-        foreach ($sysChatssRelatedByIdReceiver as $sysChatsRelatedByIdReceiver) {
-            $this->addSysChatsRelatedByIdReceiver($sysChatsRelatedByIdReceiver);
-        }
-
-        $this->collSysChatssRelatedByIdReceiver = $sysChatssRelatedByIdReceiver;
-        $this->collSysChatssRelatedByIdReceiverPartial = false;
-
-        return $this;
-    }
-
-    /**
-     * Returns the number of related SysChats objects.
-     *
-     * @param Criteria $criteria
-     * @param boolean $distinct
-     * @param PropelPDO $con
-     * @return int             Count of related SysChats objects.
-     * @throws PropelException
-     */
-    public function countSysChatssRelatedByIdReceiver(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
-    {
-        $partial = $this->collSysChatssRelatedByIdReceiverPartial && !$this->isNew();
-        if (null === $this->collSysChatssRelatedByIdReceiver || null !== $criteria || $partial) {
-            if ($this->isNew() && null === $this->collSysChatssRelatedByIdReceiver) {
-                return 0;
-            }
-
-            if ($partial && !$criteria) {
-                return count($this->getSysChatssRelatedByIdReceiver());
-            }
-            $query = SysChatsQuery::create(null, $criteria);
-            if ($distinct) {
-                $query->distinct();
-            }
-
-            return $query
-                ->filterBySysUsersRelatedByIdReceiver($this)
-                ->count($con);
-        }
-
-        return count($this->collSysChatssRelatedByIdReceiver);
-    }
-
-    /**
-     * Method called to associate a SysChats object to this object
-     * through the SysChats foreign key attribute.
-     *
-     * @param    SysChats $l SysChats
-     * @return SysUsers The current object (for fluent API support)
-     */
-    public function addSysChatsRelatedByIdReceiver(SysChats $l)
-    {
-        if ($this->collSysChatssRelatedByIdReceiver === null) {
-            $this->initSysChatssRelatedByIdReceiver();
-            $this->collSysChatssRelatedByIdReceiverPartial = true;
-        }
-        if (!in_array($l, $this->collSysChatssRelatedByIdReceiver->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
-            $this->doAddSysChatsRelatedByIdReceiver($l);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param	SysChatsRelatedByIdReceiver $sysChatsRelatedByIdReceiver The sysChatsRelatedByIdReceiver object to add.
-     */
-    protected function doAddSysChatsRelatedByIdReceiver($sysChatsRelatedByIdReceiver)
-    {
-        $this->collSysChatssRelatedByIdReceiver[]= $sysChatsRelatedByIdReceiver;
-        $sysChatsRelatedByIdReceiver->setSysUsersRelatedByIdReceiver($this);
-    }
-
-    /**
-     * @param	SysChatsRelatedByIdReceiver $sysChatsRelatedByIdReceiver The sysChatsRelatedByIdReceiver object to remove.
-     * @return SysUsers The current object (for fluent API support)
-     */
-    public function removeSysChatsRelatedByIdReceiver($sysChatsRelatedByIdReceiver)
-    {
-        if ($this->getSysChatssRelatedByIdReceiver()->contains($sysChatsRelatedByIdReceiver)) {
-            $this->collSysChatssRelatedByIdReceiver->remove($this->collSysChatssRelatedByIdReceiver->search($sysChatsRelatedByIdReceiver));
-            if (null === $this->sysChatssRelatedByIdReceiverScheduledForDeletion) {
-                $this->sysChatssRelatedByIdReceiverScheduledForDeletion = clone $this->collSysChatssRelatedByIdReceiver;
-                $this->sysChatssRelatedByIdReceiverScheduledForDeletion->clear();
-            }
-            $this->sysChatssRelatedByIdReceiverScheduledForDeletion[]= $sysChatsRelatedByIdReceiver;
-            $sysChatsRelatedByIdReceiver->setSysUsersRelatedByIdReceiver(null);
-        }
-
-        return $this;
     }
 
     /**
@@ -2366,6 +2146,226 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             }
             $this->sysChatssRelatedByIdSenderScheduledForDeletion[]= $sysChatsRelatedByIdSender;
             $sysChatsRelatedByIdSender->setSysUsersRelatedByIdSender(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Clears out the collSysChatssRelatedByIdReceiver collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return SysUsers The current object (for fluent API support)
+     * @see        addSysChatssRelatedByIdReceiver()
+     */
+    public function clearSysChatssRelatedByIdReceiver()
+    {
+        $this->collSysChatssRelatedByIdReceiver = null; // important to set this to null since that means it is uninitialized
+        $this->collSysChatssRelatedByIdReceiverPartial = null;
+
+        return $this;
+    }
+
+    /**
+     * reset is the collSysChatssRelatedByIdReceiver collection loaded partially
+     *
+     * @return void
+     */
+    public function resetPartialSysChatssRelatedByIdReceiver($v = true)
+    {
+        $this->collSysChatssRelatedByIdReceiverPartial = $v;
+    }
+
+    /**
+     * Initializes the collSysChatssRelatedByIdReceiver collection.
+     *
+     * By default this just sets the collSysChatssRelatedByIdReceiver collection to an empty array (like clearcollSysChatssRelatedByIdReceiver());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initSysChatssRelatedByIdReceiver($overrideExisting = true)
+    {
+        if (null !== $this->collSysChatssRelatedByIdReceiver && !$overrideExisting) {
+            return;
+        }
+        $this->collSysChatssRelatedByIdReceiver = new PropelObjectCollection();
+        $this->collSysChatssRelatedByIdReceiver->setModel('SysChats');
+    }
+
+    /**
+     * Gets an array of SysChats objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this SysUsers is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param Criteria $criteria optional Criteria object to narrow the query
+     * @param PropelPDO $con optional connection object
+     * @return PropelObjectCollection|SysChats[] List of SysChats objects
+     * @throws PropelException
+     */
+    public function getSysChatssRelatedByIdReceiver($criteria = null, PropelPDO $con = null)
+    {
+        $partial = $this->collSysChatssRelatedByIdReceiverPartial && !$this->isNew();
+        if (null === $this->collSysChatssRelatedByIdReceiver || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collSysChatssRelatedByIdReceiver) {
+                // return empty collection
+                $this->initSysChatssRelatedByIdReceiver();
+            } else {
+                $collSysChatssRelatedByIdReceiver = SysChatsQuery::create(null, $criteria)
+                    ->filterBySysUsersRelatedByIdReceiver($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    if (false !== $this->collSysChatssRelatedByIdReceiverPartial && count($collSysChatssRelatedByIdReceiver)) {
+                      $this->initSysChatssRelatedByIdReceiver(false);
+
+                      foreach ($collSysChatssRelatedByIdReceiver as $obj) {
+                        if (false == $this->collSysChatssRelatedByIdReceiver->contains($obj)) {
+                          $this->collSysChatssRelatedByIdReceiver->append($obj);
+                        }
+                      }
+
+                      $this->collSysChatssRelatedByIdReceiverPartial = true;
+                    }
+
+                    $collSysChatssRelatedByIdReceiver->getInternalIterator()->rewind();
+
+                    return $collSysChatssRelatedByIdReceiver;
+                }
+
+                if ($partial && $this->collSysChatssRelatedByIdReceiver) {
+                    foreach ($this->collSysChatssRelatedByIdReceiver as $obj) {
+                        if ($obj->isNew()) {
+                            $collSysChatssRelatedByIdReceiver[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collSysChatssRelatedByIdReceiver = $collSysChatssRelatedByIdReceiver;
+                $this->collSysChatssRelatedByIdReceiverPartial = false;
+            }
+        }
+
+        return $this->collSysChatssRelatedByIdReceiver;
+    }
+
+    /**
+     * Sets a collection of SysChatsRelatedByIdReceiver objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param PropelCollection $sysChatssRelatedByIdReceiver A Propel collection.
+     * @param PropelPDO $con Optional connection object
+     * @return SysUsers The current object (for fluent API support)
+     */
+    public function setSysChatssRelatedByIdReceiver(PropelCollection $sysChatssRelatedByIdReceiver, PropelPDO $con = null)
+    {
+        $sysChatssRelatedByIdReceiverToDelete = $this->getSysChatssRelatedByIdReceiver(new Criteria(), $con)->diff($sysChatssRelatedByIdReceiver);
+
+
+        $this->sysChatssRelatedByIdReceiverScheduledForDeletion = $sysChatssRelatedByIdReceiverToDelete;
+
+        foreach ($sysChatssRelatedByIdReceiverToDelete as $sysChatsRelatedByIdReceiverRemoved) {
+            $sysChatsRelatedByIdReceiverRemoved->setSysUsersRelatedByIdReceiver(null);
+        }
+
+        $this->collSysChatssRelatedByIdReceiver = null;
+        foreach ($sysChatssRelatedByIdReceiver as $sysChatsRelatedByIdReceiver) {
+            $this->addSysChatsRelatedByIdReceiver($sysChatsRelatedByIdReceiver);
+        }
+
+        $this->collSysChatssRelatedByIdReceiver = $sysChatssRelatedByIdReceiver;
+        $this->collSysChatssRelatedByIdReceiverPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related SysChats objects.
+     *
+     * @param Criteria $criteria
+     * @param boolean $distinct
+     * @param PropelPDO $con
+     * @return int             Count of related SysChats objects.
+     * @throws PropelException
+     */
+    public function countSysChatssRelatedByIdReceiver(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        $partial = $this->collSysChatssRelatedByIdReceiverPartial && !$this->isNew();
+        if (null === $this->collSysChatssRelatedByIdReceiver || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collSysChatssRelatedByIdReceiver) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getSysChatssRelatedByIdReceiver());
+            }
+            $query = SysChatsQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterBySysUsersRelatedByIdReceiver($this)
+                ->count($con);
+        }
+
+        return count($this->collSysChatssRelatedByIdReceiver);
+    }
+
+    /**
+     * Method called to associate a SysChats object to this object
+     * through the SysChats foreign key attribute.
+     *
+     * @param    SysChats $l SysChats
+     * @return SysUsers The current object (for fluent API support)
+     */
+    public function addSysChatsRelatedByIdReceiver(SysChats $l)
+    {
+        if ($this->collSysChatssRelatedByIdReceiver === null) {
+            $this->initSysChatssRelatedByIdReceiver();
+            $this->collSysChatssRelatedByIdReceiverPartial = true;
+        }
+        if (!in_array($l, $this->collSysChatssRelatedByIdReceiver->getArrayCopy(), true)) { // only add it if the **same** object is not already associated
+            $this->doAddSysChatsRelatedByIdReceiver($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	SysChatsRelatedByIdReceiver $sysChatsRelatedByIdReceiver The sysChatsRelatedByIdReceiver object to add.
+     */
+    protected function doAddSysChatsRelatedByIdReceiver($sysChatsRelatedByIdReceiver)
+    {
+        $this->collSysChatssRelatedByIdReceiver[]= $sysChatsRelatedByIdReceiver;
+        $sysChatsRelatedByIdReceiver->setSysUsersRelatedByIdReceiver($this);
+    }
+
+    /**
+     * @param	SysChatsRelatedByIdReceiver $sysChatsRelatedByIdReceiver The sysChatsRelatedByIdReceiver object to remove.
+     * @return SysUsers The current object (for fluent API support)
+     */
+    public function removeSysChatsRelatedByIdReceiver($sysChatsRelatedByIdReceiver)
+    {
+        if ($this->getSysChatssRelatedByIdReceiver()->contains($sysChatsRelatedByIdReceiver)) {
+            $this->collSysChatssRelatedByIdReceiver->remove($this->collSysChatssRelatedByIdReceiver->search($sysChatsRelatedByIdReceiver));
+            if (null === $this->sysChatssRelatedByIdReceiverScheduledForDeletion) {
+                $this->sysChatssRelatedByIdReceiverScheduledForDeletion = clone $this->collSysChatssRelatedByIdReceiver;
+                $this->sysChatssRelatedByIdReceiverScheduledForDeletion->clear();
+            }
+            $this->sysChatssRelatedByIdReceiverScheduledForDeletion[]= $sysChatsRelatedByIdReceiver;
+            $sysChatsRelatedByIdReceiver->setSysUsersRelatedByIdReceiver(null);
         }
 
         return $this;
@@ -2853,13 +2853,13 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->collSysChatssRelatedByIdReceiver) {
-                foreach ($this->collSysChatssRelatedByIdReceiver as $o) {
+            if ($this->collSysChatssRelatedByIdSender) {
+                foreach ($this->collSysChatssRelatedByIdSender as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
-            if ($this->collSysChatssRelatedByIdSender) {
-                foreach ($this->collSysChatssRelatedByIdSender as $o) {
+            if ($this->collSysChatssRelatedByIdReceiver) {
+                foreach ($this->collSysChatssRelatedByIdReceiver as $o) {
                     $o->clearAllReferences($deep);
                 }
             }
@@ -2883,14 +2883,14 @@ abstract class BaseSysUsers extends BaseObject implements Persistent
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        if ($this->collSysChatssRelatedByIdReceiver instanceof PropelCollection) {
-            $this->collSysChatssRelatedByIdReceiver->clearIterator();
-        }
-        $this->collSysChatssRelatedByIdReceiver = null;
         if ($this->collSysChatssRelatedByIdSender instanceof PropelCollection) {
             $this->collSysChatssRelatedByIdSender->clearIterator();
         }
         $this->collSysChatssRelatedByIdSender = null;
+        if ($this->collSysChatssRelatedByIdReceiver instanceof PropelCollection) {
+            $this->collSysChatssRelatedByIdReceiver->clearIterator();
+        }
+        $this->collSysChatssRelatedByIdReceiver = null;
         if ($this->collSysNotificationssRelatedByIdSender instanceof PropelCollection) {
             $this->collSysNotificationssRelatedByIdSender->clearIterator();
         }

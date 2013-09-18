@@ -74,7 +74,7 @@ class BC_Model extends CI_Model {
 		if ($obj->save()) {
             return $object ? $obj : $obj->getPrimaryKey();
         }
-		return null;
+		return NULL;
 	}
 	
 	public function delete($pk) 

@@ -58,7 +58,7 @@
 				</span>
 			</td>
 			<td><?php echo $page->module == '' ? '' : ( $page->section == '' ? $page->module : $page->section) ?></td>
-			<td class="edit"><?php echo button_yes_no($page->visible, 'admin/page/set_yes_no/'. $page->id_page) ?></td>
+			<td class="edit"><?php echo $page->section != '' ? '<strong>' . $page->visible .'</strong>' : button_yes_no($page->visible, 'admin/page/set_yes_no/'. $page->id_page) ?></td>
 			<td class="edit"><?php echo button_on_off($page->state, 'admin/page/set_on_off/'. $page->id_page) ?></td>
 		</tr>
 	<?php endforeach; endif ?>
@@ -78,6 +78,10 @@
 	function page_type (input) {
 		$('#container-module')[input.value == 'section' || input.value == 'subsection' ? 'show' : 'hide']();
 		$('#container-section')[input.value == 'subsection' ? 'show' : 'hide']();
+		$('#view-menu').prop({
+			disabled : input.value == 'subsection', 
+			checked : input.value != 'subsection'
+		}).parent()[input.value == 'subsection' ? 'hide' : 'show']();
 	}
 
 	function get_sections (input, value) {

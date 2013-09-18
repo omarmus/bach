@@ -84,7 +84,7 @@ class Page_m extends BC_Model {
 		return 0;
 	}
 
-	public function get_nested ()
+	public function get_nested ($subsection = FALSE)
 	{
 		$pages = SysPagesQuery::create()->orderByOrder()->find()->toArray();
 		
@@ -97,7 +97,7 @@ class Page_m extends BC_Model {
 				if (!$page['IdSection']) {
 					$page['Type'] = 'section';
 					$array[$page['IdModule']]['children'][$page['IdPage']] = $page;
-				} else {
+				} elseif ($subsection) {
 					$page['Type'] = 'subsection';
 					$array[$page['IdModule']]['children'][$page['IdSection']]['children'][$page['IdPage']] = $page;
 				}

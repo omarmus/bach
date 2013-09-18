@@ -75,6 +75,11 @@ class User_M extends BC_Model {
 		parent::__construct();
 	}
 
+	public function get_users_chat($id_user)
+	{
+		return SysUsersQuery::create()->filterByIdUser($id_user, Criteria::NOT_EQUAL)->find();
+	}
+
 	public function get_new()
 	{
 		return array(
@@ -119,7 +124,8 @@ class User_M extends BC_Model {
 			'email' 	  => $user->getEmail(), 
 			'id_user'     => $user->getIdUser(),
 			'id_rol' 	  => $user->getIdRol(),
-			'loggedin'    => TRUE, 
+			'lang'		  => $user->getLangCode(),
+			'loggedin'    => TRUE,
 			'id_photo'    => $user->getIdPhoto(),
 			'photo' 	  => $user->getIdPhoto() ? $user->getSysFiles()->getFilename() : '',
 			'parameters'  => get_parameters(),

@@ -28,9 +28,23 @@
             <script src="<?php echo base_url('lib/jqueryui/jquery-ui-1.10.3.custom.min.js') ?>"></script>
             <script src="<?php echo base_url('lib/jquery.nestedSortable/jquery.mjs.nestedSortable.js') ?>"></script>
         <?php endif; ?>
+        <script src="<?php echo base_url('lib/socket.io/socket.io.min.js') ?>"></script>
+        <script src="<?php echo base_url('js/socket.js') ?>"></script>
+        <script src="<?php echo base_url('js/chat.js') ?>"></script>
         <script type="text/javascript">
             var _base_url = '<?php echo base_url() ?>',
-                _uri = '<?php echo $this->uri->uri_string() ?>';
+                _uri = '<?php echo $this->uri->uri_string() ?>',
+                _my_user = <?php if ($my_user) : ?>JSON.parse('<?php echo $my_user ?>')<?php else : ?>{}<?php endif; ?>;
+
+
         </script>
+        <?php if ($my_user): ?>
+        <?php $this->load->view('admin/components/chat'); ?>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                init_chat();
+            });
+        </script>
+    <?php endif ?>
     </head>
             

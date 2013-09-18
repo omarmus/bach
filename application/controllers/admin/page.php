@@ -52,7 +52,7 @@ class Page extends Admin_Controller
 		}
 		
 		// Fetch all pages
-		$this->data['pages'] = $this->page->get_nested();
+		$this->data['pages'] = $this->page->get_nested(TRUE);
 
 		// Load view
 		$this->load->view('admin/page/order_ajax', $this->data);
@@ -82,6 +82,7 @@ class Page extends Admin_Controller
 		}
 		if ($page_type == 'subsection') {
 			$rules['IdSection']['rules'] .= '|callback__required_dropdown';
+			$_POST['Visible'] = 'NO';
 		}
 
 		$this->form_validation->set_rules($rules);

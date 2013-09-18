@@ -51,8 +51,8 @@ class SysChatsTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('SysUsersRelatedByIdReceiver', 'SysUsers', RelationMap::MANY_TO_ONE, array('id_receiver' => 'id_user', ), null, null);
         $this->addRelation('SysUsersRelatedByIdSender', 'SysUsers', RelationMap::MANY_TO_ONE, array('id_sender' => 'id_user', ), null, null);
+        $this->addRelation('SysUsersRelatedByIdReceiver', 'SysUsers', RelationMap::MANY_TO_ONE, array('id_receiver' => 'id_user', ), null, null);
     } // buildRelations()
 
 } // SysChatsTableMap

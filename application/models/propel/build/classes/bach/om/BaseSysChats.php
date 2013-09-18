@@ -62,12 +62,12 @@ abstract class BaseSysChats extends BaseObject implements Persistent
     /**
      * @var        SysUsers
      */
-    protected $aSysUsersRelatedByIdReceiver;
+    protected $aSysUsersRelatedByIdSender;
 
     /**
      * @var        SysUsers
      */
-    protected $aSysUsersRelatedByIdSender;
+    protected $aSysUsersRelatedByIdReceiver;
 
     /**
      * Flag to prevent endless save loop, if this object is referenced
@@ -402,8 +402,8 @@ abstract class BaseSysChats extends BaseObject implements Persistent
 
         if ($deep) {  // also de-associate any related objects?
 
-            $this->aSysUsersRelatedByIdReceiver = null;
             $this->aSysUsersRelatedByIdSender = null;
+            $this->aSysUsersRelatedByIdReceiver = null;
         } // if (deep)
     }
 
@@ -522,18 +522,18 @@ abstract class BaseSysChats extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aSysUsersRelatedByIdReceiver !== null) {
-                if ($this->aSysUsersRelatedByIdReceiver->isModified() || $this->aSysUsersRelatedByIdReceiver->isNew()) {
-                    $affectedRows += $this->aSysUsersRelatedByIdReceiver->save($con);
-                }
-                $this->setSysUsersRelatedByIdReceiver($this->aSysUsersRelatedByIdReceiver);
-            }
-
             if ($this->aSysUsersRelatedByIdSender !== null) {
                 if ($this->aSysUsersRelatedByIdSender->isModified() || $this->aSysUsersRelatedByIdSender->isNew()) {
                     $affectedRows += $this->aSysUsersRelatedByIdSender->save($con);
                 }
                 $this->setSysUsersRelatedByIdSender($this->aSysUsersRelatedByIdSender);
+            }
+
+            if ($this->aSysUsersRelatedByIdReceiver !== null) {
+                if ($this->aSysUsersRelatedByIdReceiver->isModified() || $this->aSysUsersRelatedByIdReceiver->isNew()) {
+                    $affectedRows += $this->aSysUsersRelatedByIdReceiver->save($con);
+                }
+                $this->setSysUsersRelatedByIdReceiver($this->aSysUsersRelatedByIdReceiver);
             }
 
             if ($this->isNew() || $this->isModified()) {
@@ -713,15 +713,15 @@ abstract class BaseSysChats extends BaseObject implements Persistent
             // method.  This object relates to these object(s) by a
             // foreign key reference.
 
-            if ($this->aSysUsersRelatedByIdReceiver !== null) {
-                if (!$this->aSysUsersRelatedByIdReceiver->validate($columns)) {
-                    $failureMap = array_merge($failureMap, $this->aSysUsersRelatedByIdReceiver->getValidationFailures());
-                }
-            }
-
             if ($this->aSysUsersRelatedByIdSender !== null) {
                 if (!$this->aSysUsersRelatedByIdSender->validate($columns)) {
                     $failureMap = array_merge($failureMap, $this->aSysUsersRelatedByIdSender->getValidationFailures());
+                }
+            }
+
+            if ($this->aSysUsersRelatedByIdReceiver !== null) {
+                if (!$this->aSysUsersRelatedByIdReceiver->validate($columns)) {
+                    $failureMap = array_merge($failureMap, $this->aSysUsersRelatedByIdReceiver->getValidationFailures());
                 }
             }
 
@@ -823,11 +823,11 @@ abstract class BaseSysChats extends BaseObject implements Persistent
         }
         
         if ($includeForeignObjects) {
-            if (null !== $this->aSysUsersRelatedByIdReceiver) {
-                $result['SysUsersRelatedByIdReceiver'] = $this->aSysUsersRelatedByIdReceiver->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
-            }
             if (null !== $this->aSysUsersRelatedByIdSender) {
                 $result['SysUsersRelatedByIdSender'] = $this->aSysUsersRelatedByIdSender->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
+            }
+            if (null !== $this->aSysUsersRelatedByIdReceiver) {
+                $result['SysUsersRelatedByIdReceiver'] = $this->aSysUsersRelatedByIdReceiver->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
         }
 
@@ -1055,58 +1055,6 @@ abstract class BaseSysChats extends BaseObject implements Persistent
      * @return SysChats The current object (for fluent API support)
      * @throws PropelException
      */
-    public function setSysUsersRelatedByIdReceiver(SysUsers $v = null)
-    {
-        if ($v === null) {
-            $this->setIdReceiver(NULL);
-        } else {
-            $this->setIdReceiver($v->getIdUser());
-        }
-
-        $this->aSysUsersRelatedByIdReceiver = $v;
-
-        // Add binding for other direction of this n:n relationship.
-        // If this object has already been added to the SysUsers object, it will not be re-added.
-        if ($v !== null) {
-            $v->addSysChatsRelatedByIdReceiver($this);
-        }
-
-
-        return $this;
-    }
-
-
-    /**
-     * Get the associated SysUsers object
-     *
-     * @param PropelPDO $con Optional Connection object.
-     * @param $doQuery Executes a query to get the object if required
-     * @return SysUsers The associated SysUsers object.
-     * @throws PropelException
-     */
-    public function getSysUsersRelatedByIdReceiver(PropelPDO $con = null, $doQuery = true)
-    {
-        if ($this->aSysUsersRelatedByIdReceiver === null && ($this->id_receiver !== null) && $doQuery) {
-            $this->aSysUsersRelatedByIdReceiver = SysUsersQuery::create()->findPk($this->id_receiver, $con);
-            /* The following can be used additionally to
-                guarantee the related object contains a reference
-                to this object.  This level of coupling may, however, be
-                undesirable since it could result in an only partially populated collection
-                in the referenced object.
-                $this->aSysUsersRelatedByIdReceiver->addSysChatssRelatedByIdReceiver($this);
-             */
-        }
-
-        return $this->aSysUsersRelatedByIdReceiver;
-    }
-
-    /**
-     * Declares an association between this object and a SysUsers object.
-     *
-     * @param                  SysUsers $v
-     * @return SysChats The current object (for fluent API support)
-     * @throws PropelException
-     */
     public function setSysUsersRelatedByIdSender(SysUsers $v = null)
     {
         if ($v === null) {
@@ -1153,6 +1101,58 @@ abstract class BaseSysChats extends BaseObject implements Persistent
     }
 
     /**
+     * Declares an association between this object and a SysUsers object.
+     *
+     * @param                  SysUsers $v
+     * @return SysChats The current object (for fluent API support)
+     * @throws PropelException
+     */
+    public function setSysUsersRelatedByIdReceiver(SysUsers $v = null)
+    {
+        if ($v === null) {
+            $this->setIdReceiver(NULL);
+        } else {
+            $this->setIdReceiver($v->getIdUser());
+        }
+
+        $this->aSysUsersRelatedByIdReceiver = $v;
+
+        // Add binding for other direction of this n:n relationship.
+        // If this object has already been added to the SysUsers object, it will not be re-added.
+        if ($v !== null) {
+            $v->addSysChatsRelatedByIdReceiver($this);
+        }
+
+
+        return $this;
+    }
+
+
+    /**
+     * Get the associated SysUsers object
+     *
+     * @param PropelPDO $con Optional Connection object.
+     * @param $doQuery Executes a query to get the object if required
+     * @return SysUsers The associated SysUsers object.
+     * @throws PropelException
+     */
+    public function getSysUsersRelatedByIdReceiver(PropelPDO $con = null, $doQuery = true)
+    {
+        if ($this->aSysUsersRelatedByIdReceiver === null && ($this->id_receiver !== null) && $doQuery) {
+            $this->aSysUsersRelatedByIdReceiver = SysUsersQuery::create()->findPk($this->id_receiver, $con);
+            /* The following can be used additionally to
+                guarantee the related object contains a reference
+                to this object.  This level of coupling may, however, be
+                undesirable since it could result in an only partially populated collection
+                in the referenced object.
+                $this->aSysUsersRelatedByIdReceiver->addSysChatssRelatedByIdReceiver($this);
+             */
+        }
+
+        return $this->aSysUsersRelatedByIdReceiver;
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1184,18 +1184,18 @@ abstract class BaseSysChats extends BaseObject implements Persistent
     {
         if ($deep && !$this->alreadyInClearAllReferencesDeep) {
             $this->alreadyInClearAllReferencesDeep = true;
-            if ($this->aSysUsersRelatedByIdReceiver instanceof Persistent) {
-              $this->aSysUsersRelatedByIdReceiver->clearAllReferences($deep);
-            }
             if ($this->aSysUsersRelatedByIdSender instanceof Persistent) {
               $this->aSysUsersRelatedByIdSender->clearAllReferences($deep);
+            }
+            if ($this->aSysUsersRelatedByIdReceiver instanceof Persistent) {
+              $this->aSysUsersRelatedByIdReceiver->clearAllReferences($deep);
             }
 
             $this->alreadyInClearAllReferencesDeep = false;
         } // if ($deep)
 
-        $this->aSysUsersRelatedByIdReceiver = null;
         $this->aSysUsersRelatedByIdSender = null;
+        $this->aSysUsersRelatedByIdReceiver = null;
     }
 
     /**

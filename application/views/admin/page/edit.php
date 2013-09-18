@@ -33,7 +33,7 @@
 		<?php if ( $new ) : ?>
 		<div class="form-group" style="width: 100%;">
 			<label class="checkbox-inline">
-				<input type="checkbox" name="Visible" value="YES" checked> La página será parte del menú principal
+				<input type="checkbox" id="view-menu" name="Visible" value="YES" checked> La página será parte del menú principal
 			</label>
 		</div>
 		<?php endif ?>

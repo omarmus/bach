@@ -172,6 +172,7 @@ class User extends Admin_Controller
     		echo json_encode(array('state' => 'ERROR', 'msg' => '<div class="input-error">Se produjo un error al enviar el mail.</div>'));
     	}
     }
+
 }
 
 /* End of file user.php */

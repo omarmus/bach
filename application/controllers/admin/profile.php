@@ -26,7 +26,7 @@ class Profile extends Admin_Controller {
 		if ($this->form_validation->run() == TRUE) {
 
 			// Save a new data user
-			$data = $this->user->array_request($_POST);
+			$data = $this->input->post();
 			$user = $this->user->save($data, $this->id_user, TRUE);
 
 			// Set a new data session
@@ -44,11 +44,24 @@ class Profile extends Admin_Controller {
 
 		$this->form_validation->set_rules($this->user->rules_password);
 		if ($this->form_validation->run() == TRUE) {
-			$data = $this->user->array_request($_POST);
+			$data = $this->input->post();
 			$data['Password'] = $this->bcrypt->hash_password($data['Password']);
 			$this->user->save($data, $this->id_user);
 		}
 		$this->load->view('admin/profile/profile_password');
+	}
+
+	public function update_setting()
+	{
+		// Save a new data user
+		$data = $this->input->post();
+		$user = $this->user->save($data, $this->id_user, TRUE);
+
+		// Set a new data session
+		$this->user->set_userdata($user);
+		$this->data['user'] = $user->toArray();
+
+		$this->load->view('admin/profile/profile_settings', $this->data);
 	}
 
 	public function delete_photo()

@@ -34,6 +34,7 @@
 				<ul class="nav nav-tabs" id="my-profile">
 					<li class="active"><a href="#data">My data</a></li>
 					<li><a href="#password">My password</a></li>
+					<li><a href="#settings">Preferences</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="data">
@@ -44,6 +45,11 @@
 					<div class="tab-pane" id="password">
 						<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url() ?>admin/profile/update_password')">
 							<?php $this->load->view('admin/profile/profile_password'); ?>
+						</form>
+					</div>
+					<div class="tab-pane" id="settings">
+						<form class="form modal-body" onsubmit="return validate_data(this, '<?php echo site_url() ?>admin/profile/update_setting')">
+							<?php $this->load->view('admin/profile/profile_settings'); ?>
 						</form>
 					</div>
 				</div>

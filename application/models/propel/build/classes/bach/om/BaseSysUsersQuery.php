@@ -48,13 +48,13 @@
  * @method SysUsersQuery rightJoinSysFiles($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysFiles relation
  * @method SysUsersQuery innerJoinSysFiles($relationAlias = null) Adds a INNER JOIN clause to the query using the SysFiles relation
  *
- * @method SysUsersQuery leftJoinSysChatsRelatedByIdReceiver($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
- * @method SysUsersQuery rightJoinSysChatsRelatedByIdReceiver($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
- * @method SysUsersQuery innerJoinSysChatsRelatedByIdReceiver($relationAlias = null) Adds a INNER JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
- *
  * @method SysUsersQuery leftJoinSysChatsRelatedByIdSender($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysChatsRelatedByIdSender relation
  * @method SysUsersQuery rightJoinSysChatsRelatedByIdSender($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysChatsRelatedByIdSender relation
  * @method SysUsersQuery innerJoinSysChatsRelatedByIdSender($relationAlias = null) Adds a INNER JOIN clause to the query using the SysChatsRelatedByIdSender relation
+ *
+ * @method SysUsersQuery leftJoinSysChatsRelatedByIdReceiver($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
+ * @method SysUsersQuery rightJoinSysChatsRelatedByIdReceiver($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
+ * @method SysUsersQuery innerJoinSysChatsRelatedByIdReceiver($relationAlias = null) Adds a INNER JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
  *
  * @method SysUsersQuery leftJoinSysNotificationsRelatedByIdSender($relationAlias = null) Adds a LEFT JOIN clause to the query using the SysNotificationsRelatedByIdSender relation
  * @method SysUsersQuery rightJoinSysNotificationsRelatedByIdSender($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SysNotificationsRelatedByIdSender relation
@@ -929,80 +929,6 @@ abstract class BaseSysUsersQuery extends ModelCriteria
      * @return                 SysUsersQuery The current query, for fluid interface
      * @throws PropelException - if the provided filter is invalid.
      */
-    public function filterBySysChatsRelatedByIdReceiver($sysChats, $comparison = null)
-    {
-        if ($sysChats instanceof SysChats) {
-            return $this
-                ->addUsingAlias(SysUsersPeer::ID_USER, $sysChats->getIdReceiver(), $comparison);
-        } elseif ($sysChats instanceof PropelObjectCollection) {
-            return $this
-                ->useSysChatsRelatedByIdReceiverQuery()
-                ->filterByPrimaryKeys($sysChats->getPrimaryKeys())
-                ->endUse();
-        } else {
-            throw new PropelException('filterBySysChatsRelatedByIdReceiver() only accepts arguments of type SysChats or PropelCollection');
-        }
-    }
-
-    /**
-     * Adds a JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
-     *
-     * @param     string $relationAlias optional alias for the relation
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return SysUsersQuery The current query, for fluid interface
-     */
-    public function joinSysChatsRelatedByIdReceiver($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
-    {
-        $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('SysChatsRelatedByIdReceiver');
-
-        // create a ModelJoin object for this join
-        $join = new ModelJoin();
-        $join->setJoinType($joinType);
-        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
-        if ($previousJoin = $this->getPreviousJoin()) {
-            $join->setPreviousJoin($previousJoin);
-        }
-
-        // add the ModelJoin to the current object
-        if ($relationAlias) {
-            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
-            $this->addJoinObject($join, $relationAlias);
-        } else {
-            $this->addJoinObject($join, 'SysChatsRelatedByIdReceiver');
-        }
-
-        return $this;
-    }
-
-    /**
-     * Use the SysChatsRelatedByIdReceiver relation SysChats object
-     *
-     * @see       useQuery()
-     *
-     * @param     string $relationAlias optional alias for the relation,
-     *                                   to be used as main alias in the secondary query
-     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
-     *
-     * @return   SysChatsQuery A secondary query class using the current class as primary query
-     */
-    public function useSysChatsRelatedByIdReceiverQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
-    {
-        return $this
-            ->joinSysChatsRelatedByIdReceiver($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'SysChatsRelatedByIdReceiver', 'SysChatsQuery');
-    }
-
-    /**
-     * Filter the query by a related SysChats object
-     *
-     * @param   SysChats|PropelObjectCollection $sysChats  the related object to use as filter
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return                 SysUsersQuery The current query, for fluid interface
-     * @throws PropelException - if the provided filter is invalid.
-     */
     public function filterBySysChatsRelatedByIdSender($sysChats, $comparison = null)
     {
         if ($sysChats instanceof SysChats) {
@@ -1066,6 +992,80 @@ abstract class BaseSysUsersQuery extends ModelCriteria
         return $this
             ->joinSysChatsRelatedByIdSender($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'SysChatsRelatedByIdSender', 'SysChatsQuery');
+    }
+
+    /**
+     * Filter the query by a related SysChats object
+     *
+     * @param   SysChats|PropelObjectCollection $sysChats  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return                 SysUsersQuery The current query, for fluid interface
+     * @throws PropelException - if the provided filter is invalid.
+     */
+    public function filterBySysChatsRelatedByIdReceiver($sysChats, $comparison = null)
+    {
+        if ($sysChats instanceof SysChats) {
+            return $this
+                ->addUsingAlias(SysUsersPeer::ID_USER, $sysChats->getIdReceiver(), $comparison);
+        } elseif ($sysChats instanceof PropelObjectCollection) {
+            return $this
+                ->useSysChatsRelatedByIdReceiverQuery()
+                ->filterByPrimaryKeys($sysChats->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterBySysChatsRelatedByIdReceiver() only accepts arguments of type SysChats or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the SysChatsRelatedByIdReceiver relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return SysUsersQuery The current query, for fluid interface
+     */
+    public function joinSysChatsRelatedByIdReceiver($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('SysChatsRelatedByIdReceiver');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'SysChatsRelatedByIdReceiver');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the SysChatsRelatedByIdReceiver relation SysChats object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   SysChatsQuery A secondary query class using the current class as primary query
+     */
+    public function useSysChatsRelatedByIdReceiverQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinSysChatsRelatedByIdReceiver($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'SysChatsRelatedByIdReceiver', 'SysChatsQuery');
     }
 
     /**
