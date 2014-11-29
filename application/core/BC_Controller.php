@@ -2,7 +2,7 @@
 /**
 * 
 */
-class BC_Controller extends CI_Controller
+class BC_Controller extends MX_Controller
 {
 	public $data = array();
 
@@ -24,7 +24,7 @@ class BC_Controller extends CI_Controller
 
 	public function _registered_email($email)
 	{
-		$user = SysUsersQuery::create()->filterByEmail($email)->find();
+		$user = $this->db->get_where('sys_users', array('email' => $email))->result();
 		if (count($user) == 0) {
 			$this->form_validation->set_message('_registered_email', '%s is not registered.');
 			return FALSE;
@@ -37,8 +37,9 @@ class BC_Controller extends CI_Controller
 		// Do NOT valide if emai already exists
 		//UNLESS it's the email for the current user
 		$id = $this->uri->segment(4);
-		$user = SysUsersQuery::create()->filterByEmail($email)
-									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
+
+		$user = $this->db->get_where('sys_users', array('email' => $email, 'id_user !=' => $id))->result();
+	
 		if (count($user)) {
 			$this->form_validation->set_message('_unique_email', '%s should be unique');
 			return FALSE;
@@ -51,8 +52,9 @@ class BC_Controller extends CI_Controller
 		// Do NOT valide if emai already exists
 		//UNLESS it's the username for the current user
 		$id = $this->uri->segment(4);
-		$user = SysUsersQuery::create()->filterByUsername($username)
-									   ->filterByIdUser($id, Criteria::NOT_EQUAL)->find();
+
+		$user = $this->db->get_where('sys_users', array('username' => $username, 'id_user !=' => $id))->result();
+
 		if (count($user)) {
 			$this->form_validation->set_message('_unique_username', '%s should be unique');
 			return FALSE;

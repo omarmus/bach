@@ -1,5 +1,6 @@
 <?php $this->load->view('admin/components/header'); ?>
 <body>
+    <?php $this->load->view('admin/components/chat'); ?>
     <?php if ($this->uri->segment(2) != 'dashboard' && $permissions_[$this->uri->segment(2)]['UPDATE'] == 'NO'): ?>
         <style type="text/css">
             .table th.edit, .table td.edit, .table th.state {display: none;}

@@ -1,9 +1,18 @@
-Bach PHP
-===
+bach-ci
+=======
 
-"Fork" basado en Codeigniter, Propel ORM y Twitter Bootstrap 2.3.2
+Features
 
-===
+- Codeigniter HMVC 2.1.4 
+- Bootstrap 3.2
+- Nodejs
+- Sockets.io
+- Mysql
 
-[MIT Licence](http://opensource.org/licenses/MIT "Licencia")
+Modules
+
+- Administrator (Users, pages and permissions)
+- CMS (Pages and articles)
+- Realtime (Chat and notifications)
+
 

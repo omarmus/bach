@@ -1,6 +1,6 @@
 // Start up a Node server with Socket.IO
-var io = require('socket.io').listen(8888,{
-  'log level':1
+var io = require('socket.io').listen(8888, {
+  'log level' : 1
 });
 
 // Let Node know that you want to use Mysql2
@@ -26,7 +26,7 @@ io.sockets.on('connection', function (socket) {
     connection.query('SELECT * FROM sys_sessions WHERE session_id="'+cookie.session_id+'"', function(err, res) {
       if (res) {
         user = PHPUnserialize.unserialize(res[0].user_data);
-        idUser = user.id.toString();
+        idUser = user.id_user;
 
         // Join a room chat for one 
         console.log('Joining chat user : ', idUser);

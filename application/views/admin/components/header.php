@@ -38,7 +38,7 @@
 
 
         </script>
-        <?php if ($my_user): ?>
+        <?php if (false && $my_user): ?>
         <?php $this->load->view('admin/components/chat'); ?>
         <script type="text/javascript">
             $(document).ready(function() {
